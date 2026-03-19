@@ -1,0 +1,1609 @@
+{
+  "source": "Forbes Real-Time Billionaires",
+  "sourceUrl": "https://www.forbes.com/real-time-billionaires/",
+  "fetchedAt": "2026-03-18T12:25:43.508Z",
+  "count": 200,
+  "totalWealthUsd": 8810462798000,
+  "people": [
+    {
+      "rank": 1,
+      "name": "Elon Musk",
+      "wealthUsd": 836714172000,
+      "country": "United States",
+      "source": "Tesla, SpaceX",
+      "profileUrl": "https://www.forbes.com/profile/elon-musk/"
+    },
+    {
+      "rank": 2,
+      "name": "Larry Page",
+      "wealthUsd": 255960265000,
+      "country": "United States",
+      "source": "Google",
+      "profileUrl": "https://www.forbes.com/profile/larry-page/"
+    },
+    {
+      "rank": 3,
+      "name": "Sergey Brin",
+      "wealthUsd": 236203607000,
+      "country": "United States",
+      "source": "Google",
+      "profileUrl": "https://www.forbes.com/profile/sergey-brin/"
+    },
+    {
+      "rank": 4,
+      "name": "Jeff Bezos",
+      "wealthUsd": 228329470000,
+      "country": "United States",
+      "source": "Amazon",
+      "profileUrl": "https://www.forbes.com/profile/jeff-bezos/"
+    },
+    {
+      "rank": 5,
+      "name": "Mark Zuckerberg",
+      "wealthUsd": 213648034000,
+      "country": "United States",
+      "source": "Facebook",
+      "profileUrl": "https://www.forbes.com/profile/mark-zuckerberg/"
+    },
+    {
+      "rank": 6,
+      "name": "Larry Ellison",
+      "wealthUsd": 197903564000,
+      "country": "United States",
+      "source": "Oracle",
+      "profileUrl": "https://www.forbes.com/profile/larry-ellison/"
+    },
+    {
+      "rank": 7,
+      "name": "Jensen Huang",
+      "wealthUsd": 157593941000,
+      "country": "United States",
+      "source": "Semiconductors",
+      "profileUrl": "https://www.forbes.com/profile/jensen-huang/"
+    },
+    {
+      "rank": 8,
+      "name": "Bernard Arnault & family",
+      "wealthUsd": 146306300000,
+      "country": "France",
+      "source": "LVMH",
+      "profileUrl": "https://www.forbes.com/profile/bernard-arnault/"
+    },
+    {
+      "rank": 9,
+      "name": "Warren Buffett",
+      "wealthUsd": 145703648000,
+      "country": "United States",
+      "source": "Berkshire Hathaway",
+      "profileUrl": "https://www.forbes.com/profile/warren-buffett/"
+    },
+    {
+      "rank": 10,
+      "name": "Rob Walton & family",
+      "wealthUsd": 143422677000,
+      "country": "United States",
+      "source": "Walmart",
+      "profileUrl": "https://www.forbes.com/profile/rob-walton/"
+    },
+    {
+      "rank": 11,
+      "name": "Michael Dell",
+      "wealthUsd": 142437052000,
+      "country": "United States",
+      "source": "Dell Technologies",
+      "profileUrl": "https://www.forbes.com/profile/michael-dell/"
+    },
+    {
+      "rank": 12,
+      "name": "Jim Walton & family",
+      "wealthUsd": 140701889000,
+      "country": "United States",
+      "source": "Walmart",
+      "profileUrl": "https://www.forbes.com/profile/jim-walton/"
+    },
+    {
+      "rank": 13,
+      "name": "Amancio Ortega",
+      "wealthUsd": 133195084000,
+      "country": "Spain",
+      "source": "Zara",
+      "profileUrl": "https://www.forbes.com/profile/amancio-ortega/"
+    },
+    {
+      "rank": 14,
+      "name": "Alice Walton",
+      "wealthUsd": 131573038000,
+      "country": "United States",
+      "source": "Walmart",
+      "profileUrl": "https://www.forbes.com/profile/alice-walton/"
+    },
+    {
+      "rank": 15,
+      "name": "Steve Ballmer",
+      "wealthUsd": 128026564000,
+      "country": "United States",
+      "source": "Microsoft",
+      "profileUrl": "https://www.forbes.com/profile/steve-ballmer/"
+    },
+    {
+      "rank": 16,
+      "name": "Carlos Slim Helu & family",
+      "wealthUsd": 116271885000,
+      "country": "Mexico",
+      "source": "Telecom",
+      "profileUrl": "https://www.forbes.com/profile/carlos-slim-helu/"
+    },
+    {
+      "rank": 17,
+      "name": "Changpeng Zhao",
+      "wealthUsd": 113002332000,
+      "country": "Canada",
+      "source": "Cryptocurrency exchange",
+      "profileUrl": "https://www.forbes.com/profile/changpeng-zhao/"
+    },
+    {
+      "rank": 18,
+      "name": "Michael Bloomberg",
+      "wealthUsd": 109419000000,
+      "country": "United States",
+      "source": "Bloomberg LP",
+      "profileUrl": "https://www.forbes.com/profile/michael-bloomberg/"
+    },
+    {
+      "rank": 19,
+      "name": "Bill Gates",
+      "wealthUsd": 104925206000,
+      "country": "United States",
+      "source": "Microsoft",
+      "profileUrl": "https://www.forbes.com/profile/bill-gates/"
+    },
+    {
+      "rank": 20,
+      "name": "Mukesh Ambani",
+      "wealthUsd": 98828818000,
+      "country": "India",
+      "source": "Diversified",
+      "profileUrl": "https://www.forbes.com/profile/mukesh-ambani/"
+    },
+    {
+      "rank": 21,
+      "name": "Giancarlo Devasini",
+      "wealthUsd": 89300000000,
+      "country": "Italy",
+      "source": "Cryptocurrency",
+      "profileUrl": "https://www.forbes.com/profile/giancarlo-devasini/"
+    },
+    {
+      "rank": 22,
+      "name": "Francoise Bettencourt Meyers & family",
+      "wealthUsd": 87514879000,
+      "country": "France",
+      "source": "L'Oréal",
+      "profileUrl": "https://www.forbes.com/profile/francoise-bettencourt-meyers/"
+    },
+    {
+      "rank": 23,
+      "name": "Julia Koch & family",
+      "wealthUsd": 81190000000,
+      "country": "United States",
+      "source": "Koch, Inc.",
+      "profileUrl": "https://www.forbes.com/profile/julia-koch/"
+    },
+    {
+      "rank": 24,
+      "name": "Thomas Peterffy",
+      "wealthUsd": 80104765000,
+      "country": "United States",
+      "source": "Discount brokerage",
+      "profileUrl": "https://www.forbes.com/profile/thomas-peterffy/"
+    },
+    {
+      "rank": 25,
+      "name": "Charles Koch & family",
+      "wealthUsd": 73790000000,
+      "country": "United States",
+      "source": "Koch, Inc.",
+      "profileUrl": "https://www.forbes.com/profile/charles-koch/"
+    },
+    {
+      "rank": 26,
+      "name": "Zhang Yiming",
+      "wealthUsd": 69300000000,
+      "country": "China",
+      "source": "TikTok",
+      "profileUrl": "https://www.forbes.com/profile/zhang-yiming/"
+    },
+    {
+      "rank": 27,
+      "name": "Jeff Yass",
+      "wealthUsd": 67435000000,
+      "country": "United States",
+      "source": "Trading, investments",
+      "profileUrl": "https://www.forbes.com/profile/jeff-yass/"
+    },
+    {
+      "rank": 28,
+      "name": "Zhong Shanshan",
+      "wealthUsd": 62944976000,
+      "country": "China",
+      "source": "Beverages, pharmaceuticals",
+      "profileUrl": "https://www.forbes.com/profile/zhong-shanshan/"
+    },
+    {
+      "rank": 29,
+      "name": "Robin Zeng",
+      "wealthUsd": 61811218000,
+      "country": "Hong Kong",
+      "source": "Batteries",
+      "profileUrl": "https://www.forbes.com/profile/robin-zeng/"
+    },
+    {
+      "rank": 30,
+      "name": "Gautam Adani",
+      "wealthUsd": 61427035000,
+      "country": "India",
+      "source": "Infrastructure, commodities",
+      "profileUrl": "https://www.forbes.com/profile/gautam-adani-1/"
+    },
+    {
+      "rank": 31,
+      "name": "Dieter Schwarz",
+      "wealthUsd": 60979079000,
+      "country": "Germany",
+      "source": "Retail",
+      "profileUrl": "https://www.forbes.com/profile/dieter-schwarz/"
+    },
+    {
+      "rank": 32,
+      "name": "Tadashi Yanai & family",
+      "wealthUsd": 58107353000,
+      "country": "Japan",
+      "source": "Fashion retail",
+      "profileUrl": "https://www.forbes.com/profile/tadashi-yanai/"
+    },
+    {
+      "rank": 33,
+      "name": "Germán Larrea Mota Velasco & family",
+      "wealthUsd": 57810522000,
+      "country": "Mexico",
+      "source": "Mining",
+      "profileUrl": "https://www.forbes.com/profile/german-larrea-mota-velasco/"
+    },
+    {
+      "rank": 34,
+      "name": "Ma Huateng",
+      "wealthUsd": 56797201000,
+      "country": "China",
+      "source": "Online games",
+      "profileUrl": "https://www.forbes.com/profile/ma-huateng/"
+    },
+    {
+      "rank": 35,
+      "name": "Ken Griffin",
+      "wealthUsd": 48858406000,
+      "country": "United States",
+      "source": "Hedge funds",
+      "profileUrl": "https://www.forbes.com/profile/ken-griffin/"
+    },
+    {
+      "rank": 36,
+      "name": "Lukas Walton",
+      "wealthUsd": 48087483000,
+      "country": "United States",
+      "source": "Walmart ",
+      "profileUrl": "https://www.forbes.com/profile/lukas-walton/"
+    },
+    {
+      "rank": 37,
+      "name": "Giovanni Ferrero",
+      "wealthUsd": 47425060000,
+      "country": "Italy",
+      "source": "Nutella, chocolates",
+      "profileUrl": "https://www.forbes.com/profile/giovanni-ferrero/"
+    },
+    {
+      "rank": 38,
+      "name": "Jacqueline Mars",
+      "wealthUsd": 46744836000,
+      "country": "United States",
+      "source": "Candy, pet food",
+      "profileUrl": "https://www.forbes.com/profile/jacqueline-mars/"
+    },
+    {
+      "rank": 39,
+      "name": "John Mars",
+      "wealthUsd": 46744836000,
+      "country": "United States",
+      "source": "Candy, pet food",
+      "profileUrl": "https://www.forbes.com/profile/john-mars/"
+    },
+    {
+      "rank": 40,
+      "name": "Masayoshi Son",
+      "wealthUsd": 46740983000,
+      "country": "Japan",
+      "source": "Telecom, Investments",
+      "profileUrl": "https://www.forbes.com/profile/masayoshi-son/"
+    },
+    {
+      "rank": 41,
+      "name": "Li Ka-shing",
+      "wealthUsd": 46349521000,
+      "country": "Hong Kong",
+      "source": "Diversified",
+      "profileUrl": "https://www.forbes.com/profile/li-ka-shing/"
+    },
+    {
+      "rank": 42,
+      "name": "Iris Fontbona & family",
+      "wealthUsd": 46214283000,
+      "country": "Chile",
+      "source": "Mining",
+      "profileUrl": "https://www.forbes.com/profile/iris-fontbona/"
+    },
+    {
+      "rank": 43,
+      "name": "Mark Mateschitz",
+      "wealthUsd": 44540025000,
+      "country": "Austria",
+      "source": "Red Bull",
+      "profileUrl": "https://www.forbes.com/profile/mark-mateschitz/"
+    },
+    {
+      "rank": 44,
+      "name": "Gianluigi Aponte",
+      "wealthUsd": 44497490000,
+      "country": "Switzerland",
+      "source": "Shipping",
+      "profileUrl": "https://www.forbes.com/profile/gianluigi-aponte/"
+    },
+    {
+      "rank": 45,
+      "name": "Rafaela Aponte-Diamant",
+      "wealthUsd": 44497490000,
+      "country": "Switzerland",
+      "source": "Shipping",
+      "profileUrl": "https://www.forbes.com/profile/rafaela-aponte-diamant/"
+    },
+    {
+      "rank": 46,
+      "name": "Andrea Pignataro",
+      "wealthUsd": 41463765000,
+      "country": "Italy",
+      "source": "Financial software",
+      "profileUrl": "https://www.forbes.com/profile/andrea-pignataro/"
+    },
+    {
+      "rank": 47,
+      "name": "Klaus-Michael Kuehne",
+      "wealthUsd": 41295259000,
+      "country": "Germany",
+      "source": "Shipping",
+      "profileUrl": "https://www.forbes.com/profile/klaus-michael-kuehne/"
+    },
+    {
+      "rank": 48,
+      "name": "Thomas Frist Jr & family",
+      "wealthUsd": 39746169000,
+      "country": "United States",
+      "source": "Hospitals",
+      "profileUrl": "https://www.forbes.com/profile/thomas-frist-jr/"
+    },
+    {
+      "rank": 49,
+      "name": "Alain Wertheimer",
+      "wealthUsd": 39413251000,
+      "country": "France",
+      "source": "Chanel",
+      "profileUrl": "https://www.forbes.com/profile/alain-wertheimer/"
+    },
+    {
+      "rank": 50,
+      "name": "Gerard Wertheimer",
+      "wealthUsd": 39413251000,
+      "country": "France",
+      "source": "Chanel",
+      "profileUrl": "https://www.forbes.com/profile/gerard-wertheimer-1/"
+    },
+    {
+      "rank": 51,
+      "name": "William Ding",
+      "wealthUsd": 39027687000,
+      "country": "China",
+      "source": "Online games",
+      "profileUrl": "https://www.forbes.com/profile/william-ding/"
+    },
+    {
+      "rank": 52,
+      "name": "Jean-Louis van der Velde",
+      "wealthUsd": 38000000000,
+      "country": "Netherlands",
+      "source": "Cryptocurrency",
+      "profileUrl": "https://www.forbes.com/profile/jean-louis-van-der-velde/"
+    },
+    {
+      "rank": 53,
+      "name": "Paolo Ardoino",
+      "wealthUsd": 38000000000,
+      "country": "Italy",
+      "source": "Cryptocurrency",
+      "profileUrl": "https://www.forbes.com/profile/paolo-ardoino/"
+    },
+    {
+      "rank": 54,
+      "name": "Stephen Schwarzman",
+      "wealthUsd": 37890941000,
+      "country": "United States",
+      "source": "Investments",
+      "profileUrl": "https://www.forbes.com/profile/stephen-schwarzman/"
+    },
+    {
+      "rank": 55,
+      "name": "Savitri Jindal & family",
+      "wealthUsd": 37256732000,
+      "country": "India",
+      "source": "Steel",
+      "profileUrl": "https://www.forbes.com/profile/savitri-jindal/"
+    },
+    {
+      "rank": 56,
+      "name": "Alexey Mordashov & family",
+      "wealthUsd": 36917774000,
+      "country": "Russia",
+      "source": "Steel, investments",
+      "profileUrl": "https://www.forbes.com/profile/alexey-mordashov/"
+    },
+    {
+      "rank": 57,
+      "name": "Colin Huang",
+      "wealthUsd": 36783745000,
+      "country": "China",
+      "source": "E-commerce",
+      "profileUrl": "https://www.forbes.com/profile/colin-huang/"
+    },
+    {
+      "rank": 58,
+      "name": "Miriam Adelson & family",
+      "wealthUsd": 36509261000,
+      "country": "United States",
+      "source": "Casinos",
+      "profileUrl": "https://www.forbes.com/profile/miriam-adelson/"
+    },
+    {
+      "rank": 59,
+      "name": "Eric Schmidt",
+      "wealthUsd": 35403540000,
+      "country": "United States",
+      "source": "Google",
+      "profileUrl": "https://www.forbes.com/profile/eric-schmidt/"
+    },
+    {
+      "rank": 60,
+      "name": "Zheng Shuliang & family",
+      "wealthUsd": 34534522000,
+      "country": "China",
+      "source": "Aluminum products",
+      "profileUrl": "https://www.forbes.com/profile/zheng-shuliang/"
+    },
+    {
+      "rank": 61,
+      "name": "Eduardo Saverin",
+      "wealthUsd": 34528447000,
+      "country": "Brazil",
+      "source": "Facebook",
+      "profileUrl": "https://www.forbes.com/profile/eduardo-saverin/"
+    },
+    {
+      "rank": 62,
+      "name": "Eyal Ofer",
+      "wealthUsd": 34135719000,
+      "country": "Israel",
+      "source": "Real estate, shipping",
+      "profileUrl": "https://www.forbes.com/profile/eyal-ofer/"
+    },
+    {
+      "rank": 63,
+      "name": "Idan Ofer",
+      "wealthUsd": 32728075000,
+      "country": "Israel",
+      "source": "Shipping",
+      "profileUrl": "https://www.forbes.com/profile/idan-ofer/"
+    },
+    {
+      "rank": 64,
+      "name": "Marilyn Simons & family",
+      "wealthUsd": 32548960000,
+      "country": "United States",
+      "source": "Hedge funds",
+      "profileUrl": "https://www.forbes.com/profile/marilyn-simons/"
+    },
+    {
+      "rank": 65,
+      "name": "He Xiangjian & family",
+      "wealthUsd": 32422372000,
+      "country": "China",
+      "source": "Home appliances",
+      "profileUrl": "https://www.forbes.com/profile/he-xiangjian/"
+    },
+    {
+      "rank": 66,
+      "name": "Robert Pera",
+      "wealthUsd": 31674244000,
+      "country": "United States",
+      "source": "Wireless networking",
+      "profileUrl": "https://www.forbes.com/profile/robert-pera/"
+    },
+    {
+      "rank": 67,
+      "name": "Lyndal Stephens Greth & family",
+      "wealthUsd": 31361690000,
+      "country": "United States",
+      "source": "Oil & gas",
+      "profileUrl": "https://www.forbes.com/profile/lyndal-stephens-greth/"
+    },
+    {
+      "rank": 68,
+      "name": "Henry Samueli",
+      "wealthUsd": 30948831000,
+      "country": "United States",
+      "source": "Semiconductors",
+      "profileUrl": "https://www.forbes.com/profile/henry-samueli/"
+    },
+    {
+      "rank": 69,
+      "name": "Elaine Marshall & family",
+      "wealthUsd": 30930000000,
+      "country": "United States",
+      "source": "Koch Inc.",
+      "profileUrl": "https://www.forbes.com/profile/elaine-marshall/"
+    },
+    {
+      "rank": 70,
+      "name": "Len Blavatnik",
+      "wealthUsd": 30528425000,
+      "country": "United States",
+      "source": "Music, chemicals",
+      "profileUrl": "https://www.forbes.com/profile/len-blavatnik/"
+    },
+    {
+      "rank": 71,
+      "name": "Michal Strnad",
+      "wealthUsd": 30263359000,
+      "country": "Czech Republic",
+      "source": "Defense Contracting",
+      "profileUrl": "https://www.forbes.com/profile/michal-strnad/"
+    },
+    {
+      "rank": 72,
+      "name": "Abigail Johnson",
+      "wealthUsd": 30188855000,
+      "country": "United States",
+      "source": "Fidelity",
+      "profileUrl": "https://www.forbes.com/profile/abigail-johnson/"
+    },
+    {
+      "rank": 73,
+      "name": "Peter Thiel",
+      "wealthUsd": 30170594000,
+      "country": "United States",
+      "source": "Facebook, investments",
+      "profileUrl": "https://www.forbes.com/profile/peter-thiel/"
+    },
+    {
+      "rank": 74,
+      "name": "Shiv Nadar",
+      "wealthUsd": 29895788000,
+      "country": "India",
+      "source": "Software services",
+      "profileUrl": "https://www.forbes.com/profile/shiv-nadar/"
+    },
+    {
+      "rank": 75,
+      "name": "Melinda French Gates",
+      "wealthUsd": 29846802000,
+      "country": "United States",
+      "source": "Microsoft",
+      "profileUrl": "https://www.forbes.com/profile/melinda-french-gates/"
+    },
+    {
+      "rank": 76,
+      "name": "Vladimir Potanin",
+      "wealthUsd": 29740299000,
+      "country": "Russia",
+      "source": "Metals",
+      "profileUrl": "https://www.forbes.com/profile/vladimir-potanin/"
+    },
+    {
+      "rank": 77,
+      "name": "Vagit Alekperov",
+      "wealthUsd": 29475064000,
+      "country": "Russia",
+      "source": "Oil",
+      "profileUrl": "https://www.forbes.com/profile/vagit-alekperov/"
+    },
+    {
+      "rank": 78,
+      "name": "MacKenzie Scott",
+      "wealthUsd": 28993846000,
+      "country": "United States",
+      "source": "Amazon",
+      "profileUrl": "https://www.forbes.com/profile/mackenzie-scott/"
+    },
+    {
+      "rank": 79,
+      "name": "Phil Knight & family",
+      "wealthUsd": 28966411000,
+      "country": "United States",
+      "source": "Nike",
+      "profileUrl": "https://www.forbes.com/profile/phil-knight/"
+    },
+    {
+      "rank": 80,
+      "name": "Aliko Dangote",
+      "wealthUsd": 28453508000,
+      "country": "Nigeria",
+      "source": "Cement, sugar",
+      "profileUrl": "https://www.forbes.com/profile/aliko-dangote/"
+    },
+    {
+      "rank": 81,
+      "name": "Jack Ma",
+      "wealthUsd": 28428520000,
+      "country": "China",
+      "source": "E-commerce",
+      "profileUrl": "https://www.forbes.com/profile/jack-ma/"
+    },
+    {
+      "rank": 82,
+      "name": "Huang Shilin",
+      "wealthUsd": 28302574000,
+      "country": "China",
+      "source": "Batteries",
+      "profileUrl": "https://www.forbes.com/profile/huang-shilin/"
+    },
+    {
+      "rank": 83,
+      "name": "Leonid Mikhelson & family",
+      "wealthUsd": 28301370000,
+      "country": "Russia",
+      "source": "Gas, chemicals",
+      "profileUrl": "https://www.forbes.com/profile/leonid-mikhelson/"
+    },
+    {
+      "rank": 84,
+      "name": "Lei Jun",
+      "wealthUsd": 28055990000,
+      "country": "China",
+      "source": "Smartphones, automobiles",
+      "profileUrl": "https://www.forbes.com/profile/lei-jun/"
+    },
+    {
+      "rank": 85,
+      "name": "Andreas von Bechtolsheim & family",
+      "wealthUsd": 27859142000,
+      "country": "Germany",
+      "source": "Google",
+      "profileUrl": "https://www.forbes.com/profile/andreas-von-bechtolsheim/"
+    },
+    {
+      "rank": 86,
+      "name": "Stefan Quandt",
+      "wealthUsd": 27550005000,
+      "country": "Germany",
+      "source": "BMW",
+      "profileUrl": "https://www.forbes.com/profile/stefan-quandt/"
+    },
+    {
+      "rank": 87,
+      "name": "Susanne Klatten",
+      "wealthUsd": 27374599000,
+      "country": "Germany",
+      "source": "BMW, pharmaceuticals",
+      "profileUrl": "https://www.forbes.com/profile/susanne-klatten/"
+    },
+    {
+      "rank": 88,
+      "name": "Emmanuel Besnier",
+      "wealthUsd": 26629178000,
+      "country": "France",
+      "source": "Cheese",
+      "profileUrl": "https://www.forbes.com/profile/emmanuel-besnier/"
+    },
+    {
+      "rank": 89,
+      "name": "Reinhold Wuerth & family",
+      "wealthUsd": 26511236000,
+      "country": "Germany",
+      "source": "Fasteners",
+      "profileUrl": "https://www.forbes.com/profile/reinhold-wuerth/"
+    },
+    {
+      "rank": 90,
+      "name": "François Pinault & family",
+      "wealthUsd": 26502605000,
+      "country": "France",
+      "source": "Luxury goods",
+      "profileUrl": "https://www.forbes.com/profile/francois-pinault/"
+    },
+    {
+      "rank": 91,
+      "name": "Cyrus Poonawalla",
+      "wealthUsd": 26400539000,
+      "country": "India",
+      "source": "Vaccines",
+      "profileUrl": "https://www.forbes.com/profile/cyrus-poonawalla/"
+    },
+    {
+      "rank": 92,
+      "name": "Dang Yanbao",
+      "wealthUsd": 26271059000,
+      "country": "China",
+      "source": "Coal",
+      "profileUrl": "https://www.forbes.com/profile/dang-yanbao/"
+    },
+    {
+      "rank": 93,
+      "name": "Lakshmi Mittal",
+      "wealthUsd": 26093059000,
+      "country": "India",
+      "source": "Steel",
+      "profileUrl": "https://www.forbes.com/profile/lakshmi-mittal/"
+    },
+    {
+      "rank": 94,
+      "name": "Dilip Shanghvi",
+      "wealthUsd": 25782819000,
+      "country": "India",
+      "source": "Pharmaceuticals",
+      "profileUrl": "https://www.forbes.com/profile/dilip-shanghvi/"
+    },
+    {
+      "rank": 95,
+      "name": "Israel Englander",
+      "wealthUsd": 25766500000,
+      "country": "United States",
+      "source": "Hedge funds",
+      "profileUrl": "https://www.forbes.com/profile/israel-englander/"
+    },
+    {
+      "rank": 96,
+      "name": "Vicky Safra & family",
+      "wealthUsd": 25674733000,
+      "country": "Greece",
+      "source": "Banking",
+      "profileUrl": "https://www.forbes.com/profile/vicky-safra/"
+    },
+    {
+      "rank": 97,
+      "name": "Suleiman Kerimov & family",
+      "wealthUsd": 25662204000,
+      "country": "Russia",
+      "source": "Gold",
+      "profileUrl": "https://www.forbes.com/profile/suleiman-kerimov-family/"
+    },
+    {
+      "rank": 98,
+      "name": "Vladimir Lisin",
+      "wealthUsd": 25532466000,
+      "country": "Russia",
+      "source": "Steel, transport",
+      "profileUrl": "https://www.forbes.com/profile/vladimir-lisin/"
+    },
+    {
+      "rank": 99,
+      "name": "Rick Cohen & family",
+      "wealthUsd": 25404806000,
+      "country": "United States",
+      "source": "Warehouse automation",
+      "profileUrl": "https://www.forbes.com/profile/rick-cohen/"
+    },
+    {
+      "rank": 100,
+      "name": "Gina Rinehart",
+      "wealthUsd": 25215619000,
+      "country": "Australia",
+      "source": "Mining",
+      "profileUrl": "https://www.forbes.com/profile/gina-rinehart/"
+    },
+    {
+      "rank": 101,
+      "name": "Stuart Hoegner",
+      "wealthUsd": 24700000000,
+      "country": "Canada",
+      "source": "Cryptocurrency",
+      "profileUrl": "https://www.forbes.com/profile/stuart-hoegner/"
+    },
+    {
+      "rank": 102,
+      "name": "Jay Y. Lee",
+      "wealthUsd": 24434619000,
+      "country": "South Korea",
+      "source": "Samsung",
+      "profileUrl": "https://www.forbes.com/profile/jay-y-lee/"
+    },
+    {
+      "rank": 103,
+      "name": "Gennady Timchenko",
+      "wealthUsd": 24165649000,
+      "country": "Russia",
+      "source": "Oil, gas",
+      "profileUrl": "https://www.forbes.com/profile/gennady-timchenko/"
+    },
+    {
+      "rank": 104,
+      "name": "Wang Chuanfu",
+      "wealthUsd": 24153820000,
+      "country": "China",
+      "source": "Batteries, automobiles",
+      "profileUrl": "https://www.forbes.com/profile/wang-chuanfu/"
+    },
+    {
+      "rank": 105,
+      "name": "Daniel Gilbert",
+      "wealthUsd": 24065434000,
+      "country": "United States",
+      "source": "Rocket Mortgage",
+      "profileUrl": "https://www.forbes.com/profile/daniel-gilbert/"
+    },
+    {
+      "rank": 106,
+      "name": "Christy Walton",
+      "wealthUsd": 23853169000,
+      "country": "United States",
+      "source": "Walmart",
+      "profileUrl": "https://www.forbes.com/profile/christy-walton/"
+    },
+    {
+      "rank": 107,
+      "name": "David Tepper",
+      "wealthUsd": 23687000000,
+      "country": "United States",
+      "source": "Hedge funds",
+      "profileUrl": "https://www.forbes.com/profile/david-tepper/"
+    },
+    {
+      "rank": 108,
+      "name": "Pham Nhat Vuong",
+      "wealthUsd": 23550975000,
+      "country": "Vietnam",
+      "source": "Diversified",
+      "profileUrl": "https://www.forbes.com/profile/pham-nhat-vuong/"
+    },
+    {
+      "rank": 109,
+      "name": "Harry Triguboff",
+      "wealthUsd": 23144127000,
+      "country": "Australia",
+      "source": "Real estate",
+      "profileUrl": "https://www.forbes.com/profile/harry-triguboff/"
+    },
+    {
+      "rank": 110,
+      "name": "Steve Cohen",
+      "wealthUsd": 22979014000,
+      "country": "United States",
+      "source": "Hedge funds",
+      "profileUrl": "https://www.forbes.com/profile/steve-cohen/"
+    },
+    {
+      "rank": 111,
+      "name": "Rupert Murdoch & family",
+      "wealthUsd": 22547931000,
+      "country": "United States",
+      "source": "Newspapers, TV network",
+      "profileUrl": "https://www.forbes.com/profile/rupert-murdoch/"
+    },
+    {
+      "rank": 112,
+      "name": "Stefan Persson",
+      "wealthUsd": 22446528000,
+      "country": "Sweden",
+      "source": "H&M",
+      "profileUrl": "https://www.forbes.com/profile/stefan-persson/"
+    },
+    {
+      "rank": 113,
+      "name": "Diane Hendricks",
+      "wealthUsd": 22332900000,
+      "country": "United States",
+      "source": "Building supplies",
+      "profileUrl": "https://www.forbes.com/profile/diane-hendricks/"
+    },
+    {
+      "rank": 114,
+      "name": "Stanley Kroenke",
+      "wealthUsd": 22238497000,
+      "country": "United States",
+      "source": "Sports, real estate",
+      "profileUrl": "https://www.forbes.com/profile/stanley-kroenke/"
+    },
+    {
+      "rank": 115,
+      "name": "Todd Graves",
+      "wealthUsd": 21983000000,
+      "country": "United States",
+      "source": "Fast food",
+      "profileUrl": "https://www.forbes.com/profile/todd-graves/"
+    },
+    {
+      "rank": 116,
+      "name": "Yu Yong",
+      "wealthUsd": 21938692000,
+      "country": "China",
+      "source": "Mining",
+      "profileUrl": "https://www.forbes.com/profile/yu-yong/"
+    },
+    {
+      "rank": 117,
+      "name": "Qin Yinglin",
+      "wealthUsd": 21790622000,
+      "country": "China",
+      "source": "Pig breeding",
+      "profileUrl": "https://www.forbes.com/profile/qin-yinglin/"
+    },
+    {
+      "rank": 118,
+      "name": "Michael Platt",
+      "wealthUsd": 20901000000,
+      "country": "United Kingdom",
+      "source": "Hedge funds",
+      "profileUrl": "https://www.forbes.com/profile/michael-platt/"
+    },
+    {
+      "rank": 119,
+      "name": "Henry Nicholas III",
+      "wealthUsd": 20674422000,
+      "country": "United States",
+      "source": "Semiconductors",
+      "profileUrl": "https://www.forbes.com/profile/henry-nicholas-iii/"
+    },
+    {
+      "rank": 120,
+      "name": "John Fredriksen",
+      "wealthUsd": 20637350000,
+      "country": "Cyprus",
+      "source": "Shipping",
+      "profileUrl": "https://www.forbes.com/profile/john-fredriksen/"
+    },
+    {
+      "rank": 121,
+      "name": "Ernest Garcia II",
+      "wealthUsd": 20612377000,
+      "country": "United States",
+      "source": "Used cars",
+      "profileUrl": "https://www.forbes.com/profile/ernest-garcia-ii/"
+    },
+    {
+      "rank": 122,
+      "name": "Prajogo Pangestu",
+      "wealthUsd": 20559262000,
+      "country": "Indonesia",
+      "source": "Petrochemicals, energy",
+      "profileUrl": "https://www.forbes.com/profile/prajogo-pangestu/"
+    },
+    {
+      "rank": 123,
+      "name": "Jerry Jones & family",
+      "wealthUsd": 20506839000,
+      "country": "United States",
+      "source": "Dallas Cowboys",
+      "profileUrl": "https://www.forbes.com/profile/jerry-jones/"
+    },
+    {
+      "rank": 124,
+      "name": "Andrey Melnichenko & family",
+      "wealthUsd": 20422087000,
+      "country": "Russia",
+      "source": "Fertilizers, coal",
+      "profileUrl": "https://www.forbes.com/profile/andrey-melnichenko/"
+    },
+    {
+      "rank": 125,
+      "name": "Kumar Birla",
+      "wealthUsd": 20263388000,
+      "country": "India",
+      "source": "Diversified",
+      "profileUrl": "https://www.forbes.com/profile/kumar-birla/"
+    },
+    {
+      "rank": 126,
+      "name": "Prince Alwaleed Bin Talal Alsaud",
+      "wealthUsd": 19940549000,
+      "country": "Saudi Arabia",
+      "source": "investments",
+      "profileUrl": "https://www.forbes.com/profile/prince-alwaleed-bin-talal-alsaud/"
+    },
+    {
+      "rank": 127,
+      "name": "Kwong Siu-hing",
+      "wealthUsd": 19864331000,
+      "country": "Hong Kong",
+      "source": "Real estate",
+      "profileUrl": "https://www.forbes.com/profile/kwong-siu-hing/"
+    },
+    {
+      "rank": 128,
+      "name": "John Doerr",
+      "wealthUsd": 19848243000,
+      "country": "United States",
+      "source": "Venture capital",
+      "profileUrl": "https://www.forbes.com/profile/john-doerr/"
+    },
+    {
+      "rank": 129,
+      "name": "Renata Kellnerova & family",
+      "wealthUsd": 19605057000,
+      "country": "Czech Republic",
+      "source": "Finance, telecommunications",
+      "profileUrl": "https://www.forbes.com/profile/renata-kellnerova/"
+    },
+    {
+      "rank": 130,
+      "name": "Nancy Walton Laurie",
+      "wealthUsd": 19597548000,
+      "country": "United States",
+      "source": "Walmart",
+      "profileUrl": "https://www.forbes.com/profile/nancy-walton-laurie/"
+    },
+    {
+      "rank": 131,
+      "name": "Philip Anschutz",
+      "wealthUsd": 19401000000,
+      "country": "United States",
+      "source": "Energy, sports, entertainment",
+      "profileUrl": "https://www.forbes.com/profile/philip-anschutz/"
+    },
+    {
+      "rank": 132,
+      "name": "Donald Bren",
+      "wealthUsd": 19212086000,
+      "country": "United States",
+      "source": "Real estate",
+      "profileUrl": "https://www.forbes.com/profile/donald-bren/"
+    },
+    {
+      "rank": 133,
+      "name": "Andrew Forrest & family",
+      "wealthUsd": 19188951000,
+      "country": "Australia",
+      "source": "Mining",
+      "profileUrl": "https://www.forbes.com/profile/andrew-forrest/"
+    },
+    {
+      "rank": 134,
+      "name": "Brett Adcock",
+      "wealthUsd": 19114058000,
+      "country": "United States",
+      "source": "Robots",
+      "profileUrl": "https://www.forbes.com/profile/brett-adcock/"
+    },
+    {
+      "rank": 135,
+      "name": "Vinod Adani",
+      "wealthUsd": 18940052000,
+      "country": "Cyprus",
+      "source": "Infrastructure, commodities",
+      "profileUrl": "https://www.forbes.com/profile/vinod-adani/"
+    },
+    {
+      "rank": 136,
+      "name": "Chen Jianhua",
+      "wealthUsd": 18899630000,
+      "country": "China",
+      "source": "Chemicals",
+      "profileUrl": "https://www.forbes.com/profile/chen-jianhua/"
+    },
+    {
+      "rank": 137,
+      "name": "Lu Xiangyang",
+      "wealthUsd": 18896548000,
+      "country": "China",
+      "source": "Automobiles, batteries",
+      "profileUrl": "https://www.forbes.com/profile/lu-xiangyang/"
+    },
+    {
+      "rank": 138,
+      "name": "Beate Heister",
+      "wealthUsd": 18824339000,
+      "country": "Germany",
+      "source": "Supermarkets",
+      "profileUrl": "https://www.forbes.com/profile/beate-heister/"
+    },
+    {
+      "rank": 139,
+      "name": "Karl Albrecht Jr. & family",
+      "wealthUsd": 18824339000,
+      "country": "Germany",
+      "source": "Supermarkets",
+      "profileUrl": "https://www.forbes.com/profile/karl-albrecht-jr/"
+    },
+    {
+      "rank": 140,
+      "name": "Nik Storonsky",
+      "wealthUsd": 18750000000,
+      "country": "United Kingdom",
+      "source": "Fintech",
+      "profileUrl": "https://www.forbes.com/profile/nik-storonsky/"
+    },
+    {
+      "rank": 141,
+      "name": "Chen Tianshi",
+      "wealthUsd": 18567617000,
+      "country": "China",
+      "source": "Semiconductors",
+      "profileUrl": "https://www.forbes.com/profile/chen-tianshi/"
+    },
+    {
+      "rank": 142,
+      "name": "Takemitsu Takizaki",
+      "wealthUsd": 18415772000,
+      "country": "Japan",
+      "source": "Sensors",
+      "profileUrl": "https://www.forbes.com/profile/takemitsu-takizaki/"
+    },
+    {
+      "rank": 143,
+      "name": "Dhanin Chearavanont",
+      "wealthUsd": 18397641000,
+      "country": "Thailand",
+      "source": "Diversified",
+      "profileUrl": "https://www.forbes.com/profile/dhanin-chearavanont/"
+    },
+    {
+      "rank": 144,
+      "name": "Low Tuck Kwong",
+      "wealthUsd": 18270161000,
+      "country": "Indonesia",
+      "source": "Coal",
+      "profileUrl": "https://www.forbes.com/profile/low-tuck-kwong/"
+    },
+    {
+      "rank": 145,
+      "name": "R. Budi Hartono",
+      "wealthUsd": 18185620000,
+      "country": "Indonesia",
+      "source": "Banking, tobacco",
+      "profileUrl": "https://www.forbes.com/profile/r-budi-hartono/"
+    },
+    {
+      "rank": 146,
+      "name": "Jorge Paulo Lemann & family",
+      "wealthUsd": 18135817000,
+      "country": "Brazil",
+      "source": "Beer",
+      "profileUrl": "https://www.forbes.com/profile/jorge-paulo-lemann/"
+    },
+    {
+      "rank": 147,
+      "name": "Edwin Chen",
+      "wealthUsd": 18000000000,
+      "country": "United States",
+      "source": "Artificial intelligence",
+      "profileUrl": "https://www.forbes.com/profile/edwin-chen/"
+    },
+    {
+      "rank": 148,
+      "name": "Andre Esteves",
+      "wealthUsd": 17982887000,
+      "country": "Brazil",
+      "source": "Banking",
+      "profileUrl": "https://www.forbes.com/profile/andre-esteves/"
+    },
+    {
+      "rank": 149,
+      "name": "Eric Li",
+      "wealthUsd": 17934592000,
+      "country": "China",
+      "source": "Automobiles",
+      "profileUrl": "https://www.forbes.com/profile/eric-li/"
+    },
+    {
+      "rank": 150,
+      "name": "Eric Smidt",
+      "wealthUsd": 17923000000,
+      "country": "United States",
+      "source": "Hardware stores",
+      "profileUrl": "https://www.forbes.com/profile/eric-smidt/"
+    },
+    {
+      "rank": 151,
+      "name": "James Ratcliffe",
+      "wealthUsd": 17915225000,
+      "country": "United Kingdom",
+      "source": "Chemicals",
+      "profileUrl": "https://www.forbes.com/profile/james-ratcliffe/"
+    },
+    {
+      "rank": 152,
+      "name": "Theo Albrecht Jr & family",
+      "wealthUsd": 17824191000,
+      "country": "Germany",
+      "source": "Aldi, Trader Joe's",
+      "profileUrl": "https://www.forbes.com/profile/theo-albrecht-jr/"
+    },
+    {
+      "rank": 153,
+      "name": "Zhong Huijuan",
+      "wealthUsd": 17817749000,
+      "country": "China",
+      "source": "Pharmaceuticals",
+      "profileUrl": "https://www.forbes.com/profile/zhong-huijuan/"
+    },
+    {
+      "rank": 154,
+      "name": "Wang Ning & family",
+      "wealthUsd": 17789900000,
+      "country": "China",
+      "source": "Toys",
+      "profileUrl": "https://www.forbes.com/profile/wang-ning/"
+    },
+    {
+      "rank": 155,
+      "name": "John Tu",
+      "wealthUsd": 17546009000,
+      "country": "United States",
+      "source": "Computer hardware",
+      "profileUrl": "https://www.forbes.com/profile/john-tu/"
+    },
+    {
+      "rank": 156,
+      "name": "David Sun",
+      "wealthUsd": 17522219000,
+      "country": "United States",
+      "source": "Computer hardware",
+      "profileUrl": "https://www.forbes.com/profile/david-sun/"
+    },
+    {
+      "rank": 157,
+      "name": "John Collison",
+      "wealthUsd": 17490000000,
+      "country": "Ireland",
+      "source": "Payment software",
+      "profileUrl": "https://www.forbes.com/profile/john-collison/"
+    },
+    {
+      "rank": 158,
+      "name": "Patrick Collison",
+      "wealthUsd": 17490000000,
+      "country": "Ireland",
+      "source": "Payment software",
+      "profileUrl": "https://www.forbes.com/profile/patrick-collison/"
+    },
+    {
+      "rank": 159,
+      "name": "Michael Hartono",
+      "wealthUsd": 17472524000,
+      "country": "Indonesia",
+      "source": "Banking, tobacco ",
+      "profileUrl": "https://www.forbes.com/profile/michael-hartono/"
+    },
+    {
+      "rank": 160,
+      "name": "John Menard Jr",
+      "wealthUsd": 17307549000,
+      "country": "United States",
+      "source": "Home improvement stores",
+      "profileUrl": "https://www.forbes.com/profile/john-menard-jr/"
+    },
+    {
+      "rank": 161,
+      "name": "Torstein Hagen",
+      "wealthUsd": 17195764000,
+      "country": "Norway",
+      "source": "Cruises",
+      "profileUrl": "https://www.forbes.com/profile/torstein-hagen/"
+    },
+    {
+      "rank": 162,
+      "name": "Jan Koum",
+      "wealthUsd": 16996309000,
+      "country": "United States",
+      "source": "WhatsApp",
+      "profileUrl": "https://www.forbes.com/profile/jan-koum/"
+    },
+    {
+      "rank": 163,
+      "name": "Stephen Ross",
+      "wealthUsd": 16982712000,
+      "country": "United States",
+      "source": "Real estate",
+      "profileUrl": "https://www.forbes.com/profile/stephen-ross/"
+    },
+    {
+      "rank": 164,
+      "name": "Zhang Zhidong",
+      "wealthUsd": 16920744000,
+      "country": "China",
+      "source": "Online games",
+      "profileUrl": "https://www.forbes.com/profile/zhang-zhidong/"
+    },
+    {
+      "rank": 165,
+      "name": "Arthur Dantchik",
+      "wealthUsd": 16877000000,
+      "country": "United States",
+      "source": "Trading, investments",
+      "profileUrl": "https://www.forbes.com/profile/arthur-dantchik/"
+    },
+    {
+      "rank": 166,
+      "name": "Ludwig Merckle",
+      "wealthUsd": 16844301000,
+      "country": "Germany",
+      "source": "Pharmaceuticals",
+      "profileUrl": "https://www.forbes.com/profile/ludwig-merckle/"
+    },
+    {
+      "rank": 167,
+      "name": "Adam Foroughi",
+      "wealthUsd": 16624983000,
+      "country": "United States",
+      "source": "advertising technology",
+      "profileUrl": "https://www.forbes.com/profile/adam-foroughi/"
+    },
+    {
+      "rank": 168,
+      "name": "Anders Holch Povlsen",
+      "wealthUsd": 16519621000,
+      "country": "Denmark",
+      "source": "Fashion retail",
+      "profileUrl": "https://www.forbes.com/profile/anders-holch-povlsen/"
+    },
+    {
+      "rank": 169,
+      "name": "Mikhail Fridman",
+      "wealthUsd": 16404535000,
+      "country": "Russia",
+      "source": "Oil, banking, telecom",
+      "profileUrl": "https://www.forbes.com/profile/mikhail-fridman/"
+    },
+    {
+      "rank": 170,
+      "name": "Alejandro Baillères Gual & family",
+      "wealthUsd": 16362106000,
+      "country": "Mexico",
+      "source": "Diversified",
+      "profileUrl": "https://www.forbes.com/profile/alejandro-bailleres-gual/"
+    },
+    {
+      "rank": 171,
+      "name": "Wang Wei",
+      "wealthUsd": 16258372000,
+      "country": "China",
+      "source": "Package delivery",
+      "profileUrl": "https://www.forbes.com/profile/wang-wei/"
+    },
+    {
+      "rank": 172,
+      "name": "Peter Mallouk",
+      "wealthUsd": 16082000000,
+      "country": "United States",
+      "source": "Wealth planning",
+      "profileUrl": "https://www.forbes.com/profile/peter-mallouk/"
+    },
+    {
+      "rank": 173,
+      "name": "Harold Hamm & family",
+      "wealthUsd": 16000000000,
+      "country": "United States",
+      "source": "Oil & gas",
+      "profileUrl": "https://www.forbes.com/profile/harold-hamm/"
+    },
+    {
+      "rank": 174,
+      "name": "Charlene de Carvalho-Heineken & family",
+      "wealthUsd": 15978443000,
+      "country": "Netherlands",
+      "source": "Heineken",
+      "profileUrl": "https://www.forbes.com/profile/charlene-de-carvalho-heineken/"
+    },
+    {
+      "rank": 175,
+      "name": "Pei Zhenhua",
+      "wealthUsd": 15941178000,
+      "country": "China",
+      "source": "Batteries",
+      "profileUrl": "https://www.forbes.com/profile/pei-zhenhua-1/"
+    },
+    {
+      "rank": 176,
+      "name": "Georg Schaeffler",
+      "wealthUsd": 15903954000,
+      "country": "Germany",
+      "source": "Auto parts",
+      "profileUrl": "https://www.forbes.com/profile/georg-schaeffler/"
+    },
+    {
+      "rank": 177,
+      "name": "Sarath Ratanavadi",
+      "wealthUsd": 15886152000,
+      "country": "Thailand",
+      "source": "Energy",
+      "profileUrl": "https://www.forbes.com/profile/sarath-ratanavadi/"
+    },
+    {
+      "rank": 178,
+      "name": "Brad Jacobs",
+      "wealthUsd": 15802952000,
+      "country": "United States",
+      "source": "Logistics",
+      "profileUrl": "https://www.forbes.com/profile/brad-jacobs/"
+    },
+    {
+      "rank": 179,
+      "name": "George Kaiser",
+      "wealthUsd": 15740701000,
+      "country": "United States",
+      "source": "Oil & gas, banking",
+      "profileUrl": "https://www.forbes.com/profile/george-kaiser/"
+    },
+    {
+      "rank": 180,
+      "name": "Charles Ergen",
+      "wealthUsd": 15629863000,
+      "country": "United States",
+      "source": "Satellite TV",
+      "profileUrl": "https://www.forbes.com/profile/charles-ergen/"
+    },
+    {
+      "rank": 181,
+      "name": "Enrique Razon Jr.",
+      "wealthUsd": 15512238000,
+      "country": "Philippines",
+      "source": "Ports",
+      "profileUrl": "https://www.forbes.com/profile/enrique-razon-jr/"
+    },
+    {
+      "rank": 182,
+      "name": "Cao Renxian",
+      "wealthUsd": 15473463000,
+      "country": "China",
+      "source": "Photovoltaic equipment ",
+      "profileUrl": "https://www.forbes.com/profile/cao-renxian/"
+    },
+    {
+      "rank": 183,
+      "name": "Radhakishan Damani",
+      "wealthUsd": 15394994000,
+      "country": "India",
+      "source": "Retail, investments",
+      "profileUrl": "https://www.forbes.com/profile/radhakishan-damani-1/"
+    },
+    {
+      "rank": 184,
+      "name": "Ray Dalio",
+      "wealthUsd": 15383970000,
+      "country": "United States",
+      "source": "Hedge funds",
+      "profileUrl": "https://www.forbes.com/profile/ray-dalio/"
+    },
+    {
+      "rank": 185,
+      "name": "Hussain Sajwani",
+      "wealthUsd": 15280201000,
+      "country": "United Arab Emirates",
+      "source": "Real estate",
+      "profileUrl": "https://www.forbes.com/profile/hussain-sajwani/"
+    },
+    {
+      "rank": 186,
+      "name": "Donald Newhouse",
+      "wealthUsd": 15082445000,
+      "country": "United States",
+      "source": "Media",
+      "profileUrl": "https://www.forbes.com/profile/donald-newhouse/"
+    },
+    {
+      "rank": 187,
+      "name": "Friedhelm Loh",
+      "wealthUsd": 15031584000,
+      "country": "Germany",
+      "source": "Manufacturing",
+      "profileUrl": "https://www.forbes.com/profile/friedhelm-loh/"
+    },
+    {
+      "rank": 188,
+      "name": "Zhou Qunfei & family",
+      "wealthUsd": 14904260000,
+      "country": "Hong Kong",
+      "source": "Smartphone screens",
+      "profileUrl": "https://www.forbes.com/profile/zhou-qunfei/"
+    },
+    {
+      "rank": 189,
+      "name": "Jaime Gilinski Bacal",
+      "wealthUsd": 14812870000,
+      "country": "Colombia",
+      "source": "Banking",
+      "profileUrl": "https://www.forbes.com/profile/jaime-gilinski-bacal/"
+    },
+    {
+      "rank": 190,
+      "name": "James Dyson",
+      "wealthUsd": 14798577000,
+      "country": "United Kingdom",
+      "source": "Vacuums",
+      "profileUrl": "https://www.forbes.com/profile/james-dyson/"
+    },
+    {
+      "rank": 191,
+      "name": "Jack Dangermond",
+      "wealthUsd": 14756268000,
+      "country": "United States",
+      "source": "Mapping software",
+      "profileUrl": "https://www.forbes.com/profile/jack-dangermond/"
+    },
+    {
+      "rank": 192,
+      "name": "Alexander Karp",
+      "wealthUsd": 14586930000,
+      "country": "United States",
+      "source": "Software firm",
+      "profileUrl": "https://www.forbes.com/profile/alexander-karp/"
+    },
+    {
+      "rank": 193,
+      "name": "Shahid Khan",
+      "wealthUsd": 14548009000,
+      "country": "United States",
+      "source": "Sports teams, auto parts",
+      "profileUrl": "https://www.forbes.com/profile/shahid-khan/"
+    },
+    {
+      "rank": 194,
+      "name": "Alisher Usmanov",
+      "wealthUsd": 14492117000,
+      "country": "Russia",
+      "source": "Steel, telecom, investments",
+      "profileUrl": "https://www.forbes.com/profile/alisher-usmanov/"
+    },
+    {
+      "rank": 195,
+      "name": "Ann Walton Kroenke",
+      "wealthUsd": 14459179000,
+      "country": "United States",
+      "source": "Walmart",
+      "profileUrl": "https://www.forbes.com/profile/ann-walton-kroenke/"
+    },
+    {
+      "rank": 196,
+      "name": "Wang Weixiu & family",
+      "wealthUsd": 14424354000,
+      "country": "China",
+      "source": "Machinery",
+      "profileUrl": "https://www.forbes.com/profile/wang-weixiu/"
+    },
+    {
+      "rank": 197,
+      "name": "Peter Woo",
+      "wealthUsd": 14291486000,
+      "country": "Hong Kong",
+      "source": "Real estate",
+      "profileUrl": "https://www.forbes.com/profile/peter-woo/"
+    },
+    {
+      "rank": 198,
+      "name": "Joseph Lau",
+      "wealthUsd": 14256519000,
+      "country": "Hong Kong",
+      "source": "Real estate",
+      "profileUrl": "https://www.forbes.com/profile/joseph-lau/"
+    },
+    {
+      "rank": 199,
+      "name": "Li Shuirong & family",
+      "wealthUsd": 14237482000,
+      "country": "China",
+      "source": "Petrochemicals",
+      "profileUrl": "https://www.forbes.com/profile/li-shuirong/"
+    },
+    {
+      "rank": 200,
+      "name": "Antonia Ax:son Johnson & family",
+      "wealthUsd": 14145060000,
+      "country": "Sweden",
+      "source": "Diversified",
+      "profileUrl": "https://www.forbes.com/profile/antonia-axson-johnson/"
+    }
+  ]
+}

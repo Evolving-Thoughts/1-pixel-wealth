@@ -1,0 +1,10 @@
+{
+  "name": "1-pixel-wealth-translation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "update:wealth": "node ./scripts/fetch-billionaires.mjs",
+    "serve": "npx --yes http-server . -p 8080"
+  }
+}
