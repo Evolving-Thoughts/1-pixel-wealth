@@ -85,6 +85,15 @@
       "i18nKey": "i18n-lets-put-this-wealth"
     },
     {
+      "id": "homeless-veterans",
+      "bar": "richest",
+      "type": "square",
+      "positionFraction": 0.52,
+      "title": "Annual cost to house every homeless veteran",
+      "amountUsd": 20000000000,
+      "squareColor": "#4CAF50"
+    },
+    {
       "id": "richest-daily",
       "bar": "richest",
       "type": "text",

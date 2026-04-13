@@ -6,7 +6,10 @@ const COUNTER_SCROLL_OFFSET = 175; // px offset for wealth counter (accounts for
 const DOLLARS_PER_PIXEL = 1000; // scale: 1 pixel = $1,000
 const SCROLL_RATE_PX = 10; // pixels per scroll unit for rate display
 const BAR_VISIBILITY_OFFSET_PX = 200; // min px into bar before counter shows
-const MAX_SQUARE_WIDTH_FRACTION = 0.8; // max square comparison width relative to bar
+const MAX_SQUARE_WIDTH_FRACTION = 0.8; // max comparison rect width relative to bar
+const MIN_RECT_HEIGHT_FOR_INNER_TEXT = 60; // px — rect must be this tall to place text inside
+const MIN_RECT_WIDTH_FOR_INNER_TEXT = 150; // px — rect must be this wide to place text inside
+const MIN_COMPARISON_GAP_VH = 1.5; // minimum viewports of scroll between comparisons
 const MAX_BAR_SEGMENTS = 100; // explicit upper bound for segmentation loop
 const FETCH_TIMEOUT_MS = 15_000; // timeout for data fetch requests
 const TICKER_UPDATE_MS = 1000; // death ticker refresh interval
@@ -312,15 +315,18 @@ function updateComparisonPositions(container) {
     fracs.push(parseFloat(items[i].getAttribute('data-position-fraction')) || 0);
   }
 
+  // Account for header elements above the comparisons container
+  var headerOffset = container.getBoundingClientRect().top - barEl.getBoundingClientRect().top;
+
   // Set explicit heights based on gap to next comparison, then compute margins.
-  // Use align-items: flex-start so sticky text appears at element top, not center.
-  var lastBottom = 0;
+  var lastBottom = headerOffset;
   for (var i = 0; i < items.length; i++) {
     var targetPx = Math.round(fracs[i] * barH);
     var nextTargetPx = (i + 1 < fracs.length)
       ? Math.round(fracs[i + 1] * barH)
       : barH;
-    var gapHeight = Math.max(window.innerHeight, nextTargetPx - targetPx);
+    var minGap = Math.round(window.innerHeight * MIN_COMPARISON_GAP_VH);
+    var gapHeight = Math.max(minGap, nextTargetPx - targetPx);
 
     var diff = Math.max(0, targetPx - lastBottom);
     items[i].style.marginTop = diff + 'px';
@@ -336,6 +342,17 @@ function updateAllComparisonPositions() {
   const allContainer = document.getElementById('allBillionaires-comparisons');
   if (richestContainer) updateComparisonPositions(richestContainer);
   if (allContainer) updateComparisonPositions(allContainer);
+}
+
+function updateRectSizes() {
+  const rects = document.querySelectorAll('.comparison-rect[data-amount-usd]');
+  for (let i = 0; i < rects.length; i++) {
+    const amountUsd = parseFloat(rects[i].getAttribute('data-amount-usd'));
+    if (!amountUsd || amountUsd <= 0) continue;
+    const dims = computeRectDimensions(amountUsd);
+    rects[i].style.width = dims.width.toFixed(1) + 'px';
+    rects[i].style.height = dims.height.toFixed(1) + 'px';
+  }
 }
 
 function updateDynamicText() {
@@ -360,12 +377,40 @@ function renderTextContent(comp, vars) {
   return '<div class="title">' + interpolate(comp.title, vars) + '</div>';
 }
 
+function computeRectDimensions(amountUsd) {
+  const areaPixels = amountUsd / DOLLARS_PER_PIXEL;
+  const maxWidth = currentBarWidth * MAX_SQUARE_WIDTH_FRACTION;
+  const side = Math.sqrt(areaPixels);
+
+  if (side <= maxWidth) {
+    return { width: side, height: side };
+  }
+  return { width: maxWidth, height: areaPixels / maxWidth };
+}
+
 function renderSquareContent(comp, vars) {
-  const maxSide = currentBarWidth * MAX_SQUARE_WIDTH_FRACTION;
-  const side = Math.min(Math.sqrt(comp.amountUsd / DOLLARS_PER_PIXEL), maxSide);
-  return '<div class="title-square-wrapper">' +
-    '<div class="title">' + interpolate(comp.title, vars) + '</div>' +
-    '<div class="square" style="width:' + side.toFixed(1) + 'px;height:' + side.toFixed(1) + 'px;background-color:' + (comp.squareColor || '#2196F3') + ';margin:0 auto"></div>' +
+  const titleHtml = interpolate(comp.title, vars);
+
+  if (!comp.amountUsd || comp.amountUsd <= 0) {
+    return '<div class="comparison-rect-wrapper"><span class="comparison-rect-label">' + titleHtml + '</span></div>';
+  }
+
+  const dims = computeRectDimensions(comp.amountUsd);
+  const color = comp.squareColor || '#2196F3';
+  const rectStyle = 'width:' + dims.width.toFixed(1) + 'px;height:' + dims.height.toFixed(1) + 'px;background-color:' + color;
+  const textFitsInside = dims.height >= MIN_RECT_HEIGHT_FOR_INNER_TEXT && dims.width >= MIN_RECT_WIDTH_FOR_INNER_TEXT;
+
+  if (textFitsInside) {
+    return '<div class="comparison-rect-wrapper comparison-rect-large">' +
+      '<div class="comparison-rect" data-amount-usd="' + comp.amountUsd + '" style="' + rectStyle + '">' +
+        '<span class="comparison-rect-label">' + titleHtml + '</span>' +
+      '</div>' +
+    '</div>';
+  }
+
+  return '<div class="comparison-rect-wrapper">' +
+    '<span class="comparison-rect-label">' + titleHtml + '</span>' +
+    '<div class="comparison-rect" data-amount-usd="' + comp.amountUsd + '" style="' + rectStyle + '"></div>' +
   '</div>';
 }
 
@@ -582,6 +627,7 @@ window.addEventListener('resize', function() {
   }
 
   applyDimensions(computeBarWidth());
+  updateRectSizes();
   updateAllComparisonPositions();
   updateDynamicText();
 
