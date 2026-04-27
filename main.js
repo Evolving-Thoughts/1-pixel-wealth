@@ -10,6 +10,7 @@ const MAX_SQUARE_WIDTH_FRACTION = 0.8; // max comparison rect width relative to 
 const MIN_RECT_HEIGHT_FOR_INNER_TEXT = 60; // px — rect must be this tall to place text inside
 const MIN_RECT_WIDTH_FOR_INNER_TEXT = 150; // px — rect must be this wide to place text inside
 const MIN_COMPARISON_GAP_VH = 1.5; // minimum viewports of scroll between comparisons
+const MIN_COMPARISON_CONTENT_PADDING_PX = 64; // extra breathing room around long comparison content
 const MAX_BAR_SEGMENTS = 100; // explicit upper bound for segmentation loop
 const FETCH_TIMEOUT_MS = 15_000; // timeout for data fetch requests
 const TICKER_UPDATE_MS = 1000; // death ticker refresh interval
@@ -303,7 +304,27 @@ function renderGroup(comparisons, container, totalWealth, vars) {
   });
 
   container.appendChild(fragment);
+
+  // Reflow after async image loads so measured heights remain accurate.
+  const images = container.querySelectorAll('img');
+  for (var imageIndex = 0; imageIndex < images.length; imageIndex++) {
+    images[imageIndex].addEventListener('load', function() {
+      updateComparisonPositions(container);
+    }, { once: true });
+  }
+
   updateComparisonPositions(container);
+}
+
+function getComparisonContentHeightPx(itemEl) {
+  const contentEl = itemEl.querySelector(
+    '.cause-card, .summary-card, .comparison-image-wrapper, .comparison-rect-wrapper, .title'
+  );
+  if (!contentEl) return 0;
+
+  const rect = contentEl.getBoundingClientRect();
+  if (!rect || !Number.isFinite(rect.height)) return 0;
+  return Math.max(0, Math.ceil(rect.height));
 }
 
 function updateComparisonPositions(container) {
@@ -323,17 +344,21 @@ function updateComparisonPositions(container) {
   // Account for header elements above the comparisons container
   var headerOffset = container.getBoundingClientRect().top - barEl.getBoundingClientRect().top;
 
-  // Set explicit heights based on gap to next comparison, then compute margins.
+  // Set explicit heights based on both target gaps and actual content size.
   var lastBottom = headerOffset;
   for (var i = 0; i < items.length; i++) {
-    var targetPx = Math.round(fracs[i] * barH);
+    var targetPx = Math.max(headerOffset, Math.round(fracs[i] * barH));
     var nextTargetPx = (i + 1 < fracs.length)
       ? Math.round(fracs[i + 1] * barH)
       : barH;
-    var minGap = Math.round(window.innerHeight * MIN_COMPARISON_GAP_VH);
-    var gapHeight = Math.max(minGap, nextTargetPx - targetPx);
+    var minGapPx = Math.round(window.innerHeight * MIN_COMPARISON_GAP_VH);
+    var contentHeightPx = getComparisonContentHeightPx(items[i]);
+    var requiredHeightPx = contentHeightPx + MIN_COMPARISON_CONTENT_PADDING_PX;
+    var targetHeightPx = Math.max(minGapPx, nextTargetPx - targetPx);
+    var gapHeight = Math.max(requiredHeightPx, targetHeightPx);
 
-    var diff = Math.max(0, targetPx - lastBottom);
+    var topPx = Math.max(targetPx, lastBottom);
+    var diff = Math.max(0, topPx - lastBottom);
     items[i].style.marginTop = diff + 'px';
     items[i].style.height = gapHeight + 'px';
     items[i].style.alignItems = 'flex-start';
@@ -410,6 +435,17 @@ function renderTextContent(comp, vars) {
   return '<div class="title">' + interpolate(comp.title, vars) + '</div>';
 }
 
+function renderImageContent(comp, vars) {
+  var alt = (comp.imageAlt || comp.title || '').replace(/"/g, '&quot;');
+  var html = '<div class="comparison-image-wrapper">';
+  if (comp.title) {
+    html += '<div class="title">' + interpolate(comp.title, vars) + '</div>';
+  }
+  html += '<img class="comparison-image" src="' + comp.imageUrl + '" alt="' + alt + '">';
+  html += '</div>';
+  return html;
+}
+
 function computeRectDimensions(amountUsd) {
   const areaPixels = amountUsd / DOLLARS_PER_PIXEL;
   const barMax = currentBarWidth * MAX_SQUARE_WIDTH_FRACTION;
@@ -483,9 +519,10 @@ function renderCauseContent(comp, totalWealth, vars) {
   let html = '<div class="cause-card">';
   html += renderPieChartHtml(pct, pctStr);
 
+  var costSuffix = comp.costPeriod === 'yearly' ? '/year' : ' total';
   html += '<div class="cause-content">' +
     '<h3 class="cause-title">' + comp.title + '</h3>' +
-    '<div class="cause-cost">' + formatCompactMoney(comp.costUsd) + ' \u2014 ' + pctStr + ' of all billionaire wealth</div>' +
+    '<div class="cause-cost">' + formatCompactMoney(comp.costUsd) + costSuffix + ' \u2014 ' + pctStr + ' of all billionaire wealth</div>' +
     '<p class="cause-desc">' + comp.description + '</p>';
 
   if (comp.deathsPerYear) {
@@ -585,6 +622,10 @@ function createComparisonElement(comp, totalWealth, vars, isFirst) {
       wrapper.classList.add('text-infobox', 'summary-infobox');
       wrapper.innerHTML = renderSummaryContent(comp, totalWealth);
       break;
+    case 'image':
+      wrapper.classList.add('text-infobox', 'image-infobox');
+      wrapper.innerHTML = renderImageContent(comp, vars);
+      break;
     default:
       wrapper.classList.add('text-infobox');
       wrapper.innerHTML = renderTextContent(comp, vars);
@@ -601,57 +642,85 @@ function getDurationClass(multiplier) {
   return 'infobox-close';
 }
 
+function getTickerItemLabel(comp) {
+  var raw = comp.tickerDescription || comp.deathLabel || comp.title || '';
+  var noTags = String(raw).replace(/<[^>]*>/g, ' ');
+  return noTags.replace(/\s+/g, ' ').trim();
+}
+
 // ─── Death Ticker ───────────────────────────────────────────────────
 function startDeathTicker(config) {
   const tickerEl = document.getElementById('death-ticker');
   const countsEl = document.getElementById('death-ticker-counts');
   if (!tickerEl || !countsEl) return;
 
-  const sources = config.sources || [];
-  if (sources.length === 0) return;
-
-  // Compute per-second rates
-  const rates = sources.map(function(s) {
-    return {
-      label: s.label,
-      perSecond: s.perYear / (365.25 * 24 * 3600),
-    };
-  });
-
-  // Keep ticker hidden until user scrolls to the first cause comparison
-  var tickerVisible = false;
-
-  function checkVisibility() {
-    if (tickerVisible) return;
-    // Find the first cause-type comparison in the DOM
-    var causeEl = document.querySelector('.cause-infobox');
-    if (!causeEl) return;
-    var scrollTop = window.scrollY || window.pageYOffset || 0;
-    var vh = window.innerHeight;
-    if (scrollTop + vh >= causeEl.offsetTop) {
-      tickerEl.hidden = false;
-      tickerVisible = true;
-    }
+  // Auto-build groups from story comparisons that have both deathsPerYear and tickerGroup.
+  // Order of groups matches the order they first appear in the comparisons array.
+  const groups = {};
+  const groupOrder = [];
+  if (story && story.comparisons) {
+    story.comparisons.forEach(function(c) {
+      if (!c.deathsPerYear || !c.tickerGroup) return;
+      if (!groups[c.tickerGroup]) {
+        groups[c.tickerGroup] = [];
+        groupOrder.push(c.tickerGroup);
+      }
+      groups[c.tickerGroup].push({
+        label: getTickerItemLabel(c),
+        perSecond: c.deathsPerYear / (365.25 * 24 * 3600),
+      });
+    });
   }
 
-  window.addEventListener('scroll', function() {
-    if (!tickerVisible) checkVisibility();
+  if (groupOrder.length === 0) return;
+
+  const groupCauseText = {};
+  groupOrder.forEach(function(groupName) {
+    var labels = groups[groupName].map(function(item) { return item.label; });
+    groupCauseText[groupName] = '(' + labels.join(', ') + ')';
   });
+
+  // The first comparison that has a tickerGroup is the trigger point.
+  var firstGroupId = story.comparisons.find(function(c) { return c.tickerGroup && c.deathsPerYear; }).id;
+  var triggerEl = document.querySelector('.comparison-' + firstGroupId);
+
+  // Show ticker once the trigger comparison has entered the viewport; hide if scrolled back above it.
+  function checkVisibility() {
+    if (!triggerEl) return;
+    var scrollTop = window.scrollY || window.pageYOffset || 0;
+    var vh = window.innerHeight;
+    tickerEl.hidden = !(scrollTop + vh > triggerEl.offsetTop);
+  }
+
+  window.addEventListener('scroll', checkVisibility);
+  checkVisibility();
 
   function update() {
     var elapsed = (Date.now() - pageOpenedAt) / 1000;
+    var grandTotal = 0;
     var html = '';
-    rates.forEach(function(r) {
-      var count = Math.floor(r.perSecond * elapsed);
-      html += '<div class="ticker-row"><span class="ticker-count">' +
-        thousand.format(count) + '</span> <span class="ticker-label">' +
-        r.label + '</span></div>';
+
+    groupOrder.forEach(function(groupName) {
+      var items = groups[groupName];
+      var groupTotal = 0;
+      items.forEach(function(r) {
+        groupTotal += Math.floor(r.perSecond * elapsed);
+      });
+      grandTotal += groupTotal;
+      html += '<div class="ticker-group">' +
+        '<div class="ticker-row ticker-group-total">' +
+          '<span class="ticker-count ticker-count-group">' + thousand.format(groupTotal) + '</span>' +
+          '<span class="ticker-label ticker-label-group">' + groupName + '</span>' +
+        '</div>' +
+        '<div class="ticker-group-causes">' + groupCauseText[groupName] + '</div>' +
+        '</div>';
     });
-    // Total row — sum the individual floored counts so the total always matches
-    var totalCount = 0;
-    rates.forEach(function(r) { totalCount += Math.floor(r.perSecond * elapsed); });
-    html += '<div class="ticker-row ticker-total"><span class="ticker-count">' +
-      thousand.format(totalCount) + '</span> <span class="ticker-label">total preventable deaths</span></div>';
+
+    // Grand total — sum of all floored counts
+    html += '<div class="ticker-row ticker-total">' +
+      '<span class="ticker-count">' + thousand.format(grandTotal) + '</span>' +
+      '<span class="ticker-label">total preventable deaths</span>' +
+      '</div>';
     countsEl.innerHTML = html;
   }
 
