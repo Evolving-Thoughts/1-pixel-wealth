@@ -1,6 +1,6 @@
 ﻿// ─── Constants & Formatters ─────────────────────────────────────────
 const MAX_SEGMENT_HEIGHT = 10_000_000;
-const MAX_SAFE_HEIGHT = 33_000_000;
+const MAX_SAFE_DOCUMENT_HEIGHT = 25_000_000; // Conservative cross-browser limit
 const RULER_TICK_PX = 160;
 const COUNTER_SCROLL_OFFSET = 175;
 const DOLLARS_PER_PIXEL = 1000;
@@ -47,7 +47,13 @@ let billionaireCount = 3428;
 let story = null;
 let pageOpenedAt = Date.now();
 let tickerIntervalId = null;
-let scrollRateComp = null; // cached ref for updateDynamicText
+let scrollRateComp = null;
+
+// ─── Capping state ──────────────────────────────────────────────────
+let isCapped = false;
+let cappedFraction = 1;
+let pctReached = 100;
+let prevCappedFraction = 1;
 
 // ─── Helpers ────────────────────────────────────────────────────────
 function getStableVh() {
@@ -60,6 +66,12 @@ function interpolate(text, vars) {
   });
 }
 
+function getMaxSafeAllBillionairesH(barWidth) {
+  var richestH = Math.round(richestPersonWealthUsd / (barWidth * DOLLARS_PER_PIXEL));
+  var otherContentH = 10000; // title screen, calibration bars, spacing
+  return Math.max(0, MAX_SAFE_DOCUMENT_HEIGHT - richestH - otherContentH);
+}
+
 // ─── Layout Computation ─────────────────────────────────────────────
 function computeBarWidth() {
   const em = parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -68,25 +80,37 @@ function computeBarWidth() {
 
 function applyDimensions(barWidth) {
   currentBarWidth = barWidth;
-  const billionBarWidth = Math.min(barWidth, 1000);
-  const billionH = Math.round(1e9 / (billionBarWidth * DOLLARS_PER_PIXEL));
-  const richestH = Math.round(richestPersonWealthUsd / (barWidth * DOLLARS_PER_PIXEL));
-  const allBillionairesH = Math.round(allBillionairesTotalUsd / (barWidth * DOLLARS_PER_PIXEL));
+  var billionBarWidth = Math.min(barWidth, 1000);
+  var billionH = Math.round(1e9 / (billionBarWidth * DOLLARS_PER_PIXEL));
+  var richestH = Math.round(richestPersonWealthUsd / (barWidth * DOLLARS_PER_PIXEL));
 
-  if (allBillionairesH > MAX_SAFE_HEIGHT) {
-    console.warn('All-billionaires bar height (' + allBillionairesH + 'px) exceeds safe limit.');
+  // Calculate logical height, then cap if needed
+  var logicalAllBillionairesH = Math.round(allBillionairesTotalUsd / (barWidth * DOLLARS_PER_PIXEL));
+  var maxSafeH = getMaxSafeAllBillionairesH(barWidth);
+  var allBillionairesH;
+
+  if (logicalAllBillionairesH > maxSafeH) {
+    allBillionairesH = maxSafeH;
+    isCapped = true;
+    cappedFraction = maxSafeH / logicalAllBillionairesH;
+    pctReached = cappedFraction * 100;
+  } else {
+    allBillionairesH = logicalAllBillionairesH;
+    isCapped = false;
+    cappedFraction = 1;
+    pctReached = 100;
   }
 
-  const root = document.documentElement.style;
+  var root = document.documentElement.style;
   root.setProperty('--bar-width', barWidth + 'px');
   root.setProperty('--bar-width-billion', billionBarWidth + 'px');
   root.setProperty('--billion-h', billionH + 'px');
   root.setProperty('--richest-h', richestH + 'px');
   root.setProperty('--all-billionaires-h', allBillionairesH + 'px');
 
-  const scaleText = formatCompactMoney(RULER_TICK_PX * barWidth * DOLLARS_PER_PIXEL);
-  const scaleEls = document.querySelectorAll('.scale-label');
-  for (let i = 0; i < scaleEls.length; i++) { scaleEls[i].textContent = scaleText; }
+  var scaleText = formatCompactMoney(RULER_TICK_PX * barWidth * DOLLARS_PER_PIXEL);
+  var scaleEls = document.querySelectorAll('.scale-label');
+  for (var i = 0; i < scaleEls.length; i++) { scaleEls[i].textContent = scaleText; }
 
   segmentBar('allBillionaires', allBillionairesH, barWidth);
 }
@@ -214,8 +238,14 @@ function applyData(billionaireData, storyData) {
   const richestTitle = document.getElementById('richest-title');
   if (richestTitle) richestTitle.textContent = money.format(richestPersonWealthUsd) + ' (wealth of ' + richestName + ')';
 
-  const allTitle = document.getElementById('allBillionaires-title');
-  if (allTitle) allTitle.textContent = 'All the world\u2019s ' + thousand.format(billionaireCount) + ' billionaires (' + formatCompactMoney(allBillionairesTotalUsd) + ')';
+  var allTitle = document.getElementById('allBillionaires-title');
+  if (allTitle) {
+    var titleText = 'All the world\u2019s ' + thousand.format(billionaireCount) + ' billionaires (' + formatCompactMoney(allBillionairesTotalUsd) + ')';
+    if (isCapped) {
+      titleText += ' \u2014 showing ' + fmtPct(pctReached);
+    }
+    allTitle.textContent = titleText;
+  }
 
   const sourceEl = document.getElementById('data-source');
   if (sourceEl) {
@@ -245,10 +275,10 @@ function applyData(billionaireData, storyData) {
 function renderComparisons() {
   if (!story || !story.comparisons) return;
 
-  const richestContainer = document.getElementById('richest-comparisons');
-  const allContainer = document.getElementById('allBillionaires-comparisons');
+  var richestContainer = document.getElementById('richest-comparisons');
+  var allContainer = document.getElementById('allBillionaires-comparisons');
 
-  const templateVars = {
+  var templateVars = {
     richestName: richestName,
     richestDailyIncome: formatCompactMoney(Math.round(richestPersonWealthUsd / 365)),
     scrollRate: formatCompactMoney(currentBarWidth * DOLLARS_PER_PIXEL * SCROLL_RATE_PX),
@@ -256,14 +286,62 @@ function renderComparisons() {
     billionaireCount: thousand.format(billionaireCount),
   };
 
-  const groups = { richest: [], allBillionaires: [] };
+  var groups = { richest: [], allBillionaires: [] };
   story.comparisons.forEach(function(c) {
-    const barKey = c.bar || 'allBillionaires';
+    var barKey = c.bar || 'allBillionaires';
     if (groups[barKey]) groups[barKey].push(c);
   });
 
-  if (richestContainer) renderGroup(groups.richest, richestContainer, richestPersonWealthUsd, templateVars);
-  if (allContainer) renderGroup(groups.allBillionaires, allContainer, allBillionairesTotalUsd, templateVars);
+  // For the allBillionaires bar: filter, remap, and add cap message if needed
+  var allComps = prepareAllBillionairesComparisons(groups.allBillionaires);
+
+  if (richestContainer) {
+    richestContainer.innerHTML = '';
+    renderGroup(groups.richest, richestContainer, richestPersonWealthUsd, templateVars);
+  }
+  if (allContainer) {
+    allContainer.innerHTML = '';
+    renderGroup(allComps, allContainer, allBillionairesTotalUsd, templateVars);
+  }
+}
+
+function prepareAllBillionairesComparisons(comparisons) {
+  if (!isCapped) return comparisons;
+
+  // Filter out comparisons beyond the capped portion
+  var visible = comparisons.filter(function(c) {
+    return c.positionFraction <= cappedFraction;
+  });
+
+  // Remap fractions to capped bar coordinates
+  var remapped = visible.map(function(c) {
+    var copy = {};
+    for (var key in c) {
+      if (c.hasOwnProperty(key)) copy[key] = c[key];
+    }
+    copy.positionFraction = c.positionFraction / cappedFraction;
+    return copy;
+  });
+
+  // Add the "browser broke" message near the bottom
+  var remainingWealth = allBillionairesTotalUsd * (1 - cappedFraction);
+  var brokeMessage = {
+    id: 'browser-broke',
+    bar: 'allBillionaires',
+    type: 'text',
+    positionFraction: 0.95,
+    title: '<strong>You\'ve hit the wall.</strong><br><br>' +
+      'The combined wealth of all billionaires is so incomprehensibly large ' +
+      'that it literally exceeds your browser\'s maximum page height. ' +
+      'You\'ve only scrolled through <strong>' + fmtPct(pctReached) + '</strong> ' +
+      'of their wealth.<br><br>' +
+      'The remaining <strong>' + fmtPct(100 - pctReached) + '</strong> \u2014 about <strong>' +
+      formatCompactMoney(remainingWealth) + '</strong> \u2014 simply doesn\'t fit on this screen.<br><br>' +
+      'To scroll through it all, try using a wider screen or window.'
+  };
+  remapped.push(brokeMessage);
+
+  return remapped;
 }
 
 function renderGroup(comparisons, container, totalWealth, vars) {
@@ -684,11 +762,11 @@ window.addEventListener('resize', function() {
   if (resizeRafId) cancelAnimationFrame(resizeRafId);
   resizeRafId = requestAnimationFrame(function() {
     resizeRafId = null;
-    const scrollTop = window.scrollY || window.pageYOffset || 0;
+    var scrollTop = window.scrollY || window.pageYOffset || 0;
 
-    let anchor = null;
-    const richestEl = document.getElementById('richest');
-    const allEl = document.getElementById('allBillionaires');
+    var anchor = null;
+    var richestEl = document.getElementById('richest');
+    var allEl = document.getElementById('allBillionaires');
 
     if (richestEl && scrollTop >= richestEl.offsetTop && scrollTop < richestEl.offsetTop + richestEl.offsetHeight) {
       anchor = { id: 'richest', frac: (scrollTop - richestEl.offsetTop) / richestEl.offsetHeight };
@@ -696,13 +774,20 @@ window.addEventListener('resize', function() {
       anchor = { id: 'allBillionaires', frac: (scrollTop - allEl.offsetTop) / allEl.offsetHeight };
     }
 
+    prevCappedFraction = cappedFraction;
     applyDimensions(computeBarWidth());
     updateRectSizes();
-    updateAllComparisonPositions();
     updateDynamicText();
 
+    // Re-render comparisons if capping state changed
+    if (cappedFraction !== prevCappedFraction) {
+      renderComparisons();
+    } else {
+      updateAllComparisonPositions();
+    }
+
     if (anchor) {
-      const el = document.getElementById(anchor.id);
+      var el = document.getElementById(anchor.id);
       if (el) window.scrollTo(0, el.offsetTop + anchor.frac * el.offsetHeight);
     }
   });

@@ -1,15 +1,15 @@
+/* ─── Reset & Base ─── */
 body, html {
   margin: 0;
 }
 html {
   overflow-x: clip;
 }
-body,
-html,
-.wealth-wrapper-outer,
-.wealth-row {
+body, html, .wealth-wrapper-outer, .wealth-row {
   min-height: 100%;
 }
+
+/* ─── Title Screen ─── */
 .title-screen {
   width: 100%;
   height: 100vh;
@@ -30,8 +30,6 @@ h1 {
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
-  padding-top: 0;
-  padding-left: 0;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -42,16 +40,7 @@ h1 {
   background-repeat: no-repeat;
   background-size: 50%;
   background-position: 50px 50px;
-  animation-name: bouncy-arrow;
-  animation-delay: 0;
-  animation-iteration-count: infinite;
-  animation-direction: forward;
-  animation-duration: 3s;
-}
-@media (max-width: 450px) {
-  .scroll-this-way {
-    bottom: -35vw;
-  }
+  animation: bouncy-arrow 3s infinite;
 }
 @keyframes bouncy-arrow {
   0%   { background-position: 50px 50px; }
@@ -62,6 +51,8 @@ h1 {
   40%  { background-position: 50px 50px; }
   100% { background-position: 50px 50px; }
 }
+
+/* ─── Layout ─── */
 .wealth-wrapper-outer {
   font-family: sans-serif;
   overflow: visible;
@@ -71,13 +62,17 @@ h1 {
   display: flex;
   flex-direction: column;
 }
+.wealth-wrapper {
+  margin: 3em 1em;
+}
+
+/* ─── Arrow ─── */
 .arrow {
   margin-top: -7.5px;
   margin-left: 5px;
 }
-.wealth-wrapper {
-  margin: 3em 1em;
-}
+
+/* ─── Wealth Bars ─── */
 .wealth {
   background-color: black;
   align-items: center;
@@ -87,13 +82,21 @@ h1 {
 .title {
   margin-bottom: 5px;
 }
-.billion .wealth > .wealth-title {
-  flex-basis: auto;
-  position: static;
+.wealth-title {
+  align-self: flex-start;
+  margin-bottom: 5px;
+  margin-top: 0;
+  color: black;
+  background: transparent;
+  box-sizing: border-box;
 }
 .wealth > .wealth-title {
   flex-basis: auto;
   padding: 10px;
+}
+.billion .wealth > .wealth-title {
+  flex-basis: auto;
+  position: static;
 }
 .wealth-header {
   position: sticky;
@@ -102,123 +105,8 @@ h1 {
   align-self: flex-start;
   width: calc(100% - 90px);
 }
-@media (max-width: 450px) {
-  .wealth-title {
-    font-size: 19px;
-  }
-}
-.wealth-title {
-  align-self: flex-start;
-  margin-bottom: 5px;
-  color: black;
-  margin-top: 0;
-  background: transparent;
-  box-sizing: border-box;
-}
-.text-infobox .title {
-  max-width: 450px;
-}
-/* Narrower max-width for the intro comparison */
-.comparison-intro .title {
-  max-width: 390px;
-}
-.infobox .comparison-rect-wrapper,
-.infobox .title {
-  font-weight: normal;
-  line-height: 1.4;
-  width: 90%;
-  max-width: 600px;
-  text-align: center;
-}
-.infobox .comparison-rect-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.comparison-rect {
-  margin-top: 8px;
-}
-.comparison-rect-label {
-  color: inherit;
-}
-/* Medium rects: text inside, whole wrapper sticky */
-.comparison-rect-medium .comparison-rect {
-  margin-top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.comparison-rect-medium .comparison-rect-label {
-  text-align: center;
-}
-/* Large rects: label is sticky within the rect */
-.comparison-rect-large {
-  width: 90%;
-  max-width: none;
-  margin-left: auto;
-  margin-right: auto;
-}
-.comparison-rect-large .comparison-rect {
-  margin-top: 0;
-}
-.comparison-rect-large .comparison-rect-label {
-  position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
-  display: block;
-  text-align: center;
-  z-index: 1;
-  margin-top: 25vh;
-  margin-bottom: 25vh;
-}
-@media (max-width: 450px) {
-  .infobox .title {
-    width: 95%;
-    left: 50%;
-    position: relative;
-    transform: translateX(-50%);
-    margin-top: 24px;
-    margin-bottom: 24px;
-    text-align: center;
-  }
-  .infobox {
-    align-items: center;
-    justify-content: center;
-  }
-  .comparison-rect-label {
-    margin-bottom: 12px;
-    margin-top: 0;
-  }
-}
-.infobox .comparison-rect-wrapper:not(.comparison-rect-large):not(.comparison-rect-medium),
-.infobox .comparison-rect-wrapper.comparison-rect-medium,
-.text-infobox .title {
-  position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 25vh;
-  margin-bottom: 25vh;
-}
-@media (max-width: 450px) {
-  .infobox .comparison-rect,
-  .infobox .comparison-rect-wrapper,
-  .infobox .title,
-  .comparison-rect-large .comparison-rect-label,
-  .comparison-rect-medium .comparison-rect-label {
-    top: 10px;
-    transform: none;
-  }
-}
-/* Infobox: layout only — height & margin are set by JS */
-.infobox {
-  z-index: 1;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
+/* ─── Calibration Bars ─── */
 .one-thousand {
   width: 1px;
   height: 1px;
@@ -257,6 +145,8 @@ h1 {
   width: var(--bar-width, 500px);
   background-color: #03A9F4;
 }
+
+/* ─── Ruler & Scale Key ─── */
 .ruler {
   background-image: url('img/ruler-vert.svg');
   background-repeat: repeat-y;
@@ -272,9 +162,7 @@ h1 {
   width: 25px;
   height: 160px;
   flex-shrink: 0;
-  background-image: url(img/scale-vert.svg);
-  background-repeat: no-repeat;
-  background-position: right center;
+  background: url(img/scale-vert.svg) no-repeat right center;
   background-size: 9px 160px;
   display: flex;
   flex-direction: column;
@@ -298,13 +186,89 @@ h1 {
   min-width: 140px;
   background: transparent;
 }
-@media (max-width: 450px) {
-  h3 {
-    font-size: 14px;
-  }
+
+/* ─── Infoboxes (comparison items inside bars) ─── */
+.infobox {
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100vh;
+}
+.infobox .title,
+.infobox .comparison-rect-wrapper {
+  font-weight: normal;
+  line-height: 1.4;
+  width: 85vw;
+  max-width: 600px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* ─── All-billionaires bar segments ─── */
+/* ─── Sticky centering for infobox content ─── */
+.text-infobox .title,
+.infobox .comparison-rect-wrapper:not(.comparison-rect-large) {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
+}
+.cause-card,
+.summary-card,
+.comparison-image-wrapper {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ─── Comparison Rectangles ─── */
+.infobox .comparison-rect-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.comparison-rect {
+  margin-top: 8px;
+}
+.comparison-rect-label {
+  color: inherit;
+}
+.comparison-rect-medium .comparison-rect {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.comparison-rect-medium .comparison-rect-label {
+  text-align: center;
+}
+.comparison-rect-large {
+  width: 90%;
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+.comparison-rect-large .comparison-rect {
+  margin-top: 0;
+}
+.comparison-rect-large .comparison-rect-label {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  text-align: center;
+  z-index: 1;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
+}
+
+/* ─── Bar Segments ─── */
 .bar-segment {
   display: block;
 }
@@ -317,14 +281,11 @@ h1 {
   min-height: 100vh;
 }
 
-/* ─── Image comparisons ─── */
+/* ─── Image Comparisons ─── */
 .comparison-image-wrapper {
+  width: 85vw;
   max-width: 700px;
-  width: 96vw;
   text-align: center;
-  position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
 }
 .comparison-image-wrapper .title {
   margin-bottom: 12px;
@@ -335,13 +296,10 @@ h1 {
   border-radius: 6px;
 }
 
-/* ─── Cause cards ─── */
+/* ─── Cause Cards ─── */
 .cause-card {
+  width: 85vw;
   max-width: 560px;
-  width: 96vw;
-  position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
 }
 .cause-pie {
   position: relative;
@@ -408,13 +366,10 @@ h1 {
   color: #888;
 }
 
-/* ─── Summary card / side-by-side chart ─── */
+/* ─── Summary Cards ─── */
 .summary-card {
-  max-width: 600px;
-  width: 96vw;
-  position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
+  width: 85vw;
+  max-width: 560px;
 }
 .side-by-side-chart {
   margin: 16px 0;
@@ -468,7 +423,7 @@ h1 {
   height: 180px;
 }
 
-/* ─── Death ticker ─── */
+/* ─── Death Ticker ─── */
 .death-ticker {
   position: fixed;
   bottom: 12px;
@@ -593,12 +548,18 @@ h1 {
   color: #999;
 }
 
+/* ─── Mobile ─── */
 @media (max-width: 450px) {
-  .cause-card,
-  .summary-card {
-    transform: none;
-    top: 10px;
+  h1 {
+    font-size: 40px;
   }
+  h3 {
+    font-size: 14px;
+  }
+  .wealth-title {
+    font-size: 19px;
+  }
+
   .bar-label {
     width: 90px;
     font-size: 11px;
@@ -606,15 +567,6 @@ h1 {
   .bar-amount {
     width: 55px;
     font-size: 11px;
-  }
-  .death-ticker {
-    bottom: 4px;
-    right: 4px;
-    font-size: 11px;
-    max-width: 200px;
-  }
-  .ticker-count {
-    font-size: 13px;
   }
   .pie-label {
     left: 100px;
@@ -624,5 +576,27 @@ h1 {
   .cause-pie .piechart-outer {
     width: 90px;
     height: 90px;
+  }
+
+  /* Death ticker */
+  .death-ticker {
+    bottom: 4px;
+    right: 4px;
+    font-size: 11px;
+    max-width: 200px;
+  }
+  .ticker-count {
+    font-size: 13px;
+  }
+}
+
+/* ─── Desktop ─── */
+@media (min-width: 1000px) {
+  .infobox .title,
+  .infobox .comparison-rect-wrapper {
+    max-width: 750px;
+  }
+  .text-infobox .title {
+    max-width: 550px;
   }
 }
