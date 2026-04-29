@@ -369,9 +369,9 @@
       "bar": "allBillionaires",
       "type": "image",
       "positionFraction": 0.003,
-      "title": "Visual of Eventim Apollo.",
-      "imageUrl": "img/eventim-apollo.png",
-      "imageAlt": "Seating chart of the Eventim Apollo concert hall, capacity 3655",
+      "title": "That's the whole group. Every billionaire on Earth fits in there:",
+      "imageUrl": "img/concert-hall.png",
+      "imageAlt": "Seating chart of a concert hall with capacity 3428",
       "i18nKey": "i18n-billionaires-concert-hall"
     },
     {
