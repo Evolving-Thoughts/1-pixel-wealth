@@ -1,6 +1,5 @@
 ﻿// ─── Constants & Formatters ─────────────────────────────────────────
 const MAX_SEGMENT_HEIGHT = 10_000_000;
-const MAX_SAFE_DOCUMENT_HEIGHT = 25_000_000; // Conservative cross-browser limit
 const RULER_TICK_PX = 160;
 const COUNTER_SCROLL_OFFSET = 175;
 const DOLLARS_PER_PIXEL = 1000;
@@ -48,6 +47,7 @@ let story = null;
 let pageOpenedAt = Date.now();
 let tickerIntervalId = null;
 let scrollRateComp = null;
+let _detectedMaxScrollHeight = null;
 
 // ─── Capping state ──────────────────────────────────────────────────
 let isCapped = false;
@@ -66,10 +66,22 @@ function interpolate(text, vars) {
   });
 }
 
+function detectMaxScrollHeight() {
+  var probe = document.createElement('div');
+  probe.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:99999999px;visibility:hidden;pointer-events:none;';
+  document.body.appendChild(probe);
+  var actualMax = document.documentElement.scrollHeight;
+  document.body.removeChild(probe);
+  return actualMax;
+}
+
 function getMaxSafeAllBillionairesH(barWidth) {
+  if (_detectedMaxScrollHeight === null) {
+    _detectedMaxScrollHeight = detectMaxScrollHeight();
+  }
   var richestH = Math.round(richestPersonWealthUsd / (barWidth * DOLLARS_PER_PIXEL));
-  var otherContentH = 10000; // title screen, calibration bars, spacing
-  return Math.max(0, MAX_SAFE_DOCUMENT_HEIGHT - richestH - otherContentH);
+  var otherContentH = 10000;
+  return Math.max(0, _detectedMaxScrollHeight - richestH - otherContentH);
 }
 
 // ─── Layout Computation ─────────────────────────────────────────────
@@ -238,21 +250,8 @@ function applyData(billionaireData, storyData) {
   const richestTitle = document.getElementById('richest-title');
   if (richestTitle) richestTitle.textContent = money.format(richestPersonWealthUsd) + ' (wealth of ' + richestName + ')';
 
-  var allTitle = document.getElementById('allBillionaires-title');
-  if (allTitle) {
-    var titleText = 'All the world\u2019s ' + thousand.format(billionaireCount) + ' billionaires (' + formatCompactMoney(allBillionairesTotalUsd) + ')';
-    if (isCapped) {
-      titleText += ' \u2014 showing ' + fmtPct(pctReached);
-    }
-    allTitle.textContent = titleText;
-  }
-
-  const sourceEl = document.getElementById('data-source');
-  if (sourceEl) {
-    const d = new Date(billionaireData.fetchedAt);
-    const dateStr = d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' });
-    sourceEl.innerHTML = 'Wealth data: <a href="' + billionaireData.sourceUrl + '" target="_blank" rel="noopener noreferrer">' + billionaireData.source + '</a> &mdash; last updated ' + dateStr;
-  }
+  const allTitle = document.getElementById('allBillionaires-title');
+  if (allTitle) allTitle.textContent = 'All the world\u2019s ' + thousand.format(billionaireCount) + ' billionaires (' + formatCompactMoney(allBillionairesTotalUsd) + ')';
 
   renderComparisons();
 
@@ -330,14 +329,12 @@ function prepareAllBillionairesComparisons(comparisons) {
     bar: 'allBillionaires',
     type: 'text',
     positionFraction: 0.95,
-    title: '<strong>You\'ve hit the wall.</strong><br><br>' +
-      'The combined wealth of all billionaires is so incomprehensibly large ' +
-      'that it literally exceeds your browser\'s maximum page height. ' +
-      'You\'ve only scrolled through <strong>' + fmtPct(pctReached) + '</strong> ' +
-      'of their wealth.<br><br>' +
+    title: '<strong>Even your browser can\'t handle this much money!</strong><br><br>' +
+      'You\'ve scrolled through ~<strong>' + fmtPct(pctReached) + '</strong> ' +
+      'of their wealth and your device has reached its limit.' +
       'The remaining <strong>' + fmtPct(100 - pctReached) + '</strong> \u2014 about <strong>' +
-      formatCompactMoney(remainingWealth) + '</strong> \u2014 simply doesn\'t fit on this screen.<br><br>' +
-      'To scroll through it all, try using a wider screen or window.'
+      formatCompactMoney(remainingWealth) + '</strong> \u2014 simply can\'t be displayed.<br><br>' +
+      formatCompactMoney(allBillionairesTotalUsd) +', a number too large for your browser to show. But not too large for ' + thousand.format(billionaireCount) + ' billionaires to own!'
   };
   remapped.push(brokeMessage);
 
