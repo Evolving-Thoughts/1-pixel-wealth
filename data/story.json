@@ -55,8 +55,8 @@
       "bar": "richest",
       "type": "square",
       "positionFraction": 0.175,
-      "title": "Yearly income of the median American (<a href=\"https://www.bls.gov/news.release/wkyeng.t01.htm\" target=\"_blank\" rel=\"noopener noreferrer\">~$63,180</a>)",
-      "amountUsd": 63180,
+      "title": "Yearly median US income (<a href=\"https://www.bls.gov/news.release/wkyeng.t01.htm\" target=\"_blank\" rel=\"noopener noreferrer\">~$64,116</a>)",
+      "amountUsd": 64116,
       "squareColor": "#2196F3",
       "i18nKey": "i18n-yearly-earnings-american"
     },
@@ -1239,7 +1239,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.094,
-      "title": "<strong>Go deeper.</strong><br><br>Everything above was the moral case. But there are many more reasons to rethink extreme wealth, including psychological, political and physical ones. I reasoned through the physics from first principles here: <a href=\"TODO:YOUR_URL\">Do We Need a Wealth Cap?</a>",
+      "title": "<strong>Go deeper.</strong><br><br>Everything above was the moral case. But there are many more reasons to rethink extreme wealth, including psychological, political and physical ones. I reasoned through the physics from first principles here: <a href=\"https://medium.com/the-springboard/do-we-need-a-wealth-cap-32814b39e308?sk=ef263f5da9fd34284a847b3b70995bb5\">Do We Need a Wealth Cap?</a>",
       "i18nKey": "i18n-go-deeper"
     },
     {

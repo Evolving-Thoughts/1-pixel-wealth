@@ -7,7 +7,7 @@ strings : {
 'i18n-wealth-shown-to' : 'Vermögen<br>maßstabsgetreu dargestellt',
 'i18n-scroll' : 'scrollen',
 'i18n-USD1000' : '1.000 $',
-'i18n-USD63180-median' : '63.180 $ (Median US-Haushaltseinkommen)',
+'i18n-USD64116-median' : '64.116 $ (Median-US-Einkommen)',
 'i18n-USD1-million' : '1 Million $',
 'i18n-USD1-billion' : '1 Milliarde $',
 
@@ -20,7 +20,7 @@ strings : {
 'i18n-lets-put-this-wealth' : 'Lass uns versuchen, dieses Vermögen einzuordnen, indem wir es mit ein paar greifbaren Dingen vergleichen.',
 
 // ─── Richest bar: comparisons ───────────────────────────────────────
-'i18n-yearly-earnings-american' : 'Jahreseinkommen des durchschnittlichen US-Amerikaners (<a href="https://www.bls.gov/news.release/wkyeng.t01.htm" target="_blank" rel="noopener noreferrer">~63.180 $</a>)',
+'i18n-yearly-earnings-american' : 'Jährliches Median-US-Einkommen (<a href="https://www.bls.gov/news.release/wkyeng.t01.htm" target="_blank" rel="noopener noreferrer">~64.116 $</a>)',
 'i18n-seat-belt' : 'So viel verdient Elon Musk während er sich im Auto anschnallt (4 Sekunden, <a href="https://www.forbes.com/sites/pr/2026/03/10/forbes-40th-annual-worlds-billionaires-list-elon-musk-is-worlds-richest-person-ever-recorded/" target="_blank" rel="noopener noreferrer"> ~63.420 $</a>)',
 'i18n-average-cost-house' : 'Durchschnittspreis eines Hauses in den USA (<a href="https://fred.stlouisfed.org/series/MSPUS" target="_blank" rel="noopener noreferrer">405.300 $ </a>)',
 'i18n-instant-coffee' : 'So viel verdient Elon Musk, während er sich einen Instantkaffee macht macht (1 Minute, <a href="https://www.forbes.com/sites/pr/2026/03/10/forbes-40th-annual-worlds-billionaires-list-elon-musk-is-worlds-richest-person-ever-recorded/" target="_blank" rel="noopener noreferrer">~951.000 $</a>)',
@@ -264,7 +264,7 @@ strings : {
 'i18n-learn-more' : '<strong>Informiere dich, wer dagegen kämpft.</strong><br><br>Diese Organisationen arbeiten daran, die Welt ein Stück gerechter zu machen:<br> <ul><li><a href="https://www.oxfam.org/">Oxfam</a> — setzt sich für Vermögenssteuern und wirtschaftliche Gerechtigkeit ein <br> <li><a href="https://taxjustice.net/"> Tax Justice Network</a> — analysiert Steueroasen und fordert faire Besteuerung<br> <li><a href="https://www.givedirectly.org/">GiveDirectly</a> — gibt Geld direkt an die ärmsten Menschen der Welt</ul> Natürlich gibt es noch viele weitere. Informiere dich und unterstütze sie, wenn du kannst. Ich habe mit keiner dieser Organisationen etwas zu tun. Sie machen einfach gute Arbeit.',
 'i18n-vote' : '<strong>Deine Stimme zählt. Nutze sie.</strong><br><br>Vermögenskonzentration in diesem Ausmaß ist kein Naturgesetz, sondern das Ergebnis politischer Entscheidungen: Steuersätze, Erbrecht, Unternehmensregulierung, Handelsabkommen. Jede Wahl ist eine Chance, zu ändern, wer diese Regeln schreibt.',
 'i18n-talk-about-this' : '<strong>Sprich darüber.</strong><br><br>Das größte Hindernis für Veränderung ist nicht, dass Menschen dagegen sind. Es ist, dass die meisten noch nie in diesem Maßstab darüber nachgedacht haben. Sprich es an. Beim Abendessen. Auf Arbeit. In der Schule. Jedes Gespräch kann der Anfang von Veränderung sein.',
-'i18n-go-deeper' : '<strong>Steig noch tiefer ein.</strong><br><br>Das alles war das moralische Argument, extremen Reichtum zu überdenken. Aber es gibt noch viele weitere Gründe: psychologische, politische und physikalische. <a href="TODO:YOUR_URL">Hier</a> habe ich aus physikalischen Grundprinzipien hergeleitet, warum wir eine Obergrenze für Reichtum brauchen.',
+'i18n-go-deeper' : '<strong>Steig noch tiefer ein.</strong><br><br>Das alles war das moralische Argument, extremen Reichtum zu überdenken. Aber es gibt noch viele weitere Gründe: psychologische, politische und physikalische. <a href="https://medium.com/the-springboard/do-we-need-a-wealth-cap-32814b39e308?sk=ef263f5da9fd34284a847b3b70995bb5">Hier</a> habe ich aus physikalischen Grundprinzipien hergeleitet, warum wir eine Obergrenze für Reichtum brauchen.',
 'i18n-dont-let-anyone-tell-you' : 'Und am wichtigsten: <strong>Lass dir nicht einreden, dass man daran nichts ändern kann.</strong><br><br> Der einzige Grund, warum wir in dieser Lage sind, ist, dass wir sie kollektiv akzeptiert haben. Wir können jederzeit aufhören, sie zu akzeptieren. Das Geld existiert. Die Lösungen existieren. Es fehlt nur die Entscheidung zu handeln.',
 'i18n-scroll-63-percent-of-money' : 'Wow, du scrollst immer noch? Du hast jetzt den Punkt ihres Vermögens erreicht, der ausreichen würde, um alles zu finanzieren, was ich oben aufgezählt habe. Alles ab hier wäre immer noch ihres, wenn wir nicht gemeinsam entscheiden, dass auch der Rest besser eingesetzt werden könnte.',
 
