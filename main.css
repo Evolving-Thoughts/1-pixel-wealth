@@ -54,6 +54,63 @@ h1 {
   background-position: 50px 50px;
   animation: bouncy-arrow 3s infinite;
 }
+.language-menu {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 4;
+}
+.language-menu-trigger {
+  border: 0;
+  background: transparent;
+  color: #333;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 2px 0;
+}
+.language-menu-trigger:hover,
+.language-menu-trigger:focus-visible {
+  color: #000;
+  outline: none;
+}
+.language-menu-panel {
+  margin-top: 8px;
+  min-width: 92px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.language-menu-panel[hidden] {
+  display: none;
+}
+.language-menu-item {
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  text-align: left;
+  font-size: 13px;
+  padding: 6px 8px;
+  color: #222;
+  cursor: pointer;
+}
+.language-menu-item:hover,
+.language-menu-item:focus-visible {
+  background: #f2f2f2;
+  outline: none;
+}
+.language-menu-item.is-active,
+.language-menu-item:disabled {
+  color: #888;
+  cursor: default;
+  background: #f8f8f8;
+}
 @keyframes bouncy-arrow {
   0%   { background-position: 50px 50px; }
   20%  { background-position: 50px 50px; }
@@ -596,6 +653,15 @@ h1 {
 
 /* ─── Mobile ─── */
 @media (max-width: 450px) {
+  .language-menu {
+    top: 12px;
+    right: 12px;
+  }
+  .language-menu-trigger,
+  .language-menu-item {
+    font-size: 12px;
+  }
+
   h1 {
     font-size: 40px;
   }

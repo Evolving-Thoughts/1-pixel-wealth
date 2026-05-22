@@ -46,7 +46,7 @@ function translate_page(response) {
   fixUntranslatedImages();
 
   const script = document.createElement("script");
-  script.src = "../main.js";
+  script.src = "../main.js?version=2.0";
   document.body.appendChild(script);
 }
 
