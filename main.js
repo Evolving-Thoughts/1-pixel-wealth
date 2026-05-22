@@ -800,7 +800,84 @@ function updateDynamicText() {
 
 // ─── Comparison Content Renderers ───────────────────────────────────
 function renderTextContent(comp, vars) {
-  return '<div class="title">' + interpolate(comp.title, vars) + '</div>';
+  let html = '<div class="title">' + interpolate(comp.title, vars);
+  if (comp.showShareButton) {
+    html += '<div class="share-inline-row">' +
+      '<button type="button" class="share-inline-btn" aria-live="polite">' +
+      tUI('share-button', 'Share this page') +
+      '</button>' +
+    '</div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+function getSharePageUrl() {
+  return window.location.origin + window.location.pathname;
+}
+
+function bindShareButton(wrapper, comp) {
+  if (!comp.showShareButton) return;
+
+  const btn = wrapper.querySelector('.share-inline-btn');
+  if (!btn) return;
+
+  const baseLabel = tUI('share-button', 'Share this page');
+  const copiedLabel = tUI('share-copied', 'Link copied');
+  const failedLabel = tUI('share-copy-failed', 'Copy failed');
+  const shareTitle = tUI('share-title', document.title || 'Wealth shown to scale');
+  let feedbackTimerId = null;
+
+  function setButtonLabel(label) {
+    btn.textContent = label;
+  }
+
+  function resetButtonLabelSoon() {
+    if (feedbackTimerId !== null) {
+      clearTimeout(feedbackTimerId);
+    }
+    feedbackTimerId = setTimeout(function() {
+      setButtonLabel(baseLabel);
+      feedbackTimerId = null;
+    }, 1600);
+  }
+
+  function tryCopyToClipboard(shareUrl) {
+    if (!navigator.clipboard || !navigator.clipboard.writeText) {
+      setButtonLabel(failedLabel);
+      resetButtonLabelSoon();
+      return;
+    }
+
+    navigator.clipboard.writeText(shareUrl)
+      .then(function() {
+        setButtonLabel(copiedLabel);
+        resetButtonLabelSoon();
+      })
+      .catch(function() {
+        setButtonLabel(failedLabel);
+        resetButtonLabelSoon();
+      });
+  }
+
+  btn.addEventListener('click', function() {
+    const shareUrl = getSharePageUrl();
+    if (!shareUrl) return;
+
+    if (navigator.share) {
+      navigator.share({ title: shareTitle, url: shareUrl })
+        .then(function() {
+          setButtonLabel(copiedLabel);
+          resetButtonLabelSoon();
+        })
+        .catch(function() {
+          tryCopyToClipboard(shareUrl);
+        });
+      return;
+    }
+
+    tryCopyToClipboard(shareUrl);
+  });
 }
 
 function renderImageContent(comp, vars) {
@@ -967,6 +1044,8 @@ function createComparisonElement(comp, totalWealth, vars) {
       wrapper.classList.add('text-infobox');
       wrapper.innerHTML = renderTextContent(comp, vars);
   }
+
+  bindShareButton(wrapper, comp);
 
   return wrapper;
 }

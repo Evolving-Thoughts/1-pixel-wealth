@@ -1208,6 +1208,7 @@
       "type": "text",
       "positionFraction": 0.09,
       "title": "<strong>Share this.</strong><br><br>The most powerful thing you can do right now costs nothing: share this page. Most people have never seen wealth inequality shown to scale. That's part of why it persists. Every person who scrolls through this is one more person who can't unsee it.",
+      "showShareButton": true,
       "i18nKey": "i18n-share-this"
     },
     {
@@ -1248,6 +1249,7 @@
       "type": "text",
       "positionFraction": 0.095,
       "title": "And most importantly: <strong>Don't let anyone tell you it's impossible to change this.</strong><br><br> The only reason we're in this situation is that we collectively accepted it. We can un-accept it. The money exists. The solutions exist. The only thing missing is the decision to act.",
+      "showShareButton": true,
       "i18nKey": "i18n-dont-let-anyone-tell-you"
     },
     {
