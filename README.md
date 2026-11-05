@@ -1,4 +1,4 @@
-# 1 Pixel Wealth
+# Pixel Wealth
 
 A scrollytelling web experience that visualizes wealth at true scale.
 
