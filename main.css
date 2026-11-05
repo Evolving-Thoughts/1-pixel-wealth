@@ -259,6 +259,10 @@ h1 {
   background: transparent;
 }
 
+.title a {
+  color: inherit;
+}
+
 /* ─── Infoboxes (comparison items inside bars) ─── */
 .infobox {
   z-index: 1;
@@ -288,11 +292,11 @@ h1 {
   margin-top: 12px;
 }
 .share-inline-btn {
-  border: 0;
-  border-radius: 999px;
-  background: #222;
-  color: #fff;
-  font-size: 13px;
+  background: #e0e0e0;
+  color: #000;
+  border-width: 3px;
+  border-radius: 4px;
+  font-size: 14px;
   font-weight: 600;
   padding: 9px 14px;
   cursor: pointer;
@@ -300,7 +304,7 @@ h1 {
 }
 .share-inline-btn:hover,
 .share-inline-btn:focus-visible {
-  background: #000;
+  background: #a6a6a6;
   outline: none;
 }
 
@@ -436,7 +440,7 @@ h1 {
   margin-bottom: 10px;
 }
 .cause-desc a {
-  color: #1565C0;
+  color: inherit;
 }
 .cause-deaths {
   background: #fff3f3;
@@ -455,11 +459,11 @@ h1 {
 }
 .cause-source {
   font-size: 12px;
-  color: #888;
+  color: #000;
   margin-top: 8px;
 }
 .cause-source a {
-  color: #888;
+  color: inherit;
 }
 
 /* ─── Summary Cards ─── */
@@ -494,7 +498,7 @@ h1 {
 }
 .bar-fill {
   height: 100%;
-  background: #03A9F4;
+  background: #efb718;
   border-radius: 3px;
   min-width: 2px;
 }
@@ -523,28 +527,31 @@ h1 {
 .death-ticker {
   position: fixed;
   bottom: 12px;
-  right: 12px;
+  right: 53px;
   z-index: 100;
-  background: rgba(30, 30, 30, 0.92);
-  color: #fff;
-  padding: 12px 16px 32px 16px;
-  border-radius: 8px;
+  background: #050505;
+  color: #000;
+  padding: 10px 16px 8px 12px;
+  border: 3px solid;
+  border-color: #902323;
+  border-radius: 4px;
   font-family: sans-serif;
   font-size: 13px;
-  max-width: 280px;
+  font-weight: 400;
+  max-width: 400px;
   max-height: calc(80vh - 40px);
   overflow-y: auto;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 .death-ticker-close {
   position: absolute;
-  top: 6px;
-  right: 10px;
+  top: 3px;
+  right: 2px;
   background: none;
   border: none;
   color: #fff;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: 400;
   cursor: pointer;
   z-index: 101;
   opacity: 0.7;
@@ -556,15 +563,18 @@ h1 {
 .death-ticker-reopen {
   position: fixed;
   bottom: 16px;
-  right: 16px;
+  right: 53px;
   z-index: 101;
-  background: #222;
+  background: #050505;
   color: #fff;
-  border: none;
-  border-radius: 50%;
+  padding: 12px 16px 10px 16px;
+  border: 3px solid;
+  border-color: #902323;
+  border-radius: 4px;
   width: 44px;
   height: 44px;
   font-size: 22px;
+  font-weight: 400;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   cursor: pointer;
   display: flex;
@@ -581,10 +591,10 @@ h1 {
   bottom: 16px;
   left: calc(max(16px, env(safe-area-inset-left)) + 14px);
   z-index: 101;
-  background: #222;
-  color: #fff;
-  border: none;
-  border-radius: 999px;
+  background: #e0e0e0;
+  color: #000;
+  border-width: 3px;
+  border-radius: 4px;
   height: 44px;
   padding: 0 16px;
   font-size: 14px;
@@ -595,7 +605,7 @@ h1 {
   transition: opacity 0.2s;
 }
 .next-message-btn:hover {
-  opacity: 1;
+  background: #a6a6a6;
 }
 .next-message-btn:disabled,
 .next-message-btn.is-scrolling {
@@ -604,11 +614,11 @@ h1 {
 }
 .death-ticker-label {
   display: block;
-  font-size: 11px;
-  color: #aaa;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
   margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  margin-right: 10px;
 }
 .ticker-row {
   display: flex;
@@ -627,14 +637,18 @@ h1 {
   color: #ccc;
 }
 .ticker-total {
-  border-top: 1px solid rgba(255,255,255,0.2);
+  border-top: 1px solid rgb(255 255 255 / 31%);
   margin-top: 4px;
   padding-top: 6px;
   font-weight: bold;
 }
-.ticker-total .ticker-count {
+.ticker-total {
   font-size: 17px;
   color: #ff4444;
+}
+.ticker-count {
+    font-size: 24px;
+    color: #ff4444;
 }
 .ticker-total .ticker-label {
   color: #fff;
@@ -642,14 +656,16 @@ h1 {
 .ticker-group + .ticker-group {
   margin-top: 5px;
   padding-top: 5px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgb(255 255 255 / 31%);
 }
 .ticker-group-total .ticker-label {
-  color: #eee;
+  color: #fff;
+  font-size: 10px;
   font-weight: bold;
 }
 .ticker-count-group {
   color: #ff8c8c;
+  font-size: 14px;
 }
 .ticker-group-causes {
   color: #9fb0bc;

@@ -1065,7 +1065,7 @@ function startDeathTicker() {
 
   var tickerLabel = tickerEl.querySelector('.death-ticker-label');
   if (tickerLabel) {
-    tickerLabel.textContent = tUI('preventable-deaths-label', 'PREVENTABLE DEATHS SINCE YOU OPENED THIS PAGE:');
+    tickerLabel.textContent = tUI('preventable-deaths-label', 'Preventable deaths since you opened this page:');
   }
 
   // Build groups from comparisons that have both deathsPerYear and tickerGroup
@@ -1152,7 +1152,7 @@ function startDeathTicker() {
 
     html += '<div class="ticker-row ticker-total">' +
       '<span class="ticker-count">' + thousand.format(grandTotal) + '</span>' +
-      '<span class="ticker-label">' + tUI('total-preventable-deaths', 'total preventable deaths') + '</span>' +
+      '<span class="ticker-label">' + tUI('total-preventable-deaths', 'Total Preventable Deaths') + '</span>' +
     '</div>';
     countsEl.innerHTML = html;
   }

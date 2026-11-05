@@ -16,7 +16,7 @@ strings : {
 'i18n-we-rarely-see-wealth' : 'Wir sehen nur selten maßstabsgetreue Darstellungen von Reichtum. Das ist einer der Gründe, warum Menschen das relative Vermögen der Superreichen <a href="https://academic.oup.com/pnasnexus/article/3/9/pgae333/7756543" target="_blank" rel="noopener noreferrer">konsequent unterschätzen</a>.',
 'i18n-every-10-pixels' : 'Alle 10 Pixel, die du scrollst, entsprechen {scrollRate}.',
 'i18n-ok-were-coming-up' : 'Okay, wir haben es gleich geschafft.',
-'i18n-lol-just-kidding' : 'Haha, kleiner Scherz, wir sind erst bei etwa einem Achtel. Aber scroll ruhig weiter, es gibt noch einiges zu sehen.',
+'i18n-just-kidding' : 'Kleiner Scherz, wir sind erst bei etwa einem Achtel. Aber scroll ruhig weiter, es gibt noch einiges zu sehen.',
 'i18n-lets-put-this-wealth' : 'Lass uns versuchen, dieses Vermögen einzuordnen, indem wir es mit ein paar greifbaren Dingen vergleichen.',
 
 // ─── Richest bar: comparisons ───────────────────────────────────────
