@@ -35,6 +35,9 @@ h1 {
   color: inherit;
   text-decoration: underline;
 }
+a {
+    color: inherit;
+}
 .scroll-this-way {
   width: 165px;
   height: 360px;
