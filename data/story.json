@@ -345,7 +345,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0,
-      "title": "The wealth of Elon Musk may seem staggering, but it is a drop in the ocean compared to the combined wealth of all <a href=\"https://www.forbes.com/sites/pr/2026/03/10/forbes-40th-annual-worlds-billionaires-list-elon-musk-is-worlds-richest-person-ever-recorded/\" target=\"_blank\" rel=\"noopener noreferrer\"> ~{billionaireCount} billionaires on Earth</a>: {allBillionairesFormatted}.",
+      "title": "The wealth of Elon Musk may seem staggering, but it is a drop in the ocean compared to the combined wealth of all <a href=\"https://www.forbes.com/sites/pr/2026/03/10/forbes-40th-annual-worlds-billionaires-list-elon-musk-is-worlds-richest-person-ever-recorded/\" target=\"_blank\" rel=\"noopener noreferrer\"> ~{billionaireCount} billionaires on Earth</a>: {allBillionairesTotalUsd}.",
       "i18nKey": "i18n-all-billionaires-intro"
     },
     {

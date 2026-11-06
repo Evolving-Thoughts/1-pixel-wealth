@@ -358,10 +358,18 @@ function updateBarCounter(barId, maxWealth, scrollTop, vh) {
   const counterEl = document.getElementById(barId + '-counter');
   if (!el || !counterEl) return;
 
+  const trackEl = document.getElementById(barId + '-scroll-track');
+  const fillEl = document.getElementById(barId + '-scroll-fill');
+
+  if (trackEl) trackEl.hidden = true;
+
   const barTop = el.offsetTop;
   const barBot = barTop + el.offsetHeight;
 
-  if (scrollTop + vh < barTop + BAR_VISIBILITY_OFFSET_PX || scrollTop > barBot) {
+  if (
+    scrollTop + vh < barTop + BAR_VISIBILITY_OFFSET_PX ||
+    scrollTop > barBot
+  ) {
     counterEl.textContent = '';
     return;
   }
@@ -374,9 +382,27 @@ function updateBarCounter(barId, maxWealth, scrollTop, vh) {
     }
   }
 
-  const wealth = Math.max(0, (scrollTop - barTop + COUNTER_SCROLL_OFFSET) * (currentBarWidth * DOLLARS_PER_PIXEL));
-  counterEl.textContent = (wealth < maxWealth) ? money.format(wealth) : money.format(maxWealth);
+  const wealth = Math.max(
+    0,
+    (scrollTop - barTop + COUNTER_SCROLL_OFFSET) *
+      (currentBarWidth * DOLLARS_PER_PIXEL)
+  );
+
+  counterEl.textContent =
+    wealth < maxWealth ? money.format(wealth) : money.format(maxWealth);
+
+  if (trackEl && fillEl && el.offsetHeight > 0) {
+    const progress = Math.max(
+      0,
+      Math.min(1, (scrollTop - barTop) / el.offsetHeight)
+    );
+
+    fillEl.style.height = `${progress * 100}%`;
+    trackEl.setAttribute('aria-valuenow', String(Math.round(progress * 100)));
+    trackEl.hidden = false;
+  }
 }
+
 
 // ─── Wealth Counter (time-based, Musk earnings since page open) ─────
 function updateWealthCounter() {
@@ -546,8 +572,8 @@ function applyData(billionaireData, storyData) {
   const allTitle = document.getElementById('allBillionaires-title');
   if (allTitle) {
     allTitle.textContent = interpolate(
-      tUI('all-billionaires-title', 'All the world\u2019s {count} billionaires ({amount})'),
-      { count: thousand.format(billionaireCount), amount: formatCompactMoney(allBillionairesTotalUsd) }
+      tUI('all-billionaires-title', '{amount} (wealth of the world\u2019s {count} billionaires)'),
+      { count: thousand.format(billionaireCount), amount: money.format(allBillionairesTotalUsd) }
     );
   }
 
@@ -582,6 +608,7 @@ function renderComparisons() {
     richestDailyIncome: formatCompactMoney(Math.round(richestPersonWealthUsd / 365)),
     scrollRate: formatCompactMoney(currentBarWidth * DOLLARS_PER_PIXEL * SCROLL_RATE_PX),
     allBillionairesFormatted: formatCompactMoney(allBillionairesTotalUsd),
+    allBillionairesTotalUsd: money.format(allBillionairesTotalUsd),
     billionaireCount: thousand.format(billionaireCount),
   };
 
