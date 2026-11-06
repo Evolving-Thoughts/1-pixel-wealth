@@ -892,9 +892,9 @@
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.054,
-      "title": "Everything I've listed so far combined:",
+      "title": "Everything listed so far combined:",
       "costUsd": 5500200000000,
-      "description": "All of the causes I've listed so far — ending infectious diseases, solving other health issues, providing clean water and sanitation, ensuring access to nutritious food, clean cooking, electricity, universal education, ending extreme poverty and forced labor, and providing universal healthcare — could be funded <strong>simultaneously</strong> with <strong>less than 30%</strong> of all billionaire wealth</strong>.",
+      "description": "All of the causes listed so far — ending infectious diseases, solving other health issues, providing clean water and sanitation, ensuring access to nutritious food, clean cooking, electricity, universal education, ending extreme poverty and forced labor, and providing universal healthcare — could be funded <strong>simultaneously</strong> with <strong>less than 30%</strong> of all billionaire wealth</strong>.",
       "i18nKey": "i18n-all-human-focused-causes-combined"
     },
     {
