@@ -853,7 +853,7 @@ function bindShareButton(wrapper, comp) {
   const baseLabel = tUI('share-button', 'Share this page');
   const copiedLabel = tUI('share-copied', 'Link copied');
   const failedLabel = tUI('share-copy-failed', 'Copy failed');
-  const shareTitle = tUI('share-title', document.title || 'Wealth shown to scale');
+  const shareTitle = tUI('share-title', document.title || 'Wealth, shown to scale');
   let feedbackTimerId = null;
 
   function setButtonLabel(label) {
