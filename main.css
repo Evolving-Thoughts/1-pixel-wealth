@@ -151,8 +151,7 @@ a {
 .wealth-title {
   align-self: flex-start;
   margin-left: 25px;
-  margin-bottom: 5px;
-  margin-top: 0;
+  margin-top: 5px;
   color: black;
   background: transparent;
   box-sizing: border-box;
@@ -250,7 +249,7 @@ a {
   align-self: flex-start;
   margin-left: 25px;
   margin-bottom: 5px;
-  margin-top: 0;
+  margin-top: 5px;
   color: #e1e1e1;
   background: transparent;
   box-sizing: border-box;
@@ -258,6 +257,7 @@ a {
 
 /* ─── Ruler & Scale Key ─── */
 .ruler {
+   margin-top: 10px;
     background-image:
       url('img/ruler-vert-right.svg'),
       url('img/ruler-vert-left.svg');
@@ -266,6 +266,7 @@ a {
     background-size: 30px 160px, 30px 160px;
   }
 #allBillionaires.wealth.ruler-right.ruler-left {
+  margin-top: 10px;
   background-image:
     url('img/ruler-vert-allbillionaires-right.svg'),
     url('img/ruler-vert-allbillionaires-left.svg');
@@ -277,7 +278,7 @@ a {
 
 .key {
   position: sticky;
-  top: 0;
+  top: 10px;
   align-self: flex-end;
   margin-right: 35px;
   margin-left: 0;
