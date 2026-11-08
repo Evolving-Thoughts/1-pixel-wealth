@@ -671,8 +671,8 @@ a {
 }
 .next-message-btn {
   position: fixed;
-  bottom: 16px;
-  left: calc(max(16px, env(safe-area-inset-left)) + 14px);
+  bottom: 12px;
+  left: calc(max(37px, env(safe-area-inset-left)) + 14px);
   z-index: 101;
   background: #e0e0e0;
   color: #000;
