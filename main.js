@@ -19,6 +19,7 @@ const AUTO_SCROLL_MIN_DURATION_MS = 350;
 const AUTO_SCROLL_MAX_DURATION_MS = 2200;
 const AUTO_SCROLL_PIXELS_PER_SECOND = 12_000;
 const LANGUAGE_STORAGE_KEY = 'preferred-language';
+const LANGUAGE_NAMES = { en: 'English', de: 'Deutsch' };
 
 function isGermanPath(pathname) {
   return /\/de(\/|$)/.test(pathname);
@@ -90,7 +91,7 @@ function createLanguageMenu() {
   trigger.type = 'button';
   trigger.className = 'language-menu-trigger';
   const currentLang = getCurrentLanguage();
-  trigger.textContent = currentLang.toUpperCase();
+  trigger.textContent = LANGUAGE_NAMES[currentLang];
   trigger.setAttribute('aria-expanded', 'false');
   trigger.setAttribute('aria-haspopup', 'true');
   trigger.setAttribute('aria-label', getCurrentLanguage() === 'de' ? 'Sprache wechseln' : 'Switch language');
@@ -102,13 +103,13 @@ function createLanguageMenu() {
   const enBtn = document.createElement('button');
   enBtn.type = 'button';
   enBtn.className = 'language-menu-item';
-  enBtn.textContent = 'English';
+  enBtn.textContent = LANGUAGE_NAMES.en;
   enBtn.dataset.lang = 'en';
 
   const deBtn = document.createElement('button');
   deBtn.type = 'button';
   deBtn.className = 'language-menu-item';
-  deBtn.textContent = 'Deutsch';
+  deBtn.textContent = LANGUAGE_NAMES.de;
   deBtn.dataset.lang = 'de';
 
   panel.appendChild(enBtn);
@@ -139,7 +140,7 @@ function createLanguageMenu() {
     if (lang === currentLang) return;
 
     persistLanguagePreference(lang);
-    trigger.textContent = lang.toUpperCase();
+    trigger.textContent = LANGUAGE_NAMES[lang];
     window.location.assign(getLanguageTargetUrl(lang));
   });
 

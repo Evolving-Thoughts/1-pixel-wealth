@@ -59,19 +59,18 @@ a {
 }
 .language-menu {
   position: absolute;
-  top: 18px;
-  right: 18px;
+  top: 0;
+  right: 0;
   z-index: 4;
 }
 .language-menu-trigger {
+  color: #000;
+  font-size: 16px;
+  text-decoration: underline;
   border: 0;
   background: transparent;
-  color: #333;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
   cursor: pointer;
-  padding: 2px 0;
+  padding: 0px 0px;
 }
 .language-menu-trigger:hover,
 .language-menu-trigger:focus-visible {
@@ -79,12 +78,10 @@ a {
   outline: none;
 }
 .language-menu-panel {
-  margin-top: 8px;
-  min-width: 92px;
+  margin-top: 0px;
+  min-width: 0px;
   border: 1px solid rgba(0, 0, 0, 0.18);
-  background: #e0e0e0;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
+  background: transparent;
   padding: 6px;
   display: flex;
   flex-direction: column;
@@ -96,11 +93,11 @@ a {
 .language-menu-item {
   border: 0;
   border-radius: 4px;
-  background: transparent;
+  background: #f8f8f8;
   text-align: left;
   font-size: 13px;
   padding: 6px 8px;
-  color: #222;
+  color: #000;
   cursor: pointer;
 }
 .language-menu-item:hover,
@@ -108,11 +105,8 @@ a {
   background: #f2f2f2;
   outline: none;
 }
-.language-menu-item.is-active,
-.language-menu-item:disabled {
-  color: #000;
-  cursor: default;
-  background: #f8f8f8;
+.language-menu-item.is-active {
+  background: #e1e1e1;
 }
 @keyframes bouncy-arrow {
   0%   { background-position: 50px 50px; }
