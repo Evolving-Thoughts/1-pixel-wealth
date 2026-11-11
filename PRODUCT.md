@@ -13,7 +13,7 @@ Broad general public, arriving mostly via shared links and social media, often o
 1 Pixel Wealth is a scrollytelling page that visualizes wealth at true scale. Success is that a visitor leaves with an intuitive, physical sense of the size of billionaire fortunes compared with everyday amounts, by scrolling through them.
 
 ## Positioning
-The scale is literal and constant: 1 pixel = $1,000 (`DOLLARS_PER_PIXEL = 1000` in main.js). The scroll distance itself conveys the magnitude, so no chart, tooltip or statistic can replace it.
+The scale is literal and constant: 1 square pixel = $1,000 (`DOLLARS_PER_PIXEL = 1000` in main.js). Bar height is `wealth / (barWidth * DOLLARS_PER_PIXEL)`, so scroll distance varies with the viewport-driven bar width while the area-to-dollar ratio never changes. The scroll distance itself conveys the magnitude, so no chart, tooltip or statistic can replace it.
 
 ## Operating Context
 Vanilla HTML/CSS/JS with no framework, served statically. Story and comparison content comes from `data/story.json`. Wealth figures come from `data/billionaires.json`, a Forbes World's Billionaires snapshot refreshed with `npm run update:wealth`. Locally: `npm run serve` (http://localhost:8080/, /de/). There is a share button and a language menu.
@@ -26,7 +26,7 @@ Vanilla HTML/CSS/JS with no framework, served statically. Story and comparison c
 - Open: no build step or framework is decided or needed.
 
 ## Brand Commitments
-- **1 pixel = $1,000 must never change.** It is the core of the product.
+- **1 (square) pixel = $1,000 must never change.** It is the core of the product.
 - The page credits its inspiration ("inspired by" link in the title screen).
 
 ## Evidence on Hand
