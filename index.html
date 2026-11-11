@@ -17,27 +17,30 @@
 
   <meta property="og:title" content="Wealth, shown to scale" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://evolving-thoughts.github.io/1-pixel-wealth/" />
+  <meta property="og:url" content="https://litekin.github.io/pixel-wealth/" />
   <meta property="og:description" content="Global wealth inequality visualized at true scale." />
-  <meta property="og:image" content="https://evolving-thoughts.github.io/1-pixel-wealth/img/og_english.png" />
+  <meta property="og:image" content="https://litekin.github.io/pixel-wealth/img/og_english.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:alt" content="Wealth shown to scale: $1,000, $64,116 median US income, and $1 million compared visually" />
+  <meta property="og:image:alt" content="Wealth, shown to scale: $1,000, $64,116 median US income, and $1 million compared visually" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://evolving-thoughts.github.io/1-pixel-wealth/img/og_english.png" />
-  <link rel="canonical" href="https://evolving-thoughts.github.io/1-pixel-wealth/" />
+  <meta name="twitter:image" content="https://litekin.github.io/pixel-wealth/img/og_english.png" />
+  <link rel="canonical" href="https://litekin.github.io/pixel-wealth/" />
 
   <link rel="stylesheet" type="text/css" href="main.css?version=2.0">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 </head>
 <body>
-<noscript><p style="text-align:center;padding:2em;font-family:sans-serif">Please enable JavaScript to view this page.</p></noscript>
+<noscript><p style="text-align:center;padding:2em;font-family:sans-serif">Please enable JavaScript to view this page, sorry.</p></noscript>
 
   <div class="wealth-wrapper-outer"><!--i18n-start-->
     <div class="wealth-row">
       <div class="title-screen">
-        <h1 class="i18n-wealth-shown-to">Wealth shown to scale</h1>
+          <a href="about.html">about</a>
+          <br>
+          <a href="https://codeberg.org/litekin/pixel-wealth" rel target="_blank">contribute</a>
+        <h1 class="i18n-wealth-shown-to">Wealth, shown to scale</h1>
         <div class="scroll-this-way i18n-scroll">scroll</div>
         <p class="inspired-by i18n-inspired-by">inspired by <a href="https://github.com/mkorostoff" target="_blank" rel="noopener noreferrer">mkorostoff</a></p>
       </div>
@@ -75,6 +78,18 @@
           <div class="wealth-header">
             <h2 class="wealth-title" id="richest-title">Loading…</h2>
             <div class="counter" id="richest-counter"></div>
+            <div
+              class="scroll-progress-track"
+              id="richest-scroll-track"
+              hidden
+              role="progressbar"
+              aria-label="Section scroll progress"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+            >
+              <div class="scroll-progress-fill" id="richest-scroll-fill"></div>
+            </div>
           </div>
           <div class="key">
             <span class="scale-label">—</span>
@@ -85,10 +100,22 @@
 
       <!-- All-billionaires bar — segmented, content injected -->
       <div id="allBillionaires-wrapper" class="wealth-wrapper all-billionaires">
-        <div id="allBillionaires" class="wealth ruler">
+        <div id="allBillionaires" class="wealth ruler-right ruler-left">
           <div class="wealth-header">
             <h2 class="wealth-title" id="allBillionaires-title">Loading…</h2>
             <div class="counter" id="allBillionaires-counter"></div>
+            <div
+              class="scroll-progress-track"
+              id="allBillionaires-scroll-track"
+              hidden
+              role="progressbar"
+              aria-label="Section scroll progress"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+            >
+              <div class="scroll-progress-fill" id="allBillionaires-scroll-fill"></div>
+            </div>
           </div>
           <div class="key">
             <span class="scale-label">—</span>
@@ -106,7 +133,7 @@
 <!-- Death ticker overlay -->
 <div id="death-ticker" class="death-ticker" hidden>
   <button id="death-ticker-close" class="death-ticker-close" title="Minimize">&times;</button>
-  <span class="death-ticker-label">PREVENTABLE DEATHS SINCE YOU OPENED THIS PAGE:</span>
+  <span class="death-ticker-label">Preventable deaths since you opened this page:</span>
   <div id="death-ticker-counts"></div>
 </div>
 <button id="death-ticker-reopen" class="death-ticker-reopen" title="Show death ticker" style="display:none;">&#128065;</button>

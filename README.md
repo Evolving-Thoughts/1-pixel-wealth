@@ -1,4 +1,5 @@
-# 1 Pixel Wealth
+fork of https://github.com/Evolving-Thoughts/1-pixel-wealth
+# Pixel Wealth
 
 A scrollytelling web experience that visualizes wealth at true scale.
 
@@ -15,7 +16,7 @@ The page combines static markup, CSS, and vanilla JavaScript with story/content 
 ## Project Structure
 
 - index.html: Main page shell
-- main.js: Rendering, data loading, comparisons, counters, and ticker logic
+- main.js: Rendering, data loading, comparisons, counters, progress bar, and ticker logic
 - main.css: Layout and visual styling
 - data/story.json: Story narrative and comparison/cause definitions
 - data/billionaires.json: Wealth data used for the bars and totals

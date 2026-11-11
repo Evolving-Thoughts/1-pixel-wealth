@@ -19,6 +19,7 @@ const AUTO_SCROLL_MIN_DURATION_MS = 350;
 const AUTO_SCROLL_MAX_DURATION_MS = 2200;
 const AUTO_SCROLL_PIXELS_PER_SECOND = 12_000;
 const LANGUAGE_STORAGE_KEY = 'preferred-language';
+const LANGUAGE_NAMES = { en: 'English', de: 'Deutsch' };
 
 function isGermanPath(pathname) {
   return /\/de(\/|$)/.test(pathname);
@@ -90,7 +91,7 @@ function createLanguageMenu() {
   trigger.type = 'button';
   trigger.className = 'language-menu-trigger';
   const currentLang = getCurrentLanguage();
-  trigger.textContent = currentLang.toUpperCase();
+  trigger.textContent = LANGUAGE_NAMES[currentLang];
   trigger.setAttribute('aria-expanded', 'false');
   trigger.setAttribute('aria-haspopup', 'true');
   trigger.setAttribute('aria-label', getCurrentLanguage() === 'de' ? 'Sprache wechseln' : 'Switch language');
@@ -102,13 +103,13 @@ function createLanguageMenu() {
   const enBtn = document.createElement('button');
   enBtn.type = 'button';
   enBtn.className = 'language-menu-item';
-  enBtn.textContent = 'English';
+  enBtn.textContent = LANGUAGE_NAMES.en;
   enBtn.dataset.lang = 'en';
 
   const deBtn = document.createElement('button');
   deBtn.type = 'button';
   deBtn.className = 'language-menu-item';
-  deBtn.textContent = 'Deutsch';
+  deBtn.textContent = LANGUAGE_NAMES.de;
   deBtn.dataset.lang = 'de';
 
   panel.appendChild(enBtn);
@@ -139,7 +140,7 @@ function createLanguageMenu() {
     if (lang === currentLang) return;
 
     persistLanguagePreference(lang);
-    trigger.textContent = lang.toUpperCase();
+    trigger.textContent = LANGUAGE_NAMES[lang];
     window.location.assign(getLanguageTargetUrl(lang));
   });
 
@@ -358,10 +359,18 @@ function updateBarCounter(barId, maxWealth, scrollTop, vh) {
   const counterEl = document.getElementById(barId + '-counter');
   if (!el || !counterEl) return;
 
+  const trackEl = document.getElementById(barId + '-scroll-track');
+  const fillEl = document.getElementById(barId + '-scroll-fill');
+
+  if (trackEl) trackEl.hidden = true;
+
   const barTop = el.offsetTop;
   const barBot = barTop + el.offsetHeight;
 
-  if (scrollTop + vh < barTop + BAR_VISIBILITY_OFFSET_PX || scrollTop > barBot) {
+  if (
+    scrollTop + vh < barTop + BAR_VISIBILITY_OFFSET_PX ||
+    scrollTop > barBot
+  ) {
     counterEl.textContent = '';
     return;
   }
@@ -374,9 +383,27 @@ function updateBarCounter(barId, maxWealth, scrollTop, vh) {
     }
   }
 
-  const wealth = Math.max(0, (scrollTop - barTop + COUNTER_SCROLL_OFFSET) * (currentBarWidth * DOLLARS_PER_PIXEL));
-  counterEl.textContent = (wealth < maxWealth) ? money.format(wealth) : money.format(maxWealth);
+  const wealth = Math.max(
+    0,
+    (scrollTop - barTop + COUNTER_SCROLL_OFFSET) *
+      (currentBarWidth * DOLLARS_PER_PIXEL)
+  );
+
+  counterEl.textContent =
+    wealth < maxWealth ? money.format(wealth) : money.format(maxWealth);
+
+  if (trackEl && fillEl && el.offsetHeight > 0) {
+    const progress = Math.max(
+      0,
+      Math.min(1, (scrollTop - barTop) / el.offsetHeight)
+    );
+
+    fillEl.style.height = `${progress * 100}%`;
+    trackEl.setAttribute('aria-valuenow', String(Math.round(progress * 100)));
+    trackEl.hidden = false;
+  }
 }
+
 
 // ─── Wealth Counter (time-based, Musk earnings since page open) ─────
 function updateWealthCounter() {
@@ -546,8 +573,8 @@ function applyData(billionaireData, storyData) {
   const allTitle = document.getElementById('allBillionaires-title');
   if (allTitle) {
     allTitle.textContent = interpolate(
-      tUI('all-billionaires-title', 'All the world\u2019s {count} billionaires ({amount})'),
-      { count: thousand.format(billionaireCount), amount: formatCompactMoney(allBillionairesTotalUsd) }
+      tUI('all-billionaires-title', '{amount} (wealth of the world\u2019s {count} billionaires)'),
+      { count: thousand.format(billionaireCount), amount: money.format(allBillionairesTotalUsd) }
     );
   }
 
@@ -582,6 +609,7 @@ function renderComparisons() {
     richestDailyIncome: formatCompactMoney(Math.round(richestPersonWealthUsd / 365)),
     scrollRate: formatCompactMoney(currentBarWidth * DOLLARS_PER_PIXEL * SCROLL_RATE_PX),
     allBillionairesFormatted: formatCompactMoney(allBillionairesTotalUsd),
+    allBillionairesTotalUsd: money.format(allBillionairesTotalUsd),
     billionaireCount: thousand.format(billionaireCount),
   };
 
@@ -825,7 +853,7 @@ function bindShareButton(wrapper, comp) {
   const baseLabel = tUI('share-button', 'Share this page');
   const copiedLabel = tUI('share-copied', 'Link copied');
   const failedLabel = tUI('share-copy-failed', 'Copy failed');
-  const shareTitle = tUI('share-title', document.title || 'Wealth shown to scale');
+  const shareTitle = tUI('share-title', document.title || 'Wealth, shown to scale');
   let feedbackTimerId = null;
 
   function setButtonLabel(label) {
@@ -1065,7 +1093,7 @@ function startDeathTicker() {
 
   var tickerLabel = tickerEl.querySelector('.death-ticker-label');
   if (tickerLabel) {
-    tickerLabel.textContent = tUI('preventable-deaths-label', 'PREVENTABLE DEATHS SINCE YOU OPENED THIS PAGE:');
+    tickerLabel.textContent = tUI('preventable-deaths-label', 'Preventable deaths since you opened this page:');
   }
 
   // Build groups from comparisons that have both deathsPerYear and tickerGroup
@@ -1152,7 +1180,7 @@ function startDeathTicker() {
 
     html += '<div class="ticker-row ticker-total">' +
       '<span class="ticker-count">' + thousand.format(grandTotal) + '</span>' +
-      '<span class="ticker-label">' + tUI('total-preventable-deaths', 'total preventable deaths') + '</span>' +
+      '<span class="ticker-label">' + tUI('total-preventable-deaths', 'Total Preventable Deaths') + '</span>' +
     '</div>';
     countsEl.innerHTML = html;
   }

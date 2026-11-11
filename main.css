@@ -35,6 +35,9 @@ h1 {
   color: inherit;
   text-decoration: underline;
 }
+a {
+    color: inherit;
+}
 .scroll-this-way {
   width: 165px;
   height: 360px;
@@ -56,19 +59,18 @@ h1 {
 }
 .language-menu {
   position: absolute;
-  top: 18px;
-  right: 18px;
+  top: 0;
+  right: 0;
   z-index: 4;
 }
 .language-menu-trigger {
+  color: #000;
+  font-size: 16px;
+  text-decoration: underline;
   border: 0;
   background: transparent;
-  color: #333;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
   cursor: pointer;
-  padding: 2px 0;
+  padding: 0px 0px;
 }
 .language-menu-trigger:hover,
 .language-menu-trigger:focus-visible {
@@ -76,12 +78,10 @@ h1 {
   outline: none;
 }
 .language-menu-panel {
-  margin-top: 8px;
-  min-width: 92px;
+  margin-top: 0px;
+  min-width: 0px;
   border: 1px solid rgba(0, 0, 0, 0.18);
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
+  background: transparent;
   padding: 6px;
   display: flex;
   flex-direction: column;
@@ -92,12 +92,12 @@ h1 {
 }
 .language-menu-item {
   border: 0;
-  border-radius: 6px;
-  background: transparent;
+  border-radius: 4px;
+  background: #f8f8f8;
   text-align: left;
   font-size: 13px;
   padding: 6px 8px;
-  color: #222;
+  color: #000;
   cursor: pointer;
 }
 .language-menu-item:hover,
@@ -105,11 +105,8 @@ h1 {
   background: #f2f2f2;
   outline: none;
 }
-.language-menu-item.is-active,
-.language-menu-item:disabled {
-  color: #888;
-  cursor: default;
-  background: #f8f8f8;
+.language-menu-item.is-active {
+  background: #e1e1e1;
 }
 @keyframes bouncy-arrow {
   0%   { background-position: 50px 50px; }
@@ -153,8 +150,8 @@ h1 {
 }
 .wealth-title {
   align-self: flex-start;
-  margin-bottom: 5px;
-  margin-top: 0;
+  margin-left: 25px;
+  margin-top: 5px;
   color: black;
   background: transparent;
   box-sizing: border-box;
@@ -209,25 +206,79 @@ h1 {
 .richest .wealth {
   height: var(--richest-h);
   width: var(--bar-width, 500px);
-  background-color: orange;
+  background-color: #ff5c5c;
 }
 .all-billionaires .wealth {
-  margin-top: 100px;
+  margin-top: 1000px;
   height: var(--all-billionaires-h);
   width: var(--bar-width, 500px);
-  background-color: #03A9F4;
+  background-color: #571212;
+}
+
+.scroll-progress-track {
+  position: relative;
+  width: 24px;
+  height: 175px;
+  margin: 4px 33px;
+  overflow: hidden;
+  background: #e0e0e0;
+  border: 3px solid #000;
+}
+.scroll-progress-track[hidden] {
+  display: none;
+}
+
+.scroll-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: #333;
+}
+
+#richest-scroll-fill {
+  background: #28b10b;
+}
+
+#allBillionaires-scroll-fill {
+  background: #28b10b;
+}
+
+#allBillionaires-title {
+  align-self: flex-start;
+  margin-left: 25px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  color: #e1e1e1;
+  background: transparent;
+  box-sizing: border-box;
 }
 
 /* ─── Ruler & Scale Key ─── */
 .ruler {
-  background-image: url('img/ruler-vert.svg');
-  background-repeat: repeat-y;
-  background-position: right 0;
-  background-size: 30px 160px;
+   margin-top: 10px;
+    background-image:
+      url('img/ruler-vert-right.svg'),
+      url('img/ruler-vert-left.svg');
+    background-repeat: repeat-y, repeat-y;
+    background-position: right 0, left 0;
+    background-size: 30px 160px, 30px 160px;
+  }
+#allBillionaires.wealth.ruler-right.ruler-left {
+  margin-top: 10px;
+  background-image:
+    url('img/ruler-vert-allbillionaires-right.svg'),
+    url('img/ruler-vert-allbillionaires-left.svg');
+  background-repeat: repeat-y, repeat-y;
+  background-position: right 0, left 0;
+  background-size: 30px 160px, 30px 160px;
 }
+
+
 .key {
   position: sticky;
-  top: 0;
+  top: 10px;
   align-self: flex-end;
   margin-right: 35px;
   margin-left: 0;
@@ -249,14 +300,34 @@ h1 {
   white-space: nowrap;
   padding: 1px 0;
 }
-.richest .key > span {
-  background-color: orange;
+.richest .key {
+  margin-right: 35px;
 }
+.all-billionaires .key {
+  color: #e1e1e1;
+  margin-right: 35px;
+  background: url(img/scale-vert-allbillionaires.svg) no-repeat right center;
+}
+
+
 .counter {
   color: black;
   padding: 5px;
   min-width: 140px;
   background: transparent;
+}
+
+#richest-counter {
+  margin-left: 28px;
+}
+
+#allBillionaires-counter {
+  margin-left: 28px;
+  color: #e1e1e1;
+}
+
+.title a {
+  color: inherit;
 }
 
 /* ─── Infoboxes (comparison items inside bars) ─── */
@@ -288,11 +359,11 @@ h1 {
   margin-top: 12px;
 }
 .share-inline-btn {
-  border: 0;
-  border-radius: 999px;
-  background: #222;
-  color: #fff;
-  font-size: 13px;
+  background: #e0e0e0;
+  color: #000;
+  border-width: 3px;
+  border-radius: 4px;
+  font-size: 14px;
   font-weight: 600;
   padding: 9px 14px;
   cursor: pointer;
@@ -300,7 +371,7 @@ h1 {
 }
 .share-inline-btn:hover,
 .share-inline-btn:focus-visible {
-  background: #000;
+  background: #a6a6a6;
   outline: none;
 }
 
@@ -375,6 +446,7 @@ h1 {
 .all-billionaires .infobox {
   height: auto;
   min-height: 100vh;
+  color: #e1e1e1;
 }
 
 /* ─── Image Comparisons ─── */
@@ -406,12 +478,12 @@ h1 {
   width: 120px;
   height: 120px;
   transform: rotate(-38deg);
-  background: yellowgreen;
+  background: #fff;
   border-radius: 50%;
 }
 .cause-pie .piechart-inner {
-  fill: yellowgreen;
-  stroke: #655;
+  fill: #28b10b;
+  stroke: #fff;
   stroke-width: 32;
 }
 .pie-label {
@@ -421,6 +493,16 @@ h1 {
   font-size: 20px;
   font-weight: bold;
   white-space: nowrap;
+  color:#000000c9;
+}
+.cause-card .pie-label {
+  position: absolute;
+  left: 130px;
+  top: 42px;
+  font-size: 20px;
+  font-weight: bold;
+  white-space: nowrap;
+  color:#a5a5a5;
 }
 .cause-title {
   margin: 8px 0 4px;
@@ -428,7 +510,7 @@ h1 {
 }
 .cause-cost {
   font-size: 15px;
-  color: #555;
+  color: #e1e1e1;
   margin-bottom: 8px;
 }
 .cause-desc {
@@ -436,11 +518,11 @@ h1 {
   margin-bottom: 10px;
 }
 .cause-desc a {
-  color: #1565C0;
+  color: inherit;
 }
 .cause-deaths {
-  background: #fff3f3;
-  border-left: 4px solid #d32f2f;
+  background: #000;
+  border-left: 4px solid #902323;
   padding: 8px 12px;
   margin: 10px 0;
   font-size: 14px;
@@ -455,11 +537,11 @@ h1 {
 }
 .cause-source {
   font-size: 12px;
-  color: #888;
+  color: #e1e1e1;
   margin-top: 8px;
 }
 .cause-source a {
-  color: #888;
+  color: inherit;
 }
 
 /* ─── Summary Cards ─── */
@@ -494,7 +576,7 @@ h1 {
 }
 .bar-fill {
   height: 100%;
-  background: #03A9F4;
+  background: #c3aa2a;
   border-radius: 3px;
   min-width: 2px;
 }
@@ -523,28 +605,31 @@ h1 {
 .death-ticker {
   position: fixed;
   bottom: 12px;
-  right: 12px;
+  right: 53px;
   z-index: 100;
-  background: rgba(30, 30, 30, 0.92);
-  color: #fff;
-  padding: 12px 16px 32px 16px;
-  border-radius: 8px;
+  background: #050505;
+  color: #000;
+  padding: 10px 16px 8px 12px;
+  border: 3px solid;
+  border-color: #902323;
+  border-radius: 4px;
   font-family: sans-serif;
   font-size: 13px;
-  max-width: 280px;
+  font-weight: 400;
+  max-width: 400px;
   max-height: calc(80vh - 40px);
   overflow-y: auto;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 .death-ticker-close {
   position: absolute;
-  top: 6px;
-  right: 10px;
+  top: 3px;
+  right: 2px;
   background: none;
   border: none;
   color: #fff;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: 400;
   cursor: pointer;
   z-index: 101;
   opacity: 0.7;
@@ -556,15 +641,18 @@ h1 {
 .death-ticker-reopen {
   position: fixed;
   bottom: 16px;
-  right: 16px;
+  right: 53px;
   z-index: 101;
-  background: #222;
+  background: #050505;
   color: #fff;
-  border: none;
-  border-radius: 50%;
+  padding: 12px 16px 10px 16px;
+  border: 3px solid;
+  border-color: #902323;
+  border-radius: 4px;
   width: 44px;
   height: 44px;
   font-size: 22px;
+  font-weight: 400;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   cursor: pointer;
   display: flex;
@@ -578,13 +666,13 @@ h1 {
 }
 .next-message-btn {
   position: fixed;
-  bottom: 16px;
-  left: calc(max(16px, env(safe-area-inset-left)) + 14px);
+  bottom: 12px;
+  left: calc(max(37px, env(safe-area-inset-left)) + 14px);
   z-index: 101;
-  background: #222;
-  color: #fff;
-  border: none;
-  border-radius: 999px;
+  background: #e0e0e0;
+  color: #000;
+  border-width: 3px;
+  border-radius: 4px;
   height: 44px;
   padding: 0 16px;
   font-size: 14px;
@@ -595,7 +683,7 @@ h1 {
   transition: opacity 0.2s;
 }
 .next-message-btn:hover {
-  opacity: 1;
+  background: #a6a6a6;
 }
 .next-message-btn:disabled,
 .next-message-btn.is-scrolling {
@@ -604,11 +692,11 @@ h1 {
 }
 .death-ticker-label {
   display: block;
-  font-size: 11px;
-  color: #aaa;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
   margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  margin-right: 10px;
 }
 .ticker-row {
   display: flex;
@@ -627,14 +715,18 @@ h1 {
   color: #ccc;
 }
 .ticker-total {
-  border-top: 1px solid rgba(255,255,255,0.2);
+  border-top: 1px solid rgb(255 255 255 / 31%);
   margin-top: 4px;
   padding-top: 6px;
   font-weight: bold;
 }
-.ticker-total .ticker-count {
+.ticker-total {
   font-size: 17px;
   color: #ff4444;
+}
+.ticker-count {
+    font-size: 24px;
+    color: #ff4444;
 }
 .ticker-total .ticker-label {
   color: #fff;
@@ -642,14 +734,16 @@ h1 {
 .ticker-group + .ticker-group {
   margin-top: 5px;
   padding-top: 5px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgb(255 255 255 / 31%);
 }
 .ticker-group-total .ticker-label {
-  color: #eee;
+  color: #fff;
+  font-size: 10px;
   font-weight: bold;
 }
 .ticker-count-group {
   color: #ff8c8c;
+  font-size: 14px;
 }
 .ticker-group-causes {
   color: #9fb0bc;
