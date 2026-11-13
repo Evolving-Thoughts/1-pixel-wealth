@@ -45,8 +45,14 @@ function translate_page(response) {
   applyTranslations();
   fixUntranslatedImages();
 
-  const script = document.createElement("script");
-  script.src = "../main.js?version=2.0";
-  document.body.appendChild(script);
+  // viz.js registers the per-message visualisations and must be loaded before main.js
+  const viz = document.createElement("script");
+  viz.src = "../viz.js?version=3.0";
+  viz.onload = viz.onerror = function() {
+    const script = document.createElement("script");
+    script.src = "../main.js?version=3.0";
+    document.body.appendChild(script);
+  };
+  document.body.appendChild(viz);
 }
 

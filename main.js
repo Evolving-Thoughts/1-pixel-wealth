@@ -11,6 +11,8 @@ const MIN_RECT_WIDTH_FOR_INNER_TEXT = 150;
 const MIN_COMPARISON_GAP_VH = 1.5;
 const MIN_COMPARISON_CONTENT_PADDING_PX = 64;
 const MAX_BAR_SEGMENTS = 100;
+const STICKY_BOTTOM_RESERVE_PX = 74; // room for the two pills at the bottom
+const MOBILE_TICKER_MAX_WIDTH_PX = 700;
 const FETCH_TIMEOUT_MS = 15_000;
 const TICKER_UPDATE_MS = 1000;
 const WEALTH_COUNTER_ANNUAL_USD = 500_000_000_000;
@@ -19,6 +21,8 @@ const AUTO_SCROLL_MIN_DURATION_MS = 350;
 const AUTO_SCROLL_MAX_DURATION_MS = 2200;
 const AUTO_SCROLL_PIXELS_PER_SECOND = 12_000;
 const LANGUAGE_STORAGE_KEY = 'preferred-language';
+// A picture may shrink to this share of its size to make a message fit on a small screen.
+const MIN_PICTURE_SCALE = 0.6;
 
 function isGermanPath(pathname) {
   return /\/de(\/|$)/.test(pathname);
@@ -185,10 +189,21 @@ function formatCompactMoney(n) {
   return money.format(n);
 }
 
+// German sets a (non-breaking) space before the percent sign and uses a decimal comma.
+function fmtPctNumber(text) {
+  var lang = window.i18n_data && window.i18n_data.code;
+  if (lang === 'de') return String(text).replace('.', ',') + ' %';
+  return text + '%';
+}
+
 function fmtPct(n) {
-  if (n >= 10) return Math.round(n) + '%';
-  if (n >= 1)  return n.toFixed(1) + '%';
-  return n.toFixed(2) + '%';
+  if (n >= 10) return fmtPctNumber(n.toFixed(1).replace(/\.0$/, ''));
+  if (n >= 1)  return fmtPctNumber(n.toFixed(1));
+  return fmtPctNumber(n.toFixed(2));
+}
+
+function fmtInt(n) {
+  return thousand.format(n);
 }
 
 // ─── Globals ────────────────────────────────────────────────────────
@@ -205,6 +220,10 @@ let _detectedMaxScrollHeight = null;
 let nextMessageBtn = null;
 let nextMessageNavInitialized = false;
 let autoScrollRafId = null;
+let rulerMajorUsd = 50_000_000;
+let rulerMajorPx = 160;
+let pendingVizMounts = [];
+let stickyContentObserver = null;
 
 // ─── Capping state ──────────────────────────────────────────────────
 let isCapped = false;
@@ -215,6 +234,11 @@ let prevCappedFraction = 1;
 // ─── Helpers ────────────────────────────────────────────────────────
 function getStableVh() {
   return document.documentElement.clientHeight || window.innerHeight;
+}
+
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
 }
 
 function interpolate(text, vars) {
@@ -305,11 +329,93 @@ function applyDimensions(barWidth) {
   root.setProperty('--richest-h', richestH + 'px');
   root.setProperty('--all-billionaires-h', allBillionairesH + 'px');
 
-  const scaleText = formatCompactMoney(RULER_TICK_PX * barWidth * DOLLARS_PER_PIXEL);
+  // Ruler and bracket show a round amount (1, 2 or 5 × 10ⁿ) at every screen width.
+  rulerMajorUsd = pickRoundRulerStep(RULER_TICK_PX * barWidth * DOLLARS_PER_PIXEL);
+  rulerMajorPx = rulerMajorUsd / (barWidth * DOLLARS_PER_PIXEL);
+  const scaleText = formatCompactMoney(rulerMajorUsd);
   const scaleEls = document.querySelectorAll('.scale-label');
   for (let i = 0; i < scaleEls.length; i++) { scaleEls[i].textContent = scaleText; }
 
   segmentBar('allBillionaires', allBillionairesH, barWidth);
+  buildRulers();
+  updateRulers();
+}
+
+// ─── Ruler (round steps, snapped to device pixels) ──────────────────
+function pickRoundRulerStep(targetUsd) {
+  const exp = Math.floor(Math.log10(targetUsd));
+  let best = null;
+  for (let e = exp - 1; e <= exp + 1; e++) {
+    [1, 2, 5].forEach(function(m) {
+      const candidate = m * Math.pow(10, e);
+      const distance = Math.abs(Math.log(candidate / targetUsd));
+      if (best === null || distance < best.distance) best = { value: candidate, distance: distance };
+    });
+  }
+  return best.value;
+}
+
+function getDevicePixelRatio() {
+  return window.devicePixelRatio || 1;
+}
+
+function snapToDevicePixel(v) {
+  const dpr = getDevicePixelRatio();
+  return Math.round(v * dpr) / dpr;
+}
+
+function buildRulers() {
+  const dpr = getDevicePixelRatio();
+  const thick = Math.max(1, Math.round(dpr)) / dpr;
+  const minor = rulerMajorPx / 10;
+  const viewH = getStableVh() + Math.ceil(rulerMajorPx) * 2;
+
+  const tracks = document.querySelectorAll('.ruler-track');
+  for (let t = 0; t < tracks.length; t++) {
+    let html = '';
+    for (let i = 0; i * minor <= viewH; i++) {
+      html += '<i style="top:' + snapToDevicePixel(i * minor) + 'px;height:' + thick + 'px;width:' + (i % 10 === 0 ? 18 : 9) + 'px"></i>';
+    }
+    tracks[t].innerHTML = html;
+    tracks[t].style.height = viewH + 'px';
+  }
+
+  const keys = document.querySelectorAll('.bar-hud .key');
+  for (let k = 0; k < keys.length; k++) {
+    keys[k].style.height = (snapToDevicePixel(rulerMajorPx) + thick) + 'px';
+    keys[k].style.borderWidth = thick + 'px';
+    keys[k].style.borderRightWidth = '0';
+  }
+
+  // The header height is needed to centre messages in the space below it.
+  const bars = document.querySelectorAll('.wealth');
+  for (let b = 0; b < bars.length; b++) {
+    const header = bars[b].querySelector('.wealth-header');
+    if (header) bars[b].style.setProperty('--hud-h', header.offsetHeight + 'px');
+  }
+}
+
+function updateRulers() {
+  const dpr = getDevicePixelRatio();
+  const vh = getStableVh();
+  const huds = document.querySelectorAll('.bar-hud');
+  for (let i = 0; i < huds.length; i++) {
+    const bar = huds[i].parentElement;
+    const view = huds[i].querySelector('.ruler-view');
+    const track = huds[i].querySelector('.ruler-track');
+    if (!bar || !view || !track) continue;
+
+    const barRect = bar.getBoundingClientRect();
+    if (barRect.bottom < 0 || barRect.top > vh) continue;
+
+    const hudTop = huds[i].getBoundingClientRect().top;
+    // How far the bar has scrolled past the HUD, wrapped to one major step.
+    const phase = Math.max(0, hudTop - barRect.top) % rulerMajorPx;
+    // Snap to the absolute device-pixel grid so every tick is equally dark.
+    const offset = Math.round((hudTop - phase) * dpr) / dpr - hudTop;
+    track.style.transform = 'translateY(' + offset + 'px)';
+    view.style.height = Math.max(0, Math.min(vh, barRect.bottom - hudTop)) + 'px';
+  }
 }
 
 // ─── Segmented Virtual Scroll ───────────────────────────────────────
@@ -334,12 +440,6 @@ function segmentBar(barId, totalHeight, barWidth) {
     seg.style.width = barWidth + 'px';
     seg.style.height = h + 'px';
     seg.style.backgroundColor = 'inherit';
-    if (iterations === 1) {
-      seg.style.backgroundImage = "url('img/ruler-vert.svg')";
-      seg.style.backgroundRepeat = 'repeat-y';
-      seg.style.backgroundPosition = 'right 0';
-      seg.style.backgroundSize = '30px 160px';
-    }
     el.appendChild(seg);
     remaining -= h;
   }
@@ -535,21 +635,15 @@ function applyData(billionaireData, storyData) {
 
   applyDimensions(computeBarWidth());
 
-  const richestTitle = document.getElementById('richest-title');
-  if (richestTitle) {
-    richestTitle.textContent = interpolate(
-      tUI('richest-title', '{amount} (wealth of {name})'),
-      { amount: money.format(richestPersonWealthUsd), name: richestName }
-    );
-  }
-
-  const allTitle = document.getElementById('allBillionaires-title');
-  if (allTitle) {
-    allTitle.textContent = interpolate(
-      tUI('all-billionaires-title', 'All the world\u2019s {count} billionaires ({amount})'),
-      { count: thousand.format(billionaireCount), amount: formatCompactMoney(allBillionairesTotalUsd) }
-    );
-  }
+  // Bar headers: the total in large type, whose wealth it is on its own line.
+  setText('richest-total', money.format(richestPersonWealthUsd));
+  setText('richest-who', interpolate(tUI('richest-who', 'Wealth of {name}'), { name: richestName }));
+  setText('allBillionaires-total', formatCompactMoney(allBillionairesTotalUsd));
+  setText('allBillionaires-who', interpolate(
+    tUI('all-billionaires-who', 'All {count} billionaires'),
+    { count: thousand.format(billionaireCount) }
+  ));
+  buildRulers();
 
   renderComparisons();
   initNextMessageNav();
@@ -633,12 +727,12 @@ function prepareAllBillionairesComparisons(comparisons) {
     positionFraction: 0.95,
     title: interpolate(
       tUI('browser-broke',
-        '<strong>Even your browser can\'t handle this much money!</strong><br><br>' +
-        'You\'ve scrolled through ~<strong>{pctReached}</strong> ' +
-        'of their wealth and your device has reached its limit.' +
-        'The remaining <strong>{pctRemaining}</strong> \u2014 about <strong>' +
-        '{remainingFormatted}</strong> \u2014 simply can\'t be displayed.<br><br>' +
-        '{totalFormatted}, a number too large for your browser to show. But not too large for {billionaireCount} billionaires to own!'
+        '<span class="step-hd">Even your browser can’t handle this much money!</span>' +
+        'You’ve scrolled through ~<strong>{pctReached}</strong> ' +
+        'of their wealth, and your device has reached its limit. ' +
+        'The remaining <strong>{pctRemaining}</strong> (about <strong>' +
+        '{remainingFormatted}</strong>) simply can’t be displayed.<br><br>' +
+        '{totalFormatted}: a number too large for your browser to show. But not too large for {billionaireCount} billionaires to own.'
       ),
       {
         pctReached: fmtPct(pctReached),
@@ -669,6 +763,14 @@ function renderGroup(comparisons, container, totalWealth, vars) {
 
   container.appendChild(fragment);
 
+  // Visualisations need their elements in the document (path lengths, observers).
+  const mounts = pendingVizMounts;
+  pendingVizMounts = [];
+  mounts.forEach(function(run) {
+    try { run(); } catch (error) { console.warn('Visualisation failed:', error); }
+  });
+  observeStickyContent(container);
+
   // Re-layout after async image loads
   const images = container.querySelectorAll('img');
   for (let i = 0; i < images.length; i++) {
@@ -678,6 +780,71 @@ function renderGroup(comparisons, container, totalWealth, vars) {
   }
 
   updateComparisonPositions(container);
+}
+
+// ─── Sticky content that is taller than the screen ──────────────────
+// Messages are centred in the space below the bar header (CSS). If a message does not fit
+// there, its picture is first made smaller. If that is not enough, the message scrolls
+// through and then sticks with its lower edge above the buttons (class "is-tall"), so every
+// line can be read on the way.
+function fitStickyContent(el, available, vh) {
+  // The picture of the message: the tallest drawing that sits below the text.
+  const drawings = el.querySelectorAll('.viz:not(.v-ring) > svg');
+  let svg = null;
+  let fullHeight = 0;
+  for (let i = 0; i < drawings.length; i++) {
+    const w = parseFloat(drawings[i].getAttribute('width')) || 0;
+    const h = parseFloat(drawings[i].getAttribute('height')) || 0;
+    const room = drawings[i].parentElement ? drawings[i].parentElement.clientWidth : 0;
+    const shownFull = (w > 0 && room > 0) ? h * Math.min(1, room / w) : h;
+    if (shownFull > fullHeight) { fullHeight = shownFull; svg = drawings[i]; }
+  }
+
+  let height = el.offsetHeight;
+  if (svg) {
+    const shown = svg.getBoundingClientRect().height;
+    const rest = height - shown; // text, captions, replay button
+    const roomForPicture = available - rest;
+    let maxHeight = '';
+    if (fullHeight > roomForPicture && roomForPicture >= fullHeight * MIN_PICTURE_SCALE) {
+      maxHeight = Math.floor(roomForPicture) + 'px';
+      height = rest + Math.floor(roomForPicture);
+    } else {
+      height = rest + fullHeight;
+    }
+    if (svg.style.maxHeight !== maxHeight) svg.style.maxHeight = maxHeight;
+  }
+
+  const tall = height > available + 1;
+  el.classList.toggle('is-tall', tall);
+  if (tall) el.style.setProperty('--tall-top', Math.round(vh - STICKY_BOTTOM_RESERVE_PX - height) + 'px');
+  else el.style.removeProperty('--tall-top');
+}
+
+const STICKY_CONTENT_SELECTOR = '.title, .cause-card, .summary-card, .comparison-image-wrapper, .comparison-rect-wrapper:not(.comparison-rect-large)';
+
+function fitStickyContentOf(el) {
+  const vh = getStableVh();
+  const bar = el.closest('.wealth');
+  const hudH = bar ? parseFloat(getComputedStyle(bar).getPropertyValue('--hud-h')) || 96 : 96;
+  fitStickyContent(el, vh - hudH - STICKY_BOTTOM_RESERVE_PX, vh);
+}
+
+function observeStickyContent(container) {
+  if (typeof ResizeObserver === 'undefined') return;
+  if (!stickyContentObserver) {
+    stickyContentObserver = new ResizeObserver(function(entries) {
+      entries.forEach(function(entry) { fitStickyContentOf(entry.target); });
+    });
+  }
+  const els = container.querySelectorAll(STICKY_CONTENT_SELECTOR);
+  for (let i = 0; i < els.length; i++) stickyContentObserver.observe(els[i]);
+}
+
+// The screen height can change without any message changing its size (rotating a phone).
+function refitStickyContent() {
+  const els = document.querySelectorAll('.infobox ' + STICKY_CONTENT_SELECTOR.split(', ').join(', .infobox '));
+  for (let i = 0; i < els.length; i++) fitStickyContentOf(els[i]);
 }
 
 // ─── Comparison Positioning ─────────────────────────────────────────
@@ -799,8 +966,43 @@ function updateDynamicText() {
 }
 
 // ─── Comparison Content Renderers ───────────────────────────────────
-function renderTextContent(comp, vars) {
-  let html = '<div class="title">' + interpolate(comp.title, vars);
+// Chapter question ("What could we do with less than 5% of the money?"):
+// the percentage becomes the eye-catcher, a small line translates it into money.
+function renderChapterInner(comp, text, totalWealth) {
+  const pct = Number(comp.chapterPct) || 0;
+  const prefix = comp.chapterPrefix || '';
+  const pctText = fmtPctNumber(String(pct));
+  const moneyLine = interpolate(tUI('chapter-of', '{pct} of {total} = {amount}'), {
+    pct: pctText,
+    total: formatCompactMoney(totalWealth),
+    amount: formatCompactMoney(totalWealth * pct / 100),
+  });
+  return '<span class="chapter">' +
+    '<span class="big num">' + (prefix ? prefix + ' ' : '') + pctText + '</span>' +
+    '<span class="q">' + text.trim() + '</span>' +
+    '<span class="of num">' + moneyLine + '</span>' +
+  '</span>';
+}
+
+// Numbered step of the call to action. The text starts with "<strong>Heading</strong><br><br>".
+function renderStepInner(comp, text) {
+  const match = text.match(/^\s*<strong>([\s\S]*?)<\/strong>\s*(?:<br\s*\/?>\s*)*([\s\S]*)$/);
+  const heading = match ? match[1] : '';
+  const body = match ? match[2] : text;
+  const counter = interpolate(tUI('step-counter', '{n} of {total}'), { n: comp.step, total: comp.stepTotal || 5 });
+  return '<span class="step-top"><span class="step-icon" data-step-icon="' + (comp.stepIcon || '') + '"></span>' +
+      '<span class="no num">' + counter + '</span></span>' +
+    '<span class="step-hd">' + heading + '</span>' + body;
+}
+
+function renderTextContent(comp, vars, totalWealth) {
+  const text = interpolate(comp.title, vars);
+  let inner = text;
+  if (comp.variant === 'chapter') inner = renderChapterInner(comp, text, totalWealth);
+  else if (comp.variant === 'note') inner = '<span class="note-inner">' + text + '</span>';
+  else if (comp.variant === 'step') inner = renderStepInner(comp, text);
+
+  let html = '<div class="title">' + inner;
   if (comp.showShareButton) {
     html += '<div class="share-inline-row">' +
       '<button type="button" class="share-inline-btn" aria-live="polite">' +
@@ -921,108 +1123,188 @@ function renderSquareContent(comp, vars) {
   '</div>';
 }
 
-function renderPieChartHtml(pct, pctStr) {
-  return '<div class="cause-pie">' +
-    '<svg class="piechart-outer" viewBox="0 0 32 32">' +
-      '<circle class="piechart-inner" r="16" cx="16" cy="16" style="stroke-dasharray:' + pct.toFixed(2) + ' 100"/>' +
-    '</svg>' +
-    '<span class="pie-label">' + pctStr + '</span>' +
-  '</div>';
+function renderShareStripHtml(pct) {
+  return '<div class="share-strip"><i style="width:' + Math.min(100, pct).toFixed(2) + '%"></i></div>';
 }
 
+// Cause card: a white sheet with the cost, its share of all billionaire wealth as a strip,
+// the description, the death toll and the source.
 function renderCauseContent(comp, totalWealth) {
   const pct = (comp.costUsd / totalWealth) * 100;
-  const pctStr = fmtPct(pct);
+  const costSuffix = comp.costPeriod === 'yearly' ? tUI('cost-yearly', '/year') : '';
+  const ofWealth = tUI('of-wealth-of-all-billionaires', 'of the wealth of<br>all billionaires');
 
-  let html = '<div class="cause-card">';
-  html += renderPieChartHtml(pct, pctStr);
-
-  const costSuffix = comp.costPeriod === 'yearly'
-    ? tUI('cost-yearly', '/year')
-    : tUI('cost-total', ' total');
-  const ofAllBillionaires = tUI('of-all-billionaire-wealth', 'of all billionaire wealth');
-
-  html += '<div class="cause-content">' +
+  let html = '<div class="cause-card">' +
     '<h3 class="cause-title">' + comp.title + '</h3>' +
-    '<div class="cause-cost">' + formatCompactMoney(comp.costUsd) + costSuffix + ' \u2014 ' + pctStr + ' ' + ofAllBillionaires + '</div>' +
+    '<div class="cause-cost num"><b>' + formatCompactMoney(comp.costUsd) + costSuffix + '</b>' +
+      '<span>' + fmtPct(pct) + ' ' + ofWealth + '</span></div>' +
+    renderShareStripHtml(pct) +
+    '<div class="share-labels num"><span>' + formatCompactMoney(comp.costUsd) + '</span>' +
+      '<span>' + formatCompactMoney(totalWealth) + '</span></div>' +
     '<p class="cause-desc">' + comp.description + '</p>';
 
   if (comp.deathsPerYear) {
     const perDay = Math.round(comp.deathsPerYear / 365);
     const deathLabel = comp.deathLabel || tUI('deaths', 'deaths');
-    html += '<div class="cause-deaths">' +
-      '<strong>' + thousand.format(perDay) + '</strong> ' + deathLabel + ' ' + tUI('per-day', 'per day') + ' \u2014 ' +
-      '<strong>' + thousand.format(comp.deathsPerYear) + '</strong> ' + tUI('per-year', 'per year') +
+    html += '<div class="cause-deaths num">' +
+      '<div><b>' + thousand.format(perDay) + '</b>' + deathLabel + '<br>' + tUI('per-day', 'per day') + '</div>' +
+      '<div><b>' + thousand.format(comp.deathsPerYear) + '</b>' + tUI('per-year', 'per year') + '</div>' +
     '</div>';
   }
 
   if (comp.sourceUrl) {
-    html += '<div class="cause-source">' + tUI('source', 'Source') + ': <a href="' + comp.sourceUrl + '" target="_blank" rel="noopener noreferrer">' + (comp.sourceName || 'Link') + '</a></div>';
+    html += '<p class="cause-source">' + tUI('source', 'Source') + ': <a href="' + comp.sourceUrl + '" target="_blank" rel="noopener noreferrer">' + (comp.sourceName || 'Link') + '</a></p>';
   }
 
-  html += '</div></div>';
-  return html;
-}
-
-function renderBarChartHtml(items, totalCost) {
-  let html = '<div class="side-by-side-chart">';
-  items.forEach(function(item) {
-    const widthPct = Math.max(1, (item.cost / totalCost) * 100);
-    html += '<div class="bar-row">' +
-      '<span class="bar-label">' + item.title + '</span>' +
-      '<div class="bar-track"><div class="bar-fill" style="width:' + widthPct.toFixed(1) + '%"></div></div>' +
-      '<span class="bar-amount">' + formatCompactMoney(item.cost) + '</span>' +
-    '</div>';
-  });
   html += '</div>';
   return html;
 }
 
-function renderSummaryContent(comp, totalWealth) {
-  const ids = comp.includeIds || [];
-  let totalCost = 0;
-  const items = [];
-  if (story.comparisons) {
-    story.comparisons.forEach(function(c) {
-      if (ids.indexOf(c.id) !== -1 && c.costUsd) {
-        totalCost += c.costUsd;
-        items.push({ title: t(c.i18nKey, c.title), cost: c.costUsd });
-      }
+// Rows of a summary card. Either one row per included cause (includeIds) or grouped
+// areas (rows: [{ title, i18nKey, sub, ids }]). Costs always come from the causes themselves.
+function getSummaryRows(comp) {
+  const byId = {};
+  (story.comparisons || []).forEach(function(c) { byId[c.id] = c; });
+  const costOf = function(ids) {
+    return (ids || []).reduce(function(sum, id) {
+      const c = byId[id];
+      if (!c || !c.costUsd) { console.warn('Summary refers to unknown cause:', id); return sum; }
+      return sum + c.costUsd;
+    }, 0);
+  };
+
+  let rows;
+  if (Array.isArray(comp.rows)) {
+    rows = comp.rows.map(function(row) {
+      return {
+        title: t(row.i18nKey, row.title),
+        sub: row.i18nKey ? t(row.i18nKey + '-sub', row.sub || '') : (row.sub || ''),
+        cost: costOf(row.ids),
+      };
+    });
+  } else {
+    rows = (comp.includeIds || []).filter(function(id) { return byId[id] && byId[id].costUsd; }).map(function(id) {
+      return { title: t(byId[id].i18nKey, byId[id].title), sub: '', cost: byId[id].costUsd };
     });
   }
+  rows.sort(function(x, y) { return y.cost - x.cost; });
+  return rows;
+}
+
+// Summary card: areas sorted by cost with labelled bars, then the total and its share.
+function renderSummaryContent(comp, totalWealth) {
+  const rows = getSummaryRows(comp);
+  const totalCost = rows.reduce(function(sum, row) { return sum + row.cost; }, 0);
+  const maxCost = rows.length ? rows[0].cost : 1;
   const summaryPct = (totalCost / totalWealth) * 100;
-  const ofAllBillionaires = tUI('of-all-billionaire-wealth', 'of all billionaire wealth');
+  const ofWealth = tUI('of-wealth-of-all-billionaires', 'of the wealth of<br>all billionaires');
 
-  let html = '<div class="summary-card">';
-  html += '<h3 class="cause-title">' + comp.title + '</h3>';
-  html += '<p class="cause-desc">' + comp.description + '</p>';
-  html += renderBarChartHtml(items, totalCost);
-
-  html += '<div class="summary-total">' +
-    '<strong>' + tUI('total', 'Total') + ': ' + formatCompactMoney(totalCost) + '</strong> \u2014 ' + fmtPct(summaryPct) + ' ' + ofAllBillionaires +
+  let html = '<div class="summary-card">' +
+    '<h3 class="cause-title">' + comp.title + '</h3>' +
+    '<p class="cause-desc">' + comp.description + '</p>' +
+    '<div class="summary-rows num">';
+  rows.forEach(function(row) {
+    html += '<div class="summary-row">' +
+      '<div class="l"><span>' + row.title + (row.sub ? '<small>' + row.sub + '</small>' : '') + '</span>' +
+        '<b>' + formatCompactMoney(row.cost) + '</b></div>' +
+      '<div class="t"><i style="width:' + ((row.cost / maxCost) * 100).toFixed(1) + '%"></i></div>' +
+    '</div>';
+  });
+  html += '</div>' +
+    '<div class="summary-total num">' +
+      '<div class="top"><b>' + formatCompactMoney(totalCost) + '</b><span>' + fmtPct(summaryPct) + ' ' + ofWealth + '</span></div>' +
+      renderShareStripHtml(summaryPct) +
+    '</div>' +
   '</div>';
-
-  html += '<div class="cause-pie summary-pie">' +
-    '<svg class="piechart-outer" viewBox="0 0 32 32">' +
-      '<circle class="piechart-inner" r="16" cx="16" cy="16" style="stroke-dasharray:' + summaryPct.toFixed(2) + ' 100"/>' +
-    '</svg>' +
-    '<span class="pie-label">' + fmtPct(summaryPct) + '</span>' +
-  '</div>';
-
-  html += '</div>';
   return html;
+}
+
+// ─── Visualisations (registered by viz.js, one per comparison id) ───
+function getVizContext(comp, wrapper, totalWealth) {
+  return {
+    comp: comp,
+    root: wrapper,
+    lang: getCurrentLanguage(),
+    locale: getActiveLocale(),
+    getComp: function(id) {
+      return (story && story.comparisons || []).find(function(c) { return c.id === id; }) || null;
+    },
+    t: t,
+    tUI: tUI,
+    interpolate: interpolate,
+    money: money,
+    fmtInt: fmtInt,
+    fmtPct: fmtPct,
+    compact: formatCompactMoney,
+    dollarsPerPixel: DOLLARS_PER_PIXEL,
+    getBarWidth: function() { return currentBarWidth; },
+    richestWealthUsd: richestPersonWealthUsd,
+    richestName: richestName,
+    allBillionairesUsd: allBillionairesTotalUsd,
+    billionaireCount: billionaireCount,
+    totalWealth: totalWealth,
+  };
+}
+
+function attachViz(wrapper, comp, totalWealth) {
+  const registry = window.WEALTH_VIZ;
+  const make = registry && registry[comp.id];
+  if (typeof make !== 'function') return;
+
+  let result;
+  try {
+    result = make(getVizContext(comp, wrapper, totalWealth));
+  } catch (error) {
+    console.warn('Visualisation ' + comp.id + ' failed:', error);
+    return;
+  }
+  if (!result) return;
+
+  const host = wrapper.querySelector('.title, .comparison-rect-wrapper, .comparison-image-wrapper');
+  if (!host) return;
+
+  let vizEl = null;
+  if (result.html) {
+    vizEl = document.createElement('div');
+    vizEl.className = 'viz' + (result.className ? ' ' + result.className : '');
+    vizEl.innerHTML = result.html;
+    // "replace" swaps out the default content (for example the plain image of the concert hall).
+    if (result.replace) {
+      const old = host.querySelector(result.replace);
+      if (old) old.replaceWith(vizEl); else host.appendChild(vizEl);
+    } else {
+      host.appendChild(vizEl);
+    }
+  }
+  if (typeof result.mount === 'function') {
+    pendingVizMounts.push(function() { result.mount(vizEl, wrapper); });
+  }
+  if (typeof result.resize === 'function') {
+    wrapper._vizResize = function() { result.resize(vizEl, wrapper); };
+  }
+}
+
+function runVizResize() {
+  const els = document.querySelectorAll('.infobox');
+  for (let i = 0; i < els.length; i++) {
+    if (typeof els[i]._vizResize === 'function') {
+      try { els[i]._vizResize(); } catch (error) { console.warn('Visualisation resize failed:', error); }
+    }
+  }
 }
 
 function createComparisonElement(comp, totalWealth, vars) {
   comp = localizeComp(comp);
   const wrapper = document.createElement('div');
   wrapper.className = 'infobox comparison-' + comp.id;
+  if (comp.variant) wrapper.classList.add('is-' + comp.variant);
+  if (comp.dense) wrapper.classList.add('is-dense');
 
   switch (comp.type) {
     case 'text':
       wrapper.classList.add('text-infobox');
       if (comp.dynamic) wrapper.setAttribute('data-dynamic', comp.dynamic);
-      wrapper.innerHTML = renderTextContent(comp, vars);
+      wrapper.innerHTML = renderTextContent(comp, vars, totalWealth);
       break;
     case 'square':
       wrapper.classList.add('text-infobox');
@@ -1042,10 +1324,11 @@ function createComparisonElement(comp, totalWealth, vars) {
       break;
     default:
       wrapper.classList.add('text-infobox');
-      wrapper.innerHTML = renderTextContent(comp, vars);
+      wrapper.innerHTML = renderTextContent(comp, vars, totalWealth);
   }
 
   bindShareButton(wrapper, comp);
+  attachViz(wrapper, comp, totalWealth);
 
   return wrapper;
 }
@@ -1065,7 +1348,14 @@ function startDeathTicker() {
 
   var tickerLabel = tickerEl.querySelector('.death-ticker-label');
   if (tickerLabel) {
-    tickerLabel.textContent = tUI('preventable-deaths-label', 'PREVENTABLE DEATHS SINCE YOU OPENED THIS PAGE:');
+    tickerLabel.textContent = tUI('preventable-deaths-label', 'Preventable deaths since you opened this page');
+  }
+  const pillCountEl = document.getElementById('death-ticker-pill-count');
+  const pillLabelEl = document.getElementById('death-ticker-pill-label');
+  if (pillLabelEl) pillLabelEl.textContent = tUI('deaths', 'deaths');
+  // On phones the ticker starts collapsed as a pill so it never covers the text.
+  if (tickerEl.dataset.minimized === undefined) {
+    tickerEl.dataset.minimized = window.innerWidth <= MOBILE_TICKER_MAX_WIDTH_PX ? 'true' : 'false';
   }
 
   // Build groups from comparisons that have both deathsPerYear and tickerGroup
@@ -1090,7 +1380,7 @@ function startDeathTicker() {
 
   const groupCauseText = {};
   groupOrder.forEach(function(groupName) {
-    groupCauseText[groupName] = '(' + groups[groupName].map(function(item) { return item.label; }).join(', ') + ')';
+    groupCauseText[groupName] = groups[groupName].map(function(item) { return item.label; }).join(', ');
   });
 
   const firstGroupComp = story.comparisons.find(function(c) { return c.tickerGroup && c.deathsPerYear; });
@@ -1101,19 +1391,12 @@ function startDeathTicker() {
   function checkVisibility() {
     if (!triggerEl) return;
     const scrollTop = window.scrollY || window.pageYOffset || 0;
-    if (tickerEl.dataset.minimized === 'true') {
-      if (tickerVisible !== false) {
-        tickerEl.hidden = true;
-        tickerVisible = false;
-      }
-      return;
-    }
-
-    const shouldShow = (scrollTop + getStableVh() > triggerEl.offsetTop);
-    if (tickerVisible !== shouldShow) {
-      tickerEl.hidden = !shouldShow;
-      tickerVisible = shouldShow;
-    }
+    const reached = (scrollTop + getStableVh() > triggerEl.offsetTop);
+    const minimized = tickerEl.dataset.minimized === 'true';
+    // Either the open panel or the pill is shown once the first death toll is reached.
+    tickerEl.hidden = !reached || minimized;
+    reopenBtn.style.display = (reached && minimized) ? 'flex' : 'none';
+    tickerVisible = reached;
   }
 
   let tickerVisibilityRafId = null;
@@ -1142,19 +1425,19 @@ function startDeathTicker() {
       });
       grandTotal += groupTotal;
       html += '<div class="ticker-group">' +
-        '<div class="ticker-row ticker-group-total">' +
-          '<span class="ticker-count ticker-count-group">' + thousand.format(groupTotal) + '</span>' +
-          '<span class="ticker-label ticker-label-group">' + translateGroupName(groupName) + '</span>' +
-        '</div>' +
-        '<div class="ticker-group-causes">' + groupCauseText[groupName] + '</div>' +
+        '<span class="ticker-count">' + thousand.format(groupTotal) + '</span>' +
+        '<span>' + translateGroupName(groupName) +
+          '<small class="ticker-group-causes">' + groupCauseText[groupName] + '</small></span>' +
       '</div>';
     });
 
-    html += '<div class="ticker-row ticker-total">' +
+    html += '<div class="ticker-total">' +
       '<span class="ticker-count">' + thousand.format(grandTotal) + '</span>' +
-      '<span class="ticker-label">' + tUI('total-preventable-deaths', 'total preventable deaths') + '</span>' +
+      '<span>' + tUI('total-preventable-deaths', 'total preventable deaths') + '</span>' +
     '</div>';
     countsEl.innerHTML = html;
+    if (pillCountEl) pillCountEl.textContent = thousand.format(grandTotal);
+    if (pillLabelEl) pillLabelEl.textContent = grandTotal === 1 ? tUI('death', 'death') : tUI('deaths', 'deaths');
   }
 
   update();
@@ -1166,16 +1449,13 @@ function startDeathTicker() {
 
   closeBtn.onclick = function() {
     tickerEl.dataset.minimized = 'true';
-    tickerEl.hidden = true;
-    reopenBtn.style.display = 'flex';
+    checkVisibility();
   };
   reopenBtn.onclick = function() {
     tickerEl.dataset.minimized = 'false';
-    tickerEl.hidden = false;
-    reopenBtn.style.display = 'none';
     checkVisibility();
   };
-  reopenBtn.style.display = 'none';
+  checkVisibility();
 }
 
 // ─── Init ───────────────────────────────────────────────────────────
@@ -1208,6 +1488,7 @@ window.addEventListener('resize', function() {
     applyDimensions(computeBarWidth());
     updateRectSizes();
     updateDynamicText();
+    runVizResize();
 
     // Re-render comparisons if capping state changed
     if (cappedFraction !== prevCappedFraction) {
@@ -1215,6 +1496,7 @@ window.addEventListener('resize', function() {
     } else {
       updateAllComparisonPositions();
     }
+    refitStickyContent();
 
     if (anchor) {
       const el = document.getElementById(anchor.id);
@@ -1229,6 +1511,7 @@ window.addEventListener('scroll', function() {
     scrollRafScheduled = true;
     requestAnimationFrame(function() {
       updateWealthCounters();
+      updateRulers();
       updateNextMessageButtonState();
       scrollRafScheduled = false;
     });

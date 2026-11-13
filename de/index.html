@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <meta charset="utf-8">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FFHH9GQTXY"></script>
   <script>
@@ -26,7 +27,7 @@
   <meta name="twitter:image" content="https://evolving-thoughts.github.io/1-pixel-wealth/de/img/og_german.png" />
   <link rel="canonical" href="https://evolving-thoughts.github.io/1-pixel-wealth/de/" />
 
-  <link rel="stylesheet" type="text/css" href="../main.css?version=2.0">
+  <link rel="stylesheet" type="text/css" href="../main.css?version=3.0">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 </head>
 <body>
@@ -35,14 +36,14 @@
 
 <!-- Death ticker overlay -->
 <div id="death-ticker" class="death-ticker" hidden>
-  <button id="death-ticker-close" class="death-ticker-close" title="Minimieren">&times;</button>
-  <span class="death-ticker-label">VERMEIDBARE TODESFÄLLE SEIT DU DIESE SEITE GEÖFFNET HAST:</span>
+  <button id="death-ticker-close" class="death-ticker-close" title="Einklappen" aria-label="Einklappen"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6"/></svg></button>
+  <span class="death-ticker-label">Vermeidbare Todesfälle, seit du diese Seite geöffnet hast</span>
   <div id="death-ticker-counts"></div>
 </div>
-<button id="death-ticker-reopen" class="death-ticker-reopen" title="Todeszähler anzeigen" style="display:none;">&#128065;</button>
+<button id="death-ticker-reopen" class="death-ticker-reopen" title="Todeszähler anzeigen" style="display:none;"><span class="ticker-dot"></span><span class="ticker-pill-count" id="death-ticker-pill-count">0</span> <span class="ticker-pill-label" id="death-ticker-pill-label">Todesfälle</span></button>
 
-<script type="text/javascript" src="i18n_de.js?version=1.0"></script>
-<script type="text/javascript" src="../i18n.js?version=1.0"></script>
+<script type="text/javascript" src="i18n_de.js?version=3.0"></script>
+<script type="text/javascript" src="../i18n.js?version=3.0"></script>
 
 
 </body>
