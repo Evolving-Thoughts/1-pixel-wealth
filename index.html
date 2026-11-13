@@ -28,7 +28,7 @@
   <meta name="twitter:image" content="https://evolving-thoughts.github.io/1-pixel-wealth/img/og_english.png" />
   <link rel="canonical" href="https://evolving-thoughts.github.io/1-pixel-wealth/" />
 
-  <link rel="stylesheet" type="text/css" href="main.css?version=2.0">
+  <link rel="stylesheet" type="text/css" href="main.css?version=3.0">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 </head>
 <body>
@@ -38,27 +38,33 @@
     <div class="wealth-row">
       <div class="title-screen">
         <h1 class="i18n-wealth-shown-to">Wealth shown to scale</h1>
-        <div class="scroll-this-way i18n-scroll">scroll</div>
+
+        <!-- One real pixel, an arrow pointing at it, and the same pixel magnified -->
+        <div class="pixel-legend">
+          <p class="pixel-eq i18n-pixel-eq">1 pixel = $1,000</p>
+          <div class="pixel-row">
+            <span class="one-pixel"></span>
+            <svg class="pixel-arrow" width="66" height="12" viewBox="0 0 66 12" aria-hidden="true"><path d="M64 6H2M8 1.5L2 6l6 4.5" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg class="pixel-lens" viewBox="0 0 132 132" width="132" height="132" aria-hidden="true"><defs><clipPath id="lens-clip"><circle cx="60" cy="60" r="50"/></clipPath></defs><g clip-path="url(#lens-clip)"><rect width="120" height="120" fill="#fff"/><path d="M10 0V120M30 0V120M50 0V120M70 0V120M90 0V120M110 0V120M0 10H120M0 30H120M0 50H120M0 70H120M0 90H120M0 110H120" stroke="#D3D5D9"/><rect x="50" y="50" width="20" height="20" fill="#111"/></g><circle cx="60" cy="60" r="50" fill="none" stroke="#111" stroke-width="3"/><path d="M97 97l26 26" stroke="#111" stroke-width="7" stroke-linecap="round"/></svg>
+          </div>
+          <span class="pixel-note i18n-pixel-note">The dot at the tip of the arrow is real: a single pixel.</span>
+        </div>
+
+        <div class="scroll-this-way">
+          <svg width="24" height="96" viewBox="0 0 24 96" aria-hidden="true"><path d="M12 0v93M2 83l10 10 10-10" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <span class="i18n-scroll">scroll</span>
+        </div>
         <p class="inspired-by i18n-inspired-by">inspired by <a href="https://github.com/mkorostoff" target="_blank" rel="noopener noreferrer">mkorostoff</a></p>
       </div>
 
-      <!-- Calibration bars -->
-      <div class="wealth-wrapper">
-        <h2 class="wealth-title i18n-USD1000">$1,000</h2>
-        <div class="wealth one-thousand"></div>
-        <div class="arrow">
-          <svg viewBox="0 0 70 14" width="70" height="14" aria-hidden="true">
-            <path d="M 69.25 5.58 L 69.25 8.72 L 14.82 8.72 L 14.82 13.4 L 0.2 7.15 L 14.82 0.9 L 14.82 5.58 Z" fill="#ccc"/>
-          </svg>
-        </div>
-      </div>
-
-      <div class="wealth-wrapper median">
-        <h2 class="wealth-title i18n-USD64116-median">$64,116 (Median US income)</h2>
+      <!-- Calibration: amount large, description small, equal gaps -->
+      <div class="wealth-wrapper calibration median">
+        <h2 class="wealth-title i18n-median-amount">$64,116</h2>
+        <p class="wealth-desc i18n-median-desc">Median US income</p>
         <div class="wealth"></div>
       </div>
 
-      <div class="wealth-wrapper million">
+      <div class="wealth-wrapper calibration million">
         <h2 class="wealth-title i18n-USD1-million">$1 million</h2>
         <div class="wealth"></div>
       </div>
@@ -71,13 +77,15 @@
 
       <!-- Richest person bar — content injected by main.js from story.json -->
       <div name="richest" class="wealth-wrapper richest">
-        <div id="richest" class="wealth ruler">
-          <div class="wealth-header">
-            <h2 class="wealth-title" id="richest-title">Loading…</h2>
-            <div class="counter" id="richest-counter"></div>
-          </div>
-          <div class="key">
-            <span class="scale-label">—</span>
+        <div id="richest" class="wealth">
+          <div class="bar-backdrop" aria-hidden="true"></div>
+          <div class="bar-hud">
+            <div class="wealth-header">
+              <h2 class="wealth-title"><span class="total" id="richest-total">…</span><span class="who" id="richest-who"></span></h2>
+              <div class="counter" id="richest-counter"></div>
+            </div>
+            <div class="key"><span class="scale-label">—</span></div>
+            <div class="ruler-view" aria-hidden="true"><div class="ruler-track"></div></div>
           </div>
           <div id="richest-comparisons"></div>
         </div>
@@ -85,13 +93,15 @@
 
       <!-- All-billionaires bar — segmented, content injected -->
       <div id="allBillionaires-wrapper" class="wealth-wrapper all-billionaires">
-        <div id="allBillionaires" class="wealth ruler">
-          <div class="wealth-header">
-            <h2 class="wealth-title" id="allBillionaires-title">Loading…</h2>
-            <div class="counter" id="allBillionaires-counter"></div>
-          </div>
-          <div class="key">
-            <span class="scale-label">—</span>
+        <div id="allBillionaires" class="wealth">
+          <div class="bar-backdrop" aria-hidden="true"></div>
+          <div class="bar-hud">
+            <div class="wealth-header">
+              <h2 class="wealth-title"><span class="total" id="allBillionaires-total">…</span><span class="who" id="allBillionaires-who"></span></h2>
+              <div class="counter" id="allBillionaires-counter"></div>
+            </div>
+            <div class="key"><span class="scale-label">—</span></div>
+            <div class="ruler-view" aria-hidden="true"><div class="ruler-track"></div></div>
           </div>
           <div id="allBillionaires-comparisons"></div>
         </div>
@@ -105,16 +115,14 @@
 
 <!-- Death ticker overlay -->
 <div id="death-ticker" class="death-ticker" hidden>
-  <button id="death-ticker-close" class="death-ticker-close" title="Minimize">&times;</button>
-  <span class="death-ticker-label">PREVENTABLE DEATHS SINCE YOU OPENED THIS PAGE:</span>
+  <button id="death-ticker-close" class="death-ticker-close" title="Minimize" aria-label="Minimize"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6"/></svg></button>
+  <span class="death-ticker-label">Preventable deaths since you opened this page</span>
   <div id="death-ticker-counts"></div>
 </div>
-<button id="death-ticker-reopen" class="death-ticker-reopen" title="Show death ticker" style="display:none;">&#128065;</button>
-    <div id="death-ticker-counts"></div>
-  </div>
-</div>
+<button id="death-ticker-reopen" class="death-ticker-reopen" title="Show death ticker" style="display:none;"><span class="ticker-dot"></span><span class="ticker-pill-count" id="death-ticker-pill-count">0</span> <span class="ticker-pill-label" id="death-ticker-pill-label">deaths</span></button>
 
-<script type="text/javascript" src="main.js?version=2.0" defer></script>
+<script type="text/javascript" src="viz.js?version=3.0" defer></script>
+<script type="text/javascript" src="main.js?version=3.0" defer></script>
 <div id="data-source" style="text-align:center;padding:8px;font-size:12px;color:#666;"></div>
 </body>
 </html>

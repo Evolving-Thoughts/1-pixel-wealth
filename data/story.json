@@ -163,7 +163,7 @@
       "bar": "richest",
       "type": "text",
       "positionFraction": 0.45,
-      "title": "We tend to put people like Ryan Gosling and Elon Musk in the same mental category: 'rich people.' But Ryan Gosling is about 12,000x closer to you than to Elon Musk.",
+      "title": "We tend to put people like Ryan Gosling and Elon Musk in the same mental category: 'rich people.' But Ryan Gosling is about <strong>12,000x closer to you</strong> than to Elon Musk.",
       "i18nKey": "i18n-gosling-musk-comparison"
     },
     {
@@ -345,7 +345,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0,
-      "title": "The wealth of Elon Musk may seem staggering, but it is a drop in the ocean compared to the combined wealth of all <a href=\"https://www.forbes.com/sites/pr/2026/03/10/forbes-40th-annual-worlds-billionaires-list-elon-musk-is-worlds-richest-person-ever-recorded/\" target=\"_blank\" rel=\"noopener noreferrer\"> ~{billionaireCount} billionaires on Earth</a>: {allBillionairesFormatted}.",
+      "title": "The wealth of Elon Musk may seem staggering, but it is a drop in the bucket compared to the combined wealth of all <a href=\"https://www.forbes.com/sites/pr/2026/03/10/forbes-40th-annual-worlds-billionaires-list-elon-musk-is-worlds-richest-person-ever-recorded/\" target=\"_blank\" rel=\"noopener noreferrer\"> ~{billionaireCount} billionaires on Earth</a>: {allBillionairesFormatted}.",
       "i18nKey": "i18n-all-billionaires-intro"
     },
     {
@@ -367,11 +367,9 @@
     {
       "id": "billionaires-concert-hall",
       "bar": "allBillionaires",
-      "type": "image",
+      "type": "text",
       "positionFraction": 0.003,
-      "title": "That's the whole group. Every billionaire on Earth fits in there — with 227 seats to spare:",
-      "imageUrl": "img/concert-hall.png",
-      "imageAlt": "Seating chart of the Eventim Apollo in London.",
+      "title": "That's the whole group. Every billionaire on Earth fits in there:",
       "i18nKey": "i18n-billionaires-concert-hall"
     },
     {
@@ -380,15 +378,19 @@
       "type": "text",
       "positionFraction": 0.004,
       "title": "Before we start, a quick note: <br> The numbers below are <strong>estimates</strong>, based on the best publicly available sources I could find (linked throughout). Exact figures vary by methodology and change over time, but the goal here is to convey the <strong>order of magnitude</strong> — the scale of what could be achieved — not perfect precision.",
-      "i18nKey": "i18n-disclaimer"
+      "i18nKey": "i18n-disclaimer",
+      "variant": "note"
     },
     {
       "id": "1-percent-of-money",
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.005,
-      "title": "<span style=\"font-size:1.4em\"><strong>Let's start small: What could we do with less than 1% of the money?</strong></span>",
-      "i18nKey": "i18n-1-percent-of-money"
+      "title": "Let's start small: What could we do with less than 1% of the money?",
+      "i18nKey": "i18n-1-percent-of-money",
+      "variant": "chapter",
+      "chapterPct": 1,
+      "chapterPrefix": "<"
     },
     {
       "id": "end-malaria",
@@ -443,8 +445,11 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.011,
-      "title": "<span style=\"font-size:1.4em\"><strong> What could we do with less than 5% of the money?</strong></span>",
-      "i18nKey": "i18n-5-percent-of-money"
+      "title": "What could we do with less than 5% of the money?",
+      "i18nKey": "i18n-5-percent-of-money",
+      "variant": "chapter",
+      "chapterPct": 5,
+      "chapterPrefix": "<"
     },
     {
       "id": "end-tuberculosis",
@@ -523,8 +528,8 @@
       "bar": "allBillionaires",
       "type": "summary",
       "positionFraction": 0.017,
-      "title": "All of the Above — Combined",
-      "description": "Every cause listed above — ending malaria, tuberculosis, HIV/AIDS and Hepatitis B & C as public health threats, and funding antimicrobial resistance research and access until 2030 — could be funded <strong>simultaneously</strong> with <strong>less than 5%</strong> of all billionaire wealth</strong>.",
+      "title": "All of the above, combined",
+      "description": "Ending malaria, tuberculosis, HIV/AIDS and hepatitis B & C, and fighting antimicrobial resistance until 2030: fundable <strong>simultaneously</strong> with <strong>less than 5%</strong> of all billionaire wealth.",
       "includeIds": [
         "end-malaria",
         "end-tuberculosis",
@@ -619,8 +624,11 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.026,
-      "title": "<span style=\"font-size:1.4em\"><strong> So let's take a look at what could we do with less than 10% of the money?</strong></span>",
-      "i18nKey": "i18n-10-percent-of-money"
+      "title": "So let's take a look: What could we do with less than 10% of the money?",
+      "i18nKey": "i18n-10-percent-of-money",
+      "variant": "chapter",
+      "chapterPct": 10,
+      "chapterPrefix": "<"
     },
     {
       "id": "clean-water-sanitation",
@@ -726,12 +734,74 @@
     {
       "id": "health-and-basic-needs-combined",
       "bar": "allBillionaires",
-      "type": "cause",
+      "type": "summary",
       "positionFraction": 0.036,
-      "title": "All health and basic needs combined:",
+      "title": "Health and basic needs, combined",
       "costUsd": 1985200000000,
-      "description": "<strong>Every single thing I listed so far</strong> — ending infectious diseases, solving other health issues, providing clean water and sanitation, ensuring access to nutritious food, clean cooking, and electricity — could be funded <strong>simultaneously</strong> with <strong>less than 10%</strong> of all billionaire wealth</strong>.",
-      "i18nKey": "i18n-health-and-basic-needs-combined"
+      "description": "Everything listed so far, from infectious diseases to electricity for all: fundable <strong>simultaneously</strong> with <strong>less than 10%</strong> of all billionaire wealth.",
+      "i18nKey": "i18n-health-and-basic-needs-combined",
+      "rows": [
+        {
+          "i18nKey": "i18n-row-infectious-diseases",
+          "title": "Infectious diseases",
+          "ids": [
+            "end-malaria",
+            "end-tuberculosis",
+            "end-hiv-aids",
+            "end-hepatitis",
+            "end-AMR"
+          ]
+        },
+        {
+          "i18nKey": "i18n-end-lead-poisoning",
+          "title": "Eliminate Lead Poisoning",
+          "ids": [
+            "end-lead-poisoning"
+          ]
+        },
+        {
+          "i18nKey": "i18n-end-blindness",
+          "title": "End Preventable Blindness",
+          "ids": [
+            "end-blindness"
+          ]
+        },
+        {
+          "i18nKey": "i18n-hearing-care",
+          "title": "Universal Hearing Care",
+          "ids": [
+            "hearing-care"
+          ]
+        },
+        {
+          "i18nKey": "i18n-clean-water-sanitation",
+          "title": "Clean Water & Sanitation for Everyone",
+          "ids": [
+            "clean-water-sanitation"
+          ]
+        },
+        {
+          "i18nKey": "i18n-end-hunger",
+          "title": "End World Hunger",
+          "ids": [
+            "end-hunger"
+          ]
+        },
+        {
+          "i18nKey": "i18n-clean-cooking",
+          "title": "Clean Cooking for All",
+          "ids": [
+            "clean-cooking"
+          ]
+        },
+        {
+          "i18nKey": "i18n-electricity-for-all",
+          "title": "Electricity for Everyone",
+          "ids": [
+            "electricity-for-all"
+          ]
+        }
+      ]
     },
     {
       "id": "health-and-basic-needs-combined-2",
@@ -770,8 +840,11 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.041,
-      "title": "<span style=\"font-size:1.4em\"><strong> What could we do with ~30% of the money?</strong></span>",
-      "i18nKey": "i18n-30-percent-of-money"
+      "title": "What could we do with ~30% of the money?",
+      "i18nKey": "i18n-30-percent-of-money",
+      "variant": "chapter",
+      "chapterPct": 30,
+      "chapterPrefix": "~"
     },
     {
       "id": "universal-education",
@@ -848,7 +921,8 @@
       "type": "text",
       "positionFraction": 0.049,
       "title": "The most recent cost figures I could find estimated that an investment of <a href=\"https://www.ilo.org/resource/news/new-ilo-study-says-economic-benefits-eliminating-child-labour-will-vastly\" target=\"_blank\" rel=\"noopener noreferrer\">$760 billion</a> could end child labor, however this number is from 2004 and therefore quite outdated. That's why I didn't include it in my calculations. But given that child labor is closely linked to poverty, education and forced labor, we can assume that it would be significantly reduced by the interventions I already mentioned.",
-      "i18nKey": "i18n-child-labor-2"
+      "i18nKey": "i18n-child-labor-2",
+      "variant": "note"
     },
     {
       "id": "universal-healthcare-intro",
@@ -890,12 +964,68 @@
     {
       "id": "all-human-focused-causes-combined",
       "bar": "allBillionaires",
-      "type": "cause",
+      "type": "summary",
       "positionFraction": 0.054,
-      "title": "Everything I've listed so far combined:",
+      "title": "Everything so far, combined",
       "costUsd": 5500200000000,
-      "description": "All of the causes I've listed so far — ending infectious diseases, solving other health issues, providing clean water and sanitation, ensuring access to nutritious food, clean cooking, electricity, universal education, ending extreme poverty and forced labor, and providing universal healthcare — could be funded <strong>simultaneously</strong> with <strong>less than 30%</strong> of all billionaire wealth</strong>.",
-      "i18nKey": "i18n-all-human-focused-causes-combined"
+      "description": "Health, basic needs, education, poverty and forced labor: all fundable <strong>simultaneously</strong> with <strong>less than 30%</strong> of all billionaire wealth.",
+      "i18nKey": "i18n-all-human-focused-causes-combined",
+      "rows": [
+        {
+          "i18nKey": "i18n-row-healthcare",
+          "title": "Healthcare for all",
+          "ids": [
+            "universal-healthcare"
+          ]
+        },
+        {
+          "i18nKey": "i18n-row-diseases",
+          "title": "Defeating diseases",
+          "ids": [
+            "end-malaria",
+            "end-tuberculosis",
+            "end-hiv-aids",
+            "end-hepatitis",
+            "end-AMR",
+            "end-lead-poisoning",
+            "end-blindness",
+            "hearing-care"
+          ],
+          "sub": "Infections, lead, vision, hearing"
+        },
+        {
+          "i18nKey": "i18n-row-basic-needs",
+          "title": "Basic needs",
+          "ids": [
+            "clean-water-sanitation",
+            "end-hunger",
+            "clean-cooking",
+            "electricity-for-all"
+          ],
+          "sub": "Water, food, cooking, electricity"
+        },
+        {
+          "i18nKey": "i18n-row-education",
+          "title": "Education for all",
+          "ids": [
+            "universal-education"
+          ]
+        },
+        {
+          "i18nKey": "i18n-row-poverty",
+          "title": "Ending extreme poverty",
+          "ids": [
+            "end-extreme-poverty"
+          ]
+        },
+        {
+          "i18nKey": "i18n-row-forced-labor",
+          "title": "Ending forced labor",
+          "ids": [
+            "end-forced-labor"
+          ]
+        }
+      ]
     },
     {
       "id": "all-human-focused-causes-combined-2",
@@ -926,8 +1056,11 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.058,
-      "title": "<span style=\"font-size:1.4em\"><strong> What could we do with ~66% of the money?</strong></span>",
-      "i18nKey": "i18n-66-percent-of-money"
+      "title": "What could we do with ~66% of the money?",
+      "i18nKey": "i18n-66-percent-of-money",
+      "variant": "chapter",
+      "chapterPct": 66,
+      "chapterPrefix": "~"
     },
     {
       "id": "planet-intro",
@@ -994,7 +1127,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.066,
-      "title": "At the end of 2024, <a href=\"https://www.internal-displacement.org/publications/2025-global-report-on-internal-displacement-grid/\" target=\"_blank\" rel=\"noopener noreferrer\">83.4 million people</a> were living in internal displacement — more than twice as many as just six years earlier. Many of them fled floods, droughts and storms made worse by a crisis they didn't cause.",
+      "title": "At the end of 2024, <a href=\"https://www.internal-displacement.org/publications/2025-global-report-on-internal-displacement-grid/\" target=\"_blank\" rel=\"noopener noreferrer\">83.4 million people</a> were living in internal displacement — more than twice as many as just six years earlier. <strong>That is as many people as live in all of Germany.</strong> Many of them fled floods, droughts and storms made worse by a crisis they didn't cause.",
       "i18nKey": "i18n-climate-displacement"
     },
     {
@@ -1099,12 +1232,81 @@
     {
       "id": "grand-summary",
       "bar": "allBillionaires",
-      "type": "cause",
+      "type": "summary",
       "positionFraction": 0.077,
       "costUsd": 12732700000000,
       "title": "ALL OF IT, TOGETHER",
-      "description": "Infectious diseases, lead poisoning, vision, hearing, water and sanitation, hunger, clean cooking, electricity, education, poverty, forced labor, universal healthcare, climate adaptation, land restoration, ocean cleanup, deforestation, and the energy transition. <strong>All of it, together</strong>.",
-      "i18nKey": "i18n-grand-summary"
+      "description": "Health, basic needs, education, poverty, forced labor, climate and nature: <strong>all of it, together</strong>, for less than two thirds of all billionaire wealth.",
+      "i18nKey": "i18n-grand-summary",
+      "rows": [
+        {
+          "i18nKey": "i18n-row-nature",
+          "title": "Nature",
+          "ids": [
+            "land-restoration",
+            "ocean-cleanup",
+            "end-deforestation"
+          ],
+          "sub": "Forests, landscapes, ocean"
+        },
+        {
+          "i18nKey": "i18n-row-health",
+          "title": "Health",
+          "ids": [
+            "universal-healthcare",
+            "end-malaria",
+            "end-tuberculosis",
+            "end-hiv-aids",
+            "end-hepatitis",
+            "end-AMR",
+            "end-lead-poisoning",
+            "end-blindness",
+            "hearing-care"
+          ],
+          "sub": "Care for all, diseases"
+        },
+        {
+          "i18nKey": "i18n-row-climate",
+          "title": "Climate",
+          "ids": [
+            "climate-adaptation",
+            "energy-transition"
+          ],
+          "sub": "Adaptation, energy transition"
+        },
+        {
+          "i18nKey": "i18n-row-basic-needs",
+          "title": "Basic needs",
+          "ids": [
+            "clean-water-sanitation",
+            "end-hunger",
+            "clean-cooking",
+            "electricity-for-all"
+          ],
+          "sub": "Water, food, cooking, electricity"
+        },
+        {
+          "i18nKey": "i18n-row-education",
+          "title": "Education for all",
+          "ids": [
+            "universal-education"
+          ]
+        },
+        {
+          "i18nKey": "i18n-row-poverty",
+          "title": "Ending extreme poverty",
+          "ids": [
+            "end-extreme-poverty"
+          ]
+        },
+        {
+          "i18nKey": "i18n-row-forced-labor",
+          "title": "Ending forced labor",
+          "ids": [
+            "end-forced-labor"
+          ]
+        }
+      ]
     },
     {
       "id": "cost-interval",
@@ -1112,7 +1314,8 @@
       "type": "text",
       "positionFraction": 0.078,
       "title": "That includes the total cost of all interventions (some until 2030) plus the yearly costs of Universal Healthcare, ending extreme poverty and providing clean water and sanitation. It would take an additional $2.93 trillion yearly to fund these 3 causes further (~73% of what billionaires gained last year).",
-      "i18nKey": "i18n-cost-interval"
+      "i18nKey": "i18n-cost-interval",
+      "variant": "note"
     },
     {
       "id": "transform-civilization",
@@ -1127,7 +1330,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.08,
-      "title": "And <strong>all of them</strong> would still be billionaires afterwards.",
+      "title": "And <strong>all of them</strong> could still be billionaires afterwards.",
       "i18nKey": "i18n-still-billionaires"
     },
     {
@@ -1191,8 +1394,9 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.088,
-      "title": "<strong>We cannot accept this level of inequality any longer.</strong>",
-      "i18nKey": "i18n-we-cannot-accept"
+      "title": "We cannot accept this level of inequality any longer.",
+      "i18nKey": "i18n-we-cannot-accept",
+      "variant": "statement"
     },
     {
       "id": "what-you-can-do",
@@ -1209,15 +1413,24 @@
       "positionFraction": 0.09,
       "title": "<strong>Share this.</strong><br><br>The most powerful thing you can do right now costs nothing: share this page. Most people have never seen wealth inequality shown to scale. That's part of why it persists. Every person who scrolls through this is one more person who can't unsee it.",
       "showShareButton": true,
-      "i18nKey": "i18n-share-this"
+      "i18nKey": "i18n-share-this",
+      "variant": "step",
+      "step": 1,
+      "stepTotal": 5,
+      "stepIcon": "share"
     },
     {
       "id": "learn-more",
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.091,
-      "title": "<strong>Learn who's fighting this.</strong><br><br>These organizations are working to close the gap between what the world could be and what it is:<br> <ul><li><a href=\"https://www.oxfam.org/\">Oxfam</a> — campaigns for wealth taxes and economic justice <br> <li><a href=\"https://taxjustice.net/\"> Tax Justice Network</a> — tracks tax havens and advocates for fair taxation<br> <li><a href=\"https://www.givedirectly.org/\">GiveDirectly</a> — sends money directly to the world's poorest people </ul> Of course, there are many more. Learn about them and support them if you can. I'm not affiliated with any of these. They're just doing good work.",
-      "i18nKey": "i18n-learn-more"
+      "title": "<strong>Learn who's fighting this.</strong><br><br>These organizations are working to close the gap between what the world could be and what it is:<ul class=\"orgs\"><li><a href=\"https://www.oxfam.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Oxfam</a><span>campaigns for wealth taxes and economic justice</span></li><li><a href=\"https://taxjustice.net/\" target=\"_blank\" rel=\"noopener noreferrer\">Tax Justice Network</a><span>tracks tax havens and advocates for fair taxation</span></li><li><a href=\"https://www.givedirectly.org/\" target=\"_blank\" rel=\"noopener noreferrer\">GiveDirectly</a><span>sends money directly to the world's poorest people</span></li></ul><span class=\"step-small\">Of course, there are many more. Learn about them and support them if you can. I'm not affiliated with any of these. They're just doing good work.</span>",
+      "i18nKey": "i18n-learn-more",
+      "variant": "step",
+      "step": 2,
+      "stepTotal": 5,
+      "stepIcon": "inform",
+      "dense": true
     },
     {
       "id": "vote",
@@ -1225,7 +1438,11 @@
       "type": "text",
       "positionFraction": 0.092,
       "title": "<strong>Vote like this matters.</strong><br><br>Wealth concentration at this scale isn't natural, it's the result of policy choices. Tax rates, inheritance laws, corporate regulation, international trade rules. Every election is a chance to change who writes those rules.",
-      "i18nKey": "i18n-vote"
+      "i18nKey": "i18n-vote",
+      "variant": "step",
+      "step": 3,
+      "stepTotal": 5,
+      "stepIcon": "vote"
     },
     {
       "id": "talk-about-this",
@@ -1233,7 +1450,11 @@
       "type": "text",
       "positionFraction": 0.093,
       "title": "<strong>Talk about it.</strong><br><br>The biggest barrier to change isn't that people disagree. It's that most people have never thought about it at this scale. Bring it up. At dinner. At work. In class. The conversation itself is the beginning of change.",
-      "i18nKey": "i18n-talk-about-this"
+      "i18nKey": "i18n-talk-about-this",
+      "variant": "step",
+      "step": 4,
+      "stepTotal": 5,
+      "stepIcon": "talk"
     },
     {
       "id": "go-deeper",
@@ -1241,7 +1462,11 @@
       "type": "text",
       "positionFraction": 0.094,
       "title": "<strong>Go deeper.</strong><br><br>Everything above was the moral case. But there are many more reasons to rethink extreme wealth, including psychological, political and physical ones. I reasoned through the physics from first principles here: <a href=\"https://medium.com/the-springboard/do-we-need-a-wealth-cap-32814b39e308?sk=ef263f5da9fd34284a847b3b70995bb5\">Do We Need a Wealth Cap?</a>",
-      "i18nKey": "i18n-go-deeper"
+      "i18nKey": "i18n-go-deeper",
+      "variant": "step",
+      "step": 5,
+      "stepTotal": 5,
+      "stepIcon": "stairs"
     },
     {
       "id": "dont-let-anyone-tell-you",
