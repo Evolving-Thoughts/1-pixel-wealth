@@ -404,6 +404,7 @@
       "tickerDescription": "malaria",
       "deathsPerYear": 610000,
       "deathLabel": "malaria deaths",
+      "deathRhythm": "Every {interval}, a person dies of malaria.",
       "sourceUrl": "https://www.who.int/news-room/fact-sheets/detail/malaria",
       "sourceName": "World Health Organization",
       "i18nKey": "i18n-end-malaria"
@@ -463,6 +464,7 @@
       "tickerDescription": "tuberculosis",
       "deathsPerYear": 1230000,
       "deathLabel": "TB deaths",
+      "deathRhythm": "Every {interval}, a person dies of tuberculosis.",
       "sourceUrl": "https://www.who.int/news-room/fact-sheets/detail/tuberculosis",
       "sourceName": "World Health Organization",
       "i18nKey": "i18n-end-tuberculosis"
@@ -479,6 +481,7 @@
       "tickerDescription": "HIV/AIDS",
       "deathsPerYear": 630000,
       "deathLabel": "HIV/AIDS deaths",
+      "deathRhythm": "Every {interval}, a person dies of HIV/AIDS.",
       "sourceUrl": "https://www.unaids.org/sites/default/files/media_asset/UNAIDS_FactSheet_en.pdf",
       "sourceName": "UNAIDS",
       "i18nKey": "i18n-end-hiv-aids"
@@ -495,6 +498,7 @@
       "tickerDescription": "hepatitis B & C",
       "deathsPerYear": 1300000,
       "deathLabel": "Hepatitis B & C deaths",
+      "deathRhythm": "Every {interval}, a person dies of hepatitis B or C.",
       "sourceUrl": "https://www.who.int/health-topics/hepatitis#tab=tab_1",
       "sourceName": "World Health Organization",
       "i18nKey": "i18n-end-hepatitis"
@@ -511,6 +515,7 @@
       "tickerDescription": "AMR",
       "deathsPerYear": 1270000,
       "deathLabel": "Antimicrobial resistance deaths",
+      "deathRhythm": "Every {interval}, a person dies of antimicrobial resistance.",
       "sourceUrl": "https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance",
       "sourceName": "World Health Organization",
       "i18nKey": "i18n-end-AMR"
@@ -559,6 +564,7 @@
       "tickerDescription": "lead-poisoning",
       "deathsPerYear": 5545000,
       "deathLabel": "Cardiovascular disease deaths due to lead exposure",
+      "deathRhythm": "Every {interval}, a person dies of cardiovascular disease caused by lead.",
       "sourceUrl": "https://www.thelancet.com/journals/lanplh/article/PIIS2542-5196(23)00166-3/fulltext",
       "sourceName": "The Lancet Journal of Planetary Health",
       "i18nKey": "i18n-end-lead-poisoning"
@@ -587,6 +593,8 @@
       "title": "End Preventable Blindness",
       "costUsd": 7100000000,
       "description": "<a href=\"https://visionatlas.iapb.org/wp-content/uploads/2025/09/The-Value-of-Vision_Full-Report.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">1.1 billion people</a> have vision impairment, including blindness, causing an annual productivity loss of ~$1.1 trillion. 90% of it is preventable or treatable through proven, cost-effective interventions like eyeglasses and basic surgery.",
+      "affectedShare": [1, 7],
+      "affectedLine": "About 1 in 7 people has a vision impairment or is blind.",
       "sourceUrl": "https://visionatlas.iapb.org/wp-content/uploads/2025/09/The-Value-of-Vision_Full-Report.pdf",
       "sourceName": "IAPB Vision Atlas",
       "i18nKey": "i18n-end-blindness"
@@ -607,6 +615,8 @@
       "title": "Universal Hearing Care",
       "costUsd": 238800000000,
       "description": "<a href=\"https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss\" target=\"_blank\" rel=\"noopener noreferrer\">430 million people</a> need hearing rehabilitation. Unaddressed hearing loss costs the world almost <a href=\"https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss\" target=\"_blank\" rel=\"noopener noreferrer\">$1 trillion per year</a>. Achieving 90% coverage by 2030 would cost about <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC8692586/\" target=\"_blank\" rel=\"noopener noreferrer\">$238.8 billion total</a> — and return $15 for every $1 invested.",
+      "affectedShare": [1, 19],
+      "affectedLine": "About 1 in 19 people has hearing loss that needs treatment.",
       "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8692586/",
       "sourceName": "The Lancet",
       "i18nKey": "i18n-hearing-care"
@@ -643,6 +653,7 @@
       "tickerDescription": "water and sanitation",
       "deathsPerYear": 1400000,
       "deathLabel": "deaths from unsafe water and poor sanitation",
+      "deathRhythm": "Every {interval}, a person dies from unsafe water and poor sanitation.",
       "sourceUrl": "https://www.who.int/news/item/28-06-2023-improving-access-to-water--sanitation-and-hygiene-can-save-1.4-million-lives-per-year--says-new-who-report",
       "sourceName": "World Health Organization",
       "i18nKey": "i18n-clean-water-sanitation"
@@ -667,6 +678,7 @@
       "tickerDescription": "SAM",
       "deathsPerYear": 100000,
       "deathLabel": "deaths of children under 5 are directly attributable to severe acute malnutrition (SAM)",
+      "deathRhythm": "Every {interval}, a child under 5 dies of severe acute malnutrition.",
       "sourceUrl": "https://www.who.int/news-room/fact-sheets/detail/malnutrition",
       "sourceName": "World Health Organization",
       "i18nKey": "i18n-end-hunger"
@@ -707,6 +719,7 @@
       "tickerDescription": "indoor air pollution from cooking",
       "deathsPerYear": 1600000,
       "deathLabel": "premature deaths from household air pollution due to unsafe cooking methods",
+      "deathRhythm": "Every {interval}, a person dies early from the smoke of cooking indoors.",
       "sourceUrl": "https://www.iea.org/reports/world-energy-outlook-2025/achieving-access-for-all",
       "sourceName": "IEA",
       "i18nKey": "i18n-clean-cooking"
@@ -727,6 +740,8 @@
       "title": "Electricity for Everyone",
       "costUsd": 230000000000,
       "description": "<a href=\"https://www.iea.org/commentaries/access-to-electricity-stagnates-leaving-globally-730-million-in-the-dark\" target=\"_blank\" rel=\"noopener noreferrer\">730 million people</a> still live without electricity. 80% of them in sub-Saharan Africa. About <a href=\"https://www.iea.org/reports/world-energy-outlook-2025/achieving-access-for-all\" target=\"_blank\" rel=\"noopener noreferrer\">$230 billion total</a> would close the gap by 2035.",
+      "affectedShare": [1, 11],
+      "affectedLine": "About 1 in 11 people lives without electricity.",
       "sourceUrl": "https://www.iea.org/reports/world-energy-outlook-2025/achieving-access-for-all",
       "sourceName": "IEA",
       "i18nKey": "i18n-electricity-for-all"
@@ -854,6 +869,8 @@
       "title": "Universal Education",
       "costUsd": 485000000000,
       "description": "<a href=\"https://www.unesco.org/en/articles/more-children-out-school-7th-year-row-273-million\" target=\"_blank\" rel=\"noopener noreferrer\">273 million children</a> are out of school. Closing the financing gap for the <a href=\"https://sdgs.un.org/goals/goal4\" target=\"_blank\" rel=\"noopener noreferrer\">UN Sustainable Development Goal on Education</a> would cost <a href=\"https://financing.desa.un.org/sites/default/files/2025-02/Brief%20Series%20-%20UNESCO_Financing%20Gap.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">$97 billion per year</a>, about $485 billion total by 2030. If we don't, UNESCO estimates the cost in lost human potential is <a href=\"https://www.unesco.org/en/articles/what-we-stand-lose-costs-children-and-youth-not-learning-2030\" target=\"_blank\" rel=\"noopener noreferrer\">$10 trillion per year</a>.",
+      "affectedShare": [1, 6],
+      "affectedLine": "About 1 in 6 school-age children is out of school.",
       "sourceUrl": "https://financing.desa.un.org/sites/default/files/2025-02/Brief%20Series%20-%20UNESCO_Financing%20Gap.pdf",
       "sourceName": "UNESCO",
       "i18nKey": "i18n-universal-education"
@@ -875,6 +892,8 @@
       "costUsd": 318000000000,
       "costPeriod": "yearly",
       "description": "<a href=\"https://blogs.worldbank.org/en/opendata/march-2026-global-poverty-update-from-the-world-bank--new-data-a\" target=\"_blank\" rel=\"noopener noreferrer\">826 million people</a> live on less than $3.00 a day. Reducing extreme poverty to just 1% would cost <a href=\"https://news.stanford.edu/stories/2026/02/costs-alleviate-extreme-poverty-interventions-research\" target=\"_blank\" rel=\"noopener noreferrer\">$318 billion per year</a>. That may sound like a lot — but the world spends <strong>seven times</strong> that on alcohol every year.",
+      "affectedShare": [1, 10],
+      "affectedLine": "About 1 in 10 people lives on less than $3 a day.",
       "sourceUrl": "https://news.stanford.edu/stories/2026/02/costs-alleviate-extreme-poverty-interventions-research",
       "sourceName": "Stanford Report",
       "i18nKey": "i18n-end-extreme-poverty"
@@ -903,6 +922,8 @@
       "title": "End Forced Labor",
       "costUsd": 212000000000,
       "description": "<a href=\"https://www.ilo.org/topics-and-sectors/forced-labour-modern-slavery-and-trafficking-persons\" target=\"_blank\" rel=\"noopener noreferrer\">27.6 million people</a> live in forced labor today. A one-time investment of roughly <a href=\"https://www.ilo.org/sites/default/files/2024-10/Acting%20against%20forced%20labour_report_WEB.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">$212 billion</a> could end it and would increase global GDP by $611 billion.",
+      "affectedShare": [1, 300],
+      "affectedLine": "About 1 in 300 people lives in forced labor.",
       "sourceUrl": "https://www.ilo.org/sites/default/files/2024-10/Acting%20against%20forced%20labour_report_WEB.pdf",
       "sourceName": "ILO",
       "i18nKey": "i18n-end-forced-labor"
@@ -941,6 +962,8 @@
       "costUsd": 2500000000000,
       "costPeriod": "yearly",
       "description": "<a href=\"https://www.who.int/news-room/fact-sheets/detail/universal-health-coverage-(uhc)\" target=\"_blank\" rel=\"noopener noreferrer\">4.6 billion people</a> lack essential health services. Universal health coverage means that all people have access to the full range of quality health services they need, when and where they need them, without financial hardship. ",
+      "affectedShare": [14, 25],
+      "affectedLine": "More than half of all people lack essential health services.",
       "sourceUrl": "https://www.who.int/news-room/fact-sheets/detail/universal-health-coverage-(uhc)",
       "sourceName": "World Health Organization",
       "i18nKey": "i18n-universal-healthcare"
@@ -1110,6 +1133,8 @@
       "title": "Climate Adaptation for Developing Countries",
       "costUsd": 1695000000000,
       "description": "<a href=\"https://www.who.int/news-room/fact-sheets/detail/climate-change-and-health\" target=\"_blank\" rel=\"noopener noreferrer\">3.6 billion people</a> live in areas highly vulnerable to climate change. <a href=\"https://wedocs.unep.org/items/b547996e-14ee-4f1c-a6d4-b811dd373ae9\" target=\"_blank\" rel=\"noopener noreferrer\">$365 billion per year</a> is needed by 2035 — but current flows are only $26 billion. A 14x gap. $1.695 trillion would close this gap until 2030.",
+      "affectedShare": [11, 25],
+      "affectedLine": "More than 4 in 10 people live in areas highly vulnerable to climate change.",
       "sourceUrl": "https://wedocs.unep.org/items/b547996e-14ee-4f1c-a6d4-b811dd373ae9",
       "sourceName": "UNEP",
       "i18nKey": "i18n-climate-adaptation"

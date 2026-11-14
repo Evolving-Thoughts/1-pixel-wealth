@@ -23,6 +23,14 @@ const AUTO_SCROLL_PIXELS_PER_SECOND = 12_000;
 const LANGUAGE_STORAGE_KEY = 'preferred-language';
 // A picture may shrink to this share of its size to make a message fit on a small screen.
 const MIN_PICTURE_SCALE = 0.6;
+const MIN_ILLUSTRATION_SCALE = 0.45; // environment pictures in a compact message
+const SECONDS_PER_YEAR = 365.25 * 24 * 3600;
+// A person, red as everywhere on the page; the dark outline keeps it visible on the blue bar.
+const DEATH_FIGURE_SVG = '<svg width="14" height="30" viewBox="0 0 18 40" aria-hidden="true">' +
+  '<circle cx="9" cy="6" r="5" fill="#C62828" stroke="#111" stroke-width="1.5"/>' +
+  '<path d="M3 15h12v13h-3v11H6V28H3z" fill="#C62828" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/></svg>';
+// The same figure, outlined only: the people not affected.
+const AFFECTED_OTHER_SVG = DEATH_FIGURE_SVG.replace(/#C62828/g, 'none');
 
 function isGermanPath(pathname) {
   return /\/de(\/|$)/.test(pathname);
@@ -286,6 +294,8 @@ function localizeComp(comp) {
     c.title = t(base, c.title);
     c.description = t(base + '-desc', c.description);
     c.deathLabel = t(base + '-death-label', c.deathLabel);
+    c.deathRhythm = t(base + '-death-rhythm', c.deathRhythm);
+    c.affectedLine = t(base + '-affected-line', c.affectedLine);
     c.sourceName = t(base + '-source-name', c.sourceName);
     c.imageAlt = t(base + '-image-alt', c.imageAlt);
     c.tickerDescription = t(base + '-ticker-desc', c.tickerDescription);
@@ -787,7 +797,34 @@ function renderGroup(comparisons, container, totalWealth, vars) {
 // there, its picture is first made smaller. If that is not enough, the message scrolls
 // through and then sticks with its lower edge above the buttons (class "is-tall"), so every
 // line can be read on the way.
-function fitStickyContent(el, available, vh) {
+function fitStickyContent(el, available, vh, hudH) {
+  // Cause and summary messages first try their normal size; if they do not fit, a tighter
+  // setting ("is-compact": smaller type and spacing, picture allowed to shrink further).
+  const canCompact = el.classList.contains('cause-card') || el.classList.contains('summary-card');
+  if (canCompact) el.classList.remove('is-compact');
+  let height = measureStickyContent(el, available);
+  if (canCompact && height > available + 1) {
+    el.classList.add('is-compact');
+    height = measureStickyContent(el, available);
+  }
+
+  const tall = height > available + 1;
+  el.classList.toggle('is-tall', tall);
+  if (tall) el.style.setProperty('--tall-top', Math.round(vh - STICKY_BOTTOM_RESERVE_PX - height) + 'px');
+  else el.style.removeProperty('--tall-top');
+  // Centred on the CSS line (see .cause-card in main.css), but never so low that the lower
+  // edge reaches the buttons: a block that fills the space is moved up as far as needed.
+  const centre = vh / 2 + hudH / 2 - 20;
+  const shift = Math.max(height / 2, height - (vh - STICKY_BOTTOM_RESERVE_PX - centre));
+  el.style.setProperty('--sticky-half', Math.round(shift) + 'px');
+}
+
+// Height the message will have once its picture is fitted into the available space.
+function measureStickyContent(el, available) {
+  // Summary arrows depend on the width, so they are drawn whenever a message is measured.
+  const arrows = el.querySelectorAll('.summary-arrow');
+  for (let i = 0; i < arrows.length; i++) layoutSummaryArrow(arrows[i]);
+
   // The picture of the message: the tallest drawing that sits below the text.
   const drawings = el.querySelectorAll('.viz:not(.v-ring) > svg');
   let svg = null;
@@ -796,7 +833,10 @@ function fitStickyContent(el, available, vh) {
     const w = parseFloat(drawings[i].getAttribute('width')) || 0;
     const h = parseFloat(drawings[i].getAttribute('height')) || 0;
     const room = drawings[i].parentElement ? drawings[i].parentElement.clientWidth : 0;
-    const shownFull = (w > 0 && room > 0) ? h * Math.min(1, room / w) : h;
+    // Most pictures are never drawn larger than their width attribute. The environment
+    // pictures (.v-env) fill the width up to their CSS max-width and may grow beyond it.
+    const cap = drawings[i].closest('.v-env') ? parseFloat(getComputedStyle(drawings[i]).maxWidth) || w : w;
+    const shownFull = (w > 0 && room > 0) ? h * Math.min(cap, room) / w : h;
     if (shownFull > fullHeight) { fullHeight = shownFull; svg = drawings[i]; }
   }
 
@@ -805,8 +845,10 @@ function fitStickyContent(el, available, vh) {
     const shown = svg.getBoundingClientRect().height;
     const rest = height - shown; // text, captions, replay button
     const roomForPicture = available - rest;
+    // Illustrations without a scale (.v-env) may shrink further than measured pictures.
+    const minScale = svg.closest('.v-env') && el.classList.contains('is-compact') ? MIN_ILLUSTRATION_SCALE : MIN_PICTURE_SCALE;
     let maxHeight = '';
-    if (fullHeight > roomForPicture && roomForPicture >= fullHeight * MIN_PICTURE_SCALE) {
+    if (fullHeight > roomForPicture && roomForPicture >= fullHeight * minScale) {
       maxHeight = Math.floor(roomForPicture) + 'px';
       height = rest + Math.floor(roomForPicture);
     } else {
@@ -814,11 +856,7 @@ function fitStickyContent(el, available, vh) {
     }
     if (svg.style.maxHeight !== maxHeight) svg.style.maxHeight = maxHeight;
   }
-
-  const tall = height > available + 1;
-  el.classList.toggle('is-tall', tall);
-  if (tall) el.style.setProperty('--tall-top', Math.round(vh - STICKY_BOTTOM_RESERVE_PX - height) + 'px');
-  else el.style.removeProperty('--tall-top');
+  return height;
 }
 
 const STICKY_CONTENT_SELECTOR = '.title, .cause-card, .summary-card, .comparison-image-wrapper, .comparison-rect-wrapper:not(.comparison-rect-large)';
@@ -827,7 +865,7 @@ function fitStickyContentOf(el) {
   const vh = getStableVh();
   const bar = el.closest('.wealth');
   const hudH = bar ? parseFloat(getComputedStyle(bar).getPropertyValue('--hud-h')) || 96 : 96;
-  fitStickyContent(el, vh - hudH - STICKY_BOTTOM_RESERVE_PX, vh);
+  fitStickyContent(el, vh - hudH - STICKY_BOTTOM_RESERVE_PX, vh, hudH);
 }
 
 function observeStickyContent(container) {
@@ -840,6 +878,14 @@ function observeStickyContent(container) {
   const els = container.querySelectorAll(STICKY_CONTENT_SELECTOR);
   for (let i = 0; i < els.length; i++) stickyContentObserver.observe(els[i]);
 }
+
+// Infoboxes use content-visibility: auto, and the ResizeObserver does not reliably report
+// blocks while their infobox is skipped. Measure again whenever an infobox starts rendering.
+document.addEventListener('contentvisibilityautostatechange', function(event) {
+  if (event.skipped || !event.target.classList || !event.target.classList.contains('infobox')) return;
+  const els = event.target.querySelectorAll(STICKY_CONTENT_SELECTOR);
+  for (let i = 0; i < els.length; i++) fitStickyContentOf(els[i]);
+}, true);
 
 // The screen height can change without any message changing its size (rotating a phone).
 function refitStickyContent() {
@@ -957,10 +1003,13 @@ function updateDynamicText() {
   for (let i = 0; i < els.length; i++) {
     const titleEl = els[i].querySelector('.title');
     if (titleEl) {
+      // The picture (band and magnifier) lives inside the title: keep it while the text is rewritten.
+      const vizEl = titleEl.querySelector(':scope > .viz');
       titleEl.innerHTML = interpolate(localizedTitle, {
         richestName: richestName,
         scrollRate: newRate,
       });
+      if (vizEl) titleEl.appendChild(vizEl);
     }
   }
 }
@@ -1127,8 +1176,8 @@ function renderShareStripHtml(pct) {
   return '<div class="share-strip"><i style="width:' + Math.min(100, pct).toFixed(2) + '%"></i></div>';
 }
 
-// Cause card: a white sheet with the cost, its share of all billionaire wealth as a strip,
-// the description, the death toll and the source.
+// Cause message (directly on the bar): the cost, its share of all billionaire wealth as a strip,
+// the description, the death toll as a rhythm and the source.
 function renderCauseContent(comp, totalWealth) {
   const pct = (comp.costUsd / totalWealth) * 100;
   const costSuffix = comp.costPeriod === 'yearly' ? tUI('cost-yearly', '/year') : '';
@@ -1145,11 +1194,34 @@ function renderCauseContent(comp, totalWealth) {
 
   if (comp.deathsPerYear) {
     const perDay = Math.round(comp.deathsPerYear / 365);
-    const deathLabel = comp.deathLabel || tUI('deaths', 'deaths');
-    html += '<div class="cause-deaths num">' +
-      '<div><b>' + thousand.format(perDay) + '</b>' + deathLabel + '<br>' + tUI('per-day', 'per day') + '</div>' +
-      '<div><b>' + thousand.format(comp.deathsPerYear) + '</b>' + tUI('per-year', 'per year') + '</div>' +
+    const counts = '<div class="cause-counts num">' +
+      '<span><b>' + thousand.format(perDay) + '</b> ' + tUI('per-day', 'per day') + '</span>' +
+      '<span><b>' + thousand.format(comp.deathsPerYear) + '</b> ' + tUI('per-year', 'per year') + '</span>' +
     '</div>';
+    if (comp.deathRhythm) {
+      // The yearly toll as a rhythm: one death every N seconds, with a line that runs down in real time.
+      const seconds = SECONDS_PER_YEAR / comp.deathsPerYear;
+      const interval = seconds < 120
+        ? interpolate(tUI('interval-seconds', '{n} seconds'), { n: thousand.format(Math.round(seconds)) })
+        : interpolate(tUI('interval-minutes', '{n} minutes'), { n: thousand.format(Math.round(seconds / 60)) });
+      const phase = ((Date.now() - pageOpenedAt) / 1000) % seconds;
+      html += '<div class="cause-deaths">' +
+        '<p class="cause-rhythm">' + DEATH_FIGURE_SVG +
+          '<span>' + interpolate(comp.deathRhythm, { interval: interval }) + '</span></p>' +
+        '<div class="cause-beat" aria-hidden="true"><i style="animation-duration:' + seconds.toFixed(2) +
+          's;animation-delay:-' + phase.toFixed(2) + 's"></i></div>' +
+        counts +
+      '</div>';
+    } else {
+      const deathLabel = comp.deathLabel || tUI('deaths', 'deaths');
+      html += '<div class="cause-deaths">' +
+        '<p class="cause-rhythm">' + DEATH_FIGURE_SVG + '<span>' + deathLabel + '</span></p>' + counts +
+      '</div>';
+    }
+  }
+
+  if (comp.affectedLine && Array.isArray(comp.affectedShare)) {
+    html += renderAffectedHtml(comp.affectedLine, comp.affectedShare[0], comp.affectedShare[1]);
   }
 
   if (comp.sourceUrl) {
@@ -1158,6 +1230,23 @@ function renderCauseContent(comp, totalWealth) {
 
   html += '</div>';
   return html;
+}
+
+// Share of the world's people affected: `total` figures, the first `affected` of them red,
+// so the red part is as large as the share (1 in 7 → 7 figures, 1 in 300 → 300 small ones).
+function renderAffectedHtml(line, affected, total) {
+  const few = total <= 12;
+  const cols = total <= 30 ? total : 50;
+  const cell = few ? 'minmax(0, 22px)' : 'minmax(0, 1fr)';
+  let figures = '';
+  for (let i = 0; i < total; i++) {
+    figures += i < affected ? DEATH_FIGURE_SVG : AFFECTED_OTHER_SVG;
+  }
+  return '<div class="cause-affected">' +
+    '<p class="cause-affected-line">' + line + '</p>' +
+    '<div class="cause-figures' + (few ? ' is-few' : '') + '" aria-hidden="true" ' +
+      'style="grid-template-columns:repeat(' + cols + ',' + cell + ')">' + figures + '</div>' +
+  '</div>';
 }
 
 // Rows of a summary card. Either one row per included cause (includeIds) or grouped
@@ -1192,28 +1281,107 @@ function getSummaryRows(comp) {
 }
 
 // Summary card: areas sorted by cost with labelled bars, then the total and its share.
+function replayButtonHtmlForSummary() {
+  const util = window.WEALTH_VIZ && window.WEALTH_VIZ._util;
+  return util ? util.replayButtonHtml(tUI('replay', 'Replay')) : '';
+}
+
+// Plays once when the summary scrolls in: the steps appear one after another, then the sum
+// bar, the arrow and the share in the strip. The end state is the normal state.
+function animateSummary(wrapper) {
+  const util = window.WEALTH_VIZ && window.WEALTH_VIZ._util;
+  const card = wrapper.querySelector('.summary-card');
+  if (!util || !card) return;
+  const steps = card.querySelectorAll('.summary-step i');
+  const sumbar = card.querySelector('.summary-sumbar');
+  const arrow = card.querySelector('.summary-arrow');
+  const share = card.querySelector('.share-strip i');
+  const stepMs = 220;
+  const afterSteps = steps.length * stepMs + 150;
+  const total = afterSteps + 1100;
+  util.playOnce(card, total, function(t) {
+    for (let i = 0; i < steps.length; i++) {
+      steps[i].style.transform = 'scaleX(' + util.seg(t, i * stepMs, i * stepMs + 320).toFixed(3) + ')';
+    }
+    sumbar.style.opacity = util.seg(t, afterSteps, afterSteps + 250).toFixed(3);
+    arrow.style.opacity = util.seg(t, afterSteps + 250, afterSteps + 550).toFixed(3);
+    share.style.transform = 'scaleX(' + util.seg(t, afterSteps + 550, afterSteps + 1100).toFixed(3) + ')';
+  });
+}
+
+// Arrow from the right end of the sum bar down to the right end of its share in the strip below
+// (targetPct: that end in % of the width), so the whole sum visibly becomes the black share.
+// It is drawn in pixels by layoutSummaryArrow, because its angle depends on the width.
+function summaryArrowHtml(targetPct) {
+  return '<div class="summary-arrow" data-pct="' + targetPct.toFixed(3) + '" aria-hidden="true"></div>';
+}
+
+// Draws the arrow for the current width: a curve that leaves the sum bar going down and
+// arrives at the share at an angle, with a small arrow head along that last direction.
+function layoutSummaryArrow(box) {
+  const w = box.clientWidth;
+  const h = box.clientHeight;
+  if (!w || !h) return;
+  const ex = Math.max(3, w * parseFloat(box.getAttribute('data-pct')) / 100);
+  const ey = h - 0.5;
+  const sx = w - 1;
+  const c2x = ex + 22;
+  const c2y = ey - 22;
+  let dx = ex - c2x;
+  let dy = ey - c2y;
+  const len = Math.sqrt(dx * dx + dy * dy) || 1;
+  dx /= len; dy /= len;
+  const headLen = 7;
+  const headHalf = 3.2;
+  const bx = ex - dx * headLen;
+  const by = ey - dy * headLen;
+  const f = function(n) { return n.toFixed(1); };
+  box.innerHTML = '<svg width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '">' +
+    '<path class="line" d="M' + f(sx) + ' 0C' + f(sx) + ' ' + f(h * 0.55) + ' ' + f(c2x) + ' ' + f(c2y) + ' ' + f(bx) + ' ' + f(by) + '"/>' +
+    '<path class="tip" d="M' + f(ex) + ' ' + f(ey) +
+      'L' + f(bx - dy * headHalf) + ' ' + f(by + dx * headHalf) +
+      'L' + f(bx + dy * headHalf) + ' ' + f(by - dx * headHalf) + 'Z"/>' +
+  '</svg>';
+}
+
 function renderSummaryContent(comp, totalWealth) {
   const rows = getSummaryRows(comp);
   const totalCost = rows.reduce(function(sum, row) { return sum + row.cost; }, 0);
-  const maxCost = rows.length ? rows[0].cost : 1;
   const summaryPct = (totalCost / totalWealth) * 100;
   const ofWealth = tUI('of-wealth-of-all-billionaires', 'of the wealth of<br>all billionaires');
 
-  let html = '<div class="summary-card">' +
+  // A staircase: full width is the sum, each step starts where the one before ended, so the
+  // steps together fill the sum bar below. An arrow then points from the sum to its share of
+  // all billionaire wealth in the usual strip (full width there = all billionaires).
+  const pctOfSum = function(v) { return totalCost ? (v / totalCost * 100).toFixed(3) + '%' : '0%'; };
+  let acc = 0;
+  let cuts = '';
+  let html = '<div class="cause-card summary-card' + (rows.length >= 7 ? ' is-dense' : '') + '">' +
     '<h3 class="cause-title">' + comp.title + '</h3>' +
     '<p class="cause-desc">' + comp.description + '</p>' +
     '<div class="summary-rows num">';
-  rows.forEach(function(row) {
+  rows.forEach(function(row, i) {
+    const left = acc;
+    acc += row.cost;
+    if (i < rows.length - 1) cuts += '<i style="left:' + pctOfSum(acc) + '"></i>';
     html += '<div class="summary-row">' +
       '<div class="l"><span>' + row.title + (row.sub ? '<small>' + row.sub + '</small>' : '') + '</span>' +
         '<b>' + formatCompactMoney(row.cost) + '</b></div>' +
-      '<div class="t"><i style="width:' + ((row.cost / maxCost) * 100).toFixed(1) + '%"></i></div>' +
+      // The last step ends exactly at the right edge (its minimum width must not push it past).
+      '<div class="summary-step"><i style="' + (i === rows.length - 1 ? 'right:0' : 'left:' + pctOfSum(left)) +
+        ';width:' + pctOfSum(row.cost) + '"></i></div>' +
     '</div>';
   });
   html += '</div>' +
     '<div class="summary-total num">' +
-      '<div class="top"><b>' + formatCompactMoney(totalCost) + '</b><span>' + fmtPct(summaryPct) + ' ' + ofWealth + '</span></div>' +
+      '<div class="cause-cost"><b>' + formatCompactMoney(totalCost) + '</b><span>' + fmtPct(summaryPct) + ' ' + ofWealth + '</span></div>' +
+      '<div class="summary-sumbar">' + cuts + '</div>' +
+      summaryArrowHtml(Math.min(100, summaryPct)) +
       renderShareStripHtml(summaryPct) +
+      // The replay button sits between the two labels, so it adds no height.
+      '<div class="share-labels num"><span>' + formatCompactMoney(totalCost) + '</span>' +
+        replayButtonHtmlForSummary() +
+        '<span>' + formatCompactMoney(totalWealth) + '</span></div>' +
     '</div>' +
   '</div>';
   return html;
@@ -1260,7 +1428,7 @@ function attachViz(wrapper, comp, totalWealth) {
   }
   if (!result) return;
 
-  const host = wrapper.querySelector('.title, .comparison-rect-wrapper, .comparison-image-wrapper');
+  const host = wrapper.querySelector('.title, .comparison-rect-wrapper, .comparison-image-wrapper, .cause-card');
   if (!host) return;
 
   let vizEl = null;
@@ -1272,6 +1440,9 @@ function attachViz(wrapper, comp, totalWealth) {
     if (result.replace) {
       const old = host.querySelector(result.replace);
       if (old) old.replaceWith(vizEl); else host.appendChild(vizEl);
+    } else if (host.querySelector(':scope > .cause-source')) {
+      // In a cause message the picture belongs to the text, above the source line.
+      host.insertBefore(vizEl, host.querySelector(':scope > .cause-source'));
     } else {
       host.appendChild(vizEl);
     }
@@ -1329,6 +1500,7 @@ function createComparisonElement(comp, totalWealth, vars) {
 
   bindShareButton(wrapper, comp);
   attachViz(wrapper, comp, totalWealth);
+  if (comp.type === 'summary') animateSummary(wrapper);
 
   return wrapper;
 }

@@ -482,21 +482,21 @@ h1 {
   cursor: pointer;
 }
 
-/* Sticky content. main.js sets `top` so each block is centred in the space below the header. */
+/* Sticky content, centred in the space below the header. main.js sets --sticky-half to half the
+   block's height, so the block is placed by `top` alone. A transform would push its upper half
+   out of its infobox while it scrolls in, and content-visibility would cut that half off. */
 .text-infobox .title,
 .infobox .comparison-rect-wrapper:not(.comparison-rect-large),
 .cause-card,
 .summary-card,
 .comparison-image-wrapper {
   position: sticky;
-  top: calc(50% + var(--hud-h, 96px) / 2 - 20px);
-  transform: translateY(-50%);
+  top: calc(50% + var(--hud-h, 96px) / 2 - 20px - var(--sticky-half, 0px));
 }
 /* Too tall to centre below the header: the message scrolls through and then sticks with its
    lower edge above the buttons. main.js sets --tall-top (usually negative). */
 .infobox .is-tall {
   top: var(--tall-top, calc(var(--hud-h, 96px) + 8px));
-  transform: none;
 }
 
 /* ─── Comparison Rectangles ─── */
@@ -568,18 +568,24 @@ h1 {
   height: auto;
 }
 
-/* ─── Cause Cards: a white sheet on the bar ─── */
+/* ─── Cause and summary messages: text directly on the bar, no sheet ─── */
 .cause-card,
 .summary-card {
   width: calc(100% - 42px);
   max-width: 560px;
   margin-left: 12px;
   margin-right: 30px;
-  background: var(--paper);
-  padding: 20px 18px 18px;
   text-align: left;
   font-size: 15.5px;
   line-height: 1.5;
+}
+.cause-card {
+  width: calc(100% - 62px);
+  margin-left: 22px;
+  margin-right: 40px;
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 500;
 }
 .cause-title {
   margin: 0;
@@ -589,29 +595,51 @@ h1 {
   line-height: 1.1;
   text-wrap: balance;
 }
+.cause-card .cause-title {
+  font-size: 32px;
+  font-stretch: 84%;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
 .cause-cost {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
+  flex-wrap: wrap; /* long yearly amounts on small phones: the share moves below instead of past the edge */
+  gap: 2px 12px;
   margin-top: 14px;
+}
+.cause-card .cause-cost {
+  margin-top: 12px;
 }
 .cause-cost b {
   font-size: 22px;
   font-weight: 800;
   white-space: nowrap;
 }
+.cause-card .cause-cost b {
+  font-size: 24px;
+}
 .cause-cost span {
+  margin-left: auto;
   font-size: 13px;
   line-height: 1.3;
   color: var(--muted);
   text-align: right;
+}
+.cause-card .cause-cost span {
+  color: inherit;
+  font-weight: 600;
 }
 .share-strip {
   height: 12px;
   background: var(--blue);
   position: relative;
   margin-top: 8px;
+}
+/* On the bar itself the track is white, so the share stays readable against the blue. */
+.cause-card .share-strip {
+  background: var(--paper);
 }
 .share-strip i {
   position: absolute;
@@ -621,6 +649,9 @@ h1 {
   background: var(--ink);
   min-width: 2px;
 }
+.cause-card .share-strip i {
+  min-width: 3px;
+}
 .share-labels {
   display: flex;
   justify-content: space-between;
@@ -628,52 +659,133 @@ h1 {
   font-weight: 600;
   margin-top: 6px;
 }
+.cause-card .share-labels {
+  margin-top: 5px;
+}
 .cause-desc {
   margin: 16px 0 0;
+  text-wrap: pretty;
 }
+.cause-card .cause-desc {
+  margin-top: 14px;
+}
+/* Death toll as a rhythm: "every 52 seconds…", a line running down in that rhythm, then the counts. */
 .cause-deaths {
   margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  gap: 20px;
-  font-size: 13px;
-  line-height: 1.3;
 }
-.cause-deaths b {
-  display: block;
-  font-size: 24px;
+.cause-rhythm {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 19px;
   font-weight: 800;
-  color: var(--red);
-  line-height: 1.1;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.cause-rhythm svg {
+  flex: none;
+}
+.cause-beat {
+  height: 3px;
+  margin-top: 10px;
+  background: rgba(17, 17, 17, .25);
+  position: relative;
+  overflow: hidden;
+}
+.cause-beat i {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform-origin: left;
+  animation: cause-beat linear infinite;
+}
+@keyframes cause-beat {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+/* Without motion the line stays empty; the sentence carries the rhythm. */
+@media (prefers-reduced-motion: reduce) {
+  .cause-beat i {
+    animation: none;
+    transform: scaleX(0);
+  }
+}
+.cause-counts {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.cause-counts b {
+  font-size: 15px;
+  font-weight: 800;
+}
+/* People affected as a share of the world: "about 1 in 7…", then that many figures, the affected ones red. */
+.cause-affected {
+  margin-top: 16px;
+}
+.cause-affected-line {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.cause-figures {
+  display: grid;
+  gap: 2px 1px;
+  margin-top: 10px;
+}
+.cause-figures.is-few {
+  gap: 6px;
+}
+.cause-figures svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .cause-source {
   font-size: 12.5px;
   color: var(--muted);
   margin: 14px 0 0;
 }
+.cause-card .cause-source {
+  margin-top: 10px;
+  color: inherit;
+  font-weight: 600;
+}
 
-/* ─── Summary Cards: sorted bars and one share strip ─── */
-.summary-card .cause-title {
-  font-size: 24px;
-}
-.summary-card .cause-desc {
-  margin-top: 8px;
-  font-size: 14px;
-  line-height: 1.42;
-}
+/* ─── Summary messages: a staircase that adds up to the sum, then its share of all wealth ───
+   Rows: full width = the sum of this summary; each step starts where the one before ended.
+   The sum bar is the same length, cut where the steps meet. The arrow points to the share
+   strip below, where full width = all billionaire wealth. */
 .summary-rows {
-  margin-top: 12px;
+  margin-top: 14px;
   display: grid;
-  gap: 7px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
 }
 .summary-row .l {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
-  font-size: 13.5px;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.25;
+}
+.summary-row .l > span {
+  min-width: 0;
+  hyphens: auto;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 360px) {
+  .summary-row .l {
+    font-stretch: 88%;
+  }
 }
 .summary-row .l b {
   font-weight: 800;
@@ -683,42 +795,87 @@ h1 {
   display: block;
   font-size: 12px;
   font-weight: 500;
-  color: var(--muted);
   line-height: 1.3;
 }
-.summary-row .t {
+.summary-step {
+  position: relative;
   height: 7px;
-  background: #E3E6EA;
-  margin-top: 3px;
+  margin-top: 4px;
 }
-.summary-row .t i {
-  display: block;
-  height: 100%;
-  background: var(--blue);
-  min-width: 1.5px;
+.summary-step::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(17, 17, 17, .32);
+}
+.summary-step i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  min-width: 2px;
+  background: var(--ink);
 }
 .summary-total {
+  margin-top: 14px;
+}
+.summary-total .cause-cost {
+  margin-top: 0;
+}
+.summary-sumbar {
+  position: relative;
+  height: 7px;
+  margin-top: 8px;
+  background: var(--ink);
+}
+.summary-sumbar i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  margin-left: -.75px;
+  background: var(--blue);
+}
+.summary-arrow {
+  position: relative;
+  height: 36px;
+  margin-top: 2px;
+}
+/* Drawn in pixels by layoutSummaryArrow (main.js). */
+.summary-arrow svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  overflow: visible;
+}
+.summary-arrow .line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.summary-arrow .tip {
+  fill: var(--ink);
+}
+.summary-total .share-strip {
+  margin-top: 3px;
+}
+/* Long lists (7 rows and more) a little tighter, so they fit on a phone. */
+.summary-card.is-dense .cause-desc {
+  font-size: 15px;
+  line-height: 1.4;
   margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1.5px solid var(--ink);
 }
-.summary-total .top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
+.summary-card.is-dense .summary-rows {
+  gap: 6px;
+  margin-top: 13px;
 }
-.summary-total .top b {
-  font-size: 22px;
-  font-weight: 800;
-  white-space: nowrap;
-}
-.summary-total .top span {
-  flex: none;
-  font-size: 13px;
-  color: var(--muted);
-  text-align: right;
-  line-height: 1.3;
+.summary-card.is-dense .summary-step {
+  height: 6px;
+  margin-top: 3px;
 }
 
 /* ─── Message variants ─── */
@@ -1016,13 +1173,17 @@ h1 {
   .infobox .comparison-rect-wrapper {
     font-size: 17px;
   }
-  .cause-card,
-  .summary-card {
-    padding: 16px 14px 14px;
-    font-size: 14.5px;
+  .cause-card {
+    font-size: 15px;
   }
   .cause-title {
     font-size: 23px;
+  }
+  .cause-card .cause-title {
+    font-size: 28px;
+  }
+  .cause-rhythm {
+    font-size: 17px;
   }
   .next-message-btn,
   .death-ticker-reopen {
@@ -1478,4 +1639,139 @@ h1 {
   .step-icon .drop {
     transform: translateY(9px);
   }
+}
+
+/* ─── Pictures of the environment causes (viz.js, "v-env") ─── */
+.viz.v-env {
+  margin: 16px 0 0;
+  text-align: left;
+}
+.viz.v-env .cause-affected-line {
+  margin: 0 0 10px;
+}
+/* Centred like the other pictures. Phones show them as drawn (260 px); larger screens a bit
+   bigger. main.js reads this max-width to compute the message height and shrinks the picture
+   again if the screen is not tall enough. */
+.viz.v-env svg {
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+}
+@media (min-width: 700px) {
+  .viz.v-env svg {
+    max-width: 360px;
+  }
+}
+.v-env .w { fill: #fff; stroke: #111; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.v-env .k { fill: #111; }
+.v-env .t { fill: #0783BB; }
+.v-env .l { fill: none; stroke: #111; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.v-env .l1 { fill: none; stroke: #111; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.v-env .riv { fill: #03A9F4; stroke: #111; stroke-width: 1.6; stroke-linejoin: round; }
+.v-env .dash { fill: none; stroke: #111; stroke-width: 1.4; stroke-dasharray: 3 2.6; }
+.v-env .fl { fill: #fff; stroke: #111; stroke-width: .8; stroke-linejoin: round; }
+.v-env .tx { font: 600 11.5px var(--font); fill: #111; }
+.v-env .cs { font: 800 10px var(--font); fill: #111; text-anchor: middle; }
+.v-env .spin { animation: env-spin 9s linear infinite; }
+@keyframes env-spin { to { transform: rotate(360deg); } }
+/* The garbage patch rocks gently on the waves; the debris drifts a little against it. */
+.v-env .env-patch {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: env-rock 4.2s ease-in-out infinite alternate;
+}
+.v-env .env-patch .fl {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: env-drift 2.9s ease-in-out infinite alternate;
+}
+@keyframes env-rock {
+  from { transform: translate(-1.5px, -1.5px) rotate(-1deg); }
+  to { transform: translate(1.5px, 2px) rotate(1deg); }
+}
+@keyframes env-drift {
+  from { transform: translate(-1px, 1px); }
+  to { transform: translate(1px, -1px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v-env .spin,
+  .v-env .env-patch,
+  .v-env .env-patch .fl { animation: none; }
+}
+
+/* ─── Compact messages ───
+   main.js adds "is-compact" only to a cause or summary message that would not fit between
+   header and buttons otherwise: slightly smaller type and spacing, so it need not scroll. */
+.cause-card.is-compact .cause-title {
+  font-size: 28px;
+}
+.cause-card.is-compact .cause-cost {
+  margin-top: 8px;
+}
+.cause-card.is-compact .cause-cost b {
+  font-size: 21px;
+}
+.cause-card.is-compact .cause-desc {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.38;
+}
+.cause-card.is-compact .cause-deaths,
+.cause-card.is-compact .cause-affected,
+.cause-card.is-compact .viz.v-env {
+  margin-top: 10px;
+}
+.cause-card.is-compact .cause-rhythm,
+.cause-card.is-compact .cause-affected-line {
+  font-size: 17px;
+}
+.cause-card.is-compact .cause-beat {
+  margin-top: 7px;
+}
+.cause-card.is-compact .cause-counts {
+  margin-top: 5px;
+}
+.cause-card.is-compact .cause-source {
+  margin-top: 6px;
+}
+.summary-card.is-compact .cause-desc {
+  font-size: 14px;
+}
+.summary-card.is-compact .summary-rows {
+  gap: 4px;
+  margin-top: 10px;
+}
+.summary-card.is-compact .summary-row .l {
+  font-size: 13.5px;
+}
+.summary-card.is-compact .summary-step {
+  height: 5px;
+  margin-top: 2px;
+}
+.summary-card.is-compact .summary-total {
+  margin-top: 10px;
+}
+.summary-card.is-compact .summary-arrow {
+  height: 28px;
+}
+
+/* Summary animation (main.js animateSummary): steps and the share grow from the left.
+   The replay button sits between the two strip labels and takes no height of its own. */
+.summary-step i,
+.summary-total .share-strip i {
+  transform-origin: left center;
+}
+.summary-total .share-labels {
+  position: relative;
+}
+.summary-total .viz-replay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 36px;
+  margin: 0;
+  padding: 0 6px;
+  font-size: 13px;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
 }

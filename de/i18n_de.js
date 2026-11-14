@@ -71,6 +71,7 @@ strings : {
 'i18n-end-malaria' : 'Malaria ausrotten',
 'i18n-end-malaria-desc' : 'Malaria ist eine der schlimmsten Infektionskrankheiten, die die Menschheit je heimgesucht hat. Allein im 20. Jahrhundert tötete Malaria <a href="https://www.ncbi.nlm.nih.gov/books/NBK215638/" target="_blank" rel="noopener noreferrer">150–300 Millionen</a> Menschen. Das ist mehr als die <a href="https://www.britannica.com/event/Black-Death" target="_blank" rel="noopener noreferrer">Pest</a>.',
 'i18n-end-malaria-death-label' : 'Malaria-Todesfälle',
+'i18n-end-malaria-death-rhythm' : 'Alle {interval} stirbt ein Mensch an Malaria.',
 'i18n-end-malaria-source-name' : 'Weltgesundheitsorganisation',
 'i18n-end-malaria-ticker-desc' : 'Malaria',
 
@@ -85,24 +86,28 @@ strings : {
 'i18n-end-tuberculosis' : 'Tuberkulose beenden',
 'i18n-end-tuberculosis-desc' : 'Tuberkulose tötete 2024 etwa <a href="https://www.who.int/news-room/fact-sheets/detail/tuberculosis" target="_blank" rel="noopener noreferrer">1,23 Millionen Menschen</a>. Sie ist weltweit die häufigste Todesursache durch Infektionskrankheiten und gehört zu den zehn häufigsten Todesursachen insgesamt. Es würde insgesamt <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10593207/" target="_blank" rel="noopener noreferrer">~250 Milliarden Dollar</a> kosten, die <a href="https://www.who.int/teams/global-programme-on-tuberculosis-and-lung-health/the-end-tb-strategy" target="_blank" rel="noopener noreferrer">END-TB-Ziele für 2030</a> zu erreichen.',
 'i18n-end-tuberculosis-death-label' : 'Tuberkulose-Todesfälle',
+'i18n-end-tuberculosis-death-rhythm' : 'Alle {interval} stirbt ein Mensch an Tuberkulose.',
 'i18n-end-tuberculosis-source-name' : 'Weltgesundheitsorganisation',
 'i18n-end-tuberculosis-ticker-desc' : 'Tuberkulose',
 
 'i18n-end-hiv-aids' : 'HIV/AIDS beenden',
 'i18n-end-hiv-aids-desc' : 'HIV/AIDS tötete 2024 etwa <a href="https://www.unaids.org/sites/default/files/media_asset/UNAIDS_FactSheet_en.pdf" target="_blank" rel="noopener noreferrer">630.000 Menschen</a>. Rund 41 Millionen leben mit HIV/AIDS. Für insgesamt <a href="https://www.unaids.org/sites/default/files/media_asset/JC3019_InvestingintheAIDSresponse_En.pdf" target="_blank" rel="noopener noreferrer">~143 Milliarden Dollar</a> könnten wir AIDS bis 2030 als Bedrohung der öffentlichen Gesundheit beenden.',
 'i18n-end-hiv-aids-death-label' : 'HIV/AIDS-Todesfälle',
+'i18n-end-hiv-aids-death-rhythm' : 'Alle {interval} stirbt ein Mensch an HIV/AIDS.',
 'i18n-end-hiv-aids-source-name' : 'UNAIDS',
 'i18n-end-hiv-aids-ticker-desc' : 'HIV/AIDS',
 
 'i18n-end-hepatitis' : 'Hepatitis B & C eliminieren',
 'i18n-end-hepatitis-desc' : 'Hepatitis B und C verursacht jährlich etwa <a href="https://www.who.int/health-topics/hepatitis#tab=tab_1" target="_blank" rel="noopener noreferrer">1,3 Millionen Todesfälle</a>, und mehr als 300 Millionen Menschen sind infiziert. Hepatitis C ist heute heilbar; Hepatitis B ist durch Impfung vermeidbar. Für <a href="https://www.who.int/news/item/26-07-2019-who-urges-countries-to-invest-in-eliminating-hepatitis" target="_blank" rel="noopener noreferrer">~58,7 Milliarden Dollar</a> könnte Hepatitis B & C bis 2030 als Bedrohung der öffentlichen Gesundheit eliminiert werden.',
 'i18n-end-hepatitis-death-label' : 'Hepatitis B & C Todesfälle',
+'i18n-end-hepatitis-death-rhythm' : 'Alle {interval} stirbt ein Mensch an Hepatitis B oder C.',
 'i18n-end-hepatitis-source-name' : 'Weltgesundheitsorganisation',
 'i18n-end-hepatitis-ticker-desc' : 'Hepatitis B & C',
 
 'i18n-end-AMR' : 'Antimikrobielle Resistenzen (AMR) bekämpfen',
 'i18n-end-AMR-desc' : 'Antimikrobielle Resistenzen (AMR) gehören zu den größten Bedrohungen der öffentlichen Gesundheit weltweit. Schätzungsweise war bakterielle AMR 2019 für <a href="https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance" target="_blank" rel="noopener noreferrer">1,27 Millionen Todesfälle</a> direkt verantwortlich und trug zu <a href="https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance" target="_blank" rel="noopener noreferrer">4,95 Millionen Todesfällen</a> bei.',
 'i18n-end-AMR-death-label' : 'Todesfälle durch antimikrobielle Resistenzen',
+'i18n-end-AMR-death-rhythm' : 'Alle {interval} stirbt ein Mensch an antimikrobiellen Resistenzen.',
 'i18n-end-AMR-source-name' : 'Weltgesundheitsorganisation',
 'i18n-end-AMR-ticker-desc' : 'AMR',
 'i18n-end-AMR-2' : 'Innovation und besseren Zugang zu hochwertiger Behandlung zu finanzieren würde bis 2030 etwa <a href="https://www.cgdev.org/publication/forecasting-fallout-amr-economic-impacts-antimicrobial-resistance-humans" target="_blank" rel="noopener noreferrer">315 Milliarden Dollar</a> kosten, aber <a href="https://www.cgdev.org/publication/forecasting-fallout-amr-economic-impacts-antimicrobial-resistance-humans" target="_blank" rel="noopener noreferrer">28 Dollar pro investiertem Dollar</a> zurückbringen. Nichtstun hingegen würde bis 2030 <a href="https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance" target="_blank" rel="noopener noreferrer">1–3,4 Billionen Dollar</a> pro Jahr kosten.',
@@ -116,6 +121,7 @@ strings : {
 'i18n-end-lead-poisoning' : 'Bleivergiftung beenden',
 'i18n-end-lead-poisoning-desc' : 'Laut UNICEF wären insgesamt nur <a href="https://ceh.unicef.org/events-and-resources/knowledge-library/investment-case-ending-childhood-lead-poisoning-2040" target="_blank" rel="noopener noreferrer">1,6 Milliarden Dollar</a> nötig wären, um Bleivergiftungen bis 2040 zu eliminieren. 2019 war Bleiexposition für 5,54 Millionen Todesfälle verantwortlich und kostete die Welt <a href="https://www.thelancet.com/journals/lanplh/article/PIIS2542-5196(23)00166-3/fulltext" target="_blank" rel="noopener noreferrer">6 Billionen Dollar</a>.',
 'i18n-end-lead-poisoning-death-label' : 'Todesfälle durch Herz-Kreislauf-Erkrankungen infolge von Bleiexposition',
+'i18n-end-lead-poisoning-death-rhythm' : 'Alle {interval} stirbt ein Mensch an einer Herz-Kreislauf-Erkrankung durch Blei.',
 'i18n-end-lead-poisoning-source-name' : 'The Lancet Planetary Health',
 'i18n-end-lead-poisoning-ticker-desc' : 'Bleivergiftung',
 
@@ -126,11 +132,13 @@ strings : {
 'i18n-end-blindness' : 'Vermeidbare Blindheit beenden',
 'i18n-end-blindness-desc' : '<a href="https://visionatlas.iapb.org/wp-content/uploads/2025/09/The-Value-of-Vision_Full-Report.pdf" target="_blank" rel="noopener noreferrer">1,1 Milliarden Menschen</a> haben eine Sehbeeinträchtigung oder sind blind. Das verursacht einen jährlichen Produktivitätsverlust von ~1,1 Billionen Dollar. 90 % der Fälle wären vermeidbar oder behandelbar, durch bewährte, günstige Maßnahmen wie Brillen und einfache Operationen.',
 'i18n-end-blindness-source-name' : 'IAPB Vision Atlas',
+'i18n-end-blindness-affected-line' : 'Etwa jeder 7. Mensch sieht schlecht oder ist blind.',
 'i18n-end-blindness-2' : 'Schon eine Investition von nur <a href="https://visionatlas.iapb.org/wp-content/uploads/2025/09/The-Value-of-Vision_Full-Report.pdf" target="_blank" rel="noopener noreferrer">7,1 Milliarden Dollar</a> von 2025 bis 2030 würde über 250 Millionen Menschen helfen, besser zu sehen, und 3 Millionen Menschen vor Blindheit bewahren. Zusätzlich würde diese Investition 28 Dollar pro investiertem Dollar einbringen.',
 
 'i18n-hearing-care' : 'Universelle Hörversorgung',
 'i18n-hearing-care-desc' : '<a href="https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss" target="_blank" rel="noopener noreferrer">430 Millionen Menschen</a> benötigen Hörrehabilitation. Unbehandelte Hörverluste kosten die Welt fast <a href="https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss" target="_blank" rel="noopener noreferrer">1 Billion Dollar pro Jahr</a>. Eine 90 %ige Abdeckung bis 2030 würde etwa <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8692586/" target="_blank" rel="noopener noreferrer">238,8 Milliarden Dollar</a> kosten, und 15 Dollar pro investiertem Dollar zurückbringen.',
 'i18n-hearing-care-source-name' : 'The Lancet',
+'i18n-hearing-care-affected-line' : 'Etwa jeder 19. Mensch hat einen Hörverlust, der behandelt werden müsste.',
 
 // ─── < 10% section: basic needs ─────────────────────────────────────
 'i18n-basic-needs' : 'Aber Gesundheitsprobleme zu behandeln ist nur die halbe Miete, solange Milliarden Menschen noch nicht mal Zugang zu Grundbedürfnissen wie sauberem Wasser, Nahrung und Strom haben.',
@@ -139,6 +147,7 @@ strings : {
 'i18n-clean-water-sanitation' : 'Sauberes Wasser und Sanitärversorgung für alle',
 'i18n-clean-water-sanitation-desc' : '<a href="https://www.unicef.org/press-releases/fast-facts-1-4-people-globally-still-lack-access-safe-drinking-water-who-unicef" target="_blank" rel="noopener noreferrer">2,1 Milliarden Menschen</a> haben keinen Zugang zu sauberem Trinkwasser. 3,4 Milliarden haben keine sichere Sanitärversorgung, darunter 354 Millionen, die ihre Notdurft im Freien verrichten müssen. 1,7 Milliarden haben zu Hause keine grundlegende Hygieneversorgung, 611 Millionen davon gar keine.',
 'i18n-clean-water-sanitation-death-label' : 'Todesfälle durch unsauberes Wasser und mangelnde Sanitärversorgung',
+'i18n-clean-water-sanitation-death-rhythm' : 'Alle {interval} stirbt ein Mensch durch unsauberes Wasser und mangelnde Sanitärversorgung.',
 'i18n-clean-water-sanitation-source-name' : 'Weltgesundheitsorganisation',
 'i18n-clean-water-sanitation-ticker-desc' : 'Wasser und Sanitärversorgung',
 'i18n-water-and-sanitation-deaths' : 'Jedes Jahr sterben <a href="https://www.who.int/news/item/28-06-2023-improving-access-to-water--sanitation-and-hygiene-can-save-1.4-million-lives-per-year--says-new-who-report" target="_blank" rel="noopener noreferrer">1,4 Millionen Menschen</a> an unsauberem Wasser und mangelnder Sanitärversorgung. Das zu lösen würde etwa <a href="https://documents1.worldbank.org/curated/en/847191468000296045/pdf/103172-PUB-Box394556B-PUBLIC-EPI-K8632-ADD-SERIES.pdf" target="_blank" rel="noopener noreferrer">114 Milliarden Dollar pro Jahr</a> kosten und alle 22 Sekunden ein Leben retten. Das ist weniger als ein Drittel dessen, was wir jährlich für <a href="https://magazica.com/global-and-regional-spending-on-cosmetics-and-beauty-products-2025-2026/" target="_blank" rel="noopener noreferrer">Kosmetik</a> ausgeben. Und jeder investierte Dollar bringt im Schnitt <a href="https://www.copenhagenconsensus.com/sites/default/files/water_sanitation_assessment_-_hutton.pdf" target="_blank" rel="noopener noreferrer">6,80 Dollar</a> zurück.',
@@ -146,6 +155,7 @@ strings : {
 'i18n-end-hunger' : 'Welthunger beenden',
 'i18n-end-hunger-desc' : '<a href="https://www.who.int/news/item/28-07-2025-global-hunger-declines-but-rises-in-africa-and-western-asia-un-report" target="_blank" rel="noopener noreferrer">673 Millionen Menschen</a> hungerten 2024. Jeder vierte Mensch weltweit ist von mittlerer oder schwerer Ernährungsunsicherheit betroffen, und diese Zahl ist zwischen 2015 und 2024 um <a href="https://oi-files-d8-prod.s3.eu-west-2.amazonaws.com/s3fs-public/2026-01/EN%20-%20Resisting%20the%20Rule%20of%20the%20Rich_0.pdf" target="_blank" rel="noopener noreferrer">42,6 %</a> gestiegen. Fast <a href="https://www.who.int/news-room/fact-sheets/detail/malnutrition" target="_blank" rel="noopener noreferrer">die Hälfte aller Todesfälle</a> bei Kindern unter 5 Jahren steht im Zusammenhang mit Unterernährung.',
 'i18n-end-hunger-death-label' : 'Todesfälle von Kindern unter 5, die direkt auf schwere akute Mangelernährung (SAM) zurückzuführen sind',
+'i18n-end-hunger-death-rhythm' : 'Alle {interval} stirbt ein Kind unter 5 Jahren an schwerer akuter Mangelernährung.',
 'i18n-end-hunger-source-name' : 'Weltgesundheitsorganisation',
 'i18n-end-hunger-ticker-desc' : 'SAM',
 'i18n-end-hunger-2' : '<a href="https://news.un.org/en/story/2025/11/1166397" target="_blank" rel="noopener noreferrer">93 Milliarden Dollar pro Jahr</a> würden den Welthunger bis 2030 beenden. Die Welt gibt <a href="https://www.gamblinginsider.com/in-depth/114456/gambling-statistics" target="_blank" rel="noopener noreferrer">~7-mal so viel</a> für Glücksspiel aus.',
@@ -156,6 +166,7 @@ strings : {
 'i18n-clean-cooking' : 'Sauberes Kochen für alle',
 'i18n-clean-cooking-desc' : 'Etwa <a href="https://www.iea.org/reports/world-energy-outlook-2025/achieving-access-for-all" target="_blank" rel="noopener noreferrer">2 Milliarden Menschen</a> kochen über offenem Feuer oder mit schmutzigen Brennstoffen. Sauberes Kochen für alle bis 2040 würde insgesamt etwa <a href="https://www.iea.org/reports/world-energy-outlook-2025/achieving-access-for-all" target="_blank" rel="noopener noreferrer">60 Milliarden Dollar</a> kosten und 1,6 Millionen vorzeitige Todesfälle pro Jahr verhindern.',
 'i18n-clean-cooking-death-label' : 'Vorzeitige Todesfälle durch Luftverschmutzung in Innenräumen aufgrund unsicherer Kochmethoden',
+'i18n-clean-cooking-death-rhythm' : 'Alle {interval} stirbt ein Mensch vorzeitig durch Rauch vom Kochen in Innenräumen.',
 'i18n-clean-cooking-source-name' : 'IEA',
 'i18n-clean-cooking-ticker-desc' : 'Luftverschmutzung durch Kochen in Innenräumen',
 
@@ -164,6 +175,7 @@ strings : {
 'i18n-electricity-for-all' : 'Strom für alle',
 'i18n-electricity-for-all-desc' : '<a href="https://www.iea.org/commentaries/access-to-electricity-stagnates-leaving-globally-730-million-in-the-dark" target="_blank" rel="noopener noreferrer">730 Millionen Menschen</a> leben noch immer ohne Strom, 80 % davon in Subsahara-Afrika. <a href="https://www.iea.org/reports/world-energy-outlook-2025/achieving-access-for-all" target="_blank" rel="noopener noreferrer">230 Milliarden Dollar</a> würden reichen, um die Lücke bis 2035 zu schließen.',
 'i18n-electricity-for-all-source-name' : 'IEA',
+'i18n-electricity-for-all-affected-line' : 'Etwa jeder 11. Mensch lebt ohne Strom.',
 
 'i18n-health-and-basic-needs-combined' : 'Gesundheit und Grundbedürfnisse zusammen',
 'i18n-health-and-basic-needs-combined-desc' : 'Alles bisher Aufgezählte, von Infektionskrankheiten bis Strom für alle: <strong>gleichzeitig</strong> finanzierbar mit <strong>weniger als 10 %</strong> des Vermögens aller Milliardäre.',
@@ -178,11 +190,13 @@ strings : {
 'i18n-universal-education' : 'Universelle Bildung',
 'i18n-universal-education-desc' : '<a href="https://www.unesco.org/en/articles/more-children-out-school-7th-year-row-273-million" target="_blank" rel="noopener noreferrer">273 Millionen Kinder</a> gehen nicht zur Schule. Die Finanzierungslücke für das <a href="https://sdgs.un.org/goals/goal4" target="_blank" rel="noopener noreferrer">UN-Nachhaltigkeitsziel Bildung</a> liegt bei <a href="https://financing.desa.un.org/sites/default/files/2025-02/Brief%20Series%20-%20UNESCO_Financing%20Gap.pdf" target="_blank" rel="noopener noreferrer">97 Milliarden Dollar pro Jahr</a>, also etwa 485 Milliarden Dollar bis 2030. Schließen wir sie nicht, kostet uns das laut UNESCO <a href="https://www.unesco.org/en/articles/what-we-stand-lose-costs-children-and-youth-not-learning-2030" target="_blank" rel="noopener noreferrer">10 Billionen Dollar pro Jahr</a> an verlorenem menschlichen Potenzial.',
 'i18n-universal-education-source-name' : 'UNESCO',
+'i18n-universal-education-affected-line' : 'Etwa jedes 6. Kind im Schulalter geht nicht zur Schule.',
 'i18n-education-children' : 'Diese Kinder fehlen nicht in der Schule, weil sie nicht lernen wollen, sondern weil sie keinen Zugang haben. Ohne Bildung verlieren sie die Chance, sich zu entwickeln und eine bessere Zukunft für sich und ihre Gemeinschaften aufzubauen.',
 
 'i18n-end-extreme-poverty' : 'Extreme Armut beenden',
 'i18n-end-extreme-poverty-desc' : '<a href="https://blogs.worldbank.org/en/opendata/march-2026-global-poverty-update-from-the-world-bank--new-data-a" target="_blank" rel="noopener noreferrer">826 Millionen Menschen</a> leben von weniger als 3,00 Dollar pro Tag. Extreme Armut auf 1 % zu senken würde <a href="https://news.stanford.edu/stories/2026/02/costs-alleviate-extreme-poverty-interventions-research" target="_blank" rel="noopener noreferrer">318 Milliarden Dollar pro Jahr</a> kosten. Das klingt nach viel, aber die Welt gibt <strong>sieben Mal</strong> so viel für Alkohol aus.',
 'i18n-end-extreme-poverty-source-name' : 'Stanford Report',
+'i18n-end-extreme-poverty-affected-line' : 'Etwa jeder 10. Mensch lebt von weniger als 3 Dollar am Tag.',
 'i18n-end-extreme-poverty-2' : '1 von 10 Menschen weltweit lebt in extremer Armut. Aber seit 1990 wurden <a href="https://unstats.un.org/sdgs/report/2025/goal-01/" target="_blank" rel="noopener noreferrer">1,5 Milliarden Menschen</a> aus extremer Armut befreit. Wir wissen also, dass es geht. Wir kennen die Kosten. Die einzige Frage ist, ob wir bereit sind, es zu tun.',
 
 'i18n-trapped-intro' : 'Aber Millionen Menschen sind nicht nur arm, sie sind <strong>gefangen</strong>.',
@@ -190,14 +204,16 @@ strings : {
 'i18n-end-forced-labor' : 'Zwangsarbeit beenden',
 'i18n-end-forced-labor-desc' : '<a href="https://www.ilo.org/topics-and-sectors/forced-labour-modern-slavery-and-trafficking-persons" target="_blank" rel="noopener noreferrer">27,6 Millionen Menschen</a> leben heute in Zwangsarbeit. Eine einmalige Investition von etwa <a href="https://www.ilo.org/sites/default/files/2024-10/Acting%20against%20forced%20labour_report_WEB.pdf" target="_blank" rel="noopener noreferrer">212 Milliarden Dollar</a> könnte das beenden und würde das globale BIP um 611 Milliarden Dollar steigern.',
 'i18n-end-forced-labor-source-name' : 'ILO',
+'i18n-end-forced-labor-affected-line' : 'Etwa einer von 300 Menschen lebt in Zwangsarbeit.',
 
 'i18n-child-labor' : 'Aber Zwangsarbeit ist nicht das einzige Problem. Obwohl die Welt versprochen hat, Kinderarbeit bis 2025 zu beenden, ist sie immer noch massiv verbreitet. <a href="https://www.unicef.org/press-releases/despite-progress-child-labour-still-affects-138-million-children-globally-ilo-unicef" target="_blank" rel="noopener noreferrer">138 Millionen Kinder</a> müssen weiterhin arbeiten, 54 Millionen davon unter gefährlichen Bedingungen.',
 'i18n-child-labor-2' : 'Die aktuellste Kostenschätzung, die ich finden konnte, geht von <a href="https://www.ilo.org/resource/news/new-ilo-study-says-economic-benefits-eliminating-child-labour-will-vastly" target="_blank" rel="noopener noreferrer">760 Milliarden Dollar</a> aus, um Kinderarbeit zu beenden. Allerdings stammt diese Zahl aus 2004 und ist damit stark veraltet, deshalb habe ich sie <strong>nicht in meine Berechnungen aufgenommen</strong>. Da Kinderarbeit aber eng mit Armut, Bildung und Zwangsarbeit zusammenhängt, kann man davon ausgehen, dass die oben genannten Maßnahmen sie deutlich reduzieren würden.',
 
 'i18n-universal-healthcare-intro' : 'Bildung schafft Chancen. Armut und Ausbeutung zu beenden schafft Freiheit. Schauen wir uns jetzt an, was ein Gesundheitssystem kostet, das es Menschen ermöglicht, beides auch wirklich zu genießen.',
-'i18n-universal-healthcare' : 'Universelle Gesundheitsversorgung (UHC)',
+'i18n-universal-healthcare' : 'Universelle Gesundheits­versorgung (UHC)',
 'i18n-universal-healthcare-desc' : '<a href="https://www.who.int/news-room/fact-sheets/detail/universal-health-coverage-(uhc)" target="_blank" rel="noopener noreferrer">4,6 Milliarden Menschen</a> haben keinen Zugang zu grundlegender Gesundheitsversorgung. Universelle Gesundheitsversorgung bedeutet, dass jeder Mensch Zugang zu hochwertigen Gesundheitsleistungen hat, wann und wo er sie braucht, ohne sich dafür finanziell zu ruinieren.',
 'i18n-universal-healthcare-source-name' : 'Weltgesundheitsorganisation',
+'i18n-universal-healthcare-affected-line' : 'Mehr als die Hälfte aller Menschen hat keinen Zugang zu grundlegender Gesundheitsversorgung.',
 'i18n-universal-healthcare-2' : 'Das heißt: Vorsorge, Behandlung, Reha und Palliativversorgung, ein Leben lang.',
 'i18n-universal-healthcare-3' : 'Eine universelle Gesundheitsversorgung für alle Länder mit niedrigem und mittlerem Einkommen würde etwa <a href="https://www.who.int/news-room/fact-sheets/detail/universal-health-coverage-(uhc)" target="_blank" rel="noopener noreferrer">2,5 Billionen Dollar pro Jahr</a> kosten.',
 
@@ -215,9 +231,10 @@ strings : {
 'i18n-climate-crisis-intro-3' : 'Sie ist eine der größten Bedrohungen, vor denen die Menschheit je stand. Und trotzdem tun wir so, als könnten wir uns entschlossenes Handeln nicht leisten, während weniger als 3.500 Menschen auf über 20 Billionen Dollar sitzen.',
 'i18n-climate-richest-emissions' : 'Die reichsten 0,1 % der Welt verursachen an einem einzigen Tag mehr CO₂ als jemand aus der ärmeren Hälfte in einem ganzen Jahr. Seit 1990 haben die reichsten 0,1 % <a href="https://www.oxfam.org/en/press-releases/person-richest-01-produces-more-carbon-pollution-day-someone-bottom-50-produces-all" target="_blank" rel="noopener noreferrer">ihren Anteil an den globalen Emissionen um 32 % erhöht</a>, während der Anteil der ärmsten Hälfte der Menschheit sogar gesunken ist.',
 
-'i18n-climate-adaptation' : 'Klimaanpassung für Entwicklungsländer',
+'i18n-climate-adaptation' : 'Klimaanpassung für Entwicklungs­länder',
 'i18n-climate-adaptation-desc' : '<a href="https://www.who.int/news-room/fact-sheets/detail/climate-change-and-health" target="_blank" rel="noopener noreferrer">3,6 Milliarden Menschen</a> leben in Gebieten, die vom Klimawandel besonders bedroht sind. Bis 2035 werden <a href="https://wedocs.unep.org/items/b547996e-14ee-4f1c-a6d4-b811dd373ae9" target="_blank" rel="noopener noreferrer">365 Milliarden Dollar pro Jahr</a> benötigt, aber aktuell fließen nur 26 Milliarden. Eine 14-fache Lücke. 1,695 Billionen Dollar würden reichen, um diese Lücke bis 2030 zu schließen.',
 'i18n-climate-adaptation-source-name' : 'UNEP',
+'i18n-climate-adaptation-affected-line' : 'Mehr als 4 von 10 Menschen leben in Gebieten, die stark vom Klimawandel bedroht sind.',
 'i18n-climate-injustice' : 'Die Menschen, die am wenigsten zum Problem beigetragen haben, zahlen den höchsten Preis. Von 2030 bis 2050 werden <a href="https://www.who.int/news-room/fact-sheets/detail/climate-change-and-health" target="_blank" rel="noopener noreferrer">250.000 zusätzliche Todesfälle pro Jahr</a> allein durch Unterernährung, Malaria, Durchfallerkrankungen und Hitzestress erwartet.',
 'i18n-climate-displacement' : 'Ende 2024 waren <a href="https://www.internal-displacement.org/publications/2025-global-report-on-internal-displacement-grid/" target="_blank" rel="noopener noreferrer">83,4 Millionen Menschen</a> innerhalb ihres eigenen Landes auf der Flucht, mehr als doppelt so viele wie sechs Jahre zuvor. <strong>Das sind so viele Menschen, wie in ganz Deutschland leben.</strong> Viele flohen vor Fluten, Dürren und Stürmen, die durch eine Krise verschärft wurden, die sie nicht verursacht haben.',
 
@@ -298,6 +315,8 @@ strings : {
 'i18n-ui-replay' : 'Nochmal',
 'i18n-ui-per-day' : 'pro Tag',
 'i18n-ui-per-year' : 'pro Jahr',
+'i18n-ui-interval-seconds' : '{n} Sekunden',
+'i18n-ui-interval-minutes' : '{n} Minuten',
 'i18n-ui-source' : 'Quelle',
 'i18n-ui-total' : 'Gesamt',
 'i18n-ui-deaths' : 'Todesfälle',
