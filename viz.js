@@ -273,7 +273,7 @@
   // 17 ─ A number line from you to Elon Musk; Gosling sits a fraction of a pixel next to you.
   VIZ['gosling-musk-comparison'] = function(ctx) {
     var gosling = ctx.getComp('estimated-wealth-ryan-gosling');
-    var goslingUsd = gosling && gosling.amountUsd ? gosling.amountUsd : 70e6;
+    var goslingUsd = gosling && gosling.amountUsd ? gosling.amountUsd : 90e6;
     function update(el) {
       var axis = el.querySelector('.axis');
       var out = el.querySelector('.zoomline');

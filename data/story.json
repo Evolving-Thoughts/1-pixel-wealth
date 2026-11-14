@@ -62,6 +62,7 @@
     },
     {
       "id": "seat-belt",
+      "calcNote": "Forbes: his wealth grew by about $500 billion in a year, about $15,855 per second. × 4 seconds ≈ $63,420.",
       "bar": "richest",
       "type": "square",
       "positionFraction": 0.2,
@@ -75,13 +76,14 @@
       "bar": "richest",
       "type": "square",
       "positionFraction": 0.225,
-      "title": "The average cost of a house in the United States (<a href=\"https://fred.stlouisfed.org/series/MSPUS\" target=\"_blank\" rel=\"noopener noreferrer\">$405,300</a>)",
-      "amountUsd": 405300,
+      "title": "The median price of a new house in the United States (<a href=\"https://fred.stlouisfed.org/series/MSPUS\" target=\"_blank\" rel=\"noopener noreferrer\">$393,300</a>)",
+      "amountUsd": 393300,
       "squareColor": "#2196F3",
       "i18nKey": "i18n-average-cost-house"
     },
     {
       "id": "instant-coffee",
+      "calcNote": "Forbes: his wealth grew by about $500 billion in a year, about $15,855 per second. × 60 seconds ≈ $951,000.",
       "bar": "richest",
       "type": "square",
       "positionFraction": 0.25,
@@ -92,6 +94,7 @@
     },
     {
       "id": "lifetime-earnings-american",
+      "calcNote": "BLS median weekly earnings of full-time workers × 52 ≈ $64,116 per year, × 40 working years ≈ $2.5 million.",
       "bar": "richest",
       "type": "square",
       "positionFraction": 0.275,
@@ -102,6 +105,7 @@
     },
     {
       "id": "lifetime-earnings-poorest-half",
+      "calcNote": "World Inequality Report: $5,100 per year × 40 years ≈ $200,000.",
       "bar": "richest",
       "type": "square",
       "positionFraction": 0.3,
@@ -120,6 +124,7 @@
     },
     {
       "id": "lifetime-earnings-lawyer",
+      "calcNote": "BLS: median annual wage $159,670 × about 38 working years ≈ $6 million.",
       "bar": "richest",
       "type": "square",
       "positionFraction": 0.35,
@@ -143,13 +148,14 @@
       "bar": "richest",
       "type": "square",
       "positionFraction": 0.4,
-      "title": "Estimated wealth of Ryan Gosling (<a href=\"https://www.celebritynetworth.com/richest-celebrities/actors/ryan-gosling-net-worth/\" target=\"_blank\" rel=\"noopener noreferrer\">~$70 million</a>)",
-      "amountUsd": 70000000,
+      "title": "Estimated wealth of Ryan Gosling (<a href=\"https://www.celebritynetworth.com/richest-celebrities/actors/ryan-gosling-net-worth/\" target=\"_blank\" rel=\"noopener noreferrer\">~$90 million</a>)",
+      "amountUsd": 90000000,
       "squareColor": "#2196F3",
       "i18nKey": "i18n-estimated-wealth-ryan-gosling"
     },
     {
       "id": "movie-barbie",
+      "calcNote": "Forbes: his wealth grew by about $500 billion in a year, about $15,855 per second. × 114 minutes ≈ $108 million.",
       "bar": "richest",
       "type": "square",
       "positionFraction": 0.425,
@@ -163,7 +169,7 @@
       "bar": "richest",
       "type": "text",
       "positionFraction": 0.45,
-      "title": "We tend to put people like Ryan Gosling and Elon Musk in the same mental category: 'rich people.' But Ryan Gosling is about <strong>12,000x closer to you</strong> than to Elon Musk.",
+      "title": "We tend to put people like Ryan Gosling and Elon Musk in the same mental category: 'rich people.' But Ryan Gosling is about <strong>9,300x closer to you</strong> than to Elon Musk.",
       "i18nKey": "i18n-gosling-musk-comparison"
     },
     {
@@ -178,6 +184,7 @@
     },
     {
       "id": "every-night-while-sleeping",
+      "calcNote": "Forbes: his wealth grew by about $500 billion in a year, about $15,855 per second. × 8 hours ≈ $456 million.",
       "bar": "richest",
       "type": "square",
       "positionFraction": 0.5,
@@ -204,6 +211,7 @@
     },
     {
       "id": "elon-musk-daily-income",
+      "calcNote": "Forbes: about $500 billion growth in a year ÷ 365 ≈ $1.37 billion per day; minus $1 billion spent ≈ $370 million.",
       "bar": "richest",
       "type": "text",
       "positionFraction": 0.575,
@@ -411,6 +419,7 @@
     },
     {
       "id": "malaria-children",
+      "calcNote": "WHO: 579,000 deaths in the African region, 75% of them children under five ≈ 434,000.",
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.007,
@@ -422,7 +431,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.008,
-      "title": "All of these deaths are preventable. Treating and preventing malaria is a well understood science, universally practiced in the developed world. <br><br> <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC5584487/\" target=\"_blank\" rel=\"noopener noreferrer\">It's estimated</a> we could get on track to basically eradicate malaria globally by 2030 with an investment of ~$102 billion total. That would only be around 0.51% of the total wealth of all billionaires.",
+      "title": "All of these deaths are preventable. Treating and preventing malaria is a well understood science, universally practiced in the developed world. <br><br> <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC5584487/\" target=\"_blank\" rel=\"noopener noreferrer\">It's estimated</a> we could cut malaria cases and deaths by 90% globally by 2030 with an investment of ~$102 billion total. That would only be around 0.51% of the total wealth of all billionaires.",
       "i18nKey": "i18n-malaria-preventable-deaths"
     },
     {
@@ -459,10 +468,10 @@
       "positionFraction": 0.012,
       "title": "End Tuberculosis",
       "costUsd": 250000000000,
-      "description": "Tuberculosis killed about <a href=\"https://www.who.int/news-room/fact-sheets/detail/tuberculosis\" target=\"_blank\" rel=\"noopener noreferrer\">1.23 million people in 2024</a>. It's the world's leading cause of death from infectious diseases, and among the top 10 causes of death globally. It would cost a total of <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC10593207/\" target=\"_blank\" rel=\"noopener noreferrer\">~$250 billion</a> to meet the <a href=\"https://www.who.int/teams/global-programme-on-tuberculosis-and-lung-health/the-end-tb-strategy\" target=\"_blank\" rel=\"noopener noreferrer\">2030 END TB</a> goals.",
+      "description": "Tuberculosis killed about <a href=\"https://www.who.int/news-room/fact-sheets/detail/tuberculosis\" target=\"_blank\" rel=\"noopener noreferrer\">1.13 million people in 2025</a>. It's the world's leading cause of death from a single infectious agent. It would cost a total of <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC10593207/\" target=\"_blank\" rel=\"noopener noreferrer\">~$250 billion</a> to meet the <a href=\"https://www.who.int/teams/global-programme-on-tuberculosis-and-lung-health/the-end-tb-strategy\" target=\"_blank\" rel=\"noopener noreferrer\">2030 END TB</a> goals.",
       "tickerGroup": "Infectious Diseases",
       "tickerDescription": "tuberculosis",
-      "deathsPerYear": 1230000,
+      "deathsPerYear": 1130000,
       "deathLabel": "TB deaths",
       "deathRhythm": "Every {interval}, a person dies of tuberculosis.",
       "sourceUrl": "https://www.who.int/news-room/fact-sheets/detail/tuberculosis",
@@ -493,7 +502,7 @@
       "positionFraction": 0.014,
       "title": "Eliminate Hepatitis B & C",
       "costUsd": 58700000000,
-      "description": "Hepatitis B & C causes about <a href=\"https://www.who.int/health-topics/hepatitis#tab=tab_1\" target=\"_blank\" rel=\"noopener noreferrer\">1.3 million deaths</a> annually and more than 300 million are infected. Hepatitis C is now curable; B is preventable by vaccine. It's estimated that <a href=\"https://www.who.int/news/item/26-07-2019-who-urges-countries-to-invest-in-eliminating-hepatitis\" target=\"_blank\" rel=\"noopener noreferrer\">~$58.7 billion</a> is needed to eliminate viral hepatitis as a public health threat by 2030.",
+      "description": "Hepatitis B & C causes about <a href=\"https://www.who.int/health-topics/hepatitis#tab=tab_1\" target=\"_blank\" rel=\"noopener noreferrer\">1.3 million deaths</a> annually and more than 300 million are infected. Hepatitis C is now curable; B is preventable by vaccine. It's estimated that <a href=\"https://www.who.int/news/item/26-07-2019-who-urges-countries-to-invest-in-eliminating-hepatitis\" target=\"_blank\" rel=\"noopener noreferrer\">~$58.7 billion</a> is needed to eliminate viral hepatitis as a public health threat in 67 low- and middle-income countries by 2030.",
       "tickerGroup": "Infectious Diseases",
       "tickerDescription": "hepatitis B & C",
       "deathsPerYear": 1300000,
@@ -505,15 +514,16 @@
     },
     {
       "id": "end-AMR",
+      "calcNote": "Center for Global Development: about $63 billion per year × 5 years (2026–2030) ≈ $315 billion.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.015,
       "title": "Combat Antimicrobial resistance (AMR)",
       "costUsd": 315000000000,
-      "description": "Antimicrobial resistance (AMR) is one of the top global public health and development threats. It is estimated that bacterial AMR was directly responsible for <a href=\"https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance\" target=\"_blank\" rel=\"noopener noreferrer\">1.27 million deaths</a> in 2019 and contributed to <a href=\"https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance\" target=\"_blank\" rel=\"noopener noreferrer\">4.95 million deaths</a>.",
+      "description": "Antimicrobial resistance (AMR) is a major global health threat. It is estimated that bacterial AMR was directly responsible for <a href=\"https://www.ox.ac.uk/news/2024-09-17-antibiotic-resistance-has-claimed-least-one-million-lives-each-year-1990\" target=\"_blank\" rel=\"noopener noreferrer\">1.14 million deaths</a> in 2021 and contributed to <a href=\"https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance\" target=\"_blank\" rel=\"noopener noreferrer\">4.71 million deaths</a>.",
       "tickerGroup": "Infectious Diseases",
       "tickerDescription": "AMR",
-      "deathsPerYear": 1270000,
+      "deathsPerYear": 1140000,
       "deathLabel": "Antimicrobial resistance deaths",
       "deathRhythm": "Every {interval}, a person dies of antimicrobial resistance.",
       "sourceUrl": "https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance",
@@ -559,7 +569,7 @@
       "positionFraction": 0.019,
       "title": "Eliminate Lead Poisoning",
       "costUsd": 1600000000,
-      "description": "UNICEF estimates it would cost a total of <a href=\"(https://ceh.unicef.org/events-and-resources/knowledge-library/investment-case-ending-childhood-lead-poisoning-2040\" target=\"_blank\" rel=\"noopener noreferrer\">$1.6 billion</a> to eliminate lead poisoning by 2040. In 2019, lead exposure was responsible for 5.54 million deaths and cost the world <a href=\"https://www.thelancet.com/journals/lanplh/article/PIIS2542-5196(23)00166-3/fulltext\" target=\"_blank\" rel=\"noopener noreferrer\">$6 trillion</a>.",
+      "description": "UNICEF estimates it would cost a total of <a href=\"https://www.weforum.org/stories/health-and-healthcare-systems/lead-poisoning-how-to-stop-it\" target=\"_blank\" rel=\"noopener noreferrer\">$1.6 billion</a> to eliminate lead poisoning by 2040. In 2019, lead exposure was responsible for 5.54 million deaths and cost the world <a href=\"https://www.thelancet.com/journals/lanplh/article/PIIS2542-5196(23)00166-3/fulltext\" target=\"_blank\" rel=\"noopener noreferrer\">$6 trillion</a>.",
       "tickerGroup": "Environmental Health",
       "tickerDescription": "lead-poisoning",
       "deathsPerYear": 5545000,
@@ -574,7 +584,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.02,
-      "title": "Even if you wouldn't care about the deaths caused by lead poisoning and only look at the money, every dollar invested in interventions returns <a href=\"https://www.worldbank.org/en/news/infographic/2025/10/23/massive-returns-economic-efficiency-of-interventions-to-prevent-and-reduce-lead-pollution\" target=\"_blank\" rel=\"noopener noreferrer\">hundreds or even thousands of dollars</a> in benefits. Not doing this is absolute insanity, yet it's still a problem in many parts of the world.",
+      "title": "Even if you wouldn't care about the deaths caused by lead poisoning and only look at the money, every dollar invested in interventions returns <a href=\"https://thedocs.worldbank.org/en/doc/538f354ddcfbd3d257d924dae0be50b2-0320072025/original/Massive-Returns-Economic-Efficiency-of-Interventions-to-Prevent-and-Reduce-Lead-Pollution.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">hundreds or even thousands of dollars</a> in benefits. Not doing this is absolute insanity, yet it's still a problem in many parts of the world.",
       "i18nKey": "i18n-lead-poisoning-investment-return"
     },
     {
@@ -587,12 +597,13 @@
     },
     {
       "id": "end-blindness",
+      "calcNote": "Share of the world population (about 8.2 billion people): 1.1 billion ≈ 1 in 7.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.022,
       "title": "End Preventable Blindness",
       "costUsd": 7100000000,
-      "description": "<a href=\"https://visionatlas.iapb.org/wp-content/uploads/2025/09/The-Value-of-Vision_Full-Report.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">1.1 billion people</a> have vision impairment, including blindness, causing an annual productivity loss of ~$1.1 trillion. 90% of it is preventable or treatable through proven, cost-effective interventions like eyeglasses and basic surgery.",
+      "description": "<a href=\"https://visionatlas.iapb.org/wp-content/uploads/2025/09/The-Value-of-Vision_Full-Report.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">1.1 billion people</a> live with sight loss that could have been prevented or can still be treated through proven, cost-effective interventions like eyeglasses and basic surgery. 90% of them live in low- and middle-income countries, where it causes an annual productivity loss of ~$1.1 trillion.",
       "affectedShare": [1, 7],
       "affectedLine": "About 1 in 7 people has a vision impairment or is blind.",
       "sourceUrl": "https://visionatlas.iapb.org/wp-content/uploads/2025/09/The-Value-of-Vision_Full-Report.pdf",
@@ -604,17 +615,18 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.023,
-      "title": "A total investment of just <a href=\"https://visionatlas.iapb.org/wp-content/uploads/2025/09/The-Value-of-Vision_Full-Report.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">$7.1 billion</a> from 2025-2030 would help over 250 million people to see better and save 3 million people from blindness. On top of the health benefits, this investment would return $28 for every $1 invested.",
+      "title": "A total investment of just <a href=\"https://visionatlas.iapb.org/wp-content/uploads/2025/09/The-Value-of-Vision_Full-Report.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">$7.1 billion</a> from 2026-2030 would help over 255 million people to see better. On top of the health benefits, this investment would return $28 for every $1 invested.",
       "i18nKey": "i18n-end-blindness-2"
     },
     {
       "id": "hearing-care",
+      "calcNote": "Share of the world population (about 8.2 billion people): 430 million ≈ 1 in 19.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.024,
       "title": "Universal Hearing Care",
       "costUsd": 238800000000,
-      "description": "<a href=\"https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss\" target=\"_blank\" rel=\"noopener noreferrer\">430 million people</a> need hearing rehabilitation. Unaddressed hearing loss costs the world almost <a href=\"https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss\" target=\"_blank\" rel=\"noopener noreferrer\">$1 trillion per year</a>. Achieving 90% coverage by 2030 would cost about <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC8692586/\" target=\"_blank\" rel=\"noopener noreferrer\">$238.8 billion total</a> — and return $15 for every $1 invested.",
+      "description": "<a href=\"https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss\" target=\"_blank\" rel=\"noopener noreferrer\">430 million people</a> need hearing rehabilitation. Unaddressed hearing loss costs the world almost <a href=\"https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss\" target=\"_blank\" rel=\"noopener noreferrer\">$1 trillion per year</a>. Achieving 90% coverage by 2030 would cost about <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC8692586/\" target=\"_blank\" rel=\"noopener noreferrer\">$238.8 billion total</a> — and return nearly $16 for every $1 invested.",
       "affectedShare": [1, 19],
       "affectedLine": "About 1 in 19 people has hearing loss that needs treatment.",
       "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8692586/",
@@ -668,6 +680,7 @@
     },
     {
       "id": "end-hunger",
+      "calcNote": "UN: $93 billion per year × 5 years (2026–2030) = $465 billion.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.029,
@@ -709,6 +722,7 @@
     },
     {
       "id": "clean-cooking",
+      "calcNote": "IEA: about $4 billion per year from 2025 to 2040 ≈ $60 billion.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.033,
@@ -734,6 +748,7 @@
     },
     {
       "id": "electricity-for-all",
+      "calcNote": "IEA: $23 billion per year × 10 years (until 2035) = $230 billion. Share of the world population (about 8.2 billion people): 730 million ≈ 1 in 11.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.035,
@@ -863,6 +878,7 @@
     },
     {
       "id": "universal-education",
+      "calcNote": "UN/UNESCO: $97 billion per year × 5 years (2026–2030) = $485 billion.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.042,
@@ -885,6 +901,7 @@
     },
     {
       "id": "end-extreme-poverty",
+      "calcNote": "Share of the world population (about 8.2 billion people): 826 million ≈ 1 in 10.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.044,
@@ -916,6 +933,7 @@
     },
     {
       "id": "end-forced-labor",
+      "calcNote": "Share of the world population (about 8.2 billion people): 27.6 million ≈ 1 in 300.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.047,
@@ -955,11 +973,12 @@
     },
     {
       "id": "universal-healthcare",
+      "calcNote": "Share of the world population (about 8.2 billion people): 4.6 billion ≈ 14 in 25.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.051,
       "title": "Universal Healthcare (UHC)",
-      "costUsd": 2500000000000,
+      "costUsd": 833400000000,
       "costPeriod": "yearly",
       "description": "<a href=\"https://www.who.int/news-room/fact-sheets/detail/universal-health-coverage-(uhc)\" target=\"_blank\" rel=\"noopener noreferrer\">4.6 billion people</a> lack essential health services. Universal health coverage means that all people have access to the full range of quality health services they need, when and where they need them, without financial hardship. ",
       "affectedShare": [14, 25],
@@ -978,10 +997,11 @@
     },
     {
       "id": "universal-healthcare-3",
+      "calcNote": "ILO Working Paper 113 (2024), table 4: financing gap for essential health care in all 133 low- and middle-income countries, $833.4 billion per year (2024 prices). It builds on WHO per-person costs (Stenberg et al. 2017), which also include clean water, sanitation and clean cooking. Those appear here as their own items, so this figure is more likely too high than too low.",
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.053,
-      "title": "The cost of delivering complete universal health coverage (UHC) across all low- and middle-income countries (LMICs) is estimated at <a href=\"https://www.who.int/news-room/fact-sheets/detail/universal-health-coverage-(uhc)\" target=\"_blank\" rel=\"noopener noreferrer\">$2.5 trillion per year</a>.",
+      "title": "Providing essential health care for everyone in all 133 low- and middle-income countries would cost an additional <a href=\"https://www.ilo.org/sites/default/files/2024-04/wp113_web.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">$833 billion per year</a> on top of what they already spend. This estimate also includes clean water, sanitation and clean cooking, which appear here as their own items, so it is more likely too high than too low.",
       "i18nKey": "i18n-universal-healthcare-3"
     },
     {
@@ -990,8 +1010,8 @@
       "type": "summary",
       "positionFraction": 0.054,
       "title": "Everything so far, combined",
-      "costUsd": 5500200000000,
-      "description": "Health, basic needs, education, poverty and forced labor: all fundable <strong>simultaneously</strong> with <strong>less than 30%</strong> of all billionaire wealth.",
+      "costUsd": 3833600000000,
+      "description": "Health, basic needs, education, poverty and forced labor: all fundable <strong>simultaneously</strong> with <strong>less than a fifth</strong> of all billionaire wealth.",
       "i18nKey": "i18n-all-human-focused-causes-combined",
       "rows": [
         {
@@ -1090,7 +1110,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.059,
-      "title": "We didn't even reach the 30% mark yet, so let's dare to dream even bigger and turn our attention to the planet we all share.",
+      "title": "We didn't even reach the 20% mark yet, so let's dare to dream even bigger and turn our attention to the planet we all share.",
       "i18nKey": "i18n-planet-intro"
     },
     {
@@ -1127,6 +1147,7 @@
     },
     {
       "id": "climate-adaptation",
+      "calcNote": "UNEP: $365 billion needed per year, $26 billion flowing, a gap of $339 billion per year × 5 years (2026–2030) ≈ $1.695 trillion. Share of the world population (about 8.2 billion people): 3.6 billion ≈ 11 in 25.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.064,
@@ -1157,6 +1178,7 @@
     },
     {
       "id": "land-restoration",
+      "calcNote": "UN: about $365 billion needed per year ($1 billion per day), $66 billion available, a gap of about $300 billion per year × 5 years (2026–2030) ≈ $1.5 trillion.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.067,
@@ -1217,6 +1239,7 @@
     },
     {
       "id": "energy-transition",
+      "calcNote": "UNCTAD: yearly gap of $286 billion for 48 developing economies × 5 years (2026–2030) = $1.43 trillion.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.073,
@@ -1259,9 +1282,9 @@
       "bar": "allBillionaires",
       "type": "summary",
       "positionFraction": 0.077,
-      "costUsd": 12732700000000,
+      "costUsd": 11066100000000,
       "title": "ALL OF IT, TOGETHER",
-      "description": "Health, basic needs, education, poverty, forced labor, climate and nature: <strong>all of it, together</strong>, for less than two thirds of all billionaire wealth.",
+      "description": "Health, basic needs, education, poverty, forced labor, climate and nature: <strong>all of it, together</strong>, for a little more than half of all billionaire wealth.",
       "i18nKey": "i18n-grand-summary",
       "rows": [
         {
@@ -1387,7 +1410,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.084,
-      "title": "That's also the reason why developing countries can't fund the solutions to their problems themselves. They have a total debt of <a href=\"https://unctad.org/news/debt-crisis-developing-countries-external-debt-hits-record-114-trillion\" target=\"_blank\" rel=\"noopener noreferrer\">$11.4 trillion</a>. That's less than the wealth of all billionaires, but they have to pay <a href=\"https://www.worldbank.org/en/news/press-release/2024/12/03/developing-countries-paid-record-1-4-trillion-on-foreign-debt-in-2023\" target=\"_blank\" rel=\"noopener noreferrer\">$1.4 trillion</a> in interest payments for it every year.",
+      "title": "That's also the reason why developing countries can't fund the solutions to their problems themselves. They have a total debt of <a href=\"https://unctad.org/news/debt-crisis-developing-countries-external-debt-hits-record-114-trillion\" target=\"_blank\" rel=\"noopener noreferrer\">$11.4 trillion</a>. That's less than the wealth of all billionaires, but in 2023 alone they had to pay <a href=\"https://www.worldbank.org/en/news/press-release/2024/12/03/developing-countries-paid-record-1-4-trillion-on-foreign-debt-in-2023\" target=\"_blank\" rel=\"noopener noreferrer\">$1.4 trillion</a> to service it, $406 billion of that in interest.",
       "i18nKey": "i18n-developing-countries-debt"
     },
     {
@@ -1506,7 +1529,7 @@
       "id": "scroll-63-percent-of-money",
       "bar": "allBillionaires",
       "type": "text",
-      "positionFraction": 0.63,
+      "positionFraction": 0.55,
       "title": "Wow, you're still going? You reached the point of their wealth that could fund all the things I listed above. Everything from this point on would still be theirs, if we don't collectively decide that the remaining money could be used for better things as well.",
       "i18nKey": "i18n-scroll-63-percent-of-money"
     }

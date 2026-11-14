@@ -169,6 +169,44 @@ h1 {
   text-decoration: underline;
 }
 
+/* Data source and date, bottom left; pairs with "inspired by" on the right */
+.data-stand {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+.data-stand a {
+  color: inherit;
+  text-decoration: underline;
+}
+/* Too narrow for both side by side: stack them on the right */
+@media (max-width: 420px) {
+  .data-stand {
+    left: auto;
+    right: 16px;
+    bottom: 30px;
+  }
+  .title-screen .scroll-this-way {
+    margin-bottom: 60px;
+  }
+}
+
+/* Link to the sources page in the last message, a quiet note between two fine lines */
+.sources-link {
+  display: block;
+  margin-top: 16px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(17, 17, 17, .45);
+  border-bottom: 1px solid rgba(17, 17, 17, .45);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+}
+
 /* ─── Dark mode switch, left of the language menu ─── */
 .theme-toggle {
   position: absolute;
@@ -1922,6 +1960,7 @@ h1 {
   stroke: var(--fg);
 }
 [data-theme="dark"] .pixel-note,
+[data-theme="dark"] .data-stand,
 [data-theme="dark"] .scroll-this-way,
 [data-theme="dark"] .inspired-by,
 [data-theme="dark"] .calibration .wealth-desc {
@@ -1955,4 +1994,82 @@ h1 {
 [data-theme="dark"] .death-ticker-reopen,
 [data-theme="dark"] .death-ticker {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, .22), 0 3px 10px rgba(0, 0, 0, .4);
+}
+
+/* ─── Sources page ─── */
+.sources {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.sources a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: .16em;
+  overflow-wrap: anywhere;
+}
+.sources-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.sources h1 {
+  text-align: left;
+  font-size: clamp(40px, 9vw, 64px);
+  max-width: none;
+  margin: 12px 0 16px;
+}
+.sources-wealth {
+  border-top: 1.5px solid currentColor;
+  padding: 12px 0 14px;
+}
+.sources-wealth h2,
+.sources-h {
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+.sources-wealth p {
+  margin: 0;
+}
+.sources-h {
+  margin-top: 28px;
+}
+.sources-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sources-list li {
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+.sources-msg {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.sources-host {
+  color: var(--muted);
+  font-size: 13px;
+}
+[data-theme="dark"] .sources-host {
+  color: var(--fg-muted);
+}
+[data-theme="dark"] .sources-list li {
+  border-top-color: #333;
+}
+.sources-calc {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+[data-theme="dark"] .sources-calc {
+  color: var(--fg-muted);
 }

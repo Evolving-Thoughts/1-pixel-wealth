@@ -675,6 +675,28 @@ function fetchWithFallback(path) {
   });
 }
 
+// Where the wealth figures come from and how old they are, bottom left of the title screen.
+function formatSnapshotDate(iso) {
+  const p = String(iso || '').split('-');
+  if (p.length !== 3) return iso || '';
+  if (getCurrentLanguage() === 'de') return p[2] + '.' + p[1] + '.' + p[0];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return months[Number(p[1]) - 1] + ' ' + Number(p[2]) + ', ' + p[0];
+}
+
+function renderDataStand(data) {
+  const titleScreen = document.querySelector('.title-screen');
+  if (!titleScreen || !data.snapshotDate || titleScreen.querySelector('.data-stand')) return;
+  const el = document.createElement('p');
+  el.className = 'data-stand';
+  const link = '<a href="' + (data.sourceUrl || 'https://www.forbes.com/billionaires/') + '" target="_blank" rel="noopener noreferrer">Forbes</a>';
+  el.innerHTML = interpolate(tUI('data-stand', 'Wealth: {source}, as of {date}'), {
+    source: link,
+    date: formatSnapshotDate(data.snapshotDate)
+  });
+  titleScreen.appendChild(el);
+}
+
 function loadData() {
   Promise.all([
     fetchWithFallback('data/billionaires.json'),
@@ -693,6 +715,7 @@ function applyData(billionaireData, storyData) {
   }
 
   story = storyData;
+  renderDataStand(billionaireData);
   richestPersonWealthUsd = Number(billionaireData.people[0].wealthUsd);
   richestName = billionaireData.people[0].name;
 
@@ -774,8 +797,30 @@ function renderComparisons() {
   updateNextMessageButtonState();
 }
 
+// Link to the sources page, added to whatever message is last on this device.
+function sourcesLinkHtml() {
+  return '<span class="sources-link"><a href="sources.html">' +
+    tUI('all-sources', 'All sources on this page') + '</a> ›</span>';
+}
+
 function prepareAllBillionairesComparisons(comparisons) {
-  if (!isCapped) return comparisons;
+  if (!isCapped) {
+    // The whole bar fits: the link goes to the last message.
+    const all = comparisons.slice();
+    let lastIndex = -1;
+    all.forEach(function(c, i) {
+      if (lastIndex < 0 || c.positionFraction >= all[lastIndex].positionFraction) lastIndex = i;
+    });
+    if (lastIndex >= 0) {
+      const last = {};
+      for (const key in all[lastIndex]) {
+        if (all[lastIndex].hasOwnProperty(key)) last[key] = all[lastIndex][key];
+      }
+      last.appendHtml = sourcesLinkHtml();
+      all[lastIndex] = last;
+    }
+    return all;
+  }
 
   // Filter out comparisons beyond the capped portion
   const visible = comparisons.filter(function(c) {
@@ -815,7 +860,8 @@ function prepareAllBillionairesComparisons(comparisons) {
         totalFormatted: formatCompactMoney(allBillionairesTotalUsd),
         billionaireCount: thousand.format(billionaireCount)
       }
-    )
+    ),
+    appendHtml: sourcesLinkHtml()
   };
   remapped.push(brokeMessage);
 
@@ -1116,6 +1162,7 @@ function renderTextContent(comp, vars, totalWealth) {
   else if (comp.variant === 'step') inner = renderStepInner(comp, text);
 
   let html = '<div class="title">' + inner;
+  if (comp.appendHtml) html += comp.appendHtml;
   if (comp.showShareButton) {
     html += '<div class="share-inline-row">' +
       '<button type="button" class="share-inline-btn" aria-live="polite">' +
