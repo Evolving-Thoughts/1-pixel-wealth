@@ -1057,14 +1057,15 @@ h1 {
 }
 
 /* ─── Death Ticker ─── */
+/* Opens above the two pills, so "Next message" stays reachable while it is open. */
 .death-ticker {
   position: fixed;
-  bottom: 14px;
+  bottom: 68px;
   right: 14px;
   z-index: 100;
   width: 300px;
   max-width: calc(100vw - 28px);
-  max-height: calc(80vh - 40px);
+  max-height: calc(100vh - 180px);
   overflow-y: auto;
   background: #1B1B1B;
   color: #fff;
@@ -1097,17 +1098,27 @@ h1 {
 .death-ticker-label {
   display: block;
   margin: 0 30px 10px 0;
-  font-size: 13px;
-  font-weight: 600;
-  color: #D4D4D4;
+  font-size: 15.5px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #fff;
+}
+/* One shared number column: it grows with the longest number, so text never covers it. */
+#death-ticker-counts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 10px;
 }
 .ticker-group,
 .ticker-total {
+  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 3ch 1fr;
-  gap: 10px;
+  grid-template-columns: subgrid;
   padding: 7px 0;
   border-top: 1px solid rgba(255, 255, 255, .14);
+}
+.ticker-group > span:last-child {
+  font-weight: 600;
 }
 .ticker-count {
   color: #FF8A80;
@@ -1159,12 +1170,71 @@ h1 {
   opacity: 0.5;
   cursor: default;
 }
-.ticker-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #FF8A80;
+.ticker-figure {
+  display: block;
   flex: none;
+}
+.death-ticker-reopen.is-short .ticker-pill-label {
+  display: none;
+}
+/* Small intro panel (phones): heading, total and a link to the breakdown, pointing at the pill */
+.ticker-more {
+  display: none;
+}
+.death-ticker.is-compact {
+  bottom: 64px;
+  padding: 10px 14px 2px;
+  overflow: visible;
+  cursor: pointer;
+}
+.death-ticker.is-compact::after {
+  content: "";
+  position: absolute;
+  right: 46px;
+  bottom: -6px;
+  width: 12px;
+  height: 12px;
+  background: #1B1B1B;
+  transform: rotate(45deg);
+}
+.death-ticker.is-compact .death-ticker-label {
+  font-size: 14.5px;
+  margin: 0 28px 6px 0;
+}
+.death-ticker.is-compact .ticker-group {
+  display: none;
+}
+.death-ticker.is-compact .ticker-total {
+  align-items: baseline;
+  padding: 6px 0 0;
+}
+.death-ticker.is-compact .ticker-total .ticker-count {
+  font-size: 20px;
+  line-height: 1;
+}
+.death-ticker.is-compact .ticker-more {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 26px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #D4D4D4;
+  font: 600 12.5px/1 var(--font);
+  cursor: pointer;
+}
+.ticker-more:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.ticker-chev {
+  display: block;
+  flex: none;
+  transition: transform .2s;
+}
+.death-ticker-reopen[aria-expanded="true"] .ticker-chev {
+  transform: rotate(180deg);
 }
 
 /* ─── Small phones ─── */

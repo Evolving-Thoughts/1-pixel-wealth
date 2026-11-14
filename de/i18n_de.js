@@ -325,6 +325,7 @@ strings : {
 'i18n-ui-all-billionaires-title' : 'Alle {count} Milliardäre der Welt ({amount})',
 'i18n-ui-total-preventable-deaths' : 'insgesamt',
 'i18n-ui-preventable-deaths-label' : 'Vermeidbare Todesfälle, seit du diese Seite geöffnet hast',
+'i18n-ui-ticker-breakdown' : 'Aufschlüsselung',
 'i18n-ui-next-point' : 'Nächste Nachricht',
 'i18n-ui-share-button' : 'Diese Seite teilen',
 'i18n-ui-share-copied' : 'Link kopiert',

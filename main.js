@@ -12,7 +12,7 @@ const MIN_COMPARISON_GAP_VH = 1.5;
 const MIN_COMPARISON_CONTENT_PADDING_PX = 64;
 const MAX_BAR_SEGMENTS = 100;
 const STICKY_BOTTOM_RESERVE_PX = 74; // room for the two pills at the bottom
-const MOBILE_TICKER_MAX_WIDTH_PX = 700;
+const TICKER_INTRO_MS = 6000; // how long the ticker stays open when it first appears
 const FETCH_TIMEOUT_MS = 15_000;
 const TICKER_UPDATE_MS = 1000;
 const WEALTH_COUNTER_ANNUAL_USD = 500_000_000_000;
@@ -1525,10 +1525,11 @@ function startDeathTicker() {
   const pillCountEl = document.getElementById('death-ticker-pill-count');
   const pillLabelEl = document.getElementById('death-ticker-pill-label');
   if (pillLabelEl) pillLabelEl.textContent = tUI('deaths', 'deaths');
-  // On phones the ticker starts collapsed as a pill so it never covers the text.
-  if (tickerEl.dataset.minimized === undefined) {
-    tickerEl.dataset.minimized = window.innerWidth <= MOBILE_TICKER_MAX_WIDTH_PX ? 'true' : 'false';
-  }
+  // The ticker is a pill that opens on tap. When it first appears it opens by itself for a few
+  // seconds, so readers see what is behind it, then folds back so it never covers the text.
+  if (tickerEl.dataset.minimized === undefined) tickerEl.dataset.minimized = 'true';
+  let introShown = false;
+  let introTimer = null;
 
   // Build groups from comparisons that have both deathsPerYear and tickerGroup
   const groups = {};
@@ -1555,20 +1556,63 @@ function startDeathTicker() {
     groupCauseText[groupName] = groups[groupName].map(function(item) { return item.label; }).join(', ');
   });
 
+  // The ticker starts at a chosen message (story.deathTicker.startAt), else at the first death toll.
   const firstGroupComp = story.comparisons.find(function(c) { return c.tickerGroup && c.deathsPerYear; });
-  const triggerEl = firstGroupComp ? document.querySelector('.comparison-' + firstGroupComp.id) : null;
+  const startId = (story.deathTicker && story.deathTicker.startAt) || (firstGroupComp && firstGroupComp.id);
+  const triggerEl = startId ? document.querySelector('.comparison-' + startId) : null;
+  const triggerMsgEl = triggerEl ? (triggerEl.querySelector(STICKY_CONTENT_SELECTOR) || triggerEl) : null;
+
+  // Breakdown link, shown only in the small intro panel
+  const moreBtn = document.createElement('button');
+  moreBtn.type = 'button';
+  moreBtn.className = 'ticker-more';
+  moreBtn.innerHTML = tUI('ticker-breakdown', 'Breakdown') +
+    '<svg width="7" height="11" viewBox="0 0 7 11" aria-hidden="true"><path d="M1.5 1.5l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  tickerEl.appendChild(moreBtn);
 
   let tickerVisible = null;
 
+  function endIntro() {
+    if (introTimer) { clearTimeout(introTimer); introTimer = null; }
+  }
+
+  // The intro opens the full panel only where it leaves the start message free; where it
+  // would cover it (phones), it opens small: heading, total and a link to the breakdown.
+  function chooseIntroSize() {
+    tickerEl.classList.remove('is-compact');
+    if (!triggerMsgEl) return;
+    const panel = tickerEl.getBoundingClientRect();
+    const msg = triggerMsgEl.getBoundingClientRect();
+    const stickyTop = parseFloat(getComputedStyle(triggerMsgEl).top);
+    const msgTop = isNaN(stickyTop) ? msg.top : stickyTop;
+    const msgBottom = msgTop + msg.height;
+    const overlapX = panel.left < msg.right && panel.right > msg.left;
+    const overlapY = panel.top < msgBottom + 8 && panel.bottom > msgTop;
+    if (overlapX && overlapY) tickerEl.classList.add('is-compact');
+  }
+
   function checkVisibility() {
     if (!triggerEl) return;
-    const scrollTop = window.scrollY || window.pageYOffset || 0;
-    const reached = (scrollTop + getStableVh() > triggerEl.offsetTop);
+    const reached = triggerMsgEl.getBoundingClientRect().top < getStableVh() * 0.6;
+    if (reached && !introShown) {
+      introShown = true;
+      tickerEl.dataset.minimized = 'false';
+      tickerEl.hidden = false;
+      chooseIntroSize();
+      introTimer = setTimeout(function() {
+        introTimer = null;
+        tickerEl.dataset.minimized = 'true';
+        checkVisibility();
+      }, TICKER_INTRO_MS);
+    }
     const minimized = tickerEl.dataset.minimized === 'true';
-    // Either the open panel or the pill is shown once the first death toll is reached.
+    if (minimized) tickerEl.classList.remove('is-compact');
+    // The pill stays once the first death toll is reached; it opens and closes the panel above it.
     tickerEl.hidden = !reached || minimized;
-    reopenBtn.style.display = (reached && minimized) ? 'flex' : 'none';
+    reopenBtn.style.display = reached ? 'flex' : 'none';
+    reopenBtn.setAttribute('aria-expanded', minimized ? 'false' : 'true');
     tickerVisible = reached;
+    fitTickerPill();
   }
 
   let tickerVisibilityRafId = null;
@@ -1610,6 +1654,16 @@ function startDeathTicker() {
     countsEl.innerHTML = html;
     if (pillCountEl) pillCountEl.textContent = thousand.format(grandTotal);
     if (pillLabelEl) pillLabelEl.textContent = grandTotal === 1 ? tUI('death', 'death') : tUI('deaths', 'deaths');
+    fitTickerPill();
+  }
+
+  // The two pills must never touch: on narrow screens (or with a long number) the word
+  // "deaths" is left out of the ticker pill; the red figure still says what is counted.
+  function fitTickerPill() {
+    if (reopenBtn.style.display === 'none' || !nextMessageBtn || nextMessageBtn.hidden) return;
+    reopenBtn.classList.remove('is-short');
+    const gap = reopenBtn.getBoundingClientRect().left - nextMessageBtn.getBoundingClientRect().right;
+    if (gap < 8) reopenBtn.classList.add('is-short');
   }
 
   update();
@@ -1619,14 +1673,35 @@ function startDeathTicker() {
     updateWealthCounter();
   }, TICKER_UPDATE_MS);
 
-  closeBtn.onclick = function() {
+  // Once the reader opens or closes it, the ticker stays as they left it.
+  closeBtn.onclick = function(e) {
+    e.stopPropagation();
+    endIntro();
     tickerEl.dataset.minimized = 'true';
     checkVisibility();
   };
   reopenBtn.onclick = function() {
-    tickerEl.dataset.minimized = 'false';
+    endIntro();
+    tickerEl.classList.remove('is-compact');
+    tickerEl.dataset.minimized = tickerEl.dataset.minimized === 'true' ? 'false' : 'true';
     checkVisibility();
   };
+  // Tapping the small intro panel opens the full breakdown.
+  tickerEl.addEventListener('click', function() {
+    if (!tickerEl.classList.contains('is-compact')) return;
+    endIntro();
+    tickerEl.classList.remove('is-compact');
+  });
+  // Moving on to the next message ends the intro, so the panel never sits on the next text.
+  if (nextMessageBtn) {
+    nextMessageBtn.addEventListener('click', function() {
+      if (!introTimer) return;
+      endIntro();
+      tickerEl.dataset.minimized = 'true';
+      checkVisibility();
+    });
+  }
+  reopenBtn.setAttribute('aria-controls', 'death-ticker');
   checkVisibility();
 }
 
