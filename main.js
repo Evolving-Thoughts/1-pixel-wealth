@@ -167,6 +167,70 @@ function createLanguageMenu() {
   menu.appendChild(trigger);
   menu.appendChild(panel);
   titleScreen.appendChild(menu);
+  createThemeToggle(titleScreen);
+}
+
+// ─── Dark mode switch ───────────────────────────────────────────────
+// The page follows the device setting until the reader picks a mode here. A pick that matches
+// the device setting is forgotten again, so the page goes back to following the device.
+// The first theme is set by the small script in the page head, before anything is drawn.
+const THEME_STORAGE_KEY = 'theme';
+const darkQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+
+function getStoredTheme() {
+  try {
+    const t = localStorage.getItem(THEME_STORAGE_KEY);
+    return t === 'dark' || t === 'light' ? t : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function getSystemTheme() {
+  return darkQuery && darkQuery.matches ? 'dark' : 'light';
+}
+
+function createThemeToggle(titleScreen) {
+  const isDe = getCurrentLanguage() === 'de';
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'theme-toggle';
+  btn.setAttribute('aria-label', isDe ? 'Dunkler Modus' : 'Dark mode');
+  btn.innerHTML =
+    '<svg class="theme-moon" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M14.5 11.2A6.5 6.5 0 0 1 6.8 3.5a6.5 6.5 0 1 0 7.7 7.7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>' +
+    '<svg class="theme-sun" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9 1.5v2M9 14.5v2M1.5 9h2M14.5 9h2M3.7 3.7l1.4 1.4M12.9 12.9l1.4 1.4M3.7 14.3l1.4-1.4M12.9 5.1l1.4-1.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
+
+  function sync() {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    btn.setAttribute('aria-pressed', String(dark));
+    btn.title = dark
+      ? (isDe ? 'Hellen Modus einschalten' : 'Switch to light mode')
+      : (isDe ? 'Dunklen Modus einschalten' : 'Switch to dark mode');
+  }
+
+  btn.addEventListener('click', function() {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try {
+      if (next === getSystemTheme()) localStorage.removeItem(THEME_STORAGE_KEY);
+      else localStorage.setItem(THEME_STORAGE_KEY, next);
+    } catch (e) { /* storage blocked: the choice lasts for this visit */ }
+    sync();
+  });
+
+  // While the reader has not picked a mode, follow the device when it switches.
+  if (darkQuery) {
+    const onSystemChange = function() {
+      if (getStoredTheme()) return;
+      document.documentElement.setAttribute('data-theme', getSystemTheme());
+      sync();
+    };
+    if (darkQuery.addEventListener) darkQuery.addEventListener('change', onSystemChange);
+    else if (darkQuery.addListener) darkQuery.addListener(onSystemChange);
+  }
+
+  sync();
+  titleScreen.appendChild(btn);
 }
 
 function getActiveLocale() {
@@ -1603,17 +1667,27 @@ function startDeathTicker() {
     // Until the messages are placed along the bars they all sit at the top; ignore that state.
     const placed = triggerEl.offsetTop > getStableVh();
     const reached = placed && triggerMsgEl.getBoundingClientRect().top < getStableVh() * 0.6;
+    // The intro opens only while the start message is on screen; someone who jumps past it
+    // (scrollbar, link) just gets the pill, so the panel never lands on an unrelated message.
     if (reached && !introShown) {
       introShown = true;
-      tickerEl.dataset.minimized = 'false';
-      tickerEl.hidden = false;
-      chooseIntroSize();
-      introTimer = setTimeout(function() {
-        introTimer = null;
-        tickerEl.dataset.minimized = 'true';
-        checkVisibility();
-      }, TICKER_INTRO_MS);
+      if (triggerMsgEl.getBoundingClientRect().bottom > 0) openIntro();
     }
+    finishCheck(reached);
+  }
+
+  function openIntro() {
+    tickerEl.dataset.minimized = 'false';
+    tickerEl.hidden = false;
+    chooseIntroSize();
+    introTimer = setTimeout(function() {
+      introTimer = null;
+      tickerEl.dataset.minimized = 'true';
+      checkVisibility();
+    }, TICKER_INTRO_MS);
+  }
+
+  function finishCheck(reached) {
     const minimized = tickerEl.dataset.minimized === 'true';
     if (minimized) tickerEl.classList.remove('is-compact');
     // The pill stays once the first death toll is reached; it opens and closes the panel above it.
