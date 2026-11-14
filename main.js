@@ -1559,8 +1559,14 @@ function startDeathTicker() {
   // The ticker starts at a chosen message (story.deathTicker.startAt), else at the first death toll.
   const firstGroupComp = story.comparisons.find(function(c) { return c.tickerGroup && c.deathsPerYear; });
   const startId = (story.deathTicker && story.deathTicker.startAt) || (firstGroupComp && firstGroupComp.id);
-  const triggerEl = startId ? document.querySelector('.comparison-' + startId) : null;
-  const triggerMsgEl = triggerEl ? (triggerEl.querySelector(STICKY_CONTENT_SELECTOR) || triggerEl) : null;
+  // Looked up on every check: the messages are rebuilt after the ticker starts (language, resize).
+  let triggerEl = null;
+  let triggerMsgEl = null;
+  function findTrigger() {
+    if (triggerEl && triggerEl.isConnected) return;
+    triggerEl = startId ? document.querySelector('.comparison-' + startId) : null;
+    triggerMsgEl = triggerEl ? (triggerEl.querySelector(STICKY_CONTENT_SELECTOR) || triggerEl) : null;
+  }
 
   // Breakdown link, shown only in the small intro panel
   const moreBtn = document.createElement('button');
@@ -1592,8 +1598,11 @@ function startDeathTicker() {
   }
 
   function checkVisibility() {
+    findTrigger();
     if (!triggerEl) return;
-    const reached = triggerMsgEl.getBoundingClientRect().top < getStableVh() * 0.6;
+    // Until the messages are placed along the bars they all sit at the top; ignore that state.
+    const placed = triggerEl.offsetTop > getStableVh();
+    const reached = placed && triggerMsgEl.getBoundingClientRect().top < getStableVh() * 0.6;
     if (reached && !introShown) {
       introShown = true;
       tickerEl.dataset.minimized = 'false';
