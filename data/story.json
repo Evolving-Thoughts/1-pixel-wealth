@@ -978,7 +978,7 @@
       "type": "cause",
       "positionFraction": 0.051,
       "title": "Universal Healthcare (UHC)",
-      "costUsd": 833400000000,
+      "costUsd": 371000000000,
       "costPeriod": "yearly",
       "description": "<a href=\"https://www.who.int/news-room/fact-sheets/detail/universal-health-coverage-(uhc)\" target=\"_blank\" rel=\"noopener noreferrer\">4.6 billion people</a> lack essential health services. Universal health coverage means that all people have access to the full range of quality health services they need, when and where they need them, without financial hardship. ",
       "affectedShare": [14, 25],
@@ -997,11 +997,11 @@
     },
     {
       "id": "universal-healthcare-3",
-      "calcNote": "ILO Working Paper 113 (2024), table 4: financing gap for essential health care in all 133 low- and middle-income countries, $833.4 billion per year (2024 prices). It builds on WHO per-person costs (Stenberg et al. 2017), which also include clean water, sanitation and clean cooking. Those appear here as their own items, so this figure is more likely too high than too low.",
+      "calcNote": "WHO, SDG Health Price Tag (Lancet Global Health 2017), ambitious scenario: additional investments rise from $134 billion to $371 billion per year by 2030. We use the highest year. The study uses 2014 prices; in today's prices the amount would be somewhat higher.",
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.053,
-      "title": "Providing essential health care for everyone in all 133 low- and middle-income countries would cost an additional <a href=\"https://www.ilo.org/sites/default/files/2024-04/wp113_web.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">$833 billion per year</a> on top of what they already spend. This estimate also includes clean water, sanitation and clean cooking, which appear here as their own items, so it is more likely too high than too low.",
+      "title": "To reach the UN health goals by 2030, 67 low- and middle-income countries, home to 75% of the world's population, would need an additional <a href=\"https://www.who.int/news/item/17-07-2017-who-estimates-cost-of-reaching-global-health-targets-by-2030\" target=\"_blank\" rel=\"noopener noreferrer\">$371 billion per year</a>. This would prevent 97 million premature deaths.",
       "i18nKey": "i18n-universal-healthcare-3"
     },
     {
@@ -1010,7 +1010,7 @@
       "type": "summary",
       "positionFraction": 0.054,
       "title": "Everything so far, combined",
-      "costUsd": 3833600000000,
+      "costUsd": 3371200000000,
       "description": "Health, basic needs, education, poverty and forced labor: all fundable <strong>simultaneously</strong> with <strong>less than a fifth</strong> of all billionaire wealth.",
       "i18nKey": "i18n-all-human-focused-causes-combined",
       "rows": [
@@ -1282,7 +1282,7 @@
       "bar": "allBillionaires",
       "type": "summary",
       "positionFraction": 0.077,
-      "costUsd": 11066100000000,
+      "costUsd": 10603700000000,
       "title": "ALL OF IT, TOGETHER",
       "description": "Health, basic needs, education, poverty, forced labor, climate and nature: <strong>all of it, together</strong>, for a little more than half of all billionaire wealth.",
       "i18nKey": "i18n-grand-summary",
@@ -1529,7 +1529,7 @@
       "id": "scroll-63-percent-of-money",
       "bar": "allBillionaires",
       "type": "text",
-      "positionFraction": 0.55,
+      "positionFraction": 0.53,
       "title": "Wow, you're still going? You reached the point of their wealth that could fund all the things I listed above. Everything from this point on would still be theirs, if we don't collectively decide that the remaining money could be used for better things as well.",
       "i18nKey": "i18n-scroll-63-percent-of-money"
     }

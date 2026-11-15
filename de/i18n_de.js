@@ -215,7 +215,7 @@ strings : {
 'i18n-universal-healthcare-source-name' : 'Weltgesundheitsorganisation',
 'i18n-universal-healthcare-affected-line' : 'Mehr als die Hälfte aller Menschen hat keinen Zugang zu grundlegender Gesundheitsversorgung.',
 'i18n-universal-healthcare-2' : 'Das heißt: Vorsorge, Behandlung, Reha und Palliativversorgung, ein Leben lang.',
-'i18n-universal-healthcare-3' : 'Eine grundlegende Gesundheitsversorgung für alle Menschen in allen 133 Ländern mit niedrigem und mittlerem Einkommen würde zusätzlich zu den heutigen Ausgaben <a href="https://www.ilo.org/sites/default/files/2024-04/wp113_web.pdf" target="_blank" rel="noopener noreferrer">833 Milliarden Dollar pro Jahr</a> kosten. Darin sind auch sauberes Wasser, Sanitärversorgung und sauberes Kochen enthalten, die hier schon eigene Posten haben. Die Kosten sind also eher zu hoch als zu niedrig angesetzt.',
+'i18n-universal-healthcare-3' : 'Damit 67 Länder mit niedrigem und mittlerem Einkommen, in denen 75 % der Weltbevölkerung leben, die Gesundheitsziele der UN bis 2030 erreichen, wären zusätzlich <a href="https://www.who.int/news/item/17-07-2017-who-estimates-cost-of-reaching-global-health-targets-by-2030" target="_blank" rel="noopener noreferrer">371 Milliarden Dollar pro Jahr</a> nötig. Das würde 97 Millionen vorzeitige Todesfälle verhindern.',
 
 'i18n-all-human-focused-causes-combined' : 'Alles bisher zusammen',
 'i18n-all-human-focused-causes-combined-desc' : 'Gesundheit, Grundbedürfnisse, Bildung, Armut und Zwangsarbeit: alles <strong>gleichzeitig</strong> finanzierbar mit <strong>weniger als einem Fünftel</strong> des Vermögens aller Milliardäre.',
@@ -348,7 +348,7 @@ strings : {
 'i18n-climate-adaptation-calc-note' : 'UNEP: Bedarf 365 Mrd. $ pro Jahr, Zuflüsse 26 Mrd. $, Lücke 339 Mrd. $ pro Jahr × 5 Jahre (2026–2030) ≈ 1,695 Bio. $. Anteil an der Weltbevölkerung (etwa 8,2 Mrd. Menschen): 3,6 Mrd. ≈ 11 von 25.',
 'i18n-land-restoration-calc-note' : 'UN: Bedarf etwa 365 Mrd. $ pro Jahr (1 Mrd. $ pro Tag), vorhanden 66 Mrd. $, Lücke etwa 300 Mrd. $ pro Jahr × 5 Jahre (2026–2030) ≈ 1,5 Bio. $.',
 'i18n-energy-transition-calc-note' : 'UNCTAD: jährliche Lücke von 286 Mrd. $ für 48 Entwicklungsländer × 5 Jahre (2026–2030) = 1,43 Bio. $.',
-'i18n-universal-healthcare-3-calc-note' : 'ILO Working Paper 113 (2024), Tabelle 4: Finanzierungslücke für grundlegende Gesundheitsversorgung in allen 133 Ländern mit niedrigem und mittlerem Einkommen, 833,4 Mrd. $ pro Jahr (Preise 2024). Grundlage sind die WHO-Kosten pro Kopf (Stenberg u. a. 2017), die auch sauberes Wasser, Sanitärversorgung und sauberes Kochen enthalten. Diese stehen hier als eigene Posten, die Zahl ist also eher zu hoch als zu niedrig.',
+'i18n-universal-healthcare-3-calc-note' : 'WHO, SDG Health Price Tag (Lancet Global Health 2017), ambitioniertes Szenario: zusätzliche Investitionen steigen von 134 Mrd. $ auf 371 Mrd. $ pro Jahr bis 2030. Wir rechnen vorsichtig mit dem höchsten Jahr. Die Studie rechnet in Preisen von 2014; in heutigen Preisen läge der Betrag etwas höher.',
 'i18n-ui-sources-calc' : 'Rechenweg',
 'i18n-ui-ticker-breakdown' : 'Aufschlüsselung',
 'i18n-ui-data-stand' : 'Vermögen: {source}, Stand {date}',
