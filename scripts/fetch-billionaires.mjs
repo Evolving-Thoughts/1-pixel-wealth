@@ -48,7 +48,7 @@ async function fetchWithRetry(url, options, retries = MAX_RETRIES) {
 async function fetchTop200() {
   const response = await fetchWithRetry(FORBES_TOP200_ENDPOINT, {
     headers: {
-      "User-Agent": "1-pixel-wealth-global/1.0",
+      "User-Agent": "pixel-wealth-global/1.0",
       Accept: "application/json",
     },
   });
@@ -104,7 +104,7 @@ async function main() {
   process.stdout.write("Fetching all billionaires…\n");
   const allResponse = await fetchWithRetry(FORBES_ALL_ENDPOINT, {
     headers: {
-      "User-Agent": "1-pixel-wealth-global/1.0",
+      "User-Agent": "pixel-wealth-global/1.0",
       Accept: "application/json",
     },
   });

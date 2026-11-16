@@ -39,8 +39,8 @@
       "bar": "richest",
       "type": "text",
       "positionFraction": 0.125,
-      "title": "Lol, just kidding, we're only about ⅛ of the way. Keep scrolling though, there's more to see.",
-      "i18nKey": "i18n-lol-just-kidding"
+      "title": "Just kidding, we're only about ⅛ of the way. Keep scrolling though, there's more to see.",
+      "i18nKey": "i18n-just-kidding"
     },
     {
       "id": "familiar-things",
@@ -345,7 +345,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0,
-      "title": "The wealth of Elon Musk may seem staggering, but it is a drop in the ocean compared to the combined wealth of all <a href=\"https://www.forbes.com/sites/pr/2026/03/10/forbes-40th-annual-worlds-billionaires-list-elon-musk-is-worlds-richest-person-ever-recorded/\" target=\"_blank\" rel=\"noopener noreferrer\"> ~{billionaireCount} billionaires on Earth</a>: {allBillionairesFormatted}.",
+      "title": "The wealth of Elon Musk may seem staggering, but it is a drop in the ocean compared to the combined wealth of the <a href=\"https://www.forbes.com/sites/pr/2026/03/10/forbes-40th-annual-worlds-billionaires-list-elon-musk-is-worlds-richest-person-ever-recorded/\" target=\"_blank\" rel=\"noopener noreferrer\"> ~{billionaireCount} billionaires on Earth</a>: {allBillionairesTotalUsd}.",
       "i18nKey": "i18n-all-billionaires-intro"
     },
     {
@@ -892,9 +892,9 @@
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.054,
-      "title": "Everything I've listed so far combined:",
+      "title": "Everything listed so far combined:",
       "costUsd": 5500200000000,
-      "description": "All of the causes I've listed so far — ending infectious diseases, solving other health issues, providing clean water and sanitation, ensuring access to nutritious food, clean cooking, electricity, universal education, ending extreme poverty and forced labor, and providing universal healthcare — could be funded <strong>simultaneously</strong> with <strong>less than 30%</strong> of all billionaire wealth</strong>.",
+      "description": "All of the causes listed so far — ending infectious diseases, solving other health issues, providing clean water and sanitation, ensuring access to nutritious food, clean cooking, electricity, universal education, ending extreme poverty and forced labor, and providing universal healthcare — could be funded <strong>simultaneously</strong> with <strong>less than 30%</strong> of all billionaire wealth</strong>.",
       "i18nKey": "i18n-all-human-focused-causes-combined"
     },
     {
@@ -1216,7 +1216,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.091,
-      "title": "<strong>Learn who's fighting this.</strong><br><br>These organizations are working to close the gap between what the world could be and what it is:<br> <ul><li><a href=\"https://www.oxfam.org/\">Oxfam</a> — campaigns for wealth taxes and economic justice <br> <li><a href=\"https://taxjustice.net/\"> Tax Justice Network</a> — tracks tax havens and advocates for fair taxation<br> <li><a href=\"https://www.givedirectly.org/\">GiveDirectly</a> — sends money directly to the world's poorest people </ul> Of course, there are many more. Learn about them and support them if you can. I'm not affiliated with any of these. They're just doing good work.",
+      "title": "<strong>Learn who's fighting this.</strong><br><br>These organizations are working to close the gap between what the world could be and what it is:<br> <ul><li><a href=\"https://www.oxfam.org/\">Oxfam</a> — campaigns for wealth taxes and economic justice <br> <li><a href=\"https://taxjustice.net/\"> Tax Justice Network</a> — tracks tax havens and advocates for fair taxation<br> <li><a href=\"https://www.givewell.org/\">GiveWell</a> — charity evaluator that recommends organizations that improve the most lives per dollar spent<br> <li><a href=\"https://www.givedirectly.org/\">GiveDirectly</a> — sends money directly to the world's poorest people </ul> Of course, there are many more. Learn about them and support them if you can. I'm not affiliated with any of these. They're just doing good work.",
       "i18nKey": "i18n-learn-more"
     },
     {
