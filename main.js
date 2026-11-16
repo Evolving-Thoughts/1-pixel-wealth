@@ -166,8 +166,9 @@ function createLanguageMenu() {
 
   menu.appendChild(trigger);
   menu.appendChild(panel);
-  titleScreen.appendChild(menu);
-  createThemeToggle(titleScreen);
+  // First in the keyboard order: the dark mode switch, then the language menu (left to right).
+  titleScreen.insertBefore(menu, titleScreen.firstChild);
+  createThemeToggle(titleScreen, menu);
 }
 
 // ─── Dark mode switch ───────────────────────────────────────────────
@@ -190,7 +191,7 @@ function getSystemTheme() {
   return darkQuery && darkQuery.matches ? 'dark' : 'light';
 }
 
-function createThemeToggle(titleScreen) {
+function createThemeToggle(titleScreen, beforeEl) {
   const isDe = getCurrentLanguage() === 'de';
   const btn = document.createElement('button');
   btn.type = 'button';
@@ -230,7 +231,7 @@ function createThemeToggle(titleScreen) {
   }
 
   sync();
-  titleScreen.appendChild(btn);
+  titleScreen.insertBefore(btn, beforeEl || titleScreen.firstChild);
 }
 
 function getActiveLocale() {
@@ -601,6 +602,14 @@ function startAutoScroll(targetY) {
 
   stopAutoScroll();
 
+  // Readers who asked their device to reduce motion jump straight to the next message;
+  // the counter and ruler at the top still show how far they travelled.
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.scrollTo(0, targetY);
+    updateNextMessageButtonState();
+    return;
+  }
+
   const duration = Math.min(
     AUTO_SCROLL_MAX_DURATION_MS,
     Math.max(AUTO_SCROLL_MIN_DURATION_MS, Math.round((distance / AUTO_SCROLL_PIXELS_PER_SECOND) * 1000))
@@ -640,6 +649,9 @@ function initNextMessageNav() {
   nextMessageBtn = document.getElementById('next-message-btn');
   if (!nextMessageBtn) return;
   nextMessageNavInitialized = true;
+  // Right after the title screen in the keyboard order, before the many links in the messages.
+  const titleScreenEl = document.querySelector('.title-screen');
+  if (titleScreenEl) titleScreenEl.after(nextMessageBtn);
 
   const nextPointLabel = tUI('next-point', 'Next message');
   nextMessageBtn.textContent = nextPointLabel;
@@ -694,7 +706,8 @@ function renderDataStand(data) {
     source: link,
     date: formatSnapshotDate(data.snapshotDate)
   });
-  titleScreen.appendChild(el);
+  // Bottom left, so it comes before "inspired by" (bottom right) in the keyboard order.
+  titleScreen.insertBefore(el, titleScreen.querySelector(".inspired-by"));
 }
 
 function loadData() {
@@ -1628,6 +1641,11 @@ function startDeathTicker() {
   const closeBtn = document.getElementById('death-ticker-close');
   const reopenBtn = document.getElementById('death-ticker-reopen');
   if (!tickerEl || !countsEl || !closeBtn || !reopenBtn) return;
+  // Keyboard order: "Next message", then the counter pill, then its panel, all before the messages.
+  if (nextMessageBtn) {
+    nextMessageBtn.after(reopenBtn);
+    reopenBtn.after(tickerEl);
+  }
 
   var tickerLabel = tickerEl.querySelector('.death-ticker-label');
   if (tickerLabel) {
