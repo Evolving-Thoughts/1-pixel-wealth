@@ -10,7 +10,7 @@ web
 Broad general public, arriving mostly via shared links and social media, often on a phone. They are curious, not experts, and want a felt sense of how extreme billionaire wealth is, not a data table.
 
 ## Product Purpose
-1 Pixel Wealth is a scrollytelling page that visualizes wealth at true scale. Success is that a visitor leaves with an intuitive, physical sense of the size of billionaire fortunes compared with everyday amounts, by scrolling through them.
+Pixel Wealth is a scrollytelling page that visualizes wealth at true scale. Success is that a visitor leaves with an intuitive, physical sense of the size of billionaire fortunes compared with everyday amounts, by scrolling through them.
 
 ## Positioning
 The scale is literal and constant: 1 square pixel = $1,000 (`DOLLARS_PER_PIXEL = 1000` in main.js). Bar height is `wealth / (barWidth * DOLLARS_PER_PIXEL)`, so scroll distance varies with the viewport-driven bar width while the area-to-dollar ratio never changes. The scroll distance itself conveys the magnitude, so no chart, tooltip or statistic can replace it.

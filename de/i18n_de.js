@@ -356,6 +356,7 @@ strings : {
 'i18n-ui-all-sources' : 'Alle Quellen dieser Seite',
 'i18n-ui-sources-title' : 'Quellen',
 'i18n-ui-sources-back' : 'Zurück zur Seite',
+'i18n-ui-privacy' : 'Datenschutz',
 'i18n-ui-sources-wealth' : 'Vermögen',
 'i18n-ui-sources-wealth-text' : '{source}, Stand {date}. {count} Milliardäre, zusammen {total}.',
 'i18n-ui-sources-messages' : 'Belege zu den Nachrichten',
@@ -368,7 +369,7 @@ strings : {
 'i18n-ui-browser-broke' : '<span class="step-hd">Selbst dein Browser kann so viel Geld nicht verarbeiten!</span>Du hast ~<strong>{pctReached}</strong> ihres Vermögens durchgescrollt, und dein Gerät hat sein Limit erreicht. Die verbleibenden <strong>{pctRemaining}</strong> (etwa <strong>{remainingFormatted}</strong>) können einfach nicht dargestellt werden.<br><br>{totalFormatted}: eine Zahl, die zu groß für deinen Browser ist. Aber nicht zu groß für {billionaireCount} Milliardäre.',
 
 // ─── Ticker group names ─────────────────────────────────────────────
-'i18n-inspired-by' : 'inspiriert von <a href="https://github.com/mkorostoff" target="_blank" rel="noopener noreferrer">mkorostoff</a>',
+'i18n-inspired-by' : 'inspiriert von <a href="https://github.com/mkorostoff" target="_blank" rel="noopener noreferrer">mkorostoff</a> · <a href="datenschutz.html">Datenschutz</a>',
 
 // ─── Ticker group names ─────────────────────────────────────────────
 'i18n-ticker-group-infectious-diseases' : 'Infektionskrankheiten',

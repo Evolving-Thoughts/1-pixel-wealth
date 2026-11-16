@@ -118,6 +118,7 @@
           return '<li><a href="' + esc(o.url) + '" target="_blank" rel="noopener noreferrer">' + esc(o.name) + '</a>' + (o.note ? ' <span class="sources-host">' + esc(o.note) + '</span>' : '') + '</li>';
         }).join('') + '</ul>';
     }
+    html += '<p class="sources-foot"><a href="' + (isDe ? 'datenschutz.html' : 'privacy.html') + '">' + esc(ui('privacy', 'Privacy')) + '</a></p>';
     root.innerHTML = html;
   }
 
