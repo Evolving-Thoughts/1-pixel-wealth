@@ -1,0 +1,5 @@
+# Impeccable (design tooling for Claude Code) stays local and is not part of the site
+.impeccable/
+.claude/skills/impeccable/
+.claude/agents/impeccable-*.md
+.claude/settings.local.json

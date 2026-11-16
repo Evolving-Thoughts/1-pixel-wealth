@@ -1,87 +1,267 @@
+/* ─── Tokens ─── */
+:root {
+  --ink: #111;
+  --paper: #fff;
+  --orange: #F2A63B;
+  --blue: #45A6DC;
+  --green: #5AAE64;
+  --muted: #595959;
+  --red: #C62828;
+  --line: #D3D5D9;
+  --font: Archivo, "Helvetica Neue", Arial, sans-serif;
+
+  /* Space kept free at the right of every bar for the ruler and the bracket */
+  --ruler-w: 18px;
+  --msg-pad-left: 22px;
+  --msg-pad-right: 62px;
+}
+
+/* Archivo, self-hosted (variable weight and width, SIL Open Font License, see fonts/OFL.txt) */
+@font-face {
+  font-family: Archivo;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  src: url('fonts/archivo-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face {
+  font-family: Archivo;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  src: url('fonts/archivo-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
 /* ─── Reset & Base ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 body, html {
   margin: 0;
 }
 html {
   overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--font);
 }
 body, html, .wealth-wrapper-outer, .wealth-row {
   min-height: 100%;
 }
+::selection {
+  background: var(--ink);
+  color: #fff;
+}
+.num,
+.wealth-title,
+.counter,
+.scale-label {
+  font-variant-numeric: tabular-nums;
+}
 
 /* ─── Title Screen ─── */
+/* One screen tall, but it may grow on very small screens so that nothing overlaps. */
 .title-screen {
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  min-height: max(100vh, 560px);
+  min-height: max(100dvh, 560px);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
 }
 h1 {
   text-align: center;
-  font-size: 60px;
-  line-height: 0.9;
+  font-size: clamp(44px, 12vw, 84px);
+  font-weight: 800;
+  font-stretch: 78%;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
   width: 100%;
-  margin-top: 100px;
+  max-width: 14ch;
+  margin: clamp(72px, 12vh, 120px) 0 0;
+  text-wrap: balance;
+}
+/* Centred in the free space between the heading and the scroll arrow, on every screen size. */
+.pixel-legend {
+  flex: none;
+  margin-block: auto;
+  padding-block: clamp(16px, 3vh, 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.pixel-eq {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 12px;
+}
+.pixel-row {
+  display: flex;
+  align-items: center;
+}
+.one-pixel {
+  width: 1px;
+  height: 1px;
+  background: var(--ink);
+  flex: none;
+}
+.pixel-arrow {
+  margin-left: 6px;
+  flex: none;
+}
+.pixel-lens {
+  flex: none;
+}
+.pixel-note {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.scroll-this-way {
+  flex: none;
+  margin-bottom: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--muted);
+  animation: nudge 3s cubic-bezier(.16, 1, .3, 1) infinite;
+}
+@keyframes nudge {
+  0%, 60%, 100% { transform: none; }
+  75% { transform: translateY(10px); }
+}
+/* Very short screens: tighter spacing and a shorter arrow, so the title screen still fits. */
+@media (max-height: 620px) {
+  h1 {
+    margin-top: 56px;
+  }
+  .scroll-this-way {
+    margin-bottom: 28px;
+  }
+  .scroll-this-way svg {
+    width: auto;
+    height: 56px;
+  }
 }
 .inspired-by {
   position: absolute;
-  bottom: 16px;
-  right: 1em;
+  bottom: 12px;
+  right: 16px;
   font-size: 12px;
-  color: #00000055;
+  color: var(--muted);
   margin: 0;
 }
 .inspired-by a {
   color: inherit;
   text-decoration: underline;
 }
-.scroll-this-way {
-  width: 165px;
-  height: 360px;
+
+/* Data source and date, bottom left; pairs with "inspired by" on the right */
+.data-stand {
   position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 48px;
-  font-size: 30px;
-  color: #00000033;
-  background-image: url(img/down.svg);
-  background-repeat: no-repeat;
-  background-size: 50%;
-  background-position: 50px 50px;
-  animation: bouncy-arrow 3s infinite;
+  bottom: 12px;
+  left: 16px;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
 }
+.data-stand a {
+  color: inherit;
+  text-decoration: underline;
+}
+/* Too narrow for both side by side: stack them on the right */
+@media (max-width: 420px) {
+  .data-stand {
+    left: auto;
+    right: 16px;
+    bottom: 30px;
+  }
+  .title-screen .scroll-this-way {
+    margin-bottom: 60px;
+  }
+}
+
+/* Link to the sources page in the last message, a quiet note between two fine lines */
+.sources-link {
+  display: block;
+  margin-top: 16px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(17, 17, 17, .45);
+  border-bottom: 1px solid rgba(17, 17, 17, .45);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+}
+
+/* ─── Dark mode switch, left of the language menu ─── */
+.theme-toggle {
+  position: absolute;
+  top: 8px;
+  right: 56px;
+  z-index: 4;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.theme-toggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+.theme-sun,
+[data-theme="dark"] .theme-moon {
+  display: none;
+}
+[data-theme="dark"] .theme-sun {
+  display: block;
+}
+
+/* ─── Language menu ─── */
 .language-menu {
   position: absolute;
-  top: 18px;
-  right: 18px;
+  top: 8px;
+  right: 8px;
   z-index: 4;
 }
 .language-menu-trigger {
   border: 0;
   background: transparent;
-  color: #333;
-  font-size: 13px;
-  font-weight: 700;
+  color: var(--ink);
+  font: 700 13px/1 var(--font);
   letter-spacing: 0.04em;
   cursor: pointer;
-  padding: 2px 0;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 12px;
 }
-.language-menu-trigger:hover,
-.language-menu-trigger:focus-visible {
-  color: #000;
-  outline: none;
+.language-menu-trigger:focus-visible,
+.language-menu-item:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 .language-menu-panel {
-  margin-top: 8px;
-  min-width: 92px;
-  border: 1px solid rgba(0, 0, 0, 0.18);
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
+  margin-top: 4px;
+  min-width: 120px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
   padding: 6px;
   display: flex;
   flex-direction: column;
@@ -92,38 +272,25 @@ h1 {
 }
 .language-menu-item {
   border: 0;
-  border-radius: 6px;
   background: transparent;
   text-align: left;
-  font-size: 13px;
-  padding: 6px 8px;
-  color: #222;
+  font: 500 14px/1 var(--font);
+  min-height: 44px;
+  padding: 0 10px;
+  color: var(--ink);
   cursor: pointer;
 }
-.language-menu-item:hover,
-.language-menu-item:focus-visible {
-  background: #f2f2f2;
-  outline: none;
+.language-menu-item:hover {
+  background: #f0f0f0;
 }
 .language-menu-item.is-active,
 .language-menu-item:disabled {
-  color: #888;
+  font-weight: 800;
   cursor: default;
-  background: #f8f8f8;
-}
-@keyframes bouncy-arrow {
-  0%   { background-position: 50px 50px; }
-  20%  { background-position: 50px 50px; }
-  25%  { background-position: 50px 70px; }
-  30%  { background-position: 50px 45px; }
-  35%  { background-position: 50px 70px; }
-  40%  { background-position: 50px 50px; }
-  100% { background-position: 50px 50px; }
 }
 
 /* ─── Layout ─── */
 .wealth-wrapper-outer {
-  font-family: sans-serif;
   overflow: visible;
   display: block;
 }
@@ -135,12 +302,6 @@ h1 {
   margin: 3em 1em;
 }
 
-/* ─── Arrow ─── */
-.arrow {
-  margin-top: -7.5px;
-  margin-left: 5px;
-}
-
 /* ─── Wealth Bars ─── */
 .wealth {
   background-color: black;
@@ -148,118 +309,191 @@ h1 {
   display: flex;
   flex-direction: column;
 }
-.title {
-  margin-bottom: 5px;
-}
 .wealth-title {
   align-self: flex-start;
-  margin-bottom: 5px;
-  margin-top: 0;
-  color: black;
-  background: transparent;
-  box-sizing: border-box;
+  margin: 0;
+  color: var(--ink);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 .wealth > .wealth-title {
   flex-basis: auto;
-  padding: 10px;
-}
-.billion .wealth > .wealth-title {
-  flex-basis: auto;
-  position: static;
-}
-.wealth-header {
-  position: sticky;
-  top: 0;
-  z-index: 3;
-  align-self: flex-start;
-  width: calc(100% - 90px);
-}
-.wealth-header .wealth-title {
-  padding-left: 4px;
+  padding: 14px;
 }
 
-/* ─── Calibration Bars ─── */
-.one-thousand {
-  width: 1px;
-  height: 1px;
-  margin-top: 5px;
+/* ─── Calibration (amount large, description small, equal gaps) ─── */
+.calibration {
+  margin-top: 0;
+  margin-bottom: 180px;
+  padding-left: 8px;
 }
-.median {
-  height: 200px;
-  width: 100%;
+.calibration .wealth-desc {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+.calibration .wealth {
+  margin-top: 10px;
 }
 .median .wealth {
-  width: 7.94px;
-  height: 7.94px;
-}
-.million {
-  height: 200px;
-  width: 100%;
+  width: 8px;
+  height: 8px;
+  background-color: var(--ink);
 }
 .million .wealth {
   width: 33.62px;
   height: 33.62px;
-  background-color: #4CAF50;
+  margin-top: 12px;
+  background-color: var(--green);
+}
+.billion {
+  margin-top: 0;
 }
 .billion .wealth {
   height: var(--billion-h, 2000px);
   width: var(--bar-width-billion, 500px);
-  background-color: #03A9F4;
+  background-color: var(--blue);
 }
 .richest .wealth {
   height: var(--richest-h);
   width: var(--bar-width, 500px);
-  background-color: orange;
+  background-color: var(--orange);
+  --bar-color: var(--orange);
 }
 .all-billionaires .wealth {
   margin-top: 100px;
   height: var(--all-billionaires-h);
   width: var(--bar-width, 500px);
-  background-color: #03A9F4;
+  background-color: var(--blue);
+  --bar-color: var(--blue);
 }
 
-/* ─── Ruler & Scale Key ─── */
-.ruler {
-  background-image: url('img/ruler-vert.svg');
-  background-repeat: repeat-y;
-  background-position: right 0;
-  background-size: 30px 160px;
+/* ─── Bar backdrop: the bar colour as a screen-sized sheet that travels with the screen ───
+   The two long bars are millions of pixels tall. When scrolling very fast, the browser cannot
+   paint their newly visible parts in time and the white page flashes through. This sheet is
+   only as large as the screen, so it is always painted; it sits behind everything in the bar. */
+.richest .wealth,
+.all-billionaires .wealth {
+  isolation: isolate;
 }
-.key {
+.richest .wealth {
+  --bar-h: var(--richest-h);
+}
+.all-billionaires .wealth {
+  --bar-h: var(--all-billionaires-h);
+}
+/* The wrapper is as tall as the bar and takes no space (negative margin). The sheet inside it
+   sticks to the top of the screen and can never leave the wrapper, so the bar keeps its exact
+   start and end. The bar must not become "position: relative": main.js measures the messages
+   with offsetTop relative to the page. */
+.bar-backdrop {
+  flex: none;
+  align-self: stretch;
+  height: var(--bar-h);
+  margin-bottom: calc(-1 * var(--bar-h));
+  z-index: -1;
+  pointer-events: none;
+}
+.bar-backdrop::before {
+  content: "";
+  display: block;
   position: sticky;
   top: 0;
-  align-self: flex-end;
-  margin-right: 35px;
-  margin-left: 0;
-  width: 25px;
-  height: 160px;
-  flex-shrink: 0;
-  background: url(img/scale-vert.svg) no-repeat right center;
-  background-size: 9px 160px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+  height: 100vh;
+  height: 100lvh;
+  background: var(--bar-color);
 }
-.key > span {
-  display: inline-block;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-size: 11px;
-  white-space: nowrap;
-  padding: 1px 0;
+
+/* ─── Bar HUD: header, bracket and ruler stay at the top while the bar scrolls ─── */
+.bar-hud {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  width: 100%;
+  height: 0;
+  flex: none;
+  align-self: stretch;
 }
-.richest .key > span {
-  background-color: orange;
+.wealth-header {
+  position: absolute;
+  left: 0;
+  right: var(--ruler-w);
+  top: 0;
+  padding: 10px 62px 12px 12px;
+  background: var(--bar-color);
+}
+.wealth-header .wealth-title {
+  font-size: clamp(19px, 6.1vw, 24px);
+}
+.wealth-header .total,
+.wealth-header .who {
+  display: block;
+}
+.wealth-header .who {
+  font-size: 0.92em;
+  font-stretch: 92%;
 }
 .counter {
-  color: black;
-  padding: 5px;
-  min-width: 140px;
-  background: transparent;
+  margin-top: 5px;
+  min-height: 1.2em;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Ruler: ticks are built by main.js and snapped to device pixels */
+.ruler-view {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--ruler-w);
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+}
+.ruler-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  will-change: transform;
+}
+.ruler-track i {
+  position: absolute;
+  right: 0;
+  background: var(--ink);
+}
+
+/* Bracket: one major ruler step, open towards the ruler, value to its left */
+.key {
+  position: absolute;
+  top: 3px;
+  right: 24px;
+  width: 8px;
+  border: 1px solid var(--ink);
+  border-right: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.key > span {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 3px);
+  writing-mode: vertical-rl;
+  transform: translateY(-50%) rotate(180deg);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 /* ─── Infoboxes (comparison items inside bars) ─── */
+#richest-comparisons,
+#allBillionaires-comparisons {
+  width: 100%;
+  min-width: 0;
+}
 .infobox {
   z-index: 1;
   width: 100%;
@@ -271,13 +505,28 @@ h1 {
 }
 .infobox .title,
 .infobox .comparison-rect-wrapper {
-  font-weight: normal;
-  line-height: 1.4;
-  width: 75vw;
-  max-width: 600px;
+  width: 100%;
+  max-width: 684px;
+  padding-left: var(--msg-pad-left);
+  padding-right: var(--msg-pad-right);
+  margin: 25vh auto;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.36;
+  text-wrap: balance;
+}
+.infobox a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+}
+.infobox a:focus-visible,
+.viz button:focus-visible,
+.share-inline-btn:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 .infobox ul {
   text-align: left;
@@ -285,42 +534,34 @@ h1 {
   margin: 0.5em auto;
 }
 .share-inline-row {
-  margin-top: 12px;
+  margin-top: 16px;
 }
 .share-inline-btn {
   border: 0;
   border-radius: 999px;
-  background: #222;
+  background: var(--ink);
   color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 9px 14px;
+  font: 600 15px/1 var(--font);
+  height: 44px;
+  padding: 0 18px;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-.share-inline-btn:hover,
-.share-inline-btn:focus-visible {
-  background: #000;
-  outline: none;
 }
 
-/* ─── Sticky centering for infobox content ─── */
+/* Sticky content, centred in the space below the header. main.js sets --sticky-half to half the
+   block's height, so the block is placed by `top` alone. A transform would push its upper half
+   out of its infobox while it scrolls in, and content-visibility would cut that half off. */
 .text-infobox .title,
-.infobox .comparison-rect-wrapper:not(.comparison-rect-large) {
-  position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 25vh;
-  margin-bottom: 25vh;
-}
+.infobox .comparison-rect-wrapper:not(.comparison-rect-large),
 .cause-card,
 .summary-card,
 .comparison-image-wrapper {
   position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
+  top: calc(50% + var(--hud-h, 96px) / 2 - 20px - var(--sticky-half, 0px));
+}
+/* Too tall to centre below the header: the message scrolls through and then sticks with its
+   lower edge above the buttons. main.js sets --tall-top (usually negative). */
+.infobox .is-tall {
+  top: var(--tall-top, calc(var(--hud-h, 96px) + 8px));
 }
 
 /* ─── Comparison Rectangles ─── */
@@ -330,7 +571,8 @@ h1 {
   align-items: center;
 }
 .comparison-rect {
-  margin-top: 8px;
+  margin-top: 14px;
+  outline: 1px solid rgba(0, 0, 0, .35);
 }
 .comparison-rect-label {
   color: inherit;
@@ -343,15 +585,19 @@ h1 {
 }
 .comparison-rect-medium .comparison-rect-label {
   text-align: center;
+  padding: 0 12px;
 }
 .comparison-rect-large {
-  width: 90%;
+  width: 100%;
   max-width: none;
-  margin-left: auto;
-  margin-right: auto;
+  padding-left: 12px;
+  padding-right: calc(var(--ruler-w) + 12px);
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .comparison-rect-large .comparison-rect {
   margin-top: 0;
+  max-width: 100%;
 }
 .comparison-rect-large .comparison-rect-label {
   position: sticky;
@@ -362,15 +608,12 @@ h1 {
   z-index: 1;
   margin-top: 25vh;
   margin-bottom: 25vh;
+  padding: 0 14px;
 }
 
 /* ─── Bar Segments ─── */
 .bar-segment {
   display: block;
-}
-.all-billionaires .wealth-header,
-.all-billionaires .key {
-  z-index: 3;
 }
 .all-billionaires .infobox {
   height: auto;
@@ -379,362 +622,1470 @@ h1 {
 
 /* ─── Image Comparisons ─── */
 .comparison-image-wrapper {
-  width: 75vw;
+  width: 100%;
   max-width: 700px;
+  padding-left: var(--msg-pad-left);
+  padding-right: var(--msg-pad-right);
   text-align: center;
-}
-.comparison-image-wrapper .title {
-  margin-bottom: 12px;
 }
 .comparison-image {
   max-width: 100%;
   height: auto;
-  border-radius: 6px;
 }
 
-/* ─── Cause Cards ─── */
-.cause-card {
-  width: 75vw;
+/* ─── Cause and summary messages: text directly on the bar, no sheet ─── */
+.cause-card,
+.summary-card {
+  width: calc(100% - 42px);
   max-width: 560px;
+  margin-left: 12px;
+  margin-right: 30px;
+  text-align: left;
+  font-size: 15.5px;
+  line-height: 1.5;
 }
-.cause-pie {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 12px;
-}
-.cause-pie .piechart-outer {
-  width: 120px;
-  height: 120px;
-  transform: rotate(-38deg);
-  background: yellowgreen;
-  border-radius: 50%;
-}
-.cause-pie .piechart-inner {
-  fill: yellowgreen;
-  stroke: #655;
-  stroke-width: 32;
-}
-.pie-label {
-  position: absolute;
-  left: 130px;
-  top: 42px;
-  font-size: 20px;
-  font-weight: bold;
-  white-space: nowrap;
+.cause-card {
+  width: calc(100% - 62px);
+  margin-left: 22px;
+  margin-right: 40px;
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 500;
 }
 .cause-title {
-  margin: 8px 0 4px;
-  font-size: 22px;
+  margin: 0;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.cause-card .cause-title {
+  font-size: 32px;
+  font-stretch: 84%;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
 }
 .cause-cost {
-  font-size: 15px;
-  color: #555;
-  margin-bottom: 8px;
-}
-.cause-desc {
-  line-height: 1.5;
-  margin-bottom: 10px;
-}
-.cause-desc a {
-  color: #1565C0;
-}
-.cause-deaths {
-  background: #fff3f3;
-  border-left: 4px solid #d32f2f;
-  padding: 8px 12px;
-  margin: 10px 0;
-  font-size: 14px;
-}
-.pocket-change {
-  background: #f3f8ff;
-  border-left: 4px solid #1565C0;
-  padding: 8px 12px;
-  margin: 10px 0;
-  font-size: 14px;
-  font-style: italic;
-}
-.cause-source {
-  font-size: 12px;
-  color: #888;
-  margin-top: 8px;
-}
-.cause-source a {
-  color: #888;
-}
-
-/* ─── Summary Cards ─── */
-.summary-card {
-  width: 75vw;
-  max-width: 560px;
-}
-.side-by-side-chart {
-  margin: 16px 0;
-}
-.bar-row {
   display: flex;
-  align-items: center;
-  margin: 4px 0;
-  font-size: 13px;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap; /* long yearly amounts on small phones: the share moves below instead of past the edge */
+  gap: 2px 12px;
+  margin-top: 14px;
 }
-.bar-label {
-  width: 160px;
-  flex-shrink: 0;
-  text-align: right;
-  padding-right: 8px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.bar-track {
-  flex: 1;
-  height: 18px;
-  background: #e8e8e8;
-  border-radius: 3px;
-  overflow: hidden;
-}
-.bar-fill {
-  height: 100%;
-  background: #03A9F4;
-  border-radius: 3px;
-  min-width: 2px;
-}
-.bar-amount {
-  width: 70px;
-  flex-shrink: 0;
-  padding-left: 8px;
-  font-weight: bold;
-  white-space: nowrap;
-}
-.summary-total {
-  margin: 12px 0;
-  font-size: 16px;
-  padding: 8px 0;
-  border-top: 2px solid #333;
-}
-.summary-pie {
+.cause-card .cause-cost {
   margin-top: 12px;
 }
-.summary-pie .piechart-outer {
-  width: 180px;
-  height: 180px;
-}
-
-/* ─── Death Ticker ─── */
-.death-ticker {
-  position: fixed;
-  bottom: 12px;
-  right: 12px;
-  z-index: 100;
-  background: rgba(30, 30, 30, 0.92);
-  color: #fff;
-  padding: 12px 16px 32px 16px;
-  border-radius: 8px;
-  font-family: sans-serif;
-  font-size: 13px;
-  max-width: 280px;
-  max-height: calc(80vh - 40px);
-  overflow-y: auto;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  backdrop-filter: blur(6px);
-}
-.death-ticker-close {
-  position: absolute;
-  top: 6px;
-  right: 10px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  cursor: pointer;
-  z-index: 101;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-.death-ticker-close:hover {
-  opacity: 1;
-}
-.death-ticker-reopen {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  z-index: 101;
-  background: #222;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
+.cause-cost b {
   font-size: 22px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  cursor: pointer;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.cause-card .cause-cost b {
+  font-size: 24px;
+}
+.cause-cost span {
+  margin-left: auto;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--muted);
+  text-align: right;
+}
+.cause-card .cause-cost span {
+  color: inherit;
+  font-weight: 600;
+}
+.share-strip {
+  height: 12px;
+  background: var(--blue);
+  position: relative;
+  margin-top: 8px;
+}
+/* On the bar itself the track is white, so the share stays readable against the blue. */
+.cause-card .share-strip {
+  background: var(--paper);
+}
+.share-strip i {
+  position: absolute;
+  left: 0;
+  top: -4px;
+  bottom: -4px;
+  background: var(--ink);
+  min-width: 2px;
+}
+.cause-card .share-strip i {
+  min-width: 3px;
+}
+.share-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+.cause-card .share-labels {
+  margin-top: 5px;
+}
+.cause-desc {
+  margin: 16px 0 0;
+  text-wrap: pretty;
+}
+.cause-card .cause-desc {
+  margin-top: 14px;
+}
+/* Death toll as a rhythm: "every 52 seconds…", a line running down in that rhythm, then the counts. */
+.cause-deaths {
+  margin-top: 16px;
+}
+.cause-rhythm {
+  margin: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  opacity: 0.8;
-  transition: opacity 0.2s;
+  gap: 10px;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-wrap: balance;
 }
-.death-ticker-reopen:hover {
-  opacity: 1;
+.cause-rhythm svg {
+  flex: none;
 }
-.next-message-btn {
-  position: fixed;
-  bottom: 16px;
-  left: calc(max(16px, env(safe-area-inset-left)) + 14px);
-  z-index: 101;
-  background: #222;
-  color: #fff;
-  border: none;
-  border-radius: 999px;
-  height: 44px;
-  padding: 0 16px;
-  font-size: 14px;
+.cause-beat {
+  height: 3px;
+  margin-top: 10px;
+  background: rgba(17, 17, 17, .25);
+  position: relative;
+  overflow: hidden;
+}
+.cause-beat i {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform-origin: left;
+  animation: cause-beat linear infinite;
+}
+@keyframes cause-beat {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+/* Without motion the line stays empty; the sentence carries the rhythm. */
+@media (prefers-reduced-motion: reduce) {
+  .cause-beat i {
+    animation: none;
+    transform: scaleX(0);
+  }
+}
+.cause-counts {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 13px;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  cursor: pointer;
-  opacity: 0.88;
-  transition: opacity 0.2s;
 }
-.next-message-btn:hover {
-  opacity: 1;
+.cause-counts b {
+  font-size: 15px;
+  font-weight: 800;
 }
-.next-message-btn:disabled,
-.next-message-btn.is-scrolling {
-  opacity: 0.45;
-  cursor: default;
+/* People affected as a share of the world: "about 1 in 7…", then that many figures, the affected ones red. */
+.cause-affected {
+  margin-top: 16px;
 }
-.death-ticker-label {
+.cause-affected-line {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.cause-figures {
+  display: grid;
+  gap: 2px 1px;
+  margin-top: 10px;
+}
+.cause-figures.is-few {
+  gap: 6px;
+}
+.cause-figures svg {
   display: block;
-  font-size: 11px;
-  color: #aaa;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  width: 100%;
+  height: auto;
 }
-.ticker-row {
+.cause-source {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin: 14px 0 0;
+}
+.cause-card .cause-source {
+  margin-top: 10px;
+  color: inherit;
+  font-weight: 600;
+}
+
+/* ─── Summary messages: a staircase that adds up to the sum, then its share of all wealth ───
+   Rows: full width = the sum of this summary; each step starts where the one before ended.
+   The sum bar is the same length, cut where the steps meet. The arrow points to the share
+   strip below, where full width = all billionaire wealth. */
+.summary-rows {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+.summary-row .l {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 2px 0;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
 }
-.ticker-count {
-  font-weight: bold;
-  font-size: 15px;
-  color: #ff6b6b;
-  margin-right: 8px;
-  font-variant-numeric: tabular-nums;
+.summary-row .l > span {
+  min-width: 0;
+  hyphens: auto;
+  overflow-wrap: anywhere;
 }
-.ticker-label {
-  color: #ccc;
+@media (max-width: 360px) {
+  .summary-row .l {
+    font-stretch: 88%;
+  }
 }
-.ticker-total {
-  border-top: 1px solid rgba(255,255,255,0.2);
+.summary-row .l b {
+  font-weight: 800;
+  white-space: nowrap;
+}
+.summary-row .l small {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.summary-step {
+  position: relative;
+  height: 7px;
   margin-top: 4px;
-  padding-top: 6px;
-  font-weight: bold;
 }
-.ticker-total .ticker-count {
+.summary-step::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(17, 17, 17, .32);
+}
+.summary-step i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  min-width: 2px;
+  background: var(--ink);
+}
+.summary-total {
+  margin-top: 14px;
+}
+.summary-total .cause-cost {
+  margin-top: 0;
+}
+.summary-sumbar {
+  position: relative;
+  height: 7px;
+  margin-top: 8px;
+  background: var(--ink);
+}
+.summary-sumbar i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  margin-left: -.75px;
+  background: var(--blue);
+}
+.summary-arrow {
+  position: relative;
+  height: 36px;
+  margin-top: 2px;
+}
+/* Drawn in pixels by layoutSummaryArrow (main.js). */
+.summary-arrow svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  overflow: visible;
+}
+.summary-arrow .line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.summary-arrow .tip {
+  fill: var(--ink);
+}
+.summary-total .share-strip {
+  margin-top: 3px;
+}
+/* Long lists (7 rows and more) a little tighter, so they fit on a phone. */
+.summary-card.is-dense .cause-desc {
+  font-size: 15px;
+  line-height: 1.4;
+  margin-top: 12px;
+}
+.summary-card.is-dense .summary-rows {
+  gap: 6px;
+  margin-top: 13px;
+}
+.summary-card.is-dense .summary-step {
+  height: 6px;
+  margin-top: 3px;
+}
+
+/* ─── Message variants ─── */
+/* Quiet note: a remark on method, not another statement of the story */
+.infobox.is-note .title {
+  font-size: 15.5px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  text-wrap: pretty;
+}
+.infobox.is-note .note-inner {
+  display: block;
+  padding: 14px 0;
+  border-top: 1px solid rgba(17, 17, 17, .45);
+  border-bottom: 1px solid rgba(17, 17, 17, .45);
+}
+/* Chapter question: the percentage is the eye-catcher */
+.chapter .big {
+  display: block;
+  font-size: clamp(72px, 24vw, 108px);
+  font-weight: 800;
+  font-stretch: 80%;
+  letter-spacing: -0.03em;
+  line-height: .9;
+}
+.chapter .q {
+  display: block;
+  margin-top: 14px;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+/* One sentence set large */
+.infobox.is-statement .title {
+  font-size: clamp(30px, 9.2vw, 44px);
+  font-weight: 800;
+  font-stretch: 84%;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+/* Numbered steps of the call to action */
+.infobox.is-step .title {
+  text-align: left;
   font-size: 17px;
-  color: #ff4444;
+  line-height: 1.42;
+  text-wrap: pretty;
 }
-.ticker-total .ticker-label {
+.step-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.step-top .no {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.step-hd {
+  display: block;
+  font-size: 28px;
+  font-weight: 800;
+  font-stretch: 88%;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  text-wrap: balance;
+}
+.infobox.is-step.is-dense .title {
+  font-size: 15.5px;
+}
+.infobox.is-step.is-dense .step-hd {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+.infobox.is-step ul.orgs {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.orgs li {
+  padding-top: 6px;
+  border-top: 1px solid rgba(17, 17, 17, .45);
+}
+.orgs a {
+  display: block;
+  font-size: 16px;
+  font-weight: 800;
+}
+.orgs span {
+  display: block;
+  font-size: 13.5px;
+  line-height: 1.35;
+  font-weight: 500;
+}
+.step-small {
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-top: 10px;
+}
+
+/* ─── Visualisations (markup comes from viz.js) ─── */
+.viz {
+  margin: 22px auto 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+  text-wrap: wrap;
+}
+.viz svg {
+  display: block;
+  margin: 0 auto;
+  overflow: visible;
+  max-width: 100%;
+  height: auto;
+  font-family: var(--font);
+}
+.viz-cap {
+  margin: 10px 0 0;
+  text-wrap: balance;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.viz-cap b {
+  font-weight: 800;
+}
+.viz-cap .src {
+  font-size: 12px;
+  font-weight: 500;
+}
+.viz-legend {
+  display: flex;
+  justify-content: center;
+  gap: 6px 14px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.viz-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.viz-replay {
+  height: 44px;
+  padding: 0 14px;
+  border: 0;
+  background: none;
+  font: 600 14px/1 var(--font);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  opacity: 0;
+  /* Hidden means hidden: not clickable and not reachable with the keyboard. */
+  visibility: hidden;
+  transition: opacity .3s, visibility 0s .3s;
+  margin: 2px auto 0;
+}
+.viz-replay.show {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .3s;
+}
+
+/* ─── Death Ticker ─── */
+/* Opens above the two pills, so "Next message" stays reachable while it is open. */
+.death-ticker {
+  position: fixed;
+  bottom: 68px;
+  right: 14px;
+  z-index: 100;
+  width: 300px;
+  max-width: calc(100vw - 28px);
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  background: #1B1B1B;
+  color: #fff;
+  border-radius: 10px;
+  padding: 14px 16px 12px;
+  text-align: left;
+  font-size: 13.5px;
+  line-height: 1.35;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .28);
+}
+.death-ticker-close {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: none;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.death-ticker-close:focus-visible,
+.death-ticker-reopen:focus-visible,
+.next-message-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -4px;
+}
+.death-ticker-label {
+  display: block;
+  margin: 0 30px 10px 0;
+  font-size: 15.5px;
+  font-weight: 800;
+  line-height: 1.25;
   color: #fff;
 }
-.ticker-group + .ticker-group {
-  margin-top: 5px;
-  padding-top: 5px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+/* One shared number column: it grows with the longest number, so text never covers it. */
+#death-ticker-counts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 10px;
 }
-.ticker-group-total .ticker-label {
-  color: #eee;
-  font-weight: bold;
+.ticker-group,
+.ticker-total {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  padding: 7px 0;
+  border-top: 1px solid rgba(255, 255, 255, .14);
 }
-.ticker-count-group {
-  color: #ff8c8c;
+.ticker-group > span:last-child {
+  font-weight: 600;
+}
+.ticker-count {
+  color: #FF8A80;
+  font-weight: 800;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 .ticker-group-causes {
-  color: #9fb0bc;
-  font-size: 10px;
-  line-height: 1.3;
-  margin: 1px 0 0 0;
-  text-align: right;
-}
-.ticker-item {
-  padding-left: 8px;
-}
-.ticker-item .ticker-count {
+  display: block;
+  color: #B8B8B8;
   font-size: 12px;
-  color: #cc5555;
 }
-.ticker-item .ticker-label {
-  font-size: 11px;
-  color: #999;
+.ticker-total {
+  font-weight: 800;
+  font-size: 15px;
 }
 
-/* ─── Mobile ─── */
-@media (max-width: 450px) {
-  .language-menu {
-    top: 12px;
-    right: 12px;
-  }
-  .language-menu-trigger,
-  .language-menu-item {
-    font-size: 12px;
-  }
+/* Collapsed ticker and "next message": two pills at the bottom */
+.death-ticker-reopen,
+.next-message-btn {
+  position: fixed;
+  bottom: 14px;
+  z-index: 101;
+  height: 44px;
+  border-radius: 999px;
+  padding: 0 16px;
+  border: 0;
+  background: var(--ink);
+  color: #fff;
+  font: 600 14px/1 var(--font);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .22);
+  cursor: pointer;
+}
+.death-ticker-reopen {
+  right: calc(max(14px, env(safe-area-inset-right)) + 16px);
+  font-variant-numeric: tabular-nums;
+}
+.next-message-btn {
+  left: calc(max(12px, env(safe-area-inset-left)) + 12px);
+}
+.next-message-btn[hidden] {
+  display: none;
+}
+.next-message-btn:disabled,
+.next-message-btn.is-scrolling {
+  opacity: 0.5;
+  cursor: default;
+}
+.ticker-figure {
+  display: block;
+  flex: none;
+}
+.death-ticker-reopen.is-short .ticker-pill-label {
+  display: none;
+}
+/* Small intro panel (phones): heading, total and a link to the breakdown, pointing at the pill */
+.ticker-more {
+  display: none;
+}
+.death-ticker.is-compact {
+  bottom: 64px;
+  padding: 10px 14px 2px;
+  overflow: visible;
+  cursor: pointer;
+}
+.death-ticker.is-compact::after {
+  content: "";
+  position: absolute;
+  right: 46px;
+  bottom: -6px;
+  width: 12px;
+  height: 12px;
+  background: #1B1B1B;
+  transform: rotate(45deg);
+}
+.death-ticker.is-compact .death-ticker-label {
+  font-size: 14.5px;
+  margin: 0 28px 6px 0;
+}
+.death-ticker.is-compact .ticker-group {
+  display: none;
+}
+.death-ticker.is-compact .ticker-total {
+  align-items: baseline;
+  padding: 6px 0 0;
+}
+.death-ticker.is-compact .ticker-total .ticker-count {
+  font-size: 20px;
+  line-height: 1;
+}
+.death-ticker.is-compact .ticker-more {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 26px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #D4D4D4;
+  font: 600 12.5px/1 var(--font);
+  cursor: pointer;
+}
+.ticker-more:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.ticker-chev {
+  display: block;
+  flex: none;
+  transition: transform .2s;
+}
+.death-ticker-reopen[aria-expanded="true"] .ticker-chev {
+  transform: rotate(180deg);
+}
 
-  h1 {
-    font-size: 40px;
+/* ─── Small phones ─── */
+@media (max-width: 360px) {
+  .infobox .title,
+  .infobox .comparison-rect-wrapper {
+    font-size: 17px;
   }
-  h3 {
-    font-size: 14px;
+  .cause-card {
+    font-size: 15px;
   }
-  .wealth-title {
-    font-size: 19px;
+  .cause-title {
+    font-size: 23px;
   }
-
-  .bar-label {
-    width: 90px;
-    font-size: 11px;
+  .cause-card .cause-title {
+    font-size: 28px;
   }
-  .bar-amount {
-    width: 55px;
-    font-size: 11px;
+  .cause-rhythm {
+    font-size: 17px;
   }
-  .pie-label {
-    left: 100px;
-    top: 35px;
-    font-size: 16px;
-  }
-  .cause-pie .piechart-outer {
-    width: 90px;
-    height: 90px;
-  }
-
-  /* Death ticker */
-  .death-ticker {
-    bottom: 4px;
-    right: 4px;
-    font-size: 11px;
-    max-width: 200px;
-  }
-  .next-message-btn {
-    bottom: 8px;
-    left: calc(max(8px, env(safe-area-inset-left)) + 10px);
-    height: 38px;
+  .next-message-btn,
+  .death-ticker-reopen {
     padding: 0 12px;
-    font-size: 12px;
-  }
-  .ticker-count {
     font-size: 13px;
   }
 }
 
 /* ─── Desktop ─── */
 @media (min-width: 1000px) {
-  .infobox .title,
-  .infobox .comparison-rect-wrapper {
-    max-width: 750px;
+  .calibration {
+    padding-left: 24px;
   }
-  .text-infobox .title {
-    max-width: 550px;
+  .wealth-header {
+    padding: 14px 80px 16px 20px;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-this-way {
+    animation: none;
+  }
+}
+
+/* ─── Single visualisations (viz.js) ─── */
+/* 2: ten pixels of scrolling as a band across the whole bar, magnified below */
+.v-band {
+  height: 10px;
+  width: var(--bar-width);
+  margin-left: calc((min(var(--bar-width), 684px) - var(--bar-width)) / 2 - var(--msg-pad-left));
+  background: rgba(17, 17, 17, .42);
+}
+.v-zoom-wrap {
+  position: relative;
+  width: 132px;
+  height: 150px;
+  margin: 4px auto 0;
+}
+.v-zoom {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  border: 3px solid var(--ink);
+  overflow: hidden;
+  background: var(--bar-color, var(--orange));
+}
+.v-zoom .rows {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 36px;
+  height: 60px;
+  background: rgba(17, 17, 17, .42);
+  background-image: repeating-linear-gradient(to bottom, transparent 0 5px, rgba(17, 17, 17, .5) 5px 6px);
+}
+.v-zoom .brk {
+  position: absolute;
+  right: 18px;
+  top: 36px;
+  height: 60px;
+  width: 8px;
+  border: 2px solid var(--ink);
+  border-left: 0;
+}
+.v-zoom .brk-t {
+  position: absolute;
+  right: 31px;
+  top: 57px;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 18px;
+}
+.v-zoom-handle {
+  position: absolute;
+  left: 113px;
+  top: 116px;
+  width: 30px;
+  height: 6px;
+  background: var(--ink);
+  border-radius: 3px;
+  transform-origin: left center;
+  transform: rotate(45deg);
+}
+
+/* 7: seat belt */
+.comparison-rect.ping {
+  box-shadow: 0 0 0 7px rgba(17, 17, 17, .22);
+}
+.comparison-rect {
+  transition: box-shadow .5s cubic-bezier(.16, 1, .3, 1);
+}
+.v-belt {
+  margin-top: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.v-belt .amount {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 2px;
+}
+.v-belt .click {
+  opacity: 0;
+  transition: opacity .12s;
+}
+.v-belt .click.on {
+  opacity: 1;
+}
+
+/* Squares that carry a second, dashed square for comparison (9, 11) */
+.comparison-rect.has-inner {
+  position: relative;
+}
+.v-inner-dashed {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  outline: 1.5px dashed rgba(0, 0, 0, .8);
+  outline-offset: -1px;
+}
+.v-ghost {
+  position: relative;
+  margin: 14px auto 0;
+  outline: 1.5px dashed rgba(0, 0, 0, .7);
+  outline-offset: -1px;
+}
+.v-ghost .comparison-rect {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+}
+.k-solid,
+.k-dashed,
+.k-outline,
+.k-dot,
+.k-dot-on {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  flex: none;
+}
+.k-solid { background: var(--ink); }
+.k-dashed { outline: 1.5px dashed rgba(0, 0, 0, .8); outline-offset: -1px; }
+.k-outline { outline: 1.5px solid var(--ink); outline-offset: -1.5px; background: rgba(17, 17, 17, .12); }
+.k-dot,
+.k-dot-on { width: 8px; height: 8px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--ink); }
+.k-dot-on { background: var(--ink); }
+
+/* 16: the part Musk earns beyond Gosling's entire wealth */
+.comparison-rect.v-split {
+  position: relative;
+}
+.comparison-rect-medium .comparison-rect.v-split {
+  display: block;
+}
+.comparison-rect-medium .v-split > .comparison-rect-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--split-main, 65%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.v-extra {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px dashed rgba(17, 17, 17, .85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+}
+.v-extra b {
+  font-size: 20px;
+  font-weight: 800;
+}
+/* When the dashed part is too low for both lines, the explanation sits just below the square. */
+.v-extra.is-outside span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+}
+.comparison-rect-wrapper:has(.v-extra.is-outside) {
+  padding-bottom: 44px;
+}
+
+/* 17: number line */
+.v-nl {
+  margin-top: 28px;
+  text-align: left;
+}
+.v-nl .axis {
+  position: relative;
+  height: 12px;
+}
+.v-nl .axis::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5.5px;
+  height: 1px;
+  background: var(--ink);
+}
+.v-nl .tick {
+  position: absolute;
+  top: 0;
+  width: 1.5px;
+  height: 12px;
+  background: var(--ink);
+}
+.v-nl .tick.end {
+  right: 0;
+}
+.v-row-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 6px;
+  text-align: left;
+}
+.v-row-labels span:last-child {
+  text-align: right;
+}
+.v-nl .zoomline {
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* 24: live counter, large on its own line */
+.comparison-wealth-counter-message .title strong {
+  display: block;
+  margin: 10px 0 4px;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 25: one dot per country */
+.v-dots {
+  display: grid;
+  grid-template-columns: repeat(15, 8px);
+  gap: 4px;
+  justify-content: center;
+}
+.v-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+.v-dots i.on {
+  background: var(--ink);
+}
+
+/* 26, 29: share of a whole */
+.v-strip {
+  height: 12px;
+  background: rgba(17, 17, 17, .2);
+  position: relative;
+}
+.v-strip i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--ink);
+  min-width: 2px;
+}
+
+/* 35 and others: a small square inside a large one, true to area */
+.v-nest {
+  position: relative;
+  margin: 0 auto;
+  outline: 1.5px solid var(--ink);
+  outline-offset: -1.5px;
+  background: rgba(17, 17, 17, .12);
+}
+.v-nest i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: var(--ink);
+}
+
+/* Counters next to animations */
+.v-counters {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  margin-top: 10px;
+}
+.v-counters div {
+  text-align: center;
+  font-weight: 600;
+}
+.v-counters b {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+/* ─── Pictures on the blue bar: the group, health, basic needs ─── */
+/* 39: heat rising from the whole stone */
+.v-wave {
+  fill: none;
+  stroke: #111;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: v-rise 2.8s ease-in-out infinite;
+}
+@keyframes v-rise {
+  0% { transform: translateY(4px); opacity: 0; }
+  35% { opacity: .5; }
+  100% { transform: translateY(-10px); opacity: 0; }
+}
+.v-ember {
+  animation: v-glow 2.2s ease-in-out infinite alternate;
+}
+@keyframes v-glow {
+  from { opacity: .75; }
+  to { opacity: 1; }
+}
+/* 67: the 22-second ring with its counter */
+.viz.v-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.viz.v-ring svg {
+  margin: 0;
+  flex: none;
+}
+.v-ring .lab {
+  text-align: left;
+  font-size: 13.5px;
+  line-height: 1.35;
+}
+.v-ring .lab b {
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+@media (prefers-reduced-motion: reduce) {
+  .v-wave {
+    animation: none;
+    opacity: .42;
+    transform: none;
+  }
+  .v-ember {
+    animation: none;
+  }
+}
+
+/* ─── Signs of the five steps: they play each time the message comes into view ─── */
+.step-icon {
+  flex: none;
+  line-height: 0;
+}
+.step-icon:empty {
+  display: none;
+}
+.step-icon svg {
+  display: block;
+  overflow: visible;
+  width: 56px;
+  height: 56px;
+}
+.infobox.is-dense .step-icon svg {
+  width: 44px;
+  height: 44px;
+}
+.step-icon .slot {
+  fill: var(--blue);
+}
+.step-icon .pop,
+.step-icon .scan,
+.step-icon .drop {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.step-icon .l {
+  stroke-dasharray: 24;
+}
+.step-icon .l2 {
+  stroke-dasharray: 72;
+}
+.step-icon.go .l {
+  animation: step-draw .5s .15s both;
+}
+.step-icon.go .l2 {
+  animation: step-draw-long .9s .15s both;
+}
+.step-icon.go .pop {
+  animation: step-pop .35s both;
+}
+.step-icon.go .d0 {
+  animation-delay: .15s;
+}
+.step-icon.go .d1 {
+  animation-delay: .55s;
+}
+.step-icon.go .d2 {
+  animation-delay: .7s;
+}
+.step-icon.go .d3 {
+  animation-delay: .95s;
+}
+.step-icon.go .scan {
+  animation: step-scan 1.5s .15s both;
+}
+.step-icon.go .drop {
+  animation: step-drop 1s .25s both;
+}
+@keyframes step-draw {
+  from { stroke-dashoffset: 24; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes step-draw-long {
+  from { stroke-dashoffset: 72; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes step-pop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes step-scan {
+  0% { transform: translate(-16px, -12px); }
+  55% { transform: translate(-4px, -14px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes step-drop {
+  from { transform: translateY(-9px); }
+  to { transform: translateY(9px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .step-icon.go * {
+    animation: none !important;
+  }
+  .step-icon .drop {
+    transform: translateY(9px);
+  }
+}
+
+/* ─── Pictures of the environment causes (viz.js, "v-env") ─── */
+.viz.v-env {
+  margin: 16px 0 0;
+  text-align: left;
+}
+.viz.v-env .cause-affected-line {
+  margin: 0 0 10px;
+}
+/* Centred like the other pictures. Phones show them as drawn (260 px); larger screens a bit
+   bigger. main.js reads this max-width to compute the message height and shrinks the picture
+   again if the screen is not tall enough. */
+.viz.v-env svg {
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+}
+@media (min-width: 700px) {
+  .viz.v-env svg {
+    max-width: 360px;
+  }
+}
+.v-env .w { fill: #fff; stroke: #111; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.v-env .k { fill: #111; }
+.v-env .t { fill: #0783BB; }
+.v-env .l { fill: none; stroke: #111; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.v-env .l1 { fill: none; stroke: #111; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.v-env .riv { fill: var(--blue); stroke: #111; stroke-width: 1.6; stroke-linejoin: round; }
+.v-env .dash { fill: none; stroke: #111; stroke-width: 1.4; stroke-dasharray: 3 2.6; }
+.v-env .fl { fill: #fff; stroke: #111; stroke-width: .8; stroke-linejoin: round; }
+.v-env .tx { font: 600 11.5px var(--font); fill: #111; }
+.v-env .cs { font: 800 10px var(--font); fill: #111; text-anchor: middle; }
+.v-env .spin { animation: env-spin 9s linear infinite; }
+@keyframes env-spin { to { transform: rotate(360deg); } }
+/* The garbage patch rocks gently on the waves; the debris drifts a little against it. */
+.v-env .env-patch {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: env-rock 4.2s ease-in-out infinite alternate;
+}
+.v-env .env-patch .fl {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: env-drift 2.9s ease-in-out infinite alternate;
+}
+@keyframes env-rock {
+  from { transform: translate(-1.5px, -1.5px) rotate(-1deg); }
+  to { transform: translate(1.5px, 2px) rotate(1deg); }
+}
+@keyframes env-drift {
+  from { transform: translate(-1px, 1px); }
+  to { transform: translate(1px, -1px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v-env .spin,
+  .v-env .env-patch,
+  .v-env .env-patch .fl { animation: none; }
+}
+
+/* ─── Compact messages ───
+   main.js adds "is-compact" only to a cause or summary message that would not fit between
+   header and buttons otherwise: slightly smaller type and spacing, so it need not scroll. */
+.cause-card.is-compact .cause-title {
+  font-size: 28px;
+}
+.cause-card.is-compact .cause-cost {
+  margin-top: 8px;
+}
+.cause-card.is-compact .cause-cost b {
+  font-size: 21px;
+}
+.cause-card.is-compact .cause-desc {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.38;
+}
+.cause-card.is-compact .cause-deaths,
+.cause-card.is-compact .cause-affected,
+.cause-card.is-compact .viz.v-env {
+  margin-top: 10px;
+}
+.cause-card.is-compact .cause-rhythm,
+.cause-card.is-compact .cause-affected-line {
+  font-size: 17px;
+}
+.cause-card.is-compact .cause-beat {
+  margin-top: 7px;
+}
+.cause-card.is-compact .cause-counts {
+  margin-top: 5px;
+}
+.cause-card.is-compact .cause-source {
+  margin-top: 6px;
+}
+.summary-card.is-compact .cause-desc {
+  font-size: 14px;
+}
+.summary-card.is-compact .summary-rows {
+  gap: 4px;
+  margin-top: 10px;
+}
+.summary-card.is-compact .summary-row .l {
+  font-size: 13.5px;
+}
+.summary-card.is-compact .summary-step {
+  height: 5px;
+  margin-top: 2px;
+}
+.summary-card.is-compact .summary-total {
+  margin-top: 10px;
+}
+.summary-card.is-compact .summary-arrow {
+  height: 28px;
+}
+
+/* Summary animation (main.js animateSummary): steps and the share grow from the left.
+   The replay button sits between the two strip labels and takes no height of its own. */
+.summary-step i,
+.summary-total .share-strip i {
+  transform-origin: left center;
+}
+.summary-total .share-labels {
+  position: relative;
+}
+.summary-total .viz-replay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 36px;
+  margin: 0;
+  padding: 0 6px;
+  font-size: 13px;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+/* ─── Dark mode ───
+   On when <html data-theme="dark">: set from the device setting by the script in the page
+   head, or by the switch on the title screen.    The white page turns almost black with light text. The bars keep their meaning but are
+   dimmed about 20 % so they do not glare at night; text, figures and pictures on the bars
+   stay black, exactly as in light mode. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141414;
+  --fg: #ECECEC;
+  --fg-muted: #A8A8A8;
+  --orange: #D18E33;
+  --blue: #3A8DBD;
+  --green: #4A9254;
+}
+[data-theme="dark"] body {
+  color: var(--fg);
+}
+[data-theme="dark"] ::selection {
+  background: var(--fg);
+  color: var(--paper);
+}
+/* Everything on a bar keeps black text */
+[data-theme="dark"] .billion .wealth,
+[data-theme="dark"] .richest .wealth,
+[data-theme="dark"] .all-billionaires .wealth {
+  color: var(--ink);
+}
+/* Title screen */
+[data-theme="dark"] .one-pixel,
+[data-theme="dark"] .median .wealth {
+  background: var(--fg);
+}
+[data-theme="dark"] .pixel-arrow path {
+  stroke: var(--fg);
+}
+[data-theme="dark"] .pixel-lens g rect:first-child {
+  fill: var(--paper);
+}
+[data-theme="dark"] .pixel-lens g path {
+  stroke: #3A3A3A;
+}
+[data-theme="dark"] .pixel-lens g path + rect {
+  fill: var(--fg);
+}
+[data-theme="dark"] .pixel-lens > circle,
+[data-theme="dark"] .pixel-lens > path {
+  stroke: var(--fg);
+}
+[data-theme="dark"] .pixel-note,
+[data-theme="dark"] .data-stand,
+[data-theme="dark"] .scroll-this-way,
+[data-theme="dark"] .inspired-by,
+[data-theme="dark"] .calibration .wealth-desc {
+  color: var(--fg-muted);
+}
+[data-theme="dark"] .calibration .wealth-title {
+  color: var(--fg);
+}
+/* Language menu */
+[data-theme="dark"] .theme-toggle,
+[data-theme="dark"] .language-menu-trigger,
+[data-theme="dark"] .language-menu-item {
+  color: var(--fg);
+}
+[data-theme="dark"] .language-menu-panel {
+  border-color: var(--fg-muted);
+}
+[data-theme="dark"] .language-menu-trigger:focus-visible,
+[data-theme="dark"] .language-menu-item:focus-visible {
+  outline-color: var(--fg);
+}
+[data-theme="dark"] .language-menu-item:hover {
+  background: #2A2A2A;
+}
+/* On a bar the share track stays light */
+[data-theme="dark"] .cause-card .share-strip {
+  background: #F2F2F2;
+}
+/* Dark pills and panel get a fine edge so they do not melt into the dark page */
+[data-theme="dark"] .next-message-btn,
+[data-theme="dark"] .death-ticker-reopen,
+[data-theme="dark"] .death-ticker {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .22), 0 3px 10px rgba(0, 0, 0, .4);
+}
+
+/* ─── Sources page ─── */
+.sources {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.sources a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: .16em;
+  overflow-wrap: anywhere;
+}
+.sources-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.sources h1 {
+  text-align: left;
+  font-size: clamp(40px, 9vw, 64px);
+  max-width: none;
+  margin: 12px 0 16px;
+}
+.sources-wealth {
+  border-top: 1.5px solid currentColor;
+  padding: 12px 0 14px;
+}
+.sources-wealth h2,
+.sources-h {
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+.sources-wealth p {
+  margin: 0;
+}
+.sources-h {
+  margin-top: 28px;
+}
+.sources-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sources-list li {
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+.sources-msg {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.sources-host {
+  color: var(--muted);
+  font-size: 13px;
+}
+[data-theme="dark"] .sources-host {
+  color: var(--fg-muted);
+}
+[data-theme="dark"] .sources-list li {
+  border-top-color: #333;
+}
+.privacy p {
+  margin: 0 0 10px;
+}
+.privacy .privacy-lead {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.sources-foot {
+  margin-top: 32px;
+  font-size: 13px;
+}
+.sources-calc {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+[data-theme="dark"] .sources-calc {
+  color: var(--fg-muted);
 }

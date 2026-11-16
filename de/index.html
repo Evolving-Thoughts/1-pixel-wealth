@@ -1,32 +1,27 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FFHH9GQTXY"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-FFHH9GQTXY');
-  </script>
+  <meta charset="utf-8">
+  <!-- Visitor count without cookies (GoatCounter) -->
+  <script data-goatcounter="https://evolving-thoughts.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <title>Reichtum, maßstabsgetreu</title>
   <meta name="description" content="Eine maßstabsgetreue Visualisierung globaler Vermögensungleichheit." />
 
   <meta property="og:title" content="Reichtum, maßstabsgetreu" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://evolving-thoughts.github.io/1-pixel-wealth/de/" />
+  <meta property="og:url" content="https://evolving-thoughts.github.io/pixel-wealth/de/" />
   <meta property="og:description" content="Eine maßstabsgetreue Visualisierung globaler Vermögensungleichheit." />
-  <meta property="og:image" content="https://evolving-thoughts.github.io/1-pixel-wealth/de/img/og_german.png" />
+  <meta property="og:image" content="https://evolving-thoughts.github.io/pixel-wealth/de/img/og_german.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:alt" content="Reichtum maßstabsgetreu dargestellt: 1.000 $, 64.116 $ Median-US-Einkommen und 1 Million $ im visuellen Vergleich" />
+  <meta property="og:image:alt" content="Vermögen maßstabsgetreu dargestellt: 1 Pixel = 1.000 $. Eine Lupe zeigt einen einzelnen Pixel." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://evolving-thoughts.github.io/1-pixel-wealth/de/img/og_german.png" />
-  <link rel="canonical" href="https://evolving-thoughts.github.io/1-pixel-wealth/de/" />
+  <meta name="twitter:image" content="https://evolving-thoughts.github.io/pixel-wealth/de/img/og_german.png" />
+  <link rel="canonical" href="https://evolving-thoughts.github.io/pixel-wealth/de/" />
 
-  <link rel="stylesheet" type="text/css" href="../main.css?version=2.0">
+  <script>(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light')t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>
+  <link rel="stylesheet" type="text/css" href="../main.css?version=3.0">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 </head>
 <body>
@@ -35,14 +30,14 @@
 
 <!-- Death ticker overlay -->
 <div id="death-ticker" class="death-ticker" hidden>
-  <button id="death-ticker-close" class="death-ticker-close" title="Minimieren">&times;</button>
-  <span class="death-ticker-label">VERMEIDBARE TODESFÄLLE SEIT DU DIESE SEITE GEÖFFNET HAST:</span>
+  <button id="death-ticker-close" class="death-ticker-close" title="Einklappen" aria-label="Einklappen"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6"/></svg></button>
+  <span class="death-ticker-label">Vermeidbare Todesfälle, seit du diese Seite geöffnet hast</span>
   <div id="death-ticker-counts"></div>
 </div>
-<button id="death-ticker-reopen" class="death-ticker-reopen" title="Todeszähler anzeigen" style="display:none;">&#128065;</button>
+<button id="death-ticker-reopen" class="death-ticker-reopen" title="Todeszähler anzeigen" style="display:none;"><svg class="ticker-figure" width="10" height="22" viewBox="0 0 18 40" aria-hidden="true"><circle cx="9" cy="6" r="5" fill="#C62828" stroke="#fff" stroke-width="1.8"/><path d="M3 15h12v13h-3v11H6V28H3z" fill="#C62828" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg><span class="ticker-pill-count" id="death-ticker-pill-count">0</span> <span class="ticker-pill-label" id="death-ticker-pill-label">Todesfälle</span><svg class="ticker-chev" width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1.5 6.5L6 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 
-<script type="text/javascript" src="i18n_de.js?version=1.0"></script>
-<script type="text/javascript" src="../i18n.js?version=1.0"></script>
+<script type="text/javascript" src="i18n_de.js?version=3.0"></script>
+<script type="text/javascript" src="../i18n.js?version=3.0"></script>
 
 
 </body>
