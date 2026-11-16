@@ -1511,6 +1511,16 @@ h1 {
   font-size: 20px;
   font-weight: 800;
 }
+/* When the dashed part is too low for both lines, the explanation sits just below the square. */
+.v-extra.is-outside span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+}
+.comparison-rect-wrapper:has(.v-extra.is-outside) {
+  padding-bottom: 44px;
+}
 
 /* 17: number line */
 .v-nl {

@@ -266,6 +266,13 @@
           L(ctx, 'mehr, als Ryan Gosling insgesamt besitzt (~', 'more than Ryan Gosling owns in total (~') +
           ctx.compact(gosling.amountUsd) + ')</span>';
         rect.appendChild(extra);
+        // Too low for both lines: keep the amount inside, put the explanation below the square.
+        var fit = function() {
+          extra.classList.remove('is-outside');
+          if (extra.scrollHeight > extra.clientHeight + 1) extra.classList.add('is-outside');
+        };
+        fit();
+        if (window.ResizeObserver) new ResizeObserver(fit).observe(rect);
       },
     };
   };
