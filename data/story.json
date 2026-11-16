@@ -872,11 +872,11 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.041,
-      "title": "What could we do with ~30% of the money?",
+      "title": "What could we do with less than 20% of the money?",
       "i18nKey": "i18n-30-percent-of-money",
       "variant": "chapter",
-      "chapterPct": 30,
-      "chapterPrefix": "~"
+      "chapterPct": 20,
+      "chapterPrefix": "<"
     },
     {
       "id": "universal-education",
@@ -1085,7 +1085,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.056,
-      "title": "About $2.93 trillion of the $5.5 trillion total comes from ongoing yearly costs. But remember that the world's billionaires got richer by about $4 trillion last year alone.",
+      "title": "About $0.8 trillion of the $3.37 trillion total comes from ongoing yearly costs. But remember that the world's billionaires got richer by about $4 trillion last year alone.",
       "i18nKey": "i18n-all-human-focused-causes-combined-3"
     },
     {
@@ -1101,10 +1101,10 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.058,
-      "title": "What could we do with ~66% of the money?",
+      "title": "What could we do with ~53% of the money?",
       "i18nKey": "i18n-66-percent-of-money",
       "variant": "chapter",
-      "chapterPct": 66,
+      "chapterPct": 53,
       "chapterPrefix": "~"
     },
     {
@@ -1363,7 +1363,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.078,
-      "title": "That includes the total cost of all interventions (some until 2030) plus the yearly costs of Universal Healthcare, ending extreme poverty and providing clean water and sanitation. It would take an additional $2.93 trillion yearly to fund these 3 causes further (~73% of what billionaires gained last year).",
+      "title": "That includes the total cost of all interventions (some until 2030) plus the yearly costs of Universal Healthcare, ending extreme poverty and providing clean water and sanitation. It would take an additional $0.8 trillion yearly to fund these 3 causes further (~20% of what billionaires gained last year).",
       "i18nKey": "i18n-cost-interval",
       "variant": "note"
     },

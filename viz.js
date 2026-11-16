@@ -1001,7 +1001,7 @@
 
   // ─── 95: the yearly costs next to last year's growth, one bundle per trillion ───
   VIZ['all-human-focused-causes-combined-3'] = function(ctx) {
-    var COSTS = 2.93, GROWTH = 4;
+    var COSTS = 0.8, GROWTH = 4;
     var W = 80, H = 13, STEP = 14.1, BASE = 104;
     function bundles(value, x, fill) {
       var out = '';

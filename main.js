@@ -1139,20 +1139,14 @@ function updateDynamicText() {
 
 // ─── Comparison Content Renderers ───────────────────────────────────
 // Chapter question ("What could we do with less than 5% of the money?"):
-// the percentage becomes the eye-catcher, a small line translates it into money.
-function renderChapterInner(comp, text, totalWealth) {
+// the percentage becomes the eye-catcher.
+function renderChapterInner(comp, text) {
   const pct = Number(comp.chapterPct) || 0;
   const prefix = comp.chapterPrefix || '';
   const pctText = fmtPctNumber(String(pct));
-  const moneyLine = interpolate(tUI('chapter-of', '{pct} of {total} = {amount}'), {
-    pct: pctText,
-    total: formatCompactMoney(totalWealth),
-    amount: formatCompactMoney(totalWealth * pct / 100),
-  });
   return '<span class="chapter">' +
     '<span class="big num">' + (prefix ? prefix + ' ' : '') + pctText + '</span>' +
     '<span class="q">' + text.trim() + '</span>' +
-    '<span class="of num">' + moneyLine + '</span>' +
   '</span>';
 }
 
@@ -1170,7 +1164,7 @@ function renderStepInner(comp, text) {
 function renderTextContent(comp, vars, totalWealth) {
   const text = interpolate(comp.title, vars);
   let inner = text;
-  if (comp.variant === 'chapter') inner = renderChapterInner(comp, text, totalWealth);
+  if (comp.variant === 'chapter') inner = renderChapterInner(comp, text);
   else if (comp.variant === 'note') inner = '<span class="note-inner">' + text + '</span>';
   else if (comp.variant === 'step') inner = renderStepInner(comp, text);
 

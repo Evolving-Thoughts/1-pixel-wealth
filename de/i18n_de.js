@@ -185,7 +185,7 @@ strings : {
 'i18n-health-and-basic-needs-combined-5' : 'Bisher ging es ums Überleben. Aber Menschen verdienen mehr, als nicht zu sterben. Sprechen wir also über <strong>Chancen</strong>: die Möglichkeit, sich ein gutes Leben aufzubauen.',
 
 // ─── ~30% section: opportunity ──────────────────────────────────────
-'i18n-30-percent-of-money' : 'Was könnten wir mit ~30 % des Geldes erreichen?',
+'i18n-30-percent-of-money' : 'Was könnten wir mit weniger als 20 % des Geldes erreichen?',
 
 'i18n-universal-education' : 'Universelle Bildung',
 'i18n-universal-education-desc' : '<a href="https://www.unesco.org/en/articles/more-children-out-school-7th-year-row-273-million" target="_blank" rel="noopener noreferrer">273 Millionen Kinder</a> gehen nicht zur Schule. Die Finanzierungslücke für das <a href="https://sdgs.un.org/goals/goal4" target="_blank" rel="noopener noreferrer">UN-Nachhaltigkeitsziel Bildung</a> liegt bei <a href="https://financing.desa.un.org/sites/default/files/2025-02/Brief%20Series%20-%20UNESCO_Financing%20Gap.pdf" target="_blank" rel="noopener noreferrer">97 Milliarden Dollar pro Jahr</a>, also etwa 485 Milliarden Dollar bis 2030. Schließen wir sie nicht, kostet uns das laut UNESCO <a href="https://www.unesco.org/en/articles/what-we-stand-lose-costs-children-and-youth-not-learning-2030" target="_blank" rel="noopener noreferrer">10 Billionen Dollar pro Jahr</a> an verlorenem menschlichen Potenzial.',
@@ -220,11 +220,11 @@ strings : {
 'i18n-all-human-focused-causes-combined' : 'Alles bisher zusammen',
 'i18n-all-human-focused-causes-combined-desc' : 'Gesundheit, Grundbedürfnisse, Bildung, Armut und Zwangsarbeit: alles <strong>gleichzeitig</strong> finanzierbar mit <strong>weniger als einem Fünftel</strong> des Vermögens aller Milliardäre.',
 'i18n-all-human-focused-causes-combined-2' : 'Das bedeutet: Egal wo auf der Erde ein Kind geboren wird, es könnte satt, gebildet, gesund und frei aufwachsen. Nicht in einer fernen Utopie, sondern in ein paar Jahren, mit Geld, das schon da ist.',
-'i18n-all-human-focused-causes-combined-3' : 'Etwa 2,93 Billionen Dollar der 5,5 Billionen Gesamtkosten sind laufende jährliche Ausgaben. Aber denk dran: Das Vermögen der Milliardäre ist allein letztes Jahr um etwa 4 Billionen Dollar gestiegen.',
+'i18n-all-human-focused-causes-combined-3' : 'Etwa 0,8 Billionen Dollar der 3,37 Billionen Gesamtkosten sind laufende jährliche Ausgaben. Aber denk dran: Das Vermögen der Milliardäre ist allein letztes Jahr um etwa 4 Billionen Dollar gestiegen.',
 'i18n-all-human-focused-causes-combined-4' : 'Wenn dieser Trend anhält, könnten sie all das dauerhaft finanzieren und ihnen würde trotzdem nie das Geld ausgehen. Außerdem überschneiden sich einige Maßnahmen, die tatsächlichen Gesamtkosten könnten also noch niedriger sein. Aber wie am Anfang gesagt: Es geht hier nicht um exakte Zahlen, sondern um <strong>Perspektive</strong>, auf den absurden Maßstab dieses Reichtums und die Probleme, die wir damit lösen könnten.',
 
 // ─── ~66% section: planet ───────────────────────────────────────────
-'i18n-66-percent-of-money' : 'Was könnten wir mit ~66 % des Geldes erreichen?',
+'i18n-66-percent-of-money' : 'Was könnten wir mit ~53 % des Geldes erreichen?',
 'i18n-planet-intro' : 'Wir sind noch nicht mal bei 20 % angekommen. Lass uns also noch größer denken und den Blick auf den Planeten richten, den wir alle teilen.',
 'i18n-climate-crisis-intro' : 'Denn eines ist klar: Langfristig zählt all das nicht, wenn der Planet selbst auseinanderfällt.',
 'i18n-climate-crisis-intro-2' : 'Die Klimakrise bringt nicht nur neue Probleme, sie verschärft jedes einzelne der oben genannten. Mehr Hunger. Mehr Krankheiten. Mehr Armut. Mehr Leid.',
@@ -281,7 +281,7 @@ strings : {
 'i18n-row-climate' : 'Klima',
 'i18n-row-climate-sub' : 'Anpassung, Energiewende',
 
-'i18n-cost-interval' : 'Darin enthalten sind die Gesamtkosten aller Maßnahmen (teils bis 2030), plus die laufenden jährlichen Kosten für eine universelle Gesundheitsversorgung, die Beendigung extremer Armut und sauberes Wasser/Sanitärversorgung. Für diese drei Maßnahmen wären zusätzlich <strong>2,93 Billionen Dollar pro Jahr</strong> nötig (~73 % dessen, was Milliardäre letztes Jahr dazugewonnen haben).',
+'i18n-cost-interval' : 'Darin enthalten sind die Gesamtkosten aller Maßnahmen (teils bis 2030), plus die laufenden jährlichen Kosten für eine universelle Gesundheitsversorgung, die Beendigung extremer Armut und sauberes Wasser/Sanitärversorgung. Für diese drei Maßnahmen wären zusätzlich <strong>0,8 Billionen Dollar pro Jahr</strong> nötig (~20 % dessen, was Milliardäre letztes Jahr dazugewonnen haben).',
 'i18n-transform-civilization' : 'All das zusammen würde unsere Welt grundlegend verändern. Millionen gerettete Leben. Milliarden Menschen, die Armut und Krankheit entkommen. Wiederhergestellte Ökosysteme. <strong>Wenn nur ~3.400 Menschen etwas von ihrem Reichtum abgeben würden, könnte die gesamte Menschheit ein Entwicklungsniveau erreichen, das es noch nie gegeben hat.</strong>',
 'i18n-still-billionaires' : 'Und <strong>alle von ihnen</strong> könnten danach immer noch Milliardäre sein.',
 'i18n-money-only-on-paper' : 'Ein häufiges Gegenargument ist, dass ihr Vermögen größtenteils in Aktien steckt und deshalb nur auf dem Papier existiert. Ich finde es interessant, dass dieses Argument nur auftaucht, wenn es um Umverteilung geht. Wenn sie Twitter für 44 Milliarden kaufen wollen, ist das Geld plötzlich sehr real.',
@@ -310,7 +310,6 @@ strings : {
 'i18n-ui-of-wealth-of-all-billionaires' : 'des Vermögens<br>aller Milliardäre',
 'i18n-ui-richest-who' : 'Vermögen von {name}',
 'i18n-ui-all-billionaires-who' : 'Alle {count} Milliardäre',
-'i18n-ui-chapter-of' : '{pct} von {total} = {amount}',
 'i18n-ui-step-counter' : '{n} von {total}',
 'i18n-ui-replay' : 'Nochmal',
 'i18n-ui-per-day' : 'pro Tag',
