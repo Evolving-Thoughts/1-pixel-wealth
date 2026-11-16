@@ -321,7 +321,7 @@
       "bar": "richest",
       "type": "text",
       "positionFraction": 0.9,
-      "title": "Just one example: In 2022 Musk bought Twitter for $44 billion  (5% of his current wealth) and reshaped what billions of people see, read and believe.",
+      "title": "Just one example: In 2022 Musk bought Twitter for $44 billion  (5% of his current wealth) and reshaped what millions of people see, read and believe.",
       "i18nKey": "i18n-twitter-acquisition"
     },
     {
@@ -407,7 +407,7 @@
       "positionFraction": 0.006,
       "title": "Eradicate Malaria",
       "costUsd": 102000000000,
-      "description": "Malaria is one of the worst infectious diseases ever visited on mankind. In the 20th century alone, malaria killed <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK215638/\" target=\"_blank\" rel=\"noopener noreferrer\">150-300 million</a> people. That's more than the <a href=\"https://www.britannica.com/event/Black-Death\" target=\"_blank\" rel=\"noopener noreferrer\">Black Death</a>.",
+      "description": "Malaria is one of the worst infectious diseases ever visited on mankind. In the 20th century alone, malaria killed <a href=\"https://nap.nationalacademies.org/read/11017/chapter/7#125\" target=\"_blank\" rel=\"noopener noreferrer\">150-300 million</a> people. That's more than the <a href=\"https://www.britannica.com/event/Black-Death\" target=\"_blank\" rel=\"noopener noreferrer\">Black Death</a>.",
       "tickerGroup": "Infectious Diseases",
       "tickerDescription": "malaria",
       "deathsPerYear": 610000,
@@ -480,12 +480,13 @@
     },
     {
       "id": "end-hiv-aids",
+      "calcNote": "UNAIDS: $29.3 billion needed per year × 5 years (2026–2030) ≈ $146.5 billion.",
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.013,
       "title": "End HIV/AIDS",
-      "costUsd": 143000000000,
-      "description": "HIV/AIDS killed about <a href=\"https://www.unaids.org/sites/default/files/media_asset/UNAIDS_FactSheet_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">630,000 people in 2024</a>. Around 41M people are living with HIV/AIDS. It would cost a total of <a href=\"https://www.unaids.org/sites/default/files/media_asset/JC3019_InvestingintheAIDSresponse_En.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">~$143 billion</a> to put the world on track to end AIDS as a public health threat by 2030.",
+      "costUsd": 146500000000,
+      "description": "HIV/AIDS killed about <a href=\"https://www.unaids.org/sites/default/files/media_asset/UNAIDS_FactSheet_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">630,000 people in 2024</a>. Around 41M people are living with HIV/AIDS. It would cost a total of <a href=\"https://unaids.org/en/resources/presscentre/pressreleaseandstatementarchive/2024/july/20240722_global-aids-update\" target=\"_blank\" rel=\"noopener noreferrer\">~$147 billion</a> to put the world on track to end AIDS as a public health threat by 2030.",
       "tickerGroup": "Infectious Diseases",
       "tickerDescription": "HIV/AIDS",
       "deathsPerYear": 630000,
@@ -535,7 +536,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.016,
-      "title": "Improving innovation and access to high quality treatment would cost about <a href=\"https://www.cgdev.org/publication/forecasting-fallout-amr-economic-impacts-antimicrobial-resistance-humans\" target=\"_blank\" rel=\"noopener noreferrer\">$315 billion until 2030</a>, but would offer a <a href=\"https://www.cgdev.org/publication/forecasting-fallout-amr-economic-impacts-antimicrobial-resistance-humans\" target=\"_blank\" rel=\"noopener noreferrer\">28:1 return on investment</a>, while inaction would cost around <a href=\"https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance\" target=\"_blank\" rel=\"noopener noreferrer\">$1-3.4 trillion</a> per year by 2030.",
+      "title": "Improving innovation and access to high quality treatment would cost about <a href=\"https://www.cgdev.org/publication/forecasting-fallout-amr-economic-impacts-antimicrobial-resistance-humans\" target=\"_blank\" rel=\"noopener noreferrer\">$315 billion until 2030</a>, but would offer a <a href=\"https://www.cgdev.org/publication/forecasting-fallout-amr-economic-impacts-antimicrobial-resistance-humans\" target=\"_blank\" rel=\"noopener noreferrer\">28:1 return on investment</a>, while inaction would shrink the world economy by around <a href=\"https://documents1.worldbank.org/curated/en/455311493396671601/text/executive-summary.txt\" target=\"_blank\" rel=\"noopener noreferrer\">$1-3.4 trillion</a> per year from 2030.",
       "i18nKey": "i18n-end-AMR-2"
     },
     {
@@ -672,10 +673,11 @@
     },
     {
       "id": "water-and-sanitation-deaths",
+      "calcNote": "Copenhagen Consensus (Hutton 2015): benefit-cost ratio for basic water 3.4 in cities and 6.8 in rural areas, for basic sanitation 2.9 to 3.3.",
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.028,
-      "title": "Every year, <a href=\"https://www.who.int/news/item/28-06-2023-improving-access-to-water--sanitation-and-hygiene-can-save-1.4-million-lives-per-year--says-new-who-report\" target=\"_blank\" rel=\"noopener noreferrer\">1.4 million people die</a> because of unsafe water and sanitation. Fixing this would cost about <a href=\"https://documents1.worldbank.org/curated/en/847191468000296045/pdf/103172-PUB-Box394556B-PUBLIC-EPI-K8632-ADD-SERIES.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">$114 billion per year</a> and would save a life every 22 seconds. That's less than a third of what we spend on <a href=\"https://magazica.com/global-and-regional-spending-on-cosmetics-and-beauty-products-2025-2026/\" target=\"_blank\" rel=\"noopener noreferrer\">cosmetics every year</a>. Every $1 invested would yield an average <a href=\"https://www.copenhagenconsensus.com/sites/default/files/water_sanitation_assessment_-_hutton.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">$6.80</a> in returns.",
+      "title": "Every year, <a href=\"https://www.who.int/news/item/28-06-2023-improving-access-to-water--sanitation-and-hygiene-can-save-1.4-million-lives-per-year--says-new-who-report\" target=\"_blank\" rel=\"noopener noreferrer\">1.4 million people die</a> because of unsafe water and sanitation. Fixing this would cost about <a href=\"https://documents1.worldbank.org/curated/en/847191468000296045/pdf/103172-PUB-Box394556B-PUBLIC-EPI-K8632-ADD-SERIES.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">$114 billion per year</a> and would save a life every 22 seconds. That's less than a third of what we spend on <a href=\"https://magazica.com/global-and-regional-spending-on-cosmetics-and-beauty-products-2025-2026/\" target=\"_blank\" rel=\"noopener noreferrer\">cosmetics every year</a>. Every $1 invested would yield <a href=\"https://www.copenhagenconsensus.com/sites/default/files/water_sanitation_assessment_-_hutton.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">$3 to $7</a> in returns.",
       "i18nKey": "i18n-water-and-sanitation-deaths"
     },
     {
@@ -686,7 +688,7 @@
       "positionFraction": 0.029,
       "title": "End World Hunger",
       "costUsd": 465000000000,
-      "description": "<a href=\"https://www.who.int/news/item/28-07-2025-global-hunger-declines-but-rises-in-africa-and-western-asia-un-report\" target=\"_blank\" rel=\"noopener noreferrer\">673 million people</a> experienced hunger in 2024. 1 in 4 people worldwide face moderate or severe food insecurity. This number increased by <a href=\"https://oi-files-d8-prod.s3.eu-west-2.amazonaws.com/s3fs-public/2026-01/EN%20-%20Resisting%20the%20Rule%20of%20the%20Rich_0.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">42.6%</a> between 2015 and 2024. Nearly <a href=\"https://www.who.int/news-room/fact-sheets/detail/malnutrition\" target=\"_blank\" rel=\"noopener noreferrer\">half of all deaths</a> among children under 5 are linked to undernutrition.",
+      "description": "<a href=\"https://www.who.int/news/item/28-07-2025-global-hunger-declines-but-rises-in-africa-and-western-asia-un-report\" target=\"_blank\" rel=\"noopener noreferrer\">673 million people</a> experienced hunger in 2024. More than 1 in 4 people (2.3 billion) worldwide face moderate or severe food insecurity. This number increased by <a href=\"https://oi-files-d8-prod.s3.eu-west-2.amazonaws.com/s3fs-public/2026-01/EN%20-%20Resisting%20the%20Rule%20of%20the%20Rich_0.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">42.6%</a> between 2015 and 2024. Nearly <a href=\"https://www.who.int/news-room/fact-sheets/detail/malnutrition\" target=\"_blank\" rel=\"noopener noreferrer\">half of all deaths</a> among children under 5 are linked to undernutrition.",
       "tickerGroup": "Basic Needs",
       "tickerDescription": "SAM",
       "deathsPerYear": 100000,
@@ -767,7 +769,7 @@
       "type": "summary",
       "positionFraction": 0.036,
       "title": "Health and basic needs, combined",
-      "costUsd": 1985200000000,
+      "costUsd": 1988700000000,
       "description": "Everything listed so far, from infectious diseases to electricity for all: fundable <strong>simultaneously</strong> with <strong>less than 10%</strong> of all billionaire wealth.",
       "i18nKey": "i18n-health-and-basic-needs-combined",
       "rows": [
@@ -1010,7 +1012,7 @@
       "type": "summary",
       "positionFraction": 0.054,
       "title": "Everything so far, combined",
-      "costUsd": 3371200000000,
+      "costUsd": 3374700000000,
       "description": "Health, basic needs, education, poverty and forced labor: all fundable <strong>simultaneously</strong> with <strong>less than a fifth</strong> of all billionaire wealth.",
       "i18nKey": "i18n-all-human-focused-causes-combined",
       "rows": [
@@ -1282,7 +1284,7 @@
       "bar": "allBillionaires",
       "type": "summary",
       "positionFraction": 0.077,
-      "costUsd": 10603700000000,
+      "costUsd": 10607200000000,
       "title": "ALL OF IT, TOGETHER",
       "description": "Health, basic needs, education, poverty, forced labor, climate and nature: <strong>all of it, together</strong>, for a little more than half of all billionaire wealth.",
       "i18nKey": "i18n-grand-summary",
