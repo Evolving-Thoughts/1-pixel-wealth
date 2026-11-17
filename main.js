@@ -285,7 +285,8 @@ function fmtInt(n) {
 let currentBarWidth = 500;
 let richestPersonWealthUsd = 839_000_000_000;
 let allBillionairesTotalUsd = 20_100_000_000_000;
-let richestName = 'the richest person';
+let richestName = 'the richest person'; // already escaped for HTML
+let richestNamePlain = 'the richest person';
 let billionaireCount = 3428;
 let story = null;
 let pageOpenedAt = Date.now();
@@ -309,6 +310,11 @@ let prevCappedFraction = 1;
 // ─── Helpers ────────────────────────────────────────────────────────
 function getStableVh() {
   return document.documentElement.clientHeight || window.innerHeight;
+}
+
+// Names and links from the Forbes data go into HTML, so they are escaped first.
+function escapeHtml(value) {
+  return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 function setText(id, text) {
@@ -703,7 +709,8 @@ function renderDataStand(data) {
   if (!titleScreen || !data.snapshotDate || titleScreen.querySelector('.data-stand')) return;
   const el = document.createElement('p');
   el.className = 'data-stand';
-  const link = '<a href="' + (data.sourceUrl || 'https://www.forbes.com/billionaires/') + '" target="_blank" rel="noopener noreferrer">Forbes</a>';
+  const url = /^https:\/\//.test(data.sourceUrl || '') ? data.sourceUrl : 'https://www.forbes.com/billionaires/';
+  const link = '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">Forbes</a>';
   el.innerHTML = interpolate(tUI('data-stand', 'Wealth: {source}, as of {date}'), {
     source: link,
     date: formatSnapshotDate(data.snapshotDate)
@@ -732,7 +739,8 @@ function applyData(billionaireData, storyData) {
   story = storyData;
   renderDataStand(billionaireData);
   richestPersonWealthUsd = Number(billionaireData.people[0].wealthUsd);
-  richestName = billionaireData.people[0].name;
+  richestNamePlain = String(billionaireData.people[0].name || richestNamePlain);
+  richestName = escapeHtml(richestNamePlain);
 
   if (billionaireData.allBillionairesTotalUsd) {
     allBillionairesTotalUsd = Number(billionaireData.allBillionairesTotalUsd);
@@ -749,7 +757,7 @@ function applyData(billionaireData, storyData) {
 
   // Bar headers: the total in large type, whose wealth it is on its own line.
   setText('richest-total', money.format(richestPersonWealthUsd));
-  setText('richest-who', interpolate(tUI('richest-who', 'Wealth of {name}'), { name: richestName }));
+  setText('richest-who', interpolate(tUI('richest-who', 'Wealth of {name}'), { name: richestNamePlain }));
   setText('allBillionaires-total', formatCompactMoney(allBillionairesTotalUsd));
   setText('allBillionaires-who', interpolate(
     tUI('all-billionaires-who', 'All {count} billionaires'),
