@@ -52,13 +52,17 @@ Then open:
 
 ## Wealth Data
 
-The page currently uses the fixed **Forbes World's Billionaires 2026 annual list (as of March 10, 2026)**. The daily update workflow in .github/workflows/daily-wealth-update.yml is switched off.
+The page uses the **Forbes World's Billionaires annual list** (currently 2026, as of March 10, 2026).
+
+From March to May, the workflow in .github/workflows/daily-wealth-update.yml checks once a day whether Forbes has published a new annual list. If it has, it opens a pull request with the new numbers and date, and a checklist of texts that are written for the old numbers (chapter percentages, last year's growth, "$20 trillion"). Check those, then merge.
+
+To check by hand:
 
 ```bash
 npm run update:wealth
 ```
 
-Note: this script fetches Forbes' **real-time** list and overwrites data/billionaires.json, replacing the fixed annual figures. The texts on the page refer to the annual list, so only run it if you want to switch to live data.
+It only changes data/billionaires.json when a newer list exists. `npm run update:wealth -- 2027` checks a given year, `-- --force` rewrites the file even if the list is not newer.
 
 ## Sources
 

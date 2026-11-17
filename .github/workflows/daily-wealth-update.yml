@@ -1,17 +1,19 @@
 name: Wealth Data Update
 
-# Currently using static Forbes 2026 annual list data.
-# Uncomment the schedule to re-enable daily real-time updates.
+# Forbes publishes its annual billionaires list in spring (2026: March 10).
+# From March to May this checks once a day whether the new list is out. If it is,
+# the numbers and the date go into a pull request, to be checked and merged by hand.
 on:
-  # schedule:
-  #   - cron: "15 5 * * *"
+  schedule:
+    - cron: "15 5 * 3-5 *"
   workflow_dispatch:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
-  refresh-data:
+  check-forbes-list:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,14 +25,28 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Refresh billionaire data
+      - name: Check for a new Forbes list
+        id: fetch
         run: npm run update:wealth
 
-      - name: Commit and push if changed
+      - name: Open a pull request
+        if: steps.fetch.outputs.updated == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          YEAR: ${{ steps.fetch.outputs.year }}
+          DATE: ${{ steps.fetch.outputs.date }}
         run: |
+          branch="wealth-update-$YEAR"
+          if git ls-remote --exit-code --heads origin "$branch" > /dev/null; then
+            echo "Branch $branch already exists, a pull request is probably open."
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
           git add data/billionaires.json
-          git diff --cached --quiet && exit 0
-          git commit -m "chore: daily billionaire wealth refresh"
-          git push
+          git commit -m "Update wealth data to the Forbes $YEAR list ($DATE)"
+          git push origin "$branch"
+          gh pr create --base master --head "$branch" \
+            --title "Forbes $YEAR billionaires list" \
+            --body-file wealth-update-pr.md
