@@ -544,7 +544,7 @@
       "bar": "allBillionaires",
       "type": "summary",
       "positionFraction": 0.017,
-      "title": "All of the above, combined",
+      "title": "Infectious diseases combined",
       "description": "Ending malaria, tuberculosis, HIV/AIDS and hepatitis B & C, and fighting antimicrobial resistance until 2030: fundable <strong>simultaneously</strong> with <strong>less than 5%</strong> of all billionaire wealth.",
       "includeIds": [
         "end-malaria",
@@ -1285,7 +1285,7 @@
       "type": "summary",
       "positionFraction": 0.077,
       "costUsd": 10607200000000,
-      "title": "ALL OF IT, TOGETHER",
+      "title": "All of it, together",
       "description": "Health, basic needs, education, poverty, forced labor, climate and nature: <strong>all of it, together</strong>, for a little more than half of all billionaire wealth.",
       "i18nKey": "i18n-grand-summary",
       "rows": [

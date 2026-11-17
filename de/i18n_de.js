@@ -112,7 +112,7 @@ strings : {
 'i18n-end-AMR-ticker-desc' : 'AMR',
 'i18n-end-AMR-2' : 'Innovation und besseren Zugang zu hochwertiger Behandlung zu finanzieren würde bis 2030 etwa <a href="https://www.cgdev.org/publication/forecasting-fallout-amr-economic-impacts-antimicrobial-resistance-humans" target="_blank" rel="noopener noreferrer">315 Milliarden Dollar</a> kosten, aber <a href="https://www.cgdev.org/publication/forecasting-fallout-amr-economic-impacts-antimicrobial-resistance-humans" target="_blank" rel="noopener noreferrer">28 Dollar pro investiertem Dollar</a> zurückbringen. Nichtstun hingegen würde die Weltwirtschaft ab 2030 um <a href="https://documents1.worldbank.org/curated/en/455311493396671601/text/executive-summary.txt" target="_blank" rel="noopener noreferrer">1–3,4 Billionen Dollar</a> pro Jahr schrumpfen lassen.',
 
-'i18n-infectious-diseases-combined' : 'Alles zusammen',
+'i18n-infectious-diseases-combined' : 'Infektionskrankheiten zusammen',
 'i18n-infectious-diseases-combined-desc' : 'Malaria, Tuberkulose, HIV/AIDS und Hepatitis B & C beenden und antimikrobielle Resistenzen bis 2030 bekämpfen: <strong>gleichzeitig</strong> finanzierbar mit <strong>weniger als 5 %</strong> des Vermögens aller Milliardäre.',
 
 'i18n-not-only-infectious-diseases' : 'Aber Infektionskrankheiten sind nicht die einzigen Gesundheitsprobleme, die wir mit mehr Geld lösen könnten.',
@@ -263,7 +263,7 @@ strings : {
 // ─── Grand summary & systemic ───────────────────────────────────────
 'i18n-major-crises-solvable' : 'Du hast gerade an Lösungen für viele der größten Krisen der Menschheit vorbeigescrollt. Krankheit. Hunger. Armut. Ausbeutung. Klima. Jede einzelne davon ist lösbar. Jede einzelne davon ist finanzierbar:',
 
-'i18n-grand-summary' : 'ALLES zusammen',
+'i18n-grand-summary' : 'Alles zusammen',
 'i18n-grand-summary-desc' : 'Gesundheit, Grundbedürfnisse, Bildung, Armut, Zwangsarbeit, Klima und Natur: <strong>alles zusammen</strong> für etwas mehr als die Hälfte des Vermögens aller Milliardäre.',
 'i18n-row-infectious-diseases' : 'Infektionskrankheiten',
 'i18n-row-healthcare' : 'Gesundheitsversorgung für alle',
