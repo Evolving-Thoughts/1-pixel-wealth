@@ -24,6 +24,8 @@ const LANGUAGE_STORAGE_KEY = 'preferred-language';
 // A picture may shrink to this share of its size to make a message fit on a small screen.
 const MIN_PICTURE_SCALE = 0.6;
 const MIN_ILLUSTRATION_SCALE = 0.45; // environment pictures in a compact message
+// A message that still does not fit is scaled down evenly, but not below this.
+const MIN_FIT_ZOOM = 0.8;
 const SECONDS_PER_YEAR = 365.25 * 24 * 3600;
 // A person, red as everywhere on the page; the dark outline keeps it visible on the blue bar.
 const DEATH_FIGURE_SVG = '<svg width="14" height="30" viewBox="0 0 18 40" aria-hidden="true">' +
@@ -917,10 +919,13 @@ function renderGroup(comparisons, container, totalWealth, vars) {
 
 // ─── Sticky content that is taller than the screen ──────────────────
 // Messages are centred in the space below the bar header (CSS). If a message does not fit
-// there, its picture is first made smaller. If that is not enough, the message scrolls
-// through and then sticks with its lower edge above the buttons (class "is-tall"), so every
-// line can be read on the way.
+// there, its picture is first made smaller, then the whole message is scaled down a little.
+// Only if that is not enough either (very small screens), the message scrolls through and
+// then sticks with its lower edge above the buttons (class "is-tall"), so every line can be
+// read on the way.
 function fitStickyContent(el, available, vh, hudH) {
+  const inner = el.querySelector(':scope > .fit-inner');
+  if (inner) inner.style.zoom = '';
   // Cause and summary messages first try their normal size; if they do not fit, a tighter
   // setting ("is-compact": smaller type and spacing, picture allowed to shrink further).
   const canCompact = el.classList.contains('cause-card') || el.classList.contains('summary-card');
@@ -929,6 +934,13 @@ function fitStickyContent(el, available, vh, hudH) {
   if (canCompact && height > available + 1) {
     el.classList.add('is-compact');
     height = measureStickyContent(el, available);
+  }
+  // Still too tall: scale the content down evenly. The zoom sits on an inner wrapper, because
+  // zoom on the sticky block itself would also scale its `top`.
+  if (height > available + 1) {
+    const zoom = Math.max(MIN_FIT_ZOOM, Math.floor(available / height * 100) / 100);
+    (inner || wrapFitInner(el)).style.zoom = String(zoom);
+    height = el.offsetHeight;
   }
 
   const tall = height > available + 1;
@@ -940,6 +952,15 @@ function fitStickyContent(el, available, vh, hudH) {
   const centre = vh / 2 + hudH / 2 - 20;
   const shift = Math.max(height / 2, height - (vh - STICKY_BOTTOM_RESERVE_PX - centre));
   el.style.setProperty('--sticky-half', Math.round(shift) + 'px');
+}
+
+// Moves the content of a sticky block into a wrapper that can be zoomed.
+function wrapFitInner(el) {
+  const box = document.createElement('div');
+  box.className = 'fit-inner';
+  while (el.firstChild) box.appendChild(el.firstChild);
+  el.appendChild(box);
+  return box;
 }
 
 // Height the message will have once its picture is fitted into the available space.
@@ -974,6 +995,11 @@ function measureStickyContent(el, available) {
     if (fullHeight > roomForPicture && roomForPicture >= fullHeight * minScale) {
       maxHeight = Math.floor(roomForPicture) + 'px';
       height = rest + Math.floor(roomForPicture);
+    } else if (fullHeight > roomForPicture) {
+      // Not enough room even at the smallest size: use the smallest size, and the message
+      // is scaled down for the rest (see fitStickyContent).
+      maxHeight = Math.floor(fullHeight * minScale) + 'px';
+      height = rest + Math.floor(fullHeight * minScale);
     } else {
       height = rest + fullHeight;
     }

@@ -210,7 +210,7 @@ strings : {
 'i18n-child-labor-2' : 'Die aktuellste Kostenschätzung, die ich finden konnte, geht von <a href="https://www.ilo.org/resource/news/new-ilo-study-says-economic-benefits-eliminating-child-labour-will-vastly" target="_blank" rel="noopener noreferrer">760 Milliarden Dollar</a> aus, um Kinderarbeit zu beenden. Allerdings stammt diese Zahl aus 2004 und ist damit stark veraltet, deshalb habe ich sie <strong>nicht in meine Berechnungen aufgenommen</strong>. Da Kinderarbeit aber eng mit Armut, Bildung und Zwangsarbeit zusammenhängt, kann man davon ausgehen, dass die oben genannten Maßnahmen sie deutlich reduzieren würden.',
 
 'i18n-universal-healthcare-intro' : 'Bildung schafft Chancen. Armut und Ausbeutung zu beenden schafft Freiheit. Schauen wir uns jetzt an, was ein Gesundheitssystem kostet, das es Menschen ermöglicht, beides auch wirklich zu genießen.',
-'i18n-universal-healthcare' : 'Universelle Gesundheits­versorgung (UHC)',
+'i18n-universal-healthcare' : 'Gesundheits­versorgung für Milliarden ausbauen',
 'i18n-universal-healthcare-desc' : '<a href="https://www.who.int/news-room/fact-sheets/detail/universal-health-coverage-(uhc)" target="_blank" rel="noopener noreferrer">4,6 Milliarden Menschen</a> haben keinen Zugang zu grundlegender Gesundheitsversorgung. Universelle Gesundheitsversorgung bedeutet, dass jeder Mensch Zugang zu hochwertigen Gesundheitsleistungen hat, wann und wo er sie braucht, ohne sich dafür finanziell zu ruinieren.',
 'i18n-universal-healthcare-source-name' : 'Weltgesundheitsorganisation',
 'i18n-universal-healthcare-affected-line' : 'Mehr als die Hälfte aller Menschen hat keinen Zugang zu grundlegender Gesundheitsversorgung.',
@@ -281,7 +281,7 @@ strings : {
 'i18n-row-climate' : 'Klima',
 'i18n-row-climate-sub' : 'Anpassung, Energiewende',
 
-'i18n-cost-interval' : 'Darin enthalten sind die Gesamtkosten aller Maßnahmen (teils bis 2030), plus die laufenden jährlichen Kosten für eine universelle Gesundheitsversorgung, die Beendigung extremer Armut und sauberes Wasser/Sanitärversorgung. Für diese drei Maßnahmen wären zusätzlich <strong>0,8 Billionen Dollar pro Jahr</strong> nötig (~20 % dessen, was Milliardäre letztes Jahr dazugewonnen haben).',
+'i18n-cost-interval' : 'Darin enthalten sind die Gesamtkosten aller Maßnahmen (teils bis 2030), plus die laufenden jährlichen Kosten für den Ausbau der Gesundheitsversorgung, die Beendigung extremer Armut und sauberes Wasser/Sanitärversorgung. Für diese drei Maßnahmen wären zusätzlich <strong>0,8 Billionen Dollar pro Jahr</strong> nötig (~20 % dessen, was Milliardäre letztes Jahr dazugewonnen haben).',
 'i18n-transform-civilization' : 'All das zusammen würde unsere Welt grundlegend verändern. Millionen gerettete Leben. Milliarden Menschen, die Armut und Krankheit entkommen. Wiederhergestellte Ökosysteme. <strong>Wenn nur ~3.400 Menschen etwas von ihrem Reichtum abgeben würden, könnte die gesamte Menschheit ein Entwicklungsniveau erreichen, das es noch nie gegeben hat.</strong>',
 'i18n-still-billionaires' : 'Und <strong>alle von ihnen</strong> könnten danach immer noch Milliardäre sein.',
 'i18n-money-only-on-paper' : 'Ein häufiges Gegenargument ist, dass ihr Vermögen größtenteils in Aktien steckt und deshalb nur auf dem Papier existiert. Ich finde es interessant, dass dieses Argument nur auftaucht, wenn es um Umverteilung geht. Wenn sie Twitter für 44 Milliarden kaufen wollen, ist das Geld plötzlich sehr real.',
