@@ -979,7 +979,7 @@
       "bar": "allBillionaires",
       "type": "cause",
       "positionFraction": 0.051,
-      "title": "Universal Healthcare (UHC)",
+      "title": "Expanding healthcare for billions",
       "costUsd": 371000000000,
       "costPeriod": "yearly",
       "description": "<a href=\"https://www.who.int/news-room/fact-sheets/detail/universal-health-coverage-(uhc)\" target=\"_blank\" rel=\"noopener noreferrer\">4.6 billion people</a> lack essential health services. Universal health coverage means that all people have access to the full range of quality health services they need, when and where they need them, without financial hardship. ",
@@ -1363,7 +1363,7 @@
       "bar": "allBillionaires",
       "type": "text",
       "positionFraction": 0.078,
-      "title": "That includes the total cost of all interventions (some until 2030) plus the yearly costs of Universal Healthcare, ending extreme poverty and providing clean water and sanitation. It would take an additional $0.8 trillion yearly to fund these 3 causes further (~20% of what billionaires gained last year).",
+      "title": "That includes the total cost of all interventions (some until 2030) plus the yearly costs of expanding healthcare, ending extreme poverty and providing clean water and sanitation. It would take an additional $0.8 trillion yearly to fund these 3 causes further (~20% of what billionaires gained last year).",
       "i18nKey": "i18n-cost-interval",
       "variant": "note"
     },

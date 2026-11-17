@@ -1440,6 +1440,36 @@
           if (!holder) return;
           holder.innerHTML = '<svg width="56" height="56" viewBox="0 0 48 48" aria-hidden="true">' + art + '</svg>';
           if (typeof IntersectionObserver === 'undefined') return;
+          // Parts that pop up are scaled through the SVG transform attribute instead of a CSS
+          // transform: some mobile browsers drew a flickering white line with the CSS version.
+          var pops = Array.prototype.slice.call(holder.querySelectorAll('.pop'));
+          var POP_DELAY = { d0: 150, d1: 550, d2: 700, d3: 950 };
+          var POP_MS = 350;
+          var raf = 0;
+          function setPop(p, k) {
+            if (!p._c) {
+              var b = p.getBBox();
+              p._c = (b.x + b.width / 2).toFixed(2) + ' ' + (b.y + b.height / 2).toFixed(2);
+            }
+            p.setAttribute('opacity', k.toFixed(3));
+            p.setAttribute('transform', k >= 1 ? '' : 'translate(' + p._c + ') scale(' + k.toFixed(3) + ') translate(' + p._c.replace(/(\S+) (\S+)/, '-$1 -$2') + ')');
+          }
+          function playPops() {
+            cancelAnimationFrame(raf);
+            if (!pops.length || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+            pops.forEach(function(p) { setPop(p, 0); });
+            var start = performance.now();
+            (function step(now) {
+              var running = false;
+              pops.forEach(function(p) {
+                var delay = POP_DELAY[(p.getAttribute('class').match(/d\d/) || ['d0'])[0]] || 0;
+                var t = Math.max(0, Math.min(1, (now - start - delay) / POP_MS));
+                if (t < 1) running = true;
+                setPop(p, 1 - Math.pow(1 - t, 3)); // eases out
+              });
+              if (running) raf = requestAnimationFrame(step);
+            })(start);
+          }
           // The sign plays every time the message comes into view.
           new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
@@ -1447,6 +1477,7 @@
               if (!entry.isIntersecting) return;
               void holder.offsetWidth; // restart the CSS animations
               holder.classList.add('go');
+              playPops();
             });
           }, { threshold: 0.9 }).observe(holder);
         },
@@ -1512,6 +1543,37 @@ var ENV_PICTURES = {
           GERMANY: L(ctx, 'Deutschland', 'Germany'),
           PATCH: L(ctx, 'Müllteppich', 'Garbage patch'),
         }),
+      // The patch rocks gently on the waves and the debris drifts a little against it. This
+      // sets the SVG transform attribute instead of animating a CSS transform: some mobile
+      // browsers drew a flickering white line below the picture with the CSS version.
+      mount: function(el) {
+        var patch = el.querySelector('.env-patch');
+        var debris = patch && patch.querySelector('.fl');
+        if (!patch || !debris || typeof requestAnimationFrame === 'undefined') return;
+        if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        // Smooth back and forth between -1 and 1 with the given half period in ms.
+        function swing(t, half) { return -Math.cos(Math.PI * t / half); }
+        var visible = false, frame = 0, cx = 0, cy = 0;
+        function step(t) {
+          frame = 0;
+          if (!visible) return;
+          // The centre is measured once the picture is drawn (not while its message is skipped).
+          if (!cx) {
+            var box = patch.getBBox();
+            cx = box.x + box.width / 2;
+            cy = box.y + box.height / 2;
+          }
+          var r = swing(t, 4200), d = swing(t, 2900);
+          patch.setAttribute('transform', 'translate(' + (1.5 * r).toFixed(2) + ' ' + (0.25 + 1.75 * r).toFixed(2) + ') rotate(' + r.toFixed(3) + ' ' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ')');
+          debris.setAttribute('transform', 'translate(' + d.toFixed(2) + ' ' + (-d).toFixed(2) + ')');
+          frame = requestAnimationFrame(step);
+        }
+        if (typeof IntersectionObserver === 'undefined') { visible = true; frame = requestAnimationFrame(step); return; }
+        new IntersectionObserver(function(entries) {
+          visible = entries[entries.length - 1].isIntersecting;
+          if (visible && !frame) frame = requestAnimationFrame(step);
+        }).observe(el);
+      },
     };
   };
 

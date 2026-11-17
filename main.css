@@ -1711,7 +1711,6 @@ h1 {
 .step-icon .slot {
   fill: var(--blue);
 }
-.step-icon .pop,
 .step-icon .scan,
 .step-icon .drop {
   transform-box: fill-box;
@@ -1728,9 +1727,6 @@ h1 {
 }
 .step-icon.go .l2 {
   animation: step-draw-long .9s .15s both;
-}
-.step-icon.go .pop {
-  animation: step-pop .35s both;
 }
 .step-icon.go .d0 {
   animation-delay: .15s;
@@ -1757,10 +1753,6 @@ h1 {
 @keyframes step-draw-long {
   from { stroke-dashoffset: 72; }
   to { stroke-dashoffset: 0; }
-}
-@keyframes step-pop {
-  from { transform: scale(0); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
 }
 @keyframes step-scan {
   0% { transform: translate(-16px, -12px); }
@@ -1813,29 +1805,9 @@ h1 {
 .v-env .cs { font: 800 10px var(--font); fill: #111; text-anchor: middle; }
 .v-env .spin { animation: env-spin 9s linear infinite; }
 @keyframes env-spin { to { transform: rotate(360deg); } }
-/* The garbage patch rocks gently on the waves; the debris drifts a little against it. */
-.v-env .env-patch {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: env-rock 4.2s ease-in-out infinite alternate;
-}
-.v-env .env-patch .fl {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: env-drift 2.9s ease-in-out infinite alternate;
-}
-@keyframes env-rock {
-  from { transform: translate(-1.5px, -1.5px) rotate(-1deg); }
-  to { transform: translate(1.5px, 2px) rotate(1deg); }
-}
-@keyframes env-drift {
-  from { transform: translate(-1px, 1px); }
-  to { transform: translate(1px, -1px); }
-}
+/* The garbage patch rocks on the waves: viz.js moves it through the SVG transform attribute. */
 @media (prefers-reduced-motion: reduce) {
-  .v-env .spin,
-  .v-env .env-patch,
-  .v-env .env-patch .fl { animation: none; }
+  .v-env .spin { animation: none; }
 }
 
 /* ─── Compact messages ───
